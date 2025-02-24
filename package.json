@@ -1,0 +1,42 @@
+{
+  "name": "jinge-starter",
+  "description": "jinge 框架最小化初始项目模板",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev -c scripts/vite.config.ts",
+    "build-dev": "NODE_ENV=development vite build -m development -c scripts/vite.config.ts",
+    "build": "vite build -c scripts/vite.config.ts",
+    "preview": "vite preview",
+    "lint-fix": "eslint '**/*.{js,mjs,ts}' --fix && prettier --log-level=warn --write . !*.yaml",
+    "lint": "tsc --noEmit && eslint '**/*.{js,mjs,ts}' && prettier --check . !*.yaml",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@tailwindcss/vite": "^4.0.6",
+    "@types/eslint__js": "^8.42.3",
+    "@types/node": "^22.13.4",
+    "eslint": "^9.20.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-import-x": "^4.6.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.1",
+    "tailwindcss": "^4.0.6",
+    "typescript-eslint": "^8.24.1",
+    "vite": "^6.1.0"
+  },
+  "dependencies": {
+    "jinge": "link:../jinge",
+    "jinge-compiler": "link:../jinge-swc-compiler"
+  }
+}

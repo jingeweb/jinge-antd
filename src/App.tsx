@@ -1,54 +1,32 @@
-import { JNode, Props, vm } from "jinge";
-
-function A(props: Props<{
-  props: { n: number, },
-  slots: {
-    a: JNode;
-  },
-  children: JNode;
-  events: {
-    click: (...args: any[]) => void
-  }
-}>) {
-  return <div>
-    {props.children}
-    <button on:click={props["on:click"]} >TTT</button>
-  </div>
-}
-
-// export function FormField(props: Props<{
-//   props: {
-//     required?: boolean;
-//     className?: string;
-//     labelClassName?: string;
-//     error?: string;
-//   },
-//   children?: JNode,
-//   slots: {
-//     label: JNode
-//   }
-// }>) {
-
-//   return (
-//     <div >
-//       <label >
-//         <span className='relative'>
-//           {props.required && <span className='absolute -left-2 top-[1px] text-base text-red-500'>*</span>}
-//           {props["slot:label"]}
-//         </span>
-//       </label>
-//       <div
-
-//       >
-//         {props.children}
-//         {props.error && <p className='text-error text-xs'>{props.error}</p>}
-//       </div>
-//     </div>
-//   );
-// };
+import { vm } from "jinge";
+import { Popover } from "./components/popover";
 
 export function App() {
-
-  return <A n={10} slot:a="x" on:click={() => console.log('cc')} >H</A>
-
+  const state = vm({
+    open: false
+  });
+  let tm = 0;
+  return (
+    <div>
+      <div className="p-36"></div>
+      <div className="p-10">
+        <Popover on:openChange={(v) => {
+          state.open = v;
+          clearTimeout(tm);
+        }} open={state.open} placement="top" slot:trigger={<button className="relative">TEST</button>} >Hello, World</Popover>
+      </div>
+      <p>
+        <button on:click={() => {
+          if (state.open === false) {
+            state.open = true;
+            tm = window.setTimeout(() => {
+              state.open = false;
+              tm = 0;
+            }, 3000);
+          }
+        }}>TTT</button>
+      </p>
+      <div className="p-36"></div>
+    </div>
+  );
 }

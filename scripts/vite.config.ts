@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     // watch: {},
     minify: false,
-    // sourcemap: true,
+    sourcemap: true,
 
     rollupOptions: {
       output: {
@@ -21,9 +21,10 @@ export default defineConfig({
     jingeVitePlugin({
       importAlias: 'source',
       loadDebugNativeBinding: true,
-      intl: {
-        dropDefaultText: false,
-      },
+      // intl: {
+      //   dropDefaultText: false,
+      // },
+      intl: true,
     }),
   ],
 });

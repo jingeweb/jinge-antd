@@ -1,0 +1,58 @@
+.ja-modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+
+  &.ja-enter {
+    opacity: 1;
+  }
+  &.ja-enter-active {
+    transition: opacity ease-in 0.2s;
+  }
+  &.ja-leave-active {
+    transition: opacity ease-out 0.2s;
+  }
+  &.ja-leave {
+    opacity: 0;
+  }
+}
+.ja-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 16px;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  &.ja-enter {
+    opacity: 1;
+  }
+  &.ja-enter-active {
+    transition: opacity ease-in 0.3s;
+  }
+  &.ja-leave-active {
+    transition: opacity ease-out 0.3s;
+  }
+  &.ja-leave {
+    opacity: 0;
+  }
+
+  & > .ja-modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & > .ja-modal-content {
+  }
+
+  & > .ja-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+  }
+}

@@ -62,6 +62,7 @@ export default tseslint.config(
   {
     ignores: [
       '**/node_modules/',
+      '**/dist-site/',
       '**/dist/',
       '**/temp/',
       '**/coverage/',

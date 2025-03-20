@@ -1,14 +1,15 @@
 {
-  "name": "jinge-starter",
-  "description": "jinge 框架最小化初始项目模板",
+  "name": "jinge-antd",
+  "description": "jinge 框架实现的 ant-design 组件库",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite dev -c scripts/vite.config.ts",
     "build-dev": "NODE_ENV=development vite build -m development -c scripts/vite.config.ts",
     "build": "vite build -c scripts/vite.config.ts",
-    "preview": "vite preview",
+    "dev-site": "vite dev -c scripts/vite.site.config.mts",
+    "build-site": "vite build -c scripts/vite.site.config.mts",
+    "preview-site": "vite preview -c scripts/vite.site.config.mts",
     "lint-fix": "eslint '**/*.{js,mjs,ts}' --fix && prettier --log-level=warn --write . !*.yaml",
     "lint": "tsc --noEmit && eslint '**/*.{js,mjs,ts}' && prettier --check . !*.yaml",
     "lint-staged": "lint-staged",
@@ -22,8 +23,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@iconify/json": "^2.2.318",
+    "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/vite": "^4.0.14",
-    "@types/eslint__js": "^9.14.0",
     "@types/node": "^22.13.10",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
@@ -31,14 +33,16 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "sass-embedded": "^1.85.1",
     "tailwindcss": "^4.0.14",
     "typescript-eslint": "^8.26.1",
-    "vite": "^6.2.2"
-  },
-  "dependencies": {
-    "@floating-ui/dom": "^1.6.13",
+    "vite": "^6.2.2",
+    "vite-tsconfig-paths": "^5.1.4",
     "jinge": "link:../jinge",
     "jinge-compiler": "link:../jinge-swc-compiler"
+  },
+  "peerDependencies": {
+    "jinge": "^4.1.1"
   }
 }

@@ -1,21 +1,22 @@
-import { z } from './z';
+import { z } from '../_util/z';
 import {
   type AnyFn,
+  type JNode,
   TransitionGroup,
+  type WithPropSlot,
   bootstrap,
   cx,
   expose,
   isString,
-  setImmediate,
+  onMount,
   uid,
   vm,
 } from 'jinge';
 
-export interface MessageOptions {
-  content: string;
+export type MessageOptions = WithPropSlot<'content', JNode> & {
   duration?: number;
-  onClose?: () => void;
-}
+  'on:close'?: () => void;
+};
 
 export interface MessageUpdateOptions {
   type?: MessageConfig['type'];
@@ -23,22 +24,33 @@ export interface MessageUpdateOptions {
   duration?: number;
 }
 
-interface MessageConfig {
+type MessageConfig = WithPropSlot<'content', JNode> & {
   type: 'success' | 'error' | 'info' | 'warning' | 'loading';
-  content: string;
   _id: string;
   _p?: Promise<void>;
   _r?: AnyFn;
   _onClose?: () => void;
   _tm: number;
-}
+};
+
 export interface MessageInstance {
   close: () => void;
   update: (options: MessageUpdateOptions) => void;
   waitClose: () => Promise<void>;
 }
 
-let messageContainer: MessageContainerInstance;
+let messageContainer: MessageContainerInstance | undefined = undefined;
+
+function initMessageContainer() {
+  const $dv = document.createElement('div');
+  document.body.appendChild($dv);
+  messageContainer = bootstrap(MessageContainerComponent, $dv);
+}
+
+function clearAll() {
+  messageContainer?.clear();
+}
+
 interface MessageContainerInstance {
   show: (type: MessageConfig['type'], message: string | MessageOptions) => MessageInstance;
   clear: () => void;
@@ -46,7 +58,12 @@ interface MessageContainerInstance {
 function MessageContainerComponent() {
   const state = vm({
     messages: [] as MessageConfig[],
+    zIndex: 0,
   });
+  onMount(() => {
+    return z.watchMessageZ((messageZ) => (state.zIndex = messageZ));
+  });
+
   const store = new Map<string, MessageConfig>();
   function close(message: MessageConfig) {
     if (message._r === undefined) {
@@ -85,9 +102,11 @@ function MessageContainerComponent() {
     };
     const message: MessageConfig = vm({
       type,
-      content: options.content,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      content: options.content as any,
+      'slot:content': options['slot:content'],
       _id: uid(),
-      _onClose: options.onClose,
+      _onClose: options['on:close'],
       _p: undefined,
       _r: undefined,
       _tm: 0,
@@ -126,24 +145,20 @@ function MessageContainerComponent() {
     warning: 'icon-[ant-design--exclamation-circle-filled] text-warning',
     loading: 'icon-[ant-design--loading-outlined] animate-spin text-blue-500',
   });
+
   return (
-    <div
-      className='pointer-events-none fixed top-0 left-1/2 -translate-x-1/2'
-      style={`z-index: ${z.currentIndex}`}
-    >
+    <div className='ja-message-container' style={`z-index: ${state.zIndex}`}>
       <TransitionGroup
-        enterClass='transform-[translateY(0)] opacity-100'
-        enterActiveClass='ease-in'
-        leaveClass='transform-[translateY(-80%)] opacity-0'
-        leaveActiveClass='ease-out'
+        enterClass='ja-enter'
+        enterActiveClass='ja-enter-active'
+        leaveClass='ja-leave'
+        leaveActiveClass='ja-leave-active'
         loop={state.messages}
         key='_id'
       >
         {(each) => (
-          <div className='mt-4 flex items-center rounded-lg bg-white px-4 py-2 text-black/85 shadow-xl transition-[transform,opacity] duration-300 will-change-transform'>
-            <span
-              className={cx('icon mr-2 text-base', each.data.type, icMap[each.data.type])}
-            ></span>
+          <div className='ja-message'>
+            <span className={cx('icon', each.data.type, icMap[each.data.type])}></span>
             <div className='content'>{each.data.content}</div>
           </div>
         )}
@@ -152,34 +167,41 @@ function MessageContainerComponent() {
   );
 }
 
+function innerShow(type: MessageConfig['type'], options: string | MessageOptions) {
+  if (!messageContainer) {
+    initMessageContainer();
+  }
+  return messageContainer!.show(type, options);
+}
+
 function showSuccess(options: MessageOptions): MessageInstance;
 function showSuccess(content: string): MessageInstance;
 function showSuccess(contentOrOptions: string | MessageOptions): MessageInstance {
-  return messageContainer.show('success', contentOrOptions);
+  return innerShow('success', contentOrOptions);
 }
 
 function showError(options: MessageOptions): MessageInstance;
 function showError(content: string): MessageInstance;
 function showError(contentOrOptions: string | MessageOptions): MessageInstance {
-  return messageContainer.show('error', contentOrOptions);
+  return innerShow('error', contentOrOptions);
 }
 
 function showInfo(options: MessageOptions): MessageInstance;
 function showInfo(content: string): MessageInstance;
 function showInfo(contentOrOptions: string | MessageOptions): MessageInstance {
-  return messageContainer.show('info', contentOrOptions);
+  return innerShow('info', contentOrOptions);
 }
 
 function showWarning(options: MessageOptions): MessageInstance;
 function showWarning(content: string): MessageInstance;
 function showWarning(contentOrOptions: string | MessageOptions): MessageInstance {
-  return messageContainer.show('warning', contentOrOptions);
+  return innerShow('warning', contentOrOptions);
 }
 
 function showLoading(options: MessageOptions): MessageInstance;
 function showLoading(content: string): MessageInstance;
 function showLoading(contentOrOptions: string | MessageOptions): MessageInstance {
-  return messageContainer.show('loading', contentOrOptions);
+  return innerShow('loading', contentOrOptions);
 }
 
 const message = {
@@ -188,20 +210,7 @@ const message = {
   info: showInfo,
   loading: showLoading,
   warning: showWarning,
+  clear: clearAll,
 };
 
 export { message };
-
-function initMessageContainer() {
-  const $dv = document.createElement('div');
-  document.body.appendChild($dv);
-  messageContainer = bootstrap(MessageContainerComponent, $dv);
-}
-if (typeof window !== 'undefined') {
-  if (import.meta.env.DEV) {
-    // dev 模式下需要延迟初始化，保证编译器在文件末尾插入的 HMR 相关代码先执行。
-    setImmediate(() => initMessageContainer());
-  } else {
-    initMessageContainer();
-  }
-}

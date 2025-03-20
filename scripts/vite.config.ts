@@ -1,30 +1,18 @@
 import { defineConfig } from 'vite';
 import { jingeVitePlugin } from 'jinge-compiler';
-import tailwindcss from '@tailwindcss/vite';
+import path from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    // watch: {},
-    minify: false,
-    sourcemap: true,
-
-    rollupOptions: {
-      output: {
-        entryFileNames: '[name].js',
-      },
+    lib: {
+      entry: path.resolve(__dirname, '../src/index.ts'),
+      name: 'JingeAntd',
+      fileName: 'jinge-antd',
     },
+    sourcemap: true,
+    outDir: path.resolve(__dirname, '../dist'),
   },
 
-  plugins: [
-    tailwindcss(),
-    jingeVitePlugin({
-      importAlias: 'source',
-      loadDebugNativeBinding: true,
-      // intl: {
-      //   dropDefaultText: false,
-      // },
-      intl: true,
-    }),
-  ],
+  plugins: [jingeVitePlugin()],
 });

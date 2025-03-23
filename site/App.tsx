@@ -1,16 +1,27 @@
 // import { modal } from '../src/modal';
-import { Tooltip } from '@/tooltip';
-import { vm, watch } from 'jinge';
+import { LoadingOutlined } from '@/loading';
+import { message } from '@/message';
+import { modal } from '@/modal';
+import { onModalConfirm } from '@/modal/modal';
+import { Popconfirm } from '@/popconfirm';
+import { vm } from 'jinge';
 
-function A(props: { k: () => void }) {
-  return <button on:click={props.k}>AAA</button>;
+function A() {
+  onModalConfirm(() => {
+    return new Promise((res) => {
+      setTimeout(() => res(false), 3000);
+    });
+  });
+  return (
+    <div>
+      <p>Form Content22222</p>
+    </div>
+  );
 }
+
 export function App() {
   const state = vm({
     n: 10,
-    k: () => {
-      console.log('a');
-    },
   });
   // setInterval(() => {
   //   state.n++;
@@ -43,21 +54,19 @@ export function App() {
 
   return (
     <div className='pt-10'>
+      <LoadingOutlined />
       {state.n}
-      {state.n + state.n}
-      <Tooltip open content='this is a tooltip'>
-        <A k={state.k} />
-      </Tooltip>
-      <p>
-        <button
-          on:click={() => {
-            state.k = () => {
-              console.log('b');
-            };
-          }}
-        >
-          TEST
-        </button>
+      <p className='p-40'>
+        <Popconfirm title='确认删除XXX吗？' placement='top-end' on:confirm={() => {
+          return new Promise((res) => {
+            setTimeout(() => res(true), 3000)
+          })
+        }} >
+          <button
+          >
+            TEST
+          </button>
+        </Popconfirm>
       </p>
       <div className='p-36'></div>
     </div>

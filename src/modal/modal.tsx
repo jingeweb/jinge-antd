@@ -13,6 +13,22 @@ import {
   watch,
 } from 'jinge';
 import { z } from '../_util/z';
+import { Button } from '@/button';
+import { AntDesignCloseCircleOutlined } from '@/icon';
+import {
+  type ConfirmCallback,
+  type ConfirmContext,
+  createContextOnConfirm,
+  useConfirmContext,
+} from '@/_util/confirm';
+
+export const MODAL_CONTEXT = Symbol('modalContext');
+export type ModalContext = ConfirmContext & {};
+
+/**
+ * 监听弹窗的 confirm 按钮点击。会在 onUnmount 中自动取消监听。
+ */
+export const onModalConfirm = createContextOnConfirm(MODAL_CONTEXT);
 
 export function Modal(
   props: {
@@ -23,6 +39,8 @@ export function Modal(
     showMask?: boolean;
     closeWhenMaskClick?: boolean;
     footer?: boolean;
+    confirmText?: string;
+    cancelText?: string;
   } & WithSlots<{
     default: JNode;
     footer?: JNode;
@@ -31,6 +49,8 @@ export function Modal(
     WithEvents<{
       openChange?(open: boolean): void;
       afterClose?(): void;
+      confirm?: ConfirmCallback;
+      cancel?(): void;
     }> &
     WithExpose<{
       close(): void;
@@ -41,7 +61,23 @@ export function Modal(
   const state = vm({
     /** 非受控模式下默认自动打开弹窗 */
     open: ctrlOpt ? !!props.open : true,
+    submitting: false,
   });
+
+  const confirmContext = useConfirmContext(MODAL_CONTEXT, () => props['on:confirm']?.());
+
+  async function handleConfirm() {
+    await confirmContext.handleConfirm({
+      onSubmittingChange(submitting) {
+        state.submitting = submitting;
+      },
+      onSubmitted(submitted) {
+        if (submitted) {
+          close();
+        }
+      },
+    });
+  }
 
   watch(props, 'open', (v) => {
     state.open = !!v;
@@ -103,18 +139,33 @@ export function Modal(
             <span>{props['slot:title'] ?? props.title}</span>
             {props.closable !== false && (
               <button
+                className='ja-close'
                 on:click={() => {
                   close();
                 }}
               >
-                X
+                <AntDesignCloseCircleOutlined />
               </button>
             )}
           </div>
           <div className='ja-modal-content'>{props.children}</div>
           <div className='ja-modal-footer'>
-            <button>取消</button>
-            <button>确认</button>
+            <Button
+              on:click={() => {
+                props['on:cancel']?.();
+                close();
+              }}
+            >
+              {props.cancelText ?? '取 消'}
+            </Button>
+            <Button
+              type='primary'
+              disabled={state.submitting}
+              loading={state.submitting}
+              on:click={handleConfirm}
+            >
+              {props.confirmText ?? '确 认'}
+            </Button>
           </div>
         </div>
       </Transition>

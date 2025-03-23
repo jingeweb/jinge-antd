@@ -31,6 +31,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
   const placementOpt = getPlacementOpt(props.placement);
   const offsetOpt = props.offset ?? (placementOpt.position === POS_TOP ? 20 : 10);
   const delayOpt = getDelayOpt(props.delay);
+  const dismissableOpt = props.dismissable !== false;
 
   const state = vm({
     pos: '',
@@ -56,13 +57,15 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
   function handleShown() {
     if (!triggerEl || !contentEl) return;
     if (triggerOpt === 'click') {
-      dismissDereg = registerEvent(document.body, 'mousedown', (evt) => {
-        const el = evt.target as Node;
-        if (triggerEl?.contains(el) || contentEl?.contains(el)) {
-          return;
-        }
-        doClose();
-      });
+      if (dismissableOpt) {
+        dismissDereg = registerEvent(document.body, 'mousedown', (evt) => {
+          const el = evt.target as Node;
+          if (triggerEl?.contains(el) || contentEl?.contains(el)) {
+            return;
+          }
+          doClose();
+        });
+      }
     } else if (triggerOpt === 'hover') {
       if (safePolygonOpt) {
         hoverDereg = registerEvent(document.body, 'mouseover', (evt) => {
@@ -86,9 +89,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
         hoverDereg = registerEvent(triggerEl, 'mouseleave', close);
       }
     }
-    cancelAutoUpdate = autoUpdate(triggerEl, contentEl, () => {
-      updatePos();
-    });
+    cancelAutoUpdate = autoUpdate(triggerEl!, contentEl!, updatePos);
   }
   function handleHiden() {
     if (triggerOpt === 'click') {
@@ -105,6 +106,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     }
     const triggerRect = triggerEl.getBoundingClientRect();
     const contentRect = contentEl.getBoundingClientRect();
+
     const { position, align } = placementOpt;
     let x = 0;
     let y = 0;
@@ -248,7 +250,6 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
           on:beforeEnter={(el) => {
             contentEl = el as HTMLDivElement;
             handleShown();
-            updatePos();
           }}
           on:afterLeave={() => {
             handleHiden();

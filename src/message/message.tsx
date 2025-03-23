@@ -1,6 +1,14 @@
+import {
+  AntDesignCheckCircleFilled,
+  AntDesignCloseCircleFilled,
+  AntDesignExclamationCircleFilled,
+  AntDesignInfoCircleFilled,
+} from '../icon';
 import { z } from '../_util/z';
 import {
   type AnyFn,
+  Dynamic,
+  type FC,
   type JNode,
   TransitionGroup,
   type WithPropSlot,
@@ -12,6 +20,7 @@ import {
   uid,
   vm,
 } from 'jinge';
+import { LoadingOutlined } from '../loading';
 
 export type MessageOptions = WithPropSlot<'content', JNode> & {
   duration?: number;
@@ -21,6 +30,7 @@ export type MessageOptions = WithPropSlot<'content', JNode> & {
 export interface MessageUpdateOptions {
   type?: MessageConfig['type'];
   content?: string;
+  // 'slot:content'?: JNode; // 暂时不支持更新插槽，待jinge-compiler支持。
   duration?: number;
 }
 
@@ -50,6 +60,14 @@ function initMessageContainer() {
 function clearAll() {
   messageContainer?.clear();
 }
+
+const icons: Record<string, FC> = vm({
+  loading: LoadingOutlined,
+  info: AntDesignInfoCircleFilled,
+  error: AntDesignCloseCircleFilled,
+  warning: AntDesignExclamationCircleFilled,
+  success: AntDesignCheckCircleFilled,
+});
 
 interface MessageContainerInstance {
   show: (type: MessageConfig['type'], message: string | MessageOptions) => MessageInstance;
@@ -138,14 +156,6 @@ function MessageContainerComponent() {
     show,
   });
 
-  const icMap: Record<MessageConfig['type'], string> = vm({
-    info: 'icon-[ant-design--info-circle-filled] text-gray-500',
-    error: 'icon-[ant-design--close-circle-filled] text-error',
-    success: 'icon-[ant-design--check-circle-filled] text-success',
-    warning: 'icon-[ant-design--exclamation-circle-filled] text-warning',
-    loading: 'icon-[ant-design--loading-outlined] animate-spin text-blue-500',
-  });
-
   return (
     <div className='ja-message-container' style={`z-index: ${state.zIndex}`}>
       <TransitionGroup
@@ -158,7 +168,7 @@ function MessageContainerComponent() {
       >
         {(each) => (
           <div className='ja-message'>
-            <span className={cx('icon', each.data.type, icMap[each.data.type])}></span>
+            <Dynamic fc={icons[each.data.type]} className={cx('icon', each.data.type)} />
             <div className='content'>{each.data.content}</div>
           </div>
         )}

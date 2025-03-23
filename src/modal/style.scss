@@ -44,9 +44,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    & > .ja-close {
+      cursor: pointer;
+    }
   }
 
   & > .ja-modal-content {
+    padding: 16px 0;
   }
 
   & > .ja-modal-footer {

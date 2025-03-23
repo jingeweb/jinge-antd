@@ -1,0 +1,29 @@
+.ja-input {
+  height: 32px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 11px;
+  color: var(--antd-normal-text);
+
+  &:hover {
+    border-color: var(--antd-primary);
+  }
+
+  &:focus {
+    border-color: var(--antd-primary);
+    box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
+  }
+
+  &.lg {
+    height: 40px;
+    padding: 7px 11px;
+  }
+
+  &.sm {
+    height: 24px;
+    padding: 1px 7px;
+  }
+}

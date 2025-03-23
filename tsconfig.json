@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tsbuildinfo",
-    "composite": true,
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",

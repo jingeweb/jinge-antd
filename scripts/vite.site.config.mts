@@ -3,6 +3,7 @@ import { jingeVitePlugin } from 'jinge-compiler';
 import tailwindcss from '@tailwindcss/vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'node:path';
+import { TailwindThemePlugin } from './vite-plugin';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     tsconfigPaths(),
+    TailwindThemePlugin(),
     jingeVitePlugin({
       importAlias: 'source',
       loadDebugNativeBinding: true,

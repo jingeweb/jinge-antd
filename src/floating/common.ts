@@ -27,6 +27,8 @@ export type FloatingProps = {
   open?: boolean;
   /** 位置，默认是 top */
   placement?: FloatingPlacement;
+  /** 点击其它区域时是否关闭 */
+  dismissable?: boolean;
   /** 触发方式，默认是 click。指定为 none 时完全由外部通过 visible 属性控制。*/
   triggerMethod?: FloatingTriggerMethod;
   /** 延迟显示，毫秒。trigger 为 hover 时默认为 300，trigger 为 click 时默认为 0 */

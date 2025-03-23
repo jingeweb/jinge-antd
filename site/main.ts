@@ -1,4 +1,4 @@
-import './tailwind.css';
+import './style.css';
 
 import { bootstrap } from 'jinge';
 import { App } from './App';

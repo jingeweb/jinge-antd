@@ -4,7 +4,21 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/jinge-antd.js",
+  "types": "./types/index.d.ts",
+  "exports": {
+    "colors": {
+      "import": "./dist/colors.js",
+      "types": "./types/_tool/colors.d.ts"
+    },
+    "default": {
+      "import": "./dist/jinge-antd.js",
+      "types": "./types/index.d.ts"
+    }
+  },
   "scripts": {
+    "build-types": "tsc -project ./tsconfig.types.json",
+    "build-tool": "tsup --entry.colors ./src/_tool/colors.ts --format esm",
     "build-dev": "NODE_ENV=development vite build -m development -c scripts/vite.config.ts",
     "build": "vite build -c scripts/vite.config.ts",
     "dev-site": "vite dev -c scripts/vite.site.config.mts",
@@ -22,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "@ant-design/colors": "^8.0.0",
     "@eslint/js": "^9.22.0",
     "@iconify/json": "^2.2.318",
     "@iconify/tailwind4": "^1.0.6",
@@ -31,18 +46,22 @@
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import-x": "^4.8.0",
     "husky": "^9.1.7",
+    "jinge": "link:../jinge",
+    "jinge-compiler": "link:../jinge-swc-compiler",
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "sass-embedded": "^1.85.1",
     "tailwindcss": "^4.0.14",
+    "tsup": "^8.4.0",
+    "type-fest": "^4.37.0",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.2",
     "vite-tsconfig-paths": "^5.1.4",
-    "jinge": "link:../jinge",
-    "jinge-compiler": "link:../jinge-swc-compiler"
+    "zod": "^3.24.2"
   },
   "peerDependencies": {
-    "jinge": "^4.1.1"
+    "jinge": "^4.1.3",
+    "zod": "^3"
   }
 }

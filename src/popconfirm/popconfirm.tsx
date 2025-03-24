@@ -15,7 +15,7 @@ import {
   type ConfirmContext,
   createContextOnConfirm,
   useConfirmContext,
-} from '@/_util/confirm';
+} from '../_util';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
 export type PopconfirmContext = ConfirmContext & {};

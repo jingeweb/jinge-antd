@@ -1,4 +1,4 @@
-import { LoadingOutlined } from '@/loading';
+import { LoadingOutlined } from '../loading';
 import {
   type JNode,
   type MouseEventHandler,

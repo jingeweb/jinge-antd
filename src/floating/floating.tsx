@@ -219,16 +219,14 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     triggerEl = getFirstDOM(host);
     if (!triggerEl) throw new Error('trigger not found');
 
-    const deregs: AnyFn[] = [];
-
+    let trigerDereg: AnyFn | undefined = undefined;
     if (triggerOpt === 'hover') {
-      deregs.push(registerEvent(triggerEl, 'mouseenter', open));
+      trigerDereg = registerEvent(triggerEl, 'mouseenter', open);
     } else if (triggerOpt === 'click') {
-      deregs.push(registerEvent(triggerEl, 'click', open));
+      trigerDereg = registerEvent(triggerEl, 'click', open);
     }
-
     return () => {
-      deregs.forEach((fn) => fn());
+      trigerDereg?.();
       hoverDereg?.();
       dismissDereg?.();
       cancelAutoUpdate?.();
@@ -241,7 +239,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
       <Portal>
         <Transition
           isEnter={state.isOpen}
-          appear
+          appear={state.isOpen}
           enterClass={props.enterClass ?? 'ja-enter'}
           enterActiveClass={props.enterActiveClass ?? 'ja-enter-active'}
           leaveActiveClass={props.leaveActiveClass ?? 'ja-leave-active'}

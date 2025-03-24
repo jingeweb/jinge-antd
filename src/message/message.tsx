@@ -61,14 +61,6 @@ function clearAll() {
   messageContainer?.clear();
 }
 
-const icons: Record<string, FC> = vm({
-  loading: LoadingOutlined,
-  info: AntDesignInfoCircleFilled,
-  error: AntDesignCloseCircleFilled,
-  warning: AntDesignExclamationCircleFilled,
-  success: AntDesignCheckCircleFilled,
-});
-
 interface MessageContainerInstance {
   show: (type: MessageConfig['type'], message: string | MessageOptions) => MessageInstance;
   clear: () => void;
@@ -154,6 +146,14 @@ function MessageContainerComponent() {
   expose({
     clear,
     show,
+  });
+
+  const icons: Record<string, FC> = vm({
+    loading: LoadingOutlined,
+    info: AntDesignInfoCircleFilled,
+    error: AntDesignCloseCircleFilled,
+    warning: AntDesignExclamationCircleFilled,
+    success: AntDesignCheckCircleFilled,
   });
 
   return (

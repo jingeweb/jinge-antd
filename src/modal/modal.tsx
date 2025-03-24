@@ -13,14 +13,14 @@ import {
   watch,
 } from 'jinge';
 import { z } from '../_util/z';
-import { Button } from '@/button';
-import { AntDesignCloseCircleOutlined } from '@/icon';
+import { Button } from '../button';
+import { AntDesignCloseCircleOutlined } from '../icon';
 import {
   type ConfirmCallback,
   type ConfirmContext,
   createContextOnConfirm,
   useConfirmContext,
-} from '@/_util/confirm';
+} from '../_util';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
 export type ModalContext = ConfirmContext & {};

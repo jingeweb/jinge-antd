@@ -2,25 +2,30 @@
   "name": "jinge-antd",
   "description": "jinge 框架实现的 ant-design 组件库",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/jinge-antd.js",
   "types": "./types/index.d.ts",
   "exports": {
-    "colors": {
+    ".": {
+      "import": "./dist/jinge-antd.js",
+      "types": "./types/index.d.ts"
+    },
+    "./colors": {
       "import": "./dist/colors.js",
       "types": "./types/_tool/colors.d.ts"
     },
-    "default": {
-      "import": "./dist/jinge-antd.js",
-      "types": "./types/index.d.ts"
+    "./source": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
     }
   },
   "scripts": {
     "build-types": "tsc -project ./tsconfig.types.json",
     "build-tool": "tsup --entry.colors ./src/_tool/colors.ts --format esm",
-    "build-dev": "NODE_ENV=development vite build -m development -c scripts/vite.config.ts",
-    "build": "vite build -c scripts/vite.config.ts",
+    "build-lib-dev": "NODE_ENV=development vite build -m development -c scripts/vite.config.ts",
+    "build-lib": "vite build -c scripts/vite.config.ts",
+    "build": "rm -rf dist && pnpm build-types && pnpm build-lib && pnpm build-tool",
     "dev-site": "vite dev -c scripts/vite.site.config.mts",
     "build-site": "vite build -c scripts/vite.site.config.mts",
     "preview-site": "vite preview -c scripts/vite.site.config.mts",
@@ -55,13 +60,14 @@
     "tailwindcss": "^4.0.14",
     "tsup": "^8.4.0",
     "type-fest": "^4.37.0",
+    "typescript": "^5.8.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.2.2",
     "vite-tsconfig-paths": "^5.1.4",
     "zod": "^3.24.2"
   },
   "peerDependencies": {
-    "jinge": "^4.1.3",
+    "jinge": "^4.1.5",
     "zod": "^3"
   }
 }

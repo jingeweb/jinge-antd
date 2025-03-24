@@ -1,26 +1,9 @@
-// import { modal } from '../src/modal';
-import { LoadingOutlined } from '@/loading';
-import { message } from '@/message';
-import { modal } from '@/modal';
-import { onModalConfirm } from '@/modal/modal';
-import { Popconfirm } from '@/popconfirm';
+import { LoadingOutlined } from '../src';
 import { vm } from 'jinge';
-
-function A() {
-  onModalConfirm(() => {
-    return new Promise((res) => {
-      setTimeout(() => res(false), 3000);
-    });
-  });
-  return (
-    <div>
-      <p>Form Content22222</p>
-    </div>
-  );
-}
 
 export function App() {
   const state = vm({
+    k: 'c',
     n: 10,
   });
   // setInterval(() => {
@@ -56,8 +39,11 @@ export function App() {
     <div className='pt-10'>
       <LoadingOutlined />
       {state.n}
+      {/* {state.n >= 11 && state.n <= 12 && <p><A /></p>} */}
+      {/* <Dynamic fc={x[state.k]} /> */}
+
       <p className='p-40'>
-        <Popconfirm title='确认删除XXX吗？' placement='top-end' on:confirm={() => {
+        {/* <Popconfirm title='确认删除XXX吗？' placement='top-end' on:confirm={() => {
           return new Promise((res) => {
             setTimeout(() => res(true), 3000)
           })
@@ -66,7 +52,15 @@ export function App() {
           >
             TEST
           </button>
-        </Popconfirm>
+        </Popconfirm> */}
+        <button
+          on:click={() => {
+            // state.n++;
+            state.k = state.k === 'b' ? 'a' : state.k === 'c' ? 'b' : 'c';
+          }}
+        >
+          TEST
+        </button>
       </p>
       <div className='p-36'></div>
     </div>

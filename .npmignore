@@ -1,0 +1,19 @@
+node_modules
+dist-site
+/.husky
+/.vscode
+/scripts
+/intl
+/site
+  
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.tsbuildinfo

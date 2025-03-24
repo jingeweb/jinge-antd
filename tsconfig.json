@@ -8,11 +8,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "strict": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "jsx": "preserve"
   },
   "include": ["src/**/*", "site/**/*", "scripts/**/*", "intl/**/*", "*.js", "*.mjs"]
 }

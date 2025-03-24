@@ -1,29 +1,16 @@
 .ja-message-container {
   position: fixed;
-  left: 50%;
+  left: 0;
   top: 0;
-  transform: translateX(-50%);
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
   pointer-events: none;
-  background-color: #fff;
-
-  & > .ja-enter {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  & > .ja-enter-active {
-    transition:
-      transform ease-in 0.3s,
-      opacity ease-in 0.3s;
-  }
-  & > .ja-leave {
-    transform: translateY(-80%);
-    opacity: 0;
-  }
-  & > .ja-leave-active {
-    transition:
-      transform ease-out 0.3s,
-      opacity ease-out 0.3s;
-  }
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }
 
 .ja-message {
@@ -36,10 +23,30 @@
   border-radius: 8px;
   margin-top: 16px;
   align-items: center;
+  will-change: opacity, transform;
   box-shadow:
     0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 3px 6px -4px rgba(0, 0, 0, 0.12),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+  &.ja-enter {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  &.ja-enter-active {
+    transition:
+      transform ease-in 0.3s,
+      opacity ease-in 0.3s;
+  }
+  &.ja-leave {
+    transform: translateY(-80%);
+    opacity: 0;
+  }
+  &.ja-leave-active {
+    transition:
+      transform ease-out 0.3s,
+      opacity ease-out 0.3s;
+  }
 
   & > .icon {
     margin-inline-end: 8px;

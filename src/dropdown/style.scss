@@ -7,6 +7,7 @@
 .ja-dropdown-item {
   display: flex;
   min-width: 160px;
+  color: white;
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -15,6 +16,6 @@
 
   &:hover,
   &.ja-active {
-    color: var(--color-primary);
+    color: var(--antd-primary);
   }
 }

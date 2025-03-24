@@ -6,6 +6,9 @@ import {
   type JFormEvent,
   type WithEvents,
   cx,
+  isUndefined,
+  vm,
+  watch,
 } from 'jinge';
 
 export function Input(
@@ -15,22 +18,34 @@ export function Input(
     type?: HTMLInputTypeAttribute;
     value?: string;
   } & WithEvents<{
-    change?: (evt: JFormEvent<HTMLInputElement>) => void;
+    change?: (value: string, evt: JFormEvent<HTMLInputElement>) => void;
     blur?: (evt: JClipboardEvent<HTMLInputElement>) => void;
   }>,
 ) {
+  const notCtrl = isUndefined(props.value);
+  const state = vm({
+    value: props.value ?? ''
+  });
+
+  watch(props, 'value', (v) => {
+    state.value = v ?? '';
+  });
+
   return (
     <input
       className={cx('ja-input', props.className)}
       placeholder={props.placeholder}
       type={props.type}
-      value={props.value ?? ''}
+      value={state.value}
       on:input={(evt) => {
-        props['on:change']?.(evt);
+        const v = evt.target.value;
+        if (notCtrl) {
+          state.value = v;
+        }
+
+        props['on:change']?.(v, evt);
       }}
-      on:blur={(evt) => {
-        props['on:blur']?.(evt);
-      }}
+      on:blur={props['on:blur']}
     />
   );
 }

@@ -12,3 +12,5 @@ export * from './spin';
 export * from './avatar';
 export * from './button';
 export * from './loading';
+export * from './table';
+export * from './popconfirm';

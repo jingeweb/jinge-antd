@@ -12,7 +12,7 @@ export interface FormOptions<T extends object> {
   defaultValues?: T;
 }
 
-export interface FormFieldRegisterOptions {}
+export interface FormFieldRegisterOptions { }
 export type FormValidateResult<T extends object> =
   | [Record<keyof T, string | undefined>]
   | [undefined, T];
@@ -111,6 +111,7 @@ export function Controller<T extends object, P extends keyof T>(
     <>
       {props.children({
         'on:change': (evt) => {
+          debugger
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           control.setField(name, (evt.target.value ?? '') as any, control.validated || touched);
         },

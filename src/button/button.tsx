@@ -4,6 +4,7 @@ import {
   type MouseEventHandler,
   type WithEvents,
   type WithOptChildren,
+  WithSlots,
   cx,
 } from 'jinge';
 
@@ -15,6 +16,9 @@ export function Button(
     loading?: boolean;
     disabled?: boolean;
   } & WithOptChildren<JNode> &
+    WithSlots<{
+      icon?: JNode;
+    }> &
     WithEvents<{
       click?: MouseEventHandler<HTMLButtonElement>;
     }>,
@@ -27,7 +31,7 @@ export function Button(
         props['on:click']?.(evt);
       }}
     >
-      {props.loading && <LoadingOutlined />}
+      {props.loading ? <LoadingOutlined /> : props['slot:icon']}
       {props.children}
     </button>
   );

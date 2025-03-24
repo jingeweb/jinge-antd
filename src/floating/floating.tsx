@@ -256,7 +256,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
         >
           <div
             className={cx(props.className, 'ja-floating')}
-            style={`z-index:${props.zIndex};${state.pos}`}
+            style={`z-index:${props.zIndex};${state.pos};${props.style ?? ''}`}
           >
             {props.children}
           </div>

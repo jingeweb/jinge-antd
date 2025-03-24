@@ -22,6 +22,7 @@ export type DropdownOption<T> = {
 export function Dropdown<T>(
   props: {
     value?: T;
+    style?: string;
     className?: string;
     options: DropdownOption<T>[];
   } & WithChildren<JNode> &
@@ -42,6 +43,7 @@ export function Dropdown<T>(
   return (
     <Floating
       zIndex={zIndex}
+      style={props.style}
       className={cx('ja-dropdown', props.className)}
       slot:trigger={props.children}
       open={state.open}

@@ -18,6 +18,8 @@ export type FloatingTriggerMethod = 'click' | 'hover' | 'none';
 export type FloatingProps = {
   /** 浮层的 className */
   className?: string;
+  /** 浮层的 style */
+  style?: string;
   enterClass?: string;
   enterActiveClass?: string;
   leaveClass?: string;

@@ -4,6 +4,7 @@ import {
   type WithEvents,
   type WithPropSlot,
   cx,
+  isUndefined,
   vm,
   watch,
 } from 'jinge';
@@ -21,6 +22,7 @@ export type DropdownOption<T> = {
 
 export function Dropdown<T>(
   props: {
+    open?: boolean;
     value?: T;
     style?: string;
     className?: string;
@@ -28,12 +30,18 @@ export function Dropdown<T>(
   } & WithChildren<JNode> &
     WithEvents<{
       change?: (v: T, evt: Event) => void;
+      openChange?: (open: boolean) => void;
     }>,
 ) {
+  const notCtrl = isUndefined(props.open);
   const zIndex = z.getDropdownZ();
   const state = vm({
     value: props.value,
-    open: false,
+    open: !!props.open,
+  });
+
+  watch(props, 'open', (v) => {
+    state.open = !!v;
   });
 
   watch(props, 'value', (v) => {
@@ -48,7 +56,10 @@ export function Dropdown<T>(
       slot:trigger={props.children}
       open={state.open}
       on:openChange={(v) => {
-        state.open = v;
+        if (notCtrl) {
+          state.open = v;
+        }
+        props['on:openChange']?.(v);
       }}
       placement='bottom'
     >
@@ -57,7 +68,10 @@ export function Dropdown<T>(
           on:click={(evt) => {
             state.value = option.value;
             props['on:change']?.(option.value, evt);
-            state.open = false;
+            if (notCtrl) {
+              state.open = false;
+            }
+            props['on:openChange']?.(false);
           }}
           className={cx('ja-dropdown-item', state.value === option.value && 'ja-active')}
           key={option.value}

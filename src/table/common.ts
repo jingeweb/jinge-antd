@@ -28,6 +28,8 @@ export type ColumnType<T> = {
 
 export interface TableProps<T> {
   rowKey: keyof T;
+  /** 表格的紧凑大小。默认为 lg */
+  size?: 'sm' | 'md' | 'lg';
   className?: string;
   bordered?: boolean;
   columns: ColumnType<T>[];

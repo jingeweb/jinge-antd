@@ -23,14 +23,14 @@ import {
 } from '../_util';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
-export type ModalContext = ConfirmContext & {};
+export type ModalContext = ConfirmContext<unknown> & {};
 
 /**
  * 监听弹窗的 confirm 按钮点击。会在 onUnmount 中自动取消监听。
  */
 export const onModalConfirm = createContextOnConfirm(MODAL_CONTEXT);
 
-export function Modal(
+export function Modal<Result = unknown>(
   props: {
     open?: boolean;
     closable?: boolean;
@@ -41,6 +41,8 @@ export function Modal(
     footer?: boolean;
     confirmText?: string;
     cancelText?: string;
+    confirmValue?: Result;
+    cancelValue?: Result;
   } & WithSlots<{
     default: JNode;
     footer?: JNode;
@@ -48,12 +50,12 @@ export function Modal(
     WithPropSlot<'title', JNode> &
     WithEvents<{
       openChange?(open: boolean): void;
-      afterClose?(): void;
-      confirm?: ConfirmCallback;
+      afterClose?(result?: Result): void;
+      confirm?: ConfirmCallback<Result>;
       cancel?(): void;
     }> &
     WithExpose<{
-      close(): void;
+      close(result?: Result): void;
     }>,
 ) {
   // 是否是受控模式
@@ -64,16 +66,26 @@ export function Modal(
     submitting: false,
   });
 
-  const confirmContext = useConfirmContext(MODAL_CONTEXT, () => props['on:confirm']?.());
+  const confirmValue = props.confirmValue;
+  const cancelValue = props.cancelValue;
+  let resultValue = cancelValue as Result | undefined;
+
+  const confirmContext = useConfirmContext<Result>(MODAL_CONTEXT, () => {
+    if (props['on:confirm']) {
+      return props['on:confirm']();
+    } else {
+      return confirmValue !== undefined ? { result: confirmValue } : undefined;
+    }
+  });
 
   async function handleConfirm() {
     await confirmContext.handleConfirm({
       onSubmittingChange(submitting) {
         state.submitting = submitting;
       },
-      onSubmitted(submitted) {
-        if (submitted) {
-          close();
+      onSubmitted(preventClose, result) {
+        if (!preventClose) {
+          close(result);
         }
       },
     });
@@ -87,7 +99,8 @@ export function Modal(
     return z.increment();
   });
 
-  function close() {
+  function close(result?: Result) {
+    resultValue = result;
     if (ctrlOpt) {
       props['on:openChange']?.(false);
     } else {
@@ -116,7 +129,7 @@ export function Modal(
             style={`z-index:${z.currentIndex}`}
             on:click={() => {
               if (props.closeWhenMaskClick !== false) {
-                close();
+                close(cancelValue);
               }
             }}
           ></div>
@@ -131,7 +144,7 @@ export function Modal(
         leaveClass='ja-leave'
         destroyAfterLeave
         on:afterLeave={() => {
-          props['on:afterClose']?.();
+          props['on:afterClose']?.(resultValue);
         }}
       >
         <div className={cx(props.className, 'ja-modal')} style={`z-index:${z.currentIndex + 1}`}>
@@ -141,7 +154,7 @@ export function Modal(
               <button
                 className='ja-close'
                 on:click={() => {
-                  close();
+                  close(cancelValue);
                 }}
               >
                 <AntDesignCloseCircleOutlined />
@@ -153,7 +166,7 @@ export function Modal(
             <Button
               on:click={() => {
                 props['on:cancel']?.();
-                close();
+                close(cancelValue);
               }}
             >
               {props.cancelText ?? '取 消'}

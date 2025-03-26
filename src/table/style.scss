@@ -1,2 +1,69 @@
 .ja-table {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  th {
+    font-weight: bold;
+    text-align: start;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f0f0f0;
+    position: relative;
+
+    &:first-child {
+      border-top-left-radius: 8px;
+    }
+    &:last-child {
+      border-top-right-radius: 8px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      inset-inline-end: 0;
+      width: 1px;
+      height: 1.6em;
+      background-color: #f0f0f0;
+      transform: translateY(-50%);
+    }
+  }
+
+  td {
+    position: relative;
+    text-align: start;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  tr:hover {
+    td {
+      background-color: #fafafa;
+    }
+  }
+
+  &.bordered {
+  }
+
+  &.lg {
+    th,
+    td {
+      padding: 16px;
+    }
+  }
+
+  &.md {
+    th,
+    td {
+      padding: 12px 8px;
+    }
+  }
+
+  &.sm {
+    td,
+    th {
+      padding: 8px;
+    }
+  }
 }

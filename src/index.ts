@@ -14,3 +14,4 @@ export * from './button';
 export * from './loading';
 export * from './table';
 export * from './popconfirm';
+export * from './select';

@@ -12,6 +12,11 @@ export default defineConfig({
     minify: false,
     sourcemap: true,
     outDir: path.resolve(__dirname, '../dist-site'),
+    rollupOptions: {
+      output: {
+        entryFileNames: '[name].js',
+      },
+    },
   },
 
   plugins: [

@@ -14,6 +14,7 @@ import {
 export function Input(
   props: {
     className?: string;
+    disabled?: boolean;
     placeholder?: string;
     type?: HTMLInputTypeAttribute;
     value?: string;
@@ -24,7 +25,7 @@ export function Input(
 ) {
   const notCtrl = isUndefined(props.value);
   const state = vm({
-    value: props.value ?? ''
+    value: props.value ?? '',
   });
 
   watch(props, 'value', (v) => {
@@ -33,8 +34,9 @@ export function Input(
 
   return (
     <input
-      className={cx('ja-input', props.className)}
+      className={cx('ja-input', props.className, props.disabled && 'disabled')}
       placeholder={props.placeholder}
+      disabled={props.disabled}
       type={props.type}
       value={state.value}
       on:input={(evt) => {

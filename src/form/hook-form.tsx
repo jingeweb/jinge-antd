@@ -1,10 +1,13 @@
 import {
+  type ComponentHost,
   type JClipboardEvent,
   type JFormEvent,
   type JNode,
   type WithChildren,
   type WithEvents,
+  addUnmountFn,
   vm,
+  vmWatch,
 } from 'jinge';
 import type { ZodObject, ZodRawShape, z } from 'zod';
 
@@ -20,6 +23,7 @@ export interface FormControl<T extends object> {
   validated: boolean;
   validateField: (prop: keyof T) => Promise<string | undefined>;
   setField: <P extends keyof T>(props: P, value: T[P], validate?: boolean) => void;
+  watchField: <P extends keyof T>(prop: P, callback: (v?: T[P]) => void) => (() => void);
 }
 export interface FormInstance<T extends object> {
   validate: () => Promise<FormValidateResult<T>>;
@@ -30,15 +34,21 @@ export interface FormInstance<T extends object> {
   control: FormControl<T>;
 }
 
-export function useForm<S extends ZodObject<ZodRawShape>>(schema: S, options?: z.infer<S>) {
+export function useForm<S extends ZodObject<ZodRawShape>>(
+  schema: S,
+  options?: {
+    defaultValues?: Partial<z.infer<S>>;
+  },
+) {
   type T = z.infer<S>;
-  const formState = vm(options?.defaultValues ?? {});
+  const formState = vm(options?.defaultValues ?? {}) as T;
   const formErrors = vm({}) as Record<keyof T, string | undefined>;
   const propSchemas = new Map<keyof T, ZodObject<ZodRawShape>>();
   const control = {
     validated: false,
     validateField,
     setField,
+    watchField
   };
   async function validate() {
     control.validated = true;
@@ -81,6 +91,10 @@ export function useForm<S extends ZodObject<ZodRawShape>>(schema: S, options?: z
     }
   }
 
+  function watchField<P extends keyof T>(prop: P, callback: (v?: T[P]) => void) {
+    return vmWatch(formState, prop, callback, { immediate: true });
+  }
+
   return {
     validateField,
     setField,
@@ -97,28 +111,37 @@ export function Controller<T extends object, P extends keyof T>(
     control: FormControl<T>;
   } & WithChildren<
     (
-      fieldProps: WithEvents<{
-        change: (evt: JFormEvent<HTMLInputElement>) => void;
+      fieldProps: {
+        value?: T[P]
+      } & WithEvents<{
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        change: (v: any, evt?: JFormEvent<HTMLInputElement>) => void;
         blur: (evt: JClipboardEvent<HTMLInputElement>) => void;
       }>,
     ) => JNode
   >,
+  host: ComponentHost
 ) {
   let touched = false;
   const { control, name } = props;
+  const state = vm({
+    value: undefined as (T[P] | undefined),
+    'on:change': (v: T[P]) => {
+      control.setField(name, v, control.validated || touched);
+    },
+    'on:blur': () => {
+      touched = true;
+      void control.validateField(props.name);
+    },
+  });
+  addUnmountFn(host, control.watchField(name, (v) => {
+    state.value = v;
+  }))
 
   return (
     <>
       {props.children({
-        'on:change': (evt) => {
-          debugger
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          control.setField(name, (evt.target.value ?? '') as any, control.validated || touched);
-        },
-        'on:blur': () => {
-          touched = true;
-          void control.validateField(props.name);
-        },
+        ...state
       })}
     </>
   );

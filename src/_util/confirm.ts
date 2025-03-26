@@ -1,21 +1,30 @@
-import { context, isPromise, onUnmount } from 'jinge';
+import { context, isObject, isPromise, onUnmount } from 'jinge';
 
-export type ConfirmCallback = () => void | boolean | Promise<void | boolean>;
-export interface ConfirmContext {
-  onConfirm(listener: ConfirmCallback): () => void;
+export type ConfirmCallbackResult<Result> =
+  | void
+  | false
+  | {
+      result: Result;
+    };
+export type ConfirmCallback<Result> = () =>
+  | ConfirmCallbackResult<Result>
+  | Promise<ConfirmCallbackResult<Result>>;
+
+export interface ConfirmContext<Result> {
+  onConfirm(listener: ConfirmCallback<Result>): () => void;
 }
-export function createContextOnConfirm(contextKey: symbol) {
-  return function onModalConfirm(listener: ConfirmCallback) {
-    const ctx = context<ConfirmContext>(contextKey);
+export function createContextOnConfirm<Result>(contextKey: symbol) {
+  return function onModalConfirm(listener: ConfirmCallback<Result>) {
+    const ctx = context<ConfirmContext<Result>>(contextKey);
     ctx && onUnmount(ctx.onConfirm(listener));
   };
 }
 
-export function useConfirmContext(contextKey: symbol, confirmFn?: ConfirmCallback) {
-  const onConfirmFns = new Set<ConfirmCallback>();
+export function useConfirmContext<Result>(contextKey: symbol, confirmFn?: ConfirmCallback<Result>) {
+  const onConfirmFns = new Set<ConfirmCallback<Result>>();
   confirmFn && onConfirmFns.add(confirmFn);
 
-  context<ConfirmContext>(contextKey, {
+  context<ConfirmContext<Result>>(contextKey, {
     onConfirm(listener) {
       onConfirmFns.add(listener);
       return () => onConfirmFns.delete(listener);
@@ -24,38 +33,37 @@ export function useConfirmContext(contextKey: symbol, confirmFn?: ConfirmCallbac
 
   async function handleConfirm(options: {
     onSubmittingChange(submitting: boolean): void;
-    onSubmitted(submitted: boolean): void;
+    onSubmitted(preventClose: boolean, resultValue?: Result | undefined): void;
   }) {
     const listeners = [...onConfirmFns.values()];
-    let prevent = false;
+    let preventClose = false;
+    let result = undefined;
     for await (const listener of listeners) {
       const x = listener();
-      if (isPromise<boolean>(x)) {
-        // state.submitting = true;
+      if (isPromise<ConfirmCallbackResult<Result>>(x)) {
         options.onSubmittingChange(true);
         try {
           const ret = await x;
           if (ret === false) {
-            prevent = true;
-            continue;
+            preventClose = true;
+            break;
+          } else if (isObject(ret)) {
+            result = ret.result;
           }
-        } catch (_ex) {
-          console.error(_ex);
-          prevent = true;
-          continue;
+        } catch (ex) {
+          console.error(ex);
+          preventClose = true;
+          break;
         }
       } else if (x === false) {
-        prevent = true;
-        continue;
+        preventClose = true;
+        break;
+      } else if (isObject(x)) {
+        result = x.result;
       }
     }
     options.onSubmittingChange(false);
-    // state.submitting = false;
-    options.onSubmitted(!prevent);
-
-    // if (!prevent) {
-    //   close();
-    // }
+    options.onSubmitted(preventClose, preventClose ? undefined : result);
   }
 
   return {

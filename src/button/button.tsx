@@ -25,8 +25,13 @@ export function Button(
 ) {
   return (
     <button
-      className={cx('ja-button', props.className, props.size, props.disabled && 'disabled')}
-      disabled={props.disabled}
+      className={cx(
+        'ja-button',
+        props.className,
+        props.size,
+        (props.loading || props.disabled) && 'disabled',
+      )}
+      disabled={props.loading || props.disabled}
       on:click={(evt) => {
         props['on:click']?.(evt);
       }}

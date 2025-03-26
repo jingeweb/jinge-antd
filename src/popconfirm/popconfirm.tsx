@@ -18,7 +18,7 @@ import {
 } from '../_util';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
-export type PopconfirmContext = ConfirmContext & {};
+export type PopconfirmContext = ConfirmContext<unknown> & {};
 
 /**
  * 监听弹窗的 confirm 按钮点击。会在 onUnmount 中自动取消监听。
@@ -36,7 +36,7 @@ export function Popconfirm(
     WithPropSlot<'title', JNode> &
     WithSlots<{ content?: JNode }> &
     WithEvents<{
-      confirm?: ConfirmCallback;
+      confirm?: ConfirmCallback<unknown>;
       cancel?: () => void;
     }>,
 ) {

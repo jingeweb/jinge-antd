@@ -1,17 +1,19 @@
-import { cx, JNode } from 'jinge';
-import { TableProps } from './common';
+import { type JNode, cx } from 'jinge';
+import type { TableProps } from './common';
 
 export function Table<T>(props: TableProps<T>) {
   return (
-    <table className={cx('ja-table', props.className)}>
+    <table
+      className={cx('ja-table', props.className, props.size ?? 'lg', props.bordered && 'bordered')}
+    >
       <thead>
         <tr>
           {props.columns.map((column, index) => (
-            <th key='key' style={column.width === undefined ? '' : `${column.width}px`}>
+            <th key='key' style={column.width === undefined ? '' : `width:${column.width}px`}>
               {column['slot:title']?.({
                 define: column,
                 index,
-              }) ?? column['title']}
+              }) ?? column.title}
             </th>
           ))}
         </tr>
@@ -26,7 +28,7 @@ export function Table<T>(props: TableProps<T>) {
                   columnDefine: column,
                   rowIndex,
                   columnIndex,
-                }) ?? (rowData[column.dataIndex as keyof T] as JNode)}
+                }) ?? (rowData[column.dataIndex!] as JNode)}
               </td>
             ))}
           </tr>

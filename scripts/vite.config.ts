@@ -5,6 +5,7 @@ import path from 'node:path';
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    minify: false,
     emptyOutDir: false,
     lib: {
       entry: path.resolve(__dirname, '../src/index.ts'),
@@ -13,9 +14,14 @@ export default defineConfig({
     },
     sourcemap: true,
     outDir: path.resolve(__dirname, '../dist'),
+    rollupOptions: {
+      external: ['jinge', 'zod'],
+    },
   },
-  resolve: {
-    external: ['jinge', 'zod'],
-  },
-  plugins: [jingeVitePlugin()],
+
+  plugins: [
+    jingeVitePlugin({
+      importAlias: 'dev',
+    }),
+  ],
 });

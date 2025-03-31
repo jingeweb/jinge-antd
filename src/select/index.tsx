@@ -1,5 +1,4 @@
 import './style.scss';
-
 import { Dropdown, type DropdownOption } from '../dropdown';
 
 import {
@@ -34,6 +33,10 @@ export function Select<T>(
     v !== undefined && (state.selectOption = props.options.find(opt => opt.value === v));
   }
   watch(props, 'value', upV, { immediate: true });
+  watch(props, 'options', () => {
+    // options 变化后也要更新下 selectOption
+    upV(state.value);
+  });
 
   return (
     <Dropdown options={props.options} on:change={(v) => {

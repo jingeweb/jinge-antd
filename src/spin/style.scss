@@ -1,0 +1,78 @@
+@keyframes antSpinMove {
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes antSpinRotate {
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+.ja-spin {
+  position: relative;
+  display: inline-block;
+
+  width: 20px;
+  height: 20px;
+  color: var(--antd-primary);
+  transform: rotate(45deg);
+  animation: antSpinRotate linear 1.2s infinite;
+
+  &.sm {
+    width: 14px;
+    height: 14px;
+
+    & > i {
+      width: 6px;
+      height: 6px;
+    }
+  }
+  &.lg {
+    width: 32px;
+    height: 32px;
+    & > i {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &.md > i {
+    width: 9px;
+    height: 9px;
+  }
+
+  & > i {
+    display: block;
+    position: absolute;
+
+    border-radius: 100%;
+    background-color: currentColor;
+    transform: scale(0.75);
+    transform-origin: center;
+    opacity: 0.3;
+    animation: antSpinMove linear 1s infinite;
+    animation-direction: alternate;
+
+    &:nth-child(1) {
+      top: 0;
+      left: 0;
+      animation-delay: 0s;
+    }
+    &:nth-child(2) {
+      top: 0;
+      right: 0;
+      animation-delay: 0.4s;
+    }
+    &:nth-child(3) {
+      bottom: 0;
+      left: 0;
+      animation-delay: 0.8s;
+    }
+    &:nth-child(4) {
+      bottom: 0;
+      right: 0;
+      animation-delay: 1.2s;
+    }
+  }
+}

@@ -13,8 +13,8 @@ export type ConfirmCallback<Result> = () =>
 export interface ConfirmContext<Result> {
   onConfirm(listener: ConfirmCallback<Result>): () => void;
 }
-export function createContextOnConfirm<Result>(contextKey: symbol) {
-  return function onModalConfirm(listener: ConfirmCallback<Result>) {
+export function createContextOnConfirm(contextKey: symbol) {
+  return function onModalConfirm<Result = unknown>(listener: ConfirmCallback<Result>) {
     const ctx = context<ConfirmContext<Result>>(contextKey);
     ctx && onUnmount(ctx.onConfirm(listener));
   };

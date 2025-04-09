@@ -1,11 +1,12 @@
 import './style.scss';
-import { Dropdown, type DropdownOption } from '../dropdown';
+import { Dropdown } from '../dropdown';
 
 import { type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
+import type { MenuOption } from '../menu';
 
 export function Select<T>(
   props: {
-    options: DropdownOption<T>[];
+    options: MenuOption<T>[];
     size?: 'lg' | 'sm' | 'md';
     className?: string;
     disabled?: boolean;
@@ -19,7 +20,7 @@ export function Select<T>(
   const state = vm({
     open: false,
     value: props.value,
-    selectOption: undefined as DropdownOption<T> | undefined,
+    selectOption: undefined as MenuOption<T> | undefined,
   });
   function upV(v?: T) {
     state.value = v;

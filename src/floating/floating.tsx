@@ -223,7 +223,10 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     if (triggerOpt === 'hover') {
       trigerDereg = registerEvent(triggerEl, 'mouseenter', open);
     } else if (triggerOpt === 'click') {
-      trigerDereg = registerEvent(triggerEl, 'click', open);
+      trigerDereg = registerEvent(triggerEl, 'click', (evt) => {
+        evt.stopPropagation();
+        open();
+      });
     }
     return () => {
       trigerDereg?.();

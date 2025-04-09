@@ -1,21 +1,6 @@
 .ja-dropdown {
-  border-radius: 8px;
-  background: black;
-  padding: 8px;
-  box-shadow: 0 2px 0 4px rgb(0 0 0 / 10%);
-}
-.ja-dropdown-item {
-  display: flex;
-  min-width: 160px;
-  color: white;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid rgb(0 0 0 / 20%);
-  padding: 12px;
-
-  &:hover,
-  &.ja-active {
-    color: var(--antd-primary);
+  & > .ja-menu {
+    border-radius: 8px;
+    box-shadow: 0 2px 0 4px rgb(0 0 0 / 10%);
   }
 }

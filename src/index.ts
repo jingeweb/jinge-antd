@@ -16,3 +16,4 @@ export * from './table';
 export * from './popconfirm';
 export * from './select';
 export * from './tag';
+export * from './menu';

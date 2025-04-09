@@ -15,7 +15,7 @@ export interface FormOptions<T extends object> {
   defaultValues?: T;
 }
 
-export interface FormFieldRegisterOptions { }
+export interface FormFieldRegisterOptions {}
 export type FormValidateResult<T extends object> =
   | [Record<keyof T, string | undefined>]
   | [undefined, T];
@@ -23,7 +23,7 @@ export interface FormControl<T extends object> {
   validated: boolean;
   validateField: (prop: keyof T) => Promise<string | undefined>;
   setField: <P extends keyof T>(props: P, value: T[P], validate?: boolean) => void;
-  watchField: <P extends keyof T>(prop: P, callback: (v?: T[P]) => void) => (() => void);
+  watchField: <P extends keyof T>(prop: P, callback: (v?: T[P]) => void) => () => void;
 }
 export interface FormInstance<T extends object> {
   validate: () => Promise<FormValidateResult<T>>;
@@ -48,7 +48,7 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
     validated: false,
     validateField,
     setField,
-    watchField
+    watchField,
   };
   async function validate() {
     control.validated = true;
@@ -112,7 +112,7 @@ export function Controller<T extends object, P extends keyof T>(
   } & WithChildren<
     (
       fieldProps: {
-        value?: T[P]
+        value?: T[P];
       } & WithEvents<{
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         change: (v: any, evt?: JFormEvent<HTMLInputElement>) => void;
@@ -120,12 +120,12 @@ export function Controller<T extends object, P extends keyof T>(
       }>,
     ) => JNode
   >,
-  host: ComponentHost
+  host: ComponentHost,
 ) {
   let touched = false;
   const { control, name } = props;
   const state = vm({
-    value: undefined as (T[P] | undefined),
+    value: undefined as T[P] | undefined,
     'on:change': (v: T[P]) => {
       control.setField(name, v, control.validated || touched);
     },
@@ -134,14 +134,17 @@ export function Controller<T extends object, P extends keyof T>(
       void control.validateField(props.name);
     },
   });
-  addUnmountFn(host, control.watchField(name, (v) => {
-    state.value = v;
-  }))
+  addUnmountFn(
+    host,
+    control.watchField(name, (v) => {
+      state.value = v;
+    }),
+  );
 
   return (
     <>
       {props.children({
-        ...state
+        ...state,
       })}
     </>
   );

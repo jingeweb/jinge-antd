@@ -1,16 +1,7 @@
-import {
-  type JNode,
-  type WithChildren,
-  type WithEvents,
-  cx,
-  isUndefined,
-  vm,
-  watch,
-} from 'jinge';
+import { type JNode, type WithChildren, type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
 import { Floating } from '../floating';
 import { z } from '../_util/z';
 import { Menu, type MenuOption } from '../menu';
-
 
 export function Dropdown<T>(
   props: {
@@ -35,7 +26,6 @@ export function Dropdown<T>(
     state.open = !!v;
   });
 
-
   return (
     <Floating
       zIndex={zIndex}
@@ -51,13 +41,17 @@ export function Dropdown<T>(
       }}
       placement='bottom'
     >
-      <Menu options={props.options} on:change={(v, evt) => {
-        props['on:change']?.(v, evt);
-        if (notCtrl) {
-          state.open = false;
-        }
-        props['on:openChange']?.(false);
-      }} value={props.value} />
+      <Menu
+        options={props.options}
+        on:change={(v, evt) => {
+          props['on:change']?.(v, evt);
+          if (notCtrl) {
+            state.open = false;
+          }
+          props['on:openChange']?.(false);
+        }}
+        value={props.value}
+      />
     </Floating>
   );
 }

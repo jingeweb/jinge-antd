@@ -12,13 +12,14 @@ interface InnerMenuOption<T> {
   value: T;
   label?: string;
   'slot:label'?: JNode;
-  'slot:icon'?: JNode
+  'slot:icon'?: JNode;
 }
 export type MenuOption<T> = {
   value: T;
-} & WithPropSlot<'label', JNode> & WithSlots<{
-  'icon': JNode
-}>;
+} & WithPropSlot<'label', JNode> &
+  WithSlots<{
+    icon: JNode;
+  }>;
 
 export function Menu<T>(
   props: {
@@ -26,11 +27,9 @@ export function Menu<T>(
     style?: string;
     className?: string;
     options: MenuOption<T>[];
-  } &
-    WithEvents<{
-      change?: (v: T, evt: Event) => void;
-
-    }>,
+  } & WithEvents<{
+    change?: (v: T, evt: Event) => void;
+  }>,
 ) {
   const state = vm({
     value: props.value,
@@ -41,9 +40,8 @@ export function Menu<T>(
   });
 
   return (
-
-    <div className={cx('ja-menu', props.className)}>{
-      props.options.map((option: InnerMenuOption<T>) => (
+    <div className={cx('ja-menu', props.className)}>
+      {props.options.map((option: InnerMenuOption<T>) => (
         <button
           on:click={(evt) => {
             state.value = option.value;
@@ -55,8 +53,7 @@ export function Menu<T>(
           {option['slot:icon']}
           {option['slot:label'] ?? option.label}
         </button>
-      ))
-    }</div>
-
+      ))}
+    </div>
   );
 }

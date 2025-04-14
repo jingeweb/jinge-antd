@@ -18,7 +18,7 @@ export type MenuOption<T> = {
   value: T;
 } & WithPropSlot<'label', JNode> &
   WithSlots<{
-    icon: JNode;
+    icon?: JNode;
   }>;
 
 export function Menu<T>(

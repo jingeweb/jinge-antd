@@ -15,7 +15,7 @@ export interface FormOptions<T extends object> {
   defaultValues?: T;
 }
 
-export interface FormFieldRegisterOptions {}
+export interface FormFieldRegisterOptions { }
 export type FormValidateResult<T extends object> =
   | [Record<keyof T, string | undefined>]
   | [undefined, T];

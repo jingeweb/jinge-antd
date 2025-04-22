@@ -35,12 +35,11 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
 
   const state = vm({
     pos: '',
-    isOpen: !!props.open,
-    // safeX: ''
+    open: !!props.open,
   });
 
   watch(props, 'open', (v) => {
-    state.isOpen = !!v;
+    state.open = !!v;
   });
 
   let triggerEl: HTMLElement | undefined = undefined;
@@ -168,7 +167,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     if (ctrlMode) {
       props['on:openChange']?.(true);
     } else {
-      state.isOpen = true;
+      state.open = true;
     }
   }
   function open() {
@@ -176,7 +175,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
       clearCloseTm();
       return;
     }
-    if (state.isOpen) {
+    if (state.open) {
       return;
     }
     clearOpenTm();
@@ -194,7 +193,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
       clearOpenTm();
       return;
     }
-    if (!state.isOpen) {
+    if (!state.open) {
       return;
     }
     clearCloseTm();
@@ -211,7 +210,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     if (ctrlMode) {
       props['on:openChange']?.(false);
     } else {
-      state.isOpen = false;
+      state.open = false;
     }
   }
 
@@ -241,8 +240,8 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
       {props['slot:trigger']}
       <Portal>
         <Transition
-          isEnter={state.isOpen}
-          appear={state.isOpen}
+          isEnter={state.open}
+          appear={state.open}
           enterClass={props.enterClass ?? 'ja-enter'}
           enterActiveClass={props.enterActiveClass ?? 'ja-enter-active'}
           leaveActiveClass={props.leaveActiveClass ?? 'ja-leave-active'}

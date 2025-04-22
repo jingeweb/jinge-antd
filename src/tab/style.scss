@@ -1,0 +1,27 @@
+.ja-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--antd-border);
+  gap: 32px;
+  position: relative;
+
+  & > .indicator {
+    position: absolute;
+    left: 0;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: var(--antd-primary);
+    transition: left ease 0.3s;
+    will-change: left;
+  }
+}
+
+.ja-tab-item {
+  padding: 12px 0;
+  position: relative;
+  cursor: pointer;
+
+  &.active {
+    color: var(--antd-primary);
+  }
+}

@@ -4,7 +4,7 @@ import {
   type MouseEventHandler,
   type WithEvents,
   type WithOptChildren,
-  WithSlots,
+  type WithSlots,
   cx,
 } from 'jinge';
 
@@ -12,7 +12,7 @@ export function Button(
   props: {
     className?: string;
     size?: 'lg' | 'sm';
-    type?: 'primary' | 'link';
+    type?: 'primary' | 'link' | 'default' | 'text';
     loading?: boolean;
     disabled?: boolean;
   } & WithOptChildren<JNode> &
@@ -23,15 +23,19 @@ export function Button(
       click?: MouseEventHandler<HTMLButtonElement>;
     }>,
 ) {
+  const onlyIcon = !!props['slot:icon'] && !props['slot:default'];
+
   return (
     <button
       className={cx(
         'ja-button',
-        props.className,
+        onlyIcon && 'only-icon',
         props.size,
-        (props.loading || props.disabled) && 'disabled',
+        props.type ?? 'default',
+        props.className,
+        (props.loading ?? props.disabled) && 'disabled',
       )}
-      disabled={props.loading || props.disabled}
+      disabled={props.loading ?? props.disabled}
       on:click={(evt) => {
         props['on:click']?.(evt);
       }}

@@ -44,7 +44,7 @@ export function Input(
     state.value = v ?? '';
   });
 
-  return hasDeco ? <div className={ }>
+  return hasDeco ? <div className='xx'>
 
   </div> : (
     <input

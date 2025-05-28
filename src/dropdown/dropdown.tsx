@@ -1,5 +1,5 @@
 import { type JNode, type WithChildren, type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
-import { Floating } from '../floating';
+import { Floating, type FloatingPlacement } from '../floating';
 import { z } from '../_util/z';
 import { Menu, type MenuOption } from '../menu';
 
@@ -8,6 +8,7 @@ export function Dropdown<T>(
     open?: boolean;
     value?: T;
     style?: string;
+    placement?: FloatingPlacement;
     className?: string;
     options: MenuOption<T>[];
   } & WithChildren<JNode> &
@@ -39,7 +40,7 @@ export function Dropdown<T>(
         }
         props['on:openChange']?.(v);
       }}
-      placement='bottom'
+      placement={props.placement ?? 'bottom'}
     >
       <Menu
         options={props.options}

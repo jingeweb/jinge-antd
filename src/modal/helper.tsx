@@ -14,6 +14,7 @@ export type ShowModalOptions<Result> = {
   confirmValue?: Result;
   cancelText?: string;
   cancelValue?: Result;
+  className?: string;
 } & WithPropSlot<'title', JNode> &
   WithPropSlot<'content', JNode> &
   WithEvents<{
@@ -29,6 +30,7 @@ function showModal<Result = unknown>(options: ShowModalOptions<Result>) {
     title: options.title,
     'slot:title': options['slot:title'],
     closable: options.closable,
+    className: options.className,
     closeWhenMaskClick: options.closeWhenMaskClick,
     showMask: options.showMask,
     confirmText: options.confirmText,

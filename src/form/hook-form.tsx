@@ -41,7 +41,9 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
   },
 ) {
   type T = z.infer<S>;
-  const formState = vm(options?.defaultValues ?? {}) as T;
+  const formState = vm({
+    ...options?.defaultValues
+  }) as T;
   const formErrors = vm({}) as Record<keyof T, string | undefined>;
   const propSchemas = new Map<keyof T, ZodObject<ZodRawShape>>();
   const control = {

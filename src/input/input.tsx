@@ -2,9 +2,13 @@
 import {
   type JClipboardEvent,
   type JFormEvent,
+
   type JNode,
+
+  type WithChildren,
+
   type WithEvents,
-  type WithSlots,
+
   cx,
   isUndefined,
   vm,
@@ -18,23 +22,15 @@ export function Input(
     placeholder?: string;
     value?: string;
     size?: 'sm' | 'lg' | 'md';
-    prefix?: string;
-    suffix?: string;
-    addonBefore?: string;
-    addonAfter?: string;
-  } & WithSlots<{
-    prefix?: JNode;
-    suffix?: JNode;
-    addonBefore?: JNode;
-    addonAfter?: JNode;
-  }> & WithEvents<{
+    noRoundedR?: boolean;
+    noRoundedL?: boolean;
+  } & WithEvents<{
     change?: (value: string, evt: JFormEvent<HTMLInputElement>) => void;
     blur?: (evt: JClipboardEvent<HTMLInputElement>) => void;
     focus?: (evt: JClipboardEvent<HTMLInputElement>) => void;
   }>,
 ) {
   const notCtrl = isUndefined(props.value);
-  const hasDeco = !!props.prefix || !!props.suffix || !!props.addonBefore || !!props.addonAfter || !!props['slot:prefix'] || !!props['slot:suffix'] || !!props['slot:addonBefore'] || !!props['slot:addonAfter'];
 
   const state = vm({
     value: props.value ?? '',
@@ -44,11 +40,9 @@ export function Input(
     state.value = v ?? '';
   });
 
-  return hasDeco ? <div className='xx'>
-
-  </div> : (
+  return (
     <input
-      className={cx('ja-input', props.size ?? 'md', props.className, props.disabled && 'disabled')}
+      className={cx('ja-input', props.noRoundedR && 'no-rounded-r', props.noRoundedL && 'no-rounded-l', props.size ?? 'md', props.className, props.disabled && 'disabled')}
       placeholder={props.placeholder}
       disabled={props.disabled}
       value={state.value}
@@ -64,4 +58,19 @@ export function Input(
       on:focus={props['on:focus']}
     />
   );
+}
+
+export function InputWrapper(props: { className?: string } & WithChildren<JNode>) {
+  return <div className={cx('ja-input-wrapper', props.className)}>
+    {props.children}
+  </div>
+}
+
+export function InputAddon(props: {
+  className?: string;
+  size?: 'sm' | 'lg' | 'md';
+} & WithChildren<JNode>) {
+  return <div className={cx('ja-input-addon', props.size ?? 'md', props.className)}>
+    {props.children}
+  </div>
 }

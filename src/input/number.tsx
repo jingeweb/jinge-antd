@@ -9,11 +9,14 @@ import {
   watch,
 } from 'jinge';
 
-export function NumberInput(
+export function InputNumber(
   props: {
     className?: string;
     disabled?: boolean;
     placeholder?: string;
+    size?: 'sm' | 'md' | 'lg',
+    noRoundedR?: boolean;
+    noRoundedL?: boolean;
     value?: number;
     min?: number;
     max?: number;
@@ -36,7 +39,7 @@ export function NumberInput(
   return (
     <input
       type='number'
-      className={cx('ja-input', props.className, props.disabled && 'disabled')}
+      className={cx('ja-input ja-input-number', props.noRoundedR && 'no-rounded-r', props.noRoundedL && 'no-rounded-l', props.size ?? 'md', props.className, props.disabled && 'disabled')}
       placeholder={props.placeholder}
       disabled={props.disabled}
       value={state.strval}

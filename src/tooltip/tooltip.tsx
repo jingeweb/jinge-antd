@@ -1,5 +1,5 @@
 import { type JNode, type WithChildren, type WithEvents, type WithPropSlot, cx } from 'jinge';
-import { Floating, type FloatingTriggerMethod } from '../floating';
+import { Floating, type FloatingPlacement, type FloatingTriggerMethod } from '../floating';
 import { z } from '../_util/z';
 
 export function Tooltip(
@@ -8,6 +8,7 @@ export function Tooltip(
     open?: boolean;
     className?: string;
     safePolygon?: boolean;
+    placement?: FloatingPlacement;
   } & WithEvents<{
     openChange?(v: boolean): void;
   }> &
@@ -25,7 +26,7 @@ export function Tooltip(
       triggerMethod={props.triggerMethod ?? 'hover'}
       delay={{ open: 300, close: 0 }}
       offset={10}
-      placement='top'
+      placement={props.placement ?? 'top'}
       slot:trigger={props.children}
       className={cx('ja-tooltip', props.className)}
     >

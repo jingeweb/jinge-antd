@@ -9,6 +9,7 @@ export function Select<T>(
     options: MenuOption<T>[];
     size?: 'lg' | 'sm' | 'md';
     className?: string;
+    triggerClassName?: string;
     disabled?: boolean;
     placeholder?: string;
     value?: T;
@@ -31,10 +32,10 @@ export function Select<T>(
     // options 变化后也要更新下 selectOption
     upV(state.value);
   });
-
   return (
     <Dropdown
       options={props.options}
+      className={props.className}
       on:change={(v) => {
         if (notCtrl) {
           upV(v);
@@ -48,7 +49,7 @@ export function Select<T>(
     >
       <button
         disabled={props.disabled}
-        className={cx('ja-select', props.size ?? 'md', props.className)}
+        className={cx('ja-select', props.size ?? 'md', props.triggerClassName)}
         on:click={() => {
           state.open = true;
         }}

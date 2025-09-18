@@ -1,5 +1,19 @@
-import { type JNode, type WithChildren, type WithEvents, type WithPropSlot, cx, isUndefined, vm, watch } from 'jinge';
-import { Floating, type FloatingDuration, type FloatingPlacement, type FloatingTriggerMethod } from '../floating';
+import {
+  type JNode,
+  type WithChildren,
+  type WithEvents,
+  type WithPropSlot,
+  cx,
+  isUndefined,
+  vm,
+  watch,
+} from 'jinge';
+import {
+  Floating,
+  type FloatingDuration,
+  type FloatingPlacement,
+  type FloatingTriggerMethod,
+} from '../floating';
 import { z } from '../_util/z';
 
 export function Popover(
@@ -12,7 +26,8 @@ export function Popover(
     open?: boolean;
   } & WithEvents<{
     openChange(v: boolean): void;
-  }> & WithChildren<JNode> &
+  }> &
+    WithChildren<JNode> &
     WithPropSlot<'content', JNode>,
 ) {
   const zIndex = z.getPopoverZ();

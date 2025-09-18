@@ -15,7 +15,7 @@ export interface FormOptions<T extends object> {
   defaultValues?: T;
 }
 
-export interface FormFieldRegisterOptions { }
+export interface FormFieldRegisterOptions {}
 export type FormValidateResult<T extends object> =
   | [Record<keyof T, string | undefined>]
   | [undefined, T];
@@ -42,7 +42,7 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
 ) {
   type T = z.infer<S>;
   const formState = vm({
-    ...options?.defaultValues
+    ...options?.defaultValues,
   }) as T;
   const formErrors = vm({}) as Record<keyof T, string | undefined>;
   const propSchemas = new Map<keyof T, ZodObject<ZodRawShape>>();
@@ -58,11 +58,11 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
     Object.keys(formErrors).forEach((k: keyof T) => {
       formErrors[k] = undefined;
     });
-    if (res.error?.errors.length) {
+    if (res.error?.issues.length) {
       const errors: Record<string, unknown> = {};
-      res.error!.errors.forEach((err) => {
+      res.error!.issues.forEach((err) => {
         const prop = err.path[0];
-        errors[prop] = err.message;
+        errors[prop as string] = err.message;
         formErrors[prop as keyof T] = err.message;
       });
       return [errors] as FormValidateResult<T>;
@@ -78,8 +78,8 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
       propSchemas.set(prop, s);
     }
     const res = await s.safeParseAsync(formState);
-    if (res.error?.errors?.length) {
-      formErrors[prop] = res.error?.errors[0].message;
+    if (res.error?.issues.length) {
+      formErrors[prop] = res.error?.issues[0].message;
     } else {
       formErrors[prop] = undefined;
     }

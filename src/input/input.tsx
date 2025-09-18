@@ -1,14 +1,9 @@
-
 import {
   type JClipboardEvent,
   type JFormEvent,
-
   type JNode,
-
   type WithChildren,
-
   type WithEvents,
-
   cx,
   isUndefined,
   vm,
@@ -42,7 +37,14 @@ export function Input(
 
   return (
     <input
-      className={cx('ja-input', props.noRoundedR && 'no-rounded-r', props.noRoundedL && 'no-rounded-l', props.size ?? 'md', props.className, props.disabled && 'disabled')}
+      className={cx(
+        'ja-input',
+        props.noRoundedR && 'no-rounded-r',
+        props.noRoundedL && 'no-rounded-l',
+        props.size ?? 'md',
+        props.className,
+        props.disabled && 'disabled',
+      )}
       placeholder={props.placeholder}
       disabled={props.disabled}
       value={state.value}
@@ -61,16 +63,18 @@ export function Input(
 }
 
 export function InputWrapper(props: { className?: string } & WithChildren<JNode>) {
-  return <div className={cx('ja-input-wrapper', props.className)}>
-    {props.children}
-  </div>
+  return <div className={cx('ja-input-wrapper', props.className)}>{props.children}</div>;
 }
 
-export function InputAddon(props: {
-  className?: string;
-  size?: 'sm' | 'lg' | 'md';
-} & WithChildren<JNode>) {
-  return <div className={cx('ja-input-addon', props.size ?? 'md', props.className)}>
-    {props.children}
-  </div>
+export function InputAddon(
+  props: {
+    className?: string;
+    size?: 'sm' | 'lg' | 'md';
+  } & WithChildren<JNode>,
+) {
+  return (
+    <div className={cx('ja-input-addon', props.size ?? 'md', props.className)}>
+      {props.children}
+    </div>
+  );
 }

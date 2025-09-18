@@ -1,6 +1,6 @@
 import { vm } from 'jinge';
 
-export function App(props) {
+export function App() {
   const state = vm({
     k: 'c',
     n: 10,
@@ -37,7 +37,6 @@ export function App(props) {
   return (
     <div className='pt-10'>
       {state.n}
-      {props?.children?.({ a })}
       hello
     </div>
   );

@@ -1,12 +1,6 @@
-import { autoUpdate } from '@floating-ui/dom';
-import { type JNode, Portal, type Props, Transition } from 'jinge';
+import { type JNode, Portal, Transition, type WithChildren } from 'jinge';
 
-export function A(
-  props: Props<{
-    children: JNode;
-  }>,
-) {
-  autoUpdate;
+export function A(props: WithChildren<JNode>) {
   return (
     <Portal>
       <Transition isEnter={true}>

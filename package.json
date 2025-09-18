@@ -68,6 +68,6 @@
   },
   "peerDependencies": {
     "jinge": "^4.1.7",
-    "zod": "^3"
+    "zod": "^4"
   }
 }

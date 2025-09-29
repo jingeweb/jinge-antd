@@ -1,4 +1,4 @@
-import { type JClipboardEvent, type JFormEvent, type WithEvents, cx } from 'jinge';
+import type { JClipboardEvent, JFormEvent, WithEvents } from 'jinge';
 
 export type InputInnerProps = {
   className: string;

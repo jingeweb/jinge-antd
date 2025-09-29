@@ -36,7 +36,7 @@ export interface MessageContainerConfig {
 const containerConfig: MessageContainerConfig = {
   paddingLeft: 0,
   paddingTop: 0,
-  paddingRight: 0
+  paddingRight: 0,
 };
 
 function configContainer(config: MessageContainerConfig) {
@@ -82,7 +82,7 @@ interface MessageContainerInstance {
   clear: () => void;
 }
 function MessageContainerComponent() {
-  const containerStyle = `padding-top:${containerConfig.paddingTop ?? 0}px;padding-left:${containerConfig.paddingLeft ?? 0}px;padding-right:${containerConfig.paddingRight ?? 0}px;`
+  const containerStyle = `padding-top:${containerConfig.paddingTop ?? 0}px;padding-left:${containerConfig.paddingLeft ?? 0}px;padding-right:${containerConfig.paddingRight ?? 0}px;`;
   const state = vm({
     messages: [] as MessageConfig[],
     zIndex: 0,

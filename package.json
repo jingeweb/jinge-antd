@@ -29,8 +29,8 @@
     "dev-site": "vite dev -c scripts/vite.site.config.mts",
     "build-site": "vite build -c scripts/vite.site.config.mts",
     "preview-site": "vite preview -c scripts/vite.site.config.mts",
-    "lint-fix": "eslint '**/*.{js,mjs,ts}' --fix && prettier --log-level=warn --write . !*.yaml",
-    "lint": "tsc --noEmit && eslint '**/*.{js,mjs,ts}' && prettier --check . !*.yaml",
+    "lint-fix": "eslint \"**/*.{js,mjs,ts,tsx}\" --fix && prettier --log-level=warn --write . !*.yaml",
+    "lint": "tsc --noEmit && eslint \"**/*.{js,mjs,ts,tsx}\" && prettier --check . !*.yaml",
     "lint-staged": "lint-staged",
     "prepare": "husky"
   },

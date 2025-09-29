@@ -27,6 +27,22 @@ export type MessageOptions = WithPropSlot<'content', JNode> & {
   'on:close'?: () => void;
 };
 
+export interface MessageContainerConfig {
+  paddingTop?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
+}
+
+const containerConfig: MessageContainerConfig = {
+  paddingLeft: 0,
+  paddingTop: 0,
+  paddingRight: 0
+};
+
+function configContainer(config: MessageContainerConfig) {
+  Object.assign(containerConfig, config);
+}
+
 export interface MessageUpdateOptions {
   type?: MessageConfig['type'];
   content?: string;
@@ -66,6 +82,7 @@ interface MessageContainerInstance {
   clear: () => void;
 }
 function MessageContainerComponent() {
+  const containerStyle = `padding-top:${containerConfig.paddingTop ?? 0}px;padding-left:${containerConfig.paddingLeft ?? 0}px;padding-right:${containerConfig.paddingRight ?? 0}px;`
   const state = vm({
     messages: [] as MessageConfig[],
     zIndex: 0,
@@ -157,7 +174,7 @@ function MessageContainerComponent() {
   });
 
   return (
-    <div className='ja-message-container' style={`z-index: ${state.zIndex}`}>
+    <div className='ja-message-container' style={`z-index: ${state.zIndex};${containerStyle}`}>
       <TransitionGroup
         enterClass='ja-enter'
         enterActiveClass='ja-enter-active'
@@ -215,11 +232,13 @@ function showLoading(contentOrOptions: string | MessageOptions): MessageInstance
 }
 
 const message = {
+  configContainer,
   success: showSuccess,
   error: showError,
   info: showInfo,
   loading: showLoading,
   warning: showWarning,
+  show: innerShow,
   clear: clearAll,
 };
 

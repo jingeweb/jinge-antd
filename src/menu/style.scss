@@ -7,9 +7,16 @@
   min-width: 160px;
   cursor: pointer;
   align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid rgb(0 0 0 / 20%);
+  justify-content: start;
   padding: 12px;
+
+  & > .ja-menu-item-label:not(:first-child) {
+    margin-left: 12px;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid rgb(0 0 0 / 20%);
+  }
 
   &:hover,
   &.ja-active {

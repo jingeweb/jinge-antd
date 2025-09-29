@@ -51,7 +51,7 @@ export function Menu<T>(
           key={option.value}
         >
           {option['slot:icon']}
-          {option['slot:label'] ?? option.label}
+          <span className='ja-menu-item-label'> {option['slot:label'] ?? option.label}</span>
         </button>
       ))}
     </div>

@@ -1,5 +1,10 @@
 import './style.scss';
 
 export { modal } from './helper';
-export { Modal, MODAL_CONTEXT, type ModalContext, onModalConfirm } from './modal';
-export type { ShowModalOptions, ModalInstance } from './helper';
+export type { ModalInstance, ShowModalOptions } from './helper';
+export {
+  Modal,
+  MODAL_CONTEXT,
+  onModalConfirm,
+  type ModalContext,
+} from './modal';

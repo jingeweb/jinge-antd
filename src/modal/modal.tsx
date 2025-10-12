@@ -1,4 +1,11 @@
 import {
+  type ConfirmCallback,
+  type ConfirmContext,
+  createContextOnConfirm,
+  useConfirmContext,
+} from '../_util';
+
+import {
   type JNode,
   Transition,
   type WithEvents,
@@ -12,15 +19,10 @@ import {
   vm,
   watch,
 } from 'jinge';
-import { z } from '../_util/z';
-import { Button } from '../button';
+
 import { AntDesignCloseCircleOutlined } from '../icon';
-import {
-  type ConfirmCallback,
-  type ConfirmContext,
-  createContextOnConfirm,
-  useConfirmContext,
-} from '../_util';
+import { Button } from '../button';
+import { z } from '../_util/z';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
 export type ModalContext = ConfirmContext<unknown> & {};
@@ -118,10 +120,10 @@ export function Modal<Result = unknown>(
         <Transition
           isEnter={state.open}
           appear
-          enterClass='opacity-100'
-          enterActiveClass='transition-[opacity] duration-[0.2s]'
-          leaveActiveClass='transition-[opacity] duration-[0.2s]'
-          leaveClass='opacity-0'
+          enterClass="opacity-100"
+          enterActiveClass="transition-[opacity] duration-[0.2s]"
+          leaveActiveClass="transition-[opacity] duration-[0.2s]"
+          leaveClass="opacity-0"
           destroyAfterLeave
         >
           <div
@@ -138,21 +140,24 @@ export function Modal<Result = unknown>(
       <Transition
         isEnter={state.open}
         appear
-        enterClass='ja-enter'
-        enterActiveClass='ja-enter-active'
-        leaveActiveClass='ja-leave-active'
-        leaveClass='ja-leave'
+        enterClass="ja-enter"
+        enterActiveClass="ja-enter-active"
+        leaveActiveClass="ja-leave-active"
+        leaveClass="ja-leave"
         destroyAfterLeave
         on:afterLeave={() => {
           props['on:afterClose']?.(resultValue);
         }}
       >
-        <div className={cx(props.className, 'ja-modal')} style={`z-index:${z.currentIndex + 1}`}>
-          <div className='ja-modal-title'>
+        <div
+          className={cx(props.className, 'ja-modal')}
+          style={`z-index:${z.currentIndex + 1}`}
+        >
+          <div className="ja-modal-title">
             <span>{props['slot:title'] ?? props.title}</span>
             {props.closable !== false && (
               <button
-                className='ja-close'
+                className="ja-close"
                 on:click={() => {
                   close(cancelValue);
                 }}
@@ -161,8 +166,8 @@ export function Modal<Result = unknown>(
               </button>
             )}
           </div>
-          <div className='ja-modal-content'>{props.children}</div>
-          <div className='ja-modal-footer'>
+          <div className="ja-modal-content">{props.children}</div>
+          <div className="ja-modal-footer">
             <Button
               on:click={() => {
                 props['on:cancel']?.();
@@ -172,7 +177,7 @@ export function Modal<Result = unknown>(
               {props.cancelText ?? '取 消'}
             </Button>
             <Button
-              type='primary'
+              type="primary"
               disabled={state.submitting}
               loading={state.submitting}
               on:click={handleConfirm}

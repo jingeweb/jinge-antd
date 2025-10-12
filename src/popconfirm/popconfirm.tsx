@@ -1,4 +1,16 @@
 import {
+  type ConfirmCallback,
+  type ConfirmContext,
+  createContextOnConfirm,
+  useConfirmContext,
+} from '../_util';
+import {
+  Floating,
+  type FloatingDuration,
+  type FloatingPlacement,
+} from '../floating';
+
+import {
   type JNode,
   type WithChildren,
   type WithEvents,
@@ -7,15 +19,9 @@ import {
   cx,
   vm,
 } from 'jinge';
-import { Floating, type FloatingDuration, type FloatingPlacement } from '../floating';
-import { z } from '../_util/z';
 import { Button } from '../button';
-import {
-  type ConfirmCallback,
-  type ConfirmContext,
-  createContextOnConfirm,
-  useConfirmContext,
-} from '../_util';
+
+import { z } from '../_util/z';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
 export type PopconfirmContext = ConfirmContext<unknown> & {};
@@ -46,7 +52,9 @@ export function Popconfirm(
     submitting: false,
   });
 
-  const confirmContext = useConfirmContext(POPCONFIRM_CONTEXT, () => props['on:confirm']?.());
+  const confirmContext = useConfirmContext(POPCONFIRM_CONTEXT, () =>
+    props['on:confirm']?.(),
+  );
 
   async function handleConfirm() {
     await confirmContext.handleConfirm({
@@ -69,18 +77,22 @@ export function Popconfirm(
         state.isOpen = v;
       }}
       dismissable={false}
-      triggerMethod='click'
+      triggerMethod="click"
       offset={10}
       placement={props.placement}
       slot:trigger={props.children}
       className={cx('ja-popconfirm', props.className)}
     >
-      <div className='ja-popconfirm-title'>{props['slot:title'] ?? props.title}</div>
+      <div className="ja-popconfirm-title">
+        {props['slot:title'] ?? props.title}
+      </div>
       {props['slot:content'] && (
-        <div className='ja-popconfirm-content'>{props['slot:content']}</div>
+        <div className="ja-popconfirm-content">{props['slot:content']}</div>
       )}
-      {props.content && <div className='ja-popconfirm-content'>{props.content}</div>}
-      <div className='ja-popconfirm-footer'>
+      {props.content && (
+        <div className="ja-popconfirm-content">{props.content}</div>
+      )}
+      <div className="ja-popconfirm-footer">
         <Button
           on:click={() => {
             props['on:cancel']?.();
@@ -90,7 +102,7 @@ export function Popconfirm(
           {props.cancelText ?? '取 消'}
         </Button>
         <Button
-          type='primary'
+          type="primary"
           disabled={state.submitting}
           loading={state.submitting}
           on:click={handleConfirm}

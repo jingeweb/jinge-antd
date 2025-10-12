@@ -62,8 +62,14 @@ export function Input(
   );
 }
 
-export function InputWrapper(props: { className?: string } & WithChildren<JNode>) {
-  return <div className={cx('ja-input-wrapper', props.className)}>{props.children}</div>;
+export function InputWrapper(
+  props: { className?: string } & WithChildren<JNode>,
+) {
+  return (
+    <div className={cx('ja-input-wrapper', props.className)}>
+      {props.children}
+    </div>
+  );
 }
 
 export function InputAddon(

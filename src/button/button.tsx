@@ -1,4 +1,3 @@
-import { LoadingOutlined } from '../loading';
 import {
   type JNode,
   type MouseEventHandler,
@@ -7,6 +6,7 @@ import {
   type WithSlots,
   cx,
 } from 'jinge';
+import { LoadingOutlined } from '../loading';
 
 export function Button(
   props: {

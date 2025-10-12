@@ -72,7 +72,7 @@ export function Tabs<K extends string | number>(
           {opt['slot:label'] ?? opt.label}
         </div>
       ))}
-      <div className='indicator' ref={indicator}></div>
+      <div className="indicator" ref={indicator}></div>
     </div>
   );
 }

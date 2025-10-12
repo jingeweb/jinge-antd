@@ -29,45 +29,41 @@
     "dev-site": "vite dev -c scripts/vite.site.config.mts",
     "build-site": "vite build -c scripts/vite.site.config.mts",
     "preview-site": "vite preview -c scripts/vite.site.config.mts",
-    "lint-fix": "eslint \"**/*.{js,mjs,ts,tsx}\" --fix && prettier --log-level=warn --write . !*.yaml",
-    "lint": "tsc --noEmit && eslint \"**/*.{js,mjs,ts,tsx}\" && prettier --check . !*.yaml",
+    "lint-fix": "oxlint --type-aware --fix && biome format --fix",
+    "lint": "tsc --noEmit && oxlint --type-aware && biome format",
     "lint-staged": "lint-staged",
     "prepare": "husky"
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "eslint --fix",
-      "prettier --write"
+      "oxlint --type-aware --fix",
+      "biome format --fix"
     ]
   },
   "devDependencies": {
     "@ant-design/colors": "^8.0.0",
-    "@eslint/js": "^9.36.0",
-    "@iconify/json": "^2.2.389",
+    "@biomejs/biome": "^2.2.5",
+    "@iconify/json": "^2.2.394",
     "@iconify/tailwind4": "^1.0.6",
-    "@tailwindcss/vite": "^4.1.13",
-    "@types/node": "^24.5.2",
-    "eslint": "^9.36.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import-x": "^4.16.1",
+    "@tailwindcss/vite": "^4.1.14",
+    "@types/node": "^24.7.2",
     "husky": "^9.1.7",
     "jinge": "^4.1.7",
     "jinge-compiler": "^4.1.7",
-    "lint-staged": "^16.2.3",
-    "prettier": "^3.6.2",
-    "prettier-plugin-tailwindcss": "^0.6.14",
+    "lint-staged": "^16.2.4",
+    "oxlint": "^1.22.0",
+    "oxlint-tsgolint": "^0.2.0",
     "sass-embedded": "^1.93.2",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^4.1.14",
     "tsup": "^8.5.0",
     "type-fest": "^5.0.1",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.44.1",
-    "vite": "^7.1.7",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9",
     "vite-tsconfig-paths": "^5.1.4",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "peerDependencies": {
     "jinge": "^4.1.7",
-    "zod": "^4"
+    "zod": "^4.1.12"
   }
 }

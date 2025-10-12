@@ -14,15 +14,20 @@ export interface ConfirmContext<Result> {
   onConfirm(listener: ConfirmCallback<Result>): () => void;
 }
 export function createContextOnConfirm(contextKey: symbol) {
-  return function onModalConfirm<Result = unknown>(listener: ConfirmCallback<Result>) {
+  return function onModalConfirm<Result = unknown>(
+    listener: ConfirmCallback<Result>,
+  ) {
     const ctx = context<ConfirmContext<Result>>(contextKey);
-    ctx && onUnmount(ctx.onConfirm(listener));
+    if (ctx) onUnmount(ctx.onConfirm(listener));
   };
 }
 
-export function useConfirmContext<Result>(contextKey: symbol, confirmFn?: ConfirmCallback<Result>) {
+export function useConfirmContext<Result>(
+  contextKey: symbol,
+  confirmFn?: ConfirmCallback<Result>,
+) {
   const onConfirmFns = new Set<ConfirmCallback<Result>>();
-  confirmFn && onConfirmFns.add(confirmFn);
+  if (confirmFn) onConfirmFns.add(confirmFn);
 
   context<ConfirmContext<Result>>(contextKey, {
     onConfirm(listener) {
@@ -33,12 +38,12 @@ export function useConfirmContext<Result>(contextKey: symbol, confirmFn?: Confir
 
   async function handleConfirm(options: {
     onSubmittingChange(submitting: boolean): void;
-    onSubmitted(preventClose: boolean, resultValue?: Result | undefined): void;
+    onSubmitted(preventClose: boolean, resultValue?: Result): void;
   }) {
     const listeners = [...onConfirmFns.values()];
     let preventClose = false;
     let result = undefined;
-    for await (const listener of listeners) {
+    for (const listener of listeners) {
       const x = listener();
       if (isPromise<ConfirmCallbackResult<Result>>(x)) {
         options.onSubmittingChange(true);

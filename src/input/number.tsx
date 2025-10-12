@@ -1,6 +1,13 @@
 import './style.scss';
 
-import { type JClipboardEvent, type JFormEvent, type WithEvents, cx, vm, watch } from 'jinge';
+import {
+  type JClipboardEvent,
+  type JFormEvent,
+  type WithEvents,
+  cx,
+  vm,
+  watch,
+} from 'jinge';
 
 export function InputNumber(
   props: {
@@ -30,7 +37,7 @@ export function InputNumber(
 
   return (
     <input
-      type='number'
+      type="number"
       className={cx(
         'ja-input ja-input-number',
         props.noRoundedR && 'no-rounded-r',

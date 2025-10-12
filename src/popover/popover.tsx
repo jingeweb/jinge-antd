@@ -1,4 +1,11 @@
 import {
+  Floating,
+  type FloatingDuration,
+  type FloatingPlacement,
+  type FloatingTriggerMethod,
+} from '../floating';
+
+import {
   type JNode,
   type WithChildren,
   type WithEvents,
@@ -8,12 +15,7 @@ import {
   vm,
   watch,
 } from 'jinge';
-import {
-  Floating,
-  type FloatingDuration,
-  type FloatingPlacement,
-  type FloatingTriggerMethod,
-} from '../floating';
+
 import { z } from '../_util/z';
 
 export function Popover(

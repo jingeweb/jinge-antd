@@ -1,4 +1,5 @@
 import './style.scss';
+
 import { cx } from 'jinge';
 
 export function Spin(props: { className?: string; size?: 'sm' | 'md' | 'lg' }) {

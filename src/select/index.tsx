@@ -1,7 +1,8 @@
 import './style.scss';
-import { Dropdown } from '../dropdown';
 
 import { type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
+import { Dropdown } from '../dropdown';
+
 import type { MenuOption } from '../menu';
 
 export function Select<T>(
@@ -25,7 +26,9 @@ export function Select<T>(
   });
   function upV(v?: T) {
     state.value = v;
-    v !== undefined && (state.selectOption = props.options.find((opt) => opt.value === v));
+    if (v !== undefined) {
+      state.selectOption = props.options.find((opt) => opt.value === v);
+    }
   }
   watch(props, 'value', upV, { immediate: true });
   watch(props, 'options', () => {

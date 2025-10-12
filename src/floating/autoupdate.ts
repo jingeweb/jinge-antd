@@ -9,7 +9,9 @@ function getWindow(node?: any): typeof window {
   return node?.ownerDocument?.defaultView ?? window;
 }
 function getDocumentElement(node: Node | Window): HTMLElement {
-  return ((isNode(node) ? node.ownerDocument : node.document) ?? window.document)?.documentElement;
+  return (
+    (isNode(node) ? node.ownerDocument : node.document) ?? window.document
+  )?.documentElement;
 }
 function isNode(value: unknown): value is Node {
   return value instanceof Node || value instanceof getWindow(value).Node;
@@ -25,7 +27,9 @@ function getNodeName(node: Node | Window): string {
   return '#document';
 }
 function isShadowRoot(value: unknown): value is ShadowRoot {
-  return value instanceof ShadowRoot || value instanceof getWindow(value).ShadowRoot;
+  return (
+    value instanceof ShadowRoot || value instanceof getWindow(value).ShadowRoot
+  );
 }
 
 function getParentNode(node: Node): Node {
@@ -50,7 +54,10 @@ function isLastTraversableNode(node: Node): boolean {
   return ['html', 'body', '#document'].includes(getNodeName(node));
 }
 function isHTMLElement(value: unknown): value is HTMLElement {
-  return value instanceof HTMLElement || value instanceof getWindow(value).HTMLElement;
+  return (
+    value instanceof HTMLElement ||
+    value instanceof getWindow(value).HTMLElement
+  );
 }
 export function isOverflowElement(element: Element): boolean {
   const { overflow, overflowX, overflowY, display } = getComputedStyle(element);
@@ -64,7 +71,9 @@ function getNearestOverflowAncestor(node: Node): HTMLElement {
   const parentNode = getParentNode(node);
 
   if (isLastTraversableNode(parentNode)) {
-    return node.ownerDocument ? node.ownerDocument.body : (node as Document).body;
+    return node.ownerDocument
+      ? node.ownerDocument.body
+      : (node as Document).body;
   }
 
   if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) {
@@ -74,7 +83,9 @@ function getNearestOverflowAncestor(node: Node): HTMLElement {
   return getNearestOverflowAncestor(parentNode);
 }
 function getFrameElement(win: Window): Element | null {
-  return win.parent && Object.getPrototypeOf(win.parent) ? win.frameElement : null;
+  return win.parent && Object.getPrototypeOf(win.parent)
+    ? win.frameElement
+    : null;
 }
 function getOverflowAncestors(
   node: Node,
@@ -102,7 +113,9 @@ function getOverflowAncestors(
 }
 
 function rectsAreEqual(a: DOMRect, b: DOMRect) {
-  return a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height;
+  return (
+    a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height
+  );
 }
 
 export interface AutoUpdateOptions {
@@ -192,7 +205,10 @@ function observeMove(element: Element, onMove: () => void) {
 
       if (
         ratio === 1 &&
-        !rectsAreEqual(elementRectForRootMargin, element.getBoundingClientRect())
+        !rectsAreEqual(
+          elementRectForRootMargin,
+          element.getBoundingClientRect(),
+        )
       ) {
         // It's possible that even though the ratio is reported as 1, the
         // element is not actually fully within the IntersectionObserver's root
@@ -258,11 +274,13 @@ export function autoUpdate(
       : [];
 
   ancestors.forEach((ancestor) => {
-    ancestorScroll && ancestor.addEventListener('scroll', update, { passive: true });
-    ancestorResize && ancestor.addEventListener('resize', update);
+    if (ancestorScroll)
+      ancestor.addEventListener('scroll', update, { passive: true });
+    if (ancestorResize) ancestor.addEventListener('resize', update);
   });
 
-  const cleanupIo = referenceEl && layoutShift ? observeMove(referenceEl, update) : null;
+  const cleanupIo =
+    referenceEl && layoutShift ? observeMove(referenceEl, update) : null;
 
   let reobserveFrame = -1;
   let resizeObserver: ResizeObserver | null = null;
@@ -291,8 +309,8 @@ export function autoUpdate(
 
   return () => {
     ancestors.forEach((ancestor) => {
-      ancestorScroll && ancestor.removeEventListener('scroll', update);
-      ancestorResize && ancestor.removeEventListener('resize', update);
+      if (ancestorScroll) ancestor.removeEventListener('scroll', update);
+      if (ancestorResize) ancestor.removeEventListener('resize', update);
     });
 
     cleanupIo?.();

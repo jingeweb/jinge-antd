@@ -8,5 +8,9 @@ export function Tag(
     color?: 'success' | 'processing' | 'error';
   } & WithChildren<JNode>,
 ) {
-  return <div className={cx('ja-tag', props.className, props.color)}>{props.children}</div>;
+  return (
+    <div className={cx('ja-tag', props.className, props.color)}>
+      {props.children}
+    </div>
+  );
 }

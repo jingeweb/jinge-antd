@@ -10,5 +10,12 @@
     "strict": true,
     "jsx": "preserve"
   },
-  "include": ["src/**/*", "site/**/*", "scripts/**/*", "intl/**/*", "*.js", "*.mjs"]
+  "include": [
+    "src/**/*",
+    "site/**/*",
+    "scripts/**/*",
+    "intl/**/*",
+    "*.js",
+    "*.mjs"
+  ]
 }

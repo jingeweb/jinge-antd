@@ -1,9 +1,9 @@
 import './style.scss';
 
-export { Floating } from './floating';
 export type {
-  FloatingProps,
   FloatingDuration,
   FloatingPlacement,
+  FloatingProps,
   FloatingTriggerMethod,
 } from './common';
+export { Floating } from './floating';

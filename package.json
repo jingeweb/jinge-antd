@@ -40,7 +40,7 @@
     "@iconify/tailwind4": "^1.2.3",
     "@tailwindcss/vite": "^4.3.0",
     "@types/node": "^25.6.2",
-    "@typescript/native-preview": "7.0.0-dev.20260510.1",
+    "@typescript/native-preview": "7.0.0-dev.20260512.1",
     "husky": "^9.1.7",
     "jinge": "^4.1.7",
     "jinge-compiler": "link:../jinge-compiler",
@@ -53,7 +53,7 @@
     "tsup": "^8.5.1",
     "type-fest": "^5.6.0",
     "typescript": "^6.0.3",
-    "vite": "^8.0.11",
+    "vite": "^8.0.12",
     "zod": "^4.4.3"
   },
   "peerDependencies": {

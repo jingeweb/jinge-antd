@@ -1,10 +1,5 @@
-import {
-  type JNode,
-  type WithEvents,
-  type WithPropSlot,
-  bootstrap,
-  destroyComponent,
-} from 'jinge';
+import { type JNode, type WithEvents, type WithPropSlot, bootstrap, destroyComponent } from 'jinge';
+
 import { Modal } from './modal';
 
 export interface ModalInstance<Result> {
@@ -31,9 +26,7 @@ function showModal<Result = unknown>(options: ShowModalOptions<Result>) {
   const $dv = document.createElement('div');
   document.body.appendChild($dv);
   let resFn: ((result: Result | undefined) => void) | undefined = undefined;
-  let closeP: Promise<Result | undefined> | undefined = new Promise(
-    (res) => (resFn = res),
-  );
+  let closeP: Promise<Result | undefined> | undefined = new Promise((res) => (resFn = res));
   const host = bootstrap(Modal<Result>, $dv, {
     title: options.title,
     'slot:title': options['slot:title'],

@@ -1,17 +1,7 @@
-import {
-  Floating,
-  type FloatingPlacement,
-  type FloatingTriggerMethod,
-} from '../floating';
-import {
-  type JNode,
-  type WithChildren,
-  type WithEvents,
-  type WithPropSlot,
-  cx,
-} from 'jinge';
+import { type JNode, type WithChildren, type WithEvents, type WithPropSlot, cx } from 'jinge';
 
 import { z } from '../_util/z';
+import { Floating, type FloatingPlacement, type FloatingTriggerMethod } from '../floating';
 
 export function Tooltip(
   props: {

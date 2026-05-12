@@ -1,9 +1,9 @@
 import './style.scss';
-
 import { type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
-import { Dropdown } from '../dropdown';
 
 import type { MenuOption } from '../menu';
+
+import { Dropdown } from '../dropdown';
 
 export function Select<T>(
   props: {

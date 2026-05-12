@@ -1,25 +1,16 @@
 import { type JNode, cx } from 'jinge';
+
 import type { TableProps } from './common';
 
 export function Table<T>(props: TableProps<T>) {
   return (
     <table
-      className={cx(
-        'ja-table',
-        props.className,
-        props.size ?? 'lg',
-        props.bordered && 'bordered',
-      )}
+      className={cx('ja-table', props.className, props.size ?? 'lg', props.bordered && 'bordered')}
     >
       <thead>
         <tr>
           {props.columns.map((column, index) => (
-            <th
-              key="key"
-              style={
-                column.width === undefined ? '' : `width:${column.width}px`
-              }
-            >
+            <th key="key" style={column.width === undefined ? '' : `width:${column.width}px`}>
               {column['slot:title']?.({
                 define: column,
                 index,

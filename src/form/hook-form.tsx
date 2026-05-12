@@ -1,3 +1,5 @@
+import type { ZodObject, ZodRawShape, z } from 'zod';
+
 import {
   type ComponentHost,
   type JClipboardEvent,
@@ -9,7 +11,6 @@ import {
   vm,
   vmWatch,
 } from 'jinge';
-import type { ZodObject, ZodRawShape, z } from 'zod';
 
 export interface FormOptions<T extends object> {
   defaultValues?: T;
@@ -22,24 +23,13 @@ export type FormValidateResult<T extends object> =
 export interface FormControl<T extends object> {
   validated: boolean;
   validateField: (prop: keyof T) => Promise<string | undefined>;
-  setField: <P extends keyof T>(
-    props: P,
-    value: T[P],
-    validate?: boolean,
-  ) => void;
-  watchField: <P extends keyof T>(
-    prop: P,
-    callback: (v?: T[P]) => void,
-  ) => () => void;
+  setField: <P extends keyof T>(props: P, value: T[P], validate?: boolean) => void;
+  watchField: <P extends keyof T>(prop: P, callback: (v?: T[P]) => void) => () => void;
 }
 export interface FormInstance<T extends object> {
   validate: () => Promise<FormValidateResult<T>>;
   validateField: (prop: keyof T) => Promise<string | undefined>;
-  setField: <P extends keyof T>(
-    props: P,
-    value: T[P],
-    validate?: boolean,
-  ) => void;
+  setField: <P extends keyof T>(props: P, value: T[P], validate?: boolean) => void;
   formErrors: Record<keyof T, string | undefined>;
   formState: Partial<T>;
   control: FormControl<T>;
@@ -97,21 +87,14 @@ export function useForm<S extends ZodObject<ZodRawShape>>(
     return formErrors[prop];
   }
 
-  async function setField<P extends keyof T>(
-    prop: P,
-    value: T[P],
-    validate = false,
-  ) {
+  async function setField<P extends keyof T>(prop: P, value: T[P], validate = false) {
     formState[prop] = value;
     if (validate) {
       await validateField(prop);
     }
   }
 
-  function watchField<P extends keyof T>(
-    prop: P,
-    callback: (v?: T[P]) => void,
-  ) {
+  function watchField<P extends keyof T>(prop: P, callback: (v?: T[P]) => void) {
     return vmWatch(formState, prop, callback, { immediate: true });
   }
 

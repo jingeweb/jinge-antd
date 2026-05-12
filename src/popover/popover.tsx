@@ -1,11 +1,4 @@
 import {
-  Floating,
-  type FloatingDuration,
-  type FloatingPlacement,
-  type FloatingTriggerMethod,
-} from '../floating';
-
-import {
   type JNode,
   type WithChildren,
   type WithEvents,
@@ -17,6 +10,12 @@ import {
 } from 'jinge';
 
 import { z } from '../_util/z';
+import {
+  Floating,
+  type FloatingDuration,
+  type FloatingPlacement,
+  type FloatingTriggerMethod,
+} from '../floating';
 
 export function Popover(
   props: {

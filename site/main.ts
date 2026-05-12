@@ -1,6 +1,6 @@
 import './style.css';
+import { bootstrap } from 'jinge';
 
 import { App } from './App';
-import { bootstrap } from 'jinge';
 
 bootstrap(App, document.getElementById('root')!);

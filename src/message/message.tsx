@@ -1,10 +1,4 @@
 import {
-  AntDesignCheckCircleFilled,
-  AntDesignCloseCircleFilled,
-  AntDesignExclamationCircleFilled,
-  AntDesignInfoCircleFilled,
-} from '../icon';
-import {
   type AnyFn,
   Dynamic,
   type FC,
@@ -19,8 +13,15 @@ import {
   uid,
   vm,
 } from 'jinge';
-import { LoadingOutlined } from '../loading';
+
 import { z } from '../_util/z';
+import {
+  AntDesignCheckCircleFilled,
+  AntDesignCloseCircleFilled,
+  AntDesignExclamationCircleFilled,
+  AntDesignInfoCircleFilled,
+} from '../icon';
+import { LoadingOutlined } from '../loading';
 
 export type MessageOptions = WithPropSlot<'content', JNode> & {
   duration?: number;
@@ -78,10 +79,7 @@ function clearAll() {
 }
 
 interface MessageContainerInstance {
-  show: (
-    type: MessageConfig['type'],
-    message: string | MessageOptions,
-  ) => MessageInstance;
+  show: (type: MessageConfig['type'], message: string | MessageOptions) => MessageInstance;
   clear: () => void;
 }
 function MessageContainerComponent() {
@@ -126,14 +124,9 @@ function MessageContainerComponent() {
     store.clear();
     mcs.forEach(close);
   }
-  function show(
-    type: MessageConfig['type'],
-    contentOrOptions: string | MessageOptions,
-  ) {
+  function show(type: MessageConfig['type'], contentOrOptions: string | MessageOptions) {
     const options: MessageOptions = {
-      ...(isString(contentOrOptions)
-        ? { content: contentOrOptions }
-        : contentOrOptions),
+      ...(isString(contentOrOptions) ? { content: contentOrOptions } : contentOrOptions),
     };
     const message: MessageConfig = vm({
       type,
@@ -154,10 +147,7 @@ function MessageContainerComponent() {
     });
 
     if (options.duration !== 0) {
-      message._tm = window.setTimeout(
-        () => close(message),
-        options.duration ?? 4000,
-      );
+      message._tm = window.setTimeout(() => close(message), options.duration ?? 4000);
     }
 
     state.messages.push(message);
@@ -185,10 +175,7 @@ function MessageContainerComponent() {
   });
 
   return (
-    <div
-      className="ja-message-container"
-      style={`z-index: ${state.zIndex};${containerStyle}`}
-    >
+    <div className="ja-message-container" style={`z-index: ${state.zIndex};${containerStyle}`}>
       <TransitionGroup
         enterClass="ja-enter"
         enterActiveClass="ja-enter-active"
@@ -199,10 +186,7 @@ function MessageContainerComponent() {
       >
         {(each) => (
           <div className="ja-message">
-            <Dynamic
-              fc={icons[each.data.type]}
-              className={cx('icon', each.data.type)}
-            />
+            <Dynamic fc={icons[each.data.type]} className={cx('icon', each.data.type)} />
             <div className="content">{each.data.content}</div>
           </div>
         )}
@@ -211,10 +195,7 @@ function MessageContainerComponent() {
   );
 }
 
-function innerShow(
-  type: MessageConfig['type'],
-  options: string | MessageOptions,
-) {
+function innerShow(type: MessageConfig['type'], options: string | MessageOptions) {
   if (!messageContainer) {
     initMessageContainer();
   }
@@ -223,9 +204,7 @@ function innerShow(
 
 function showSuccess(options: MessageOptions): MessageInstance;
 function showSuccess(content: string): MessageInstance;
-function showSuccess(
-  contentOrOptions: string | MessageOptions,
-): MessageInstance {
+function showSuccess(contentOrOptions: string | MessageOptions): MessageInstance {
   return innerShow('success', contentOrOptions);
 }
 
@@ -243,17 +222,13 @@ function showInfo(contentOrOptions: string | MessageOptions): MessageInstance {
 
 function showWarning(options: MessageOptions): MessageInstance;
 function showWarning(content: string): MessageInstance;
-function showWarning(
-  contentOrOptions: string | MessageOptions,
-): MessageInstance {
+function showWarning(contentOrOptions: string | MessageOptions): MessageInstance {
   return innerShow('warning', contentOrOptions);
 }
 
 function showLoading(options: MessageOptions): MessageInstance;
 function showLoading(content: string): MessageInstance;
-function showLoading(
-  contentOrOptions: string | MessageOptions,
-): MessageInstance {
+function showLoading(contentOrOptions: string | MessageOptions): MessageInstance {
   return innerShow('loading', contentOrOptions);
 }
 

@@ -1,13 +1,5 @@
 import './style.scss';
-
-import {
-  type JClipboardEvent,
-  type JFormEvent,
-  type WithEvents,
-  cx,
-  vm,
-  watch,
-} from 'jinge';
+import { type JClipboardEvent, type JFormEvent, type WithEvents, cx, vm, watch } from 'jinge';
 
 export function InputNumber(
   props: {

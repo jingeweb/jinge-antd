@@ -14,18 +14,13 @@ export interface ConfirmContext<Result> {
   onConfirm(listener: ConfirmCallback<Result>): () => void;
 }
 export function createContextOnConfirm(contextKey: symbol) {
-  return function onModalConfirm<Result = unknown>(
-    listener: ConfirmCallback<Result>,
-  ) {
+  return function onModalConfirm<Result = unknown>(listener: ConfirmCallback<Result>) {
     const ctx = context<ConfirmContext<Result>>(contextKey);
     if (ctx) onUnmount(ctx.onConfirm(listener));
   };
 }
 
-export function useConfirmContext<Result>(
-  contextKey: symbol,
-  confirmFn?: ConfirmCallback<Result>,
-) {
+export function useConfirmContext<Result>(contextKey: symbol, confirmFn?: ConfirmCallback<Result>) {
   const onConfirmFns = new Set<ConfirmCallback<Result>>();
   if (confirmFn) onConfirmFns.add(confirmFn);
 

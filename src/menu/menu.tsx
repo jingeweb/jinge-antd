@@ -47,17 +47,11 @@ export function Menu<T>(
             state.value = option.value;
             props['on:change']?.(option.value, evt);
           }}
-          className={cx(
-            'ja-menu-item',
-            state.value === option.value && 'ja-active',
-          )}
+          className={cx('ja-menu-item', state.value === option.value && 'ja-active')}
           key={option.value}
         >
           {option['slot:icon']}
-          <span className="ja-menu-item-label">
-            {' '}
-            {option['slot:label'] ?? option.label}
-          </span>
+          <span className="ja-menu-item-label"> {option['slot:label'] ?? option.label}</span>
         </button>
       ))}
     </div>

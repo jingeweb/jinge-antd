@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite';
 import { jingeVitePlugin } from 'jinge-compiler';
 import path from 'node:path';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,9 +19,5 @@ export default defineConfig({
     },
   },
 
-  plugins: [
-    jingeVitePlugin({
-      importAlias: 'dev',
-    }),
-  ],
+  plugins: [jingeVitePlugin()],
 });

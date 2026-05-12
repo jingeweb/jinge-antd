@@ -1,43 +1,16 @@
-import { vm } from 'jinge';
+import { Button, Popover } from 'jinge-antd';
 
 export function App() {
-  const state = vm({
-    k: 'c',
-    n: 10,
-  });
-  // setInterval(() => {
-  //   state.n++;
-  // }, 1000);
-
-  // async function showM() {
-  //   const modalInstance = modal.show({
-  //     title: 'TEST',
-  //     'slot:content': (
-  //       <>
-  //         <p>Hello, World {state.n}</p>
-  //         <div>
-
-  //           <button on:click={state.t}>OPEN</button>
-  //         </div>
-  //       </>
-  //     ),
-  //     // content: 'hhh',
-  //     'on:afterClose': () => {
-  //       console.info('after close');
-  //     },
-  //   });
-  //   await modalInstance.waitForClose();
-  //   console.info('after close 2');
-  // }
-
-  // watch(state, 'k', (v) => {
-  //   console.log(v);
-  // })
-
   return (
-    <div className='pt-10'>
-      {state.n}
-      hello
+    <div className="pt-10">
+      <Popover
+        on:openChange={(v) => {
+          console.log('open changed', v);
+        }}
+        slot:content={<div className="p-3">hello, it's me</div>}
+      >
+        <Button>HOVER ME</Button>
+      </Popover>
     </div>
   );
 }

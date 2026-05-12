@@ -1,10 +1,4 @@
-import {
-  type JNode,
-  type WithEvents,
-  type WithSlots,
-  isNumber,
-  isUndefined,
-} from 'jinge';
+import { type JNode, type WithEvents, type WithSlots, isNumber, isUndefined } from 'jinge';
 
 export type FloatingPlacement =
   | 'bottom'
@@ -68,11 +62,7 @@ export const ALI_END = 2;
 export const ALI_CENTER = 0;
 export function getPlacementOpt(placement?: FloatingPlacement) {
   const pl = placement ?? 'top';
-  const align = pl.endsWith('-end')
-    ? ALI_END
-    : pl.endsWith('-start')
-      ? ALI_START
-      : ALI_CENTER;
+  const align = pl.endsWith('-end') ? ALI_END : pl.endsWith('-start') ? ALI_START : ALI_CENTER;
   const position = pl.startsWith('top')
     ? POS_TOP
     : pl.startsWith('bottom')

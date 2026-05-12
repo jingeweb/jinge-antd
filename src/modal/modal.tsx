@@ -1,11 +1,4 @@
 import {
-  type ConfirmCallback,
-  type ConfirmContext,
-  createContextOnConfirm,
-  useConfirmContext,
-} from '../_util';
-
-import {
   type JNode,
   Transition,
   type WithEvents,
@@ -20,9 +13,15 @@ import {
   watch,
 } from 'jinge';
 
-import { AntDesignCloseCircleOutlined } from '../icon';
-import { Button } from '../button';
+import {
+  type ConfirmCallback,
+  type ConfirmContext,
+  createContextOnConfirm,
+  useConfirmContext,
+} from '../_util';
 import { z } from '../_util/z';
+import { Button } from '../button';
+import { AntDesignCloseCircleOutlined } from '../icon';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
 export type ModalContext = ConfirmContext<unknown> & {};
@@ -149,10 +148,7 @@ export function Modal<Result = unknown>(
           props['on:afterClose']?.(resultValue);
         }}
       >
-        <div
-          className={cx(props.className, 'ja-modal')}
-          style={`z-index:${z.currentIndex + 1}`}
-        >
+        <div className={cx(props.className, 'ja-modal')} style={`z-index:${z.currentIndex + 1}`}>
           <div className="ja-modal-title">
             <span>{props['slot:title'] ?? props.title}</span>
             {props.closable !== false && (

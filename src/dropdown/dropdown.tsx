@@ -1,16 +1,8 @@
-import { Floating, type FloatingPlacement } from '../floating';
+import { type JNode, type WithChildren, type WithEvents, cx, isUndefined, vm, watch } from 'jinge';
 
-import {
-  type JNode,
-  type WithChildren,
-  type WithEvents,
-  cx,
-  isUndefined,
-  vm,
-  watch,
-} from 'jinge';
-import { Menu, type MenuOption } from '../menu';
 import { z } from '../_util/z';
+import { Floating, type FloatingPlacement } from '../floating';
+import { Menu, type MenuOption } from '../menu';
 
 export function Dropdown<T>(
   props: {

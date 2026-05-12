@@ -1,16 +1,4 @@
 import {
-  ALI_END,
-  ALI_START,
-  type FloatingProps,
-  POS_BOTTOM,
-  POS_LEFT,
-  POS_RIGHT,
-  POS_TOP,
-  getDelayOpt,
-  getPlacementOpt,
-} from './common';
-
-import {
   type AnyFn,
   type ComponentHost,
   Portal,
@@ -23,15 +11,26 @@ import {
   vm,
   watch,
 } from 'jinge';
+
 import { autoUpdate } from './autoupdate';
+import {
+  ALI_END,
+  ALI_START,
+  type FloatingProps,
+  POS_BOTTOM,
+  POS_LEFT,
+  POS_RIGHT,
+  POS_TOP,
+  getDelayOpt,
+  getPlacementOpt,
+} from './common';
 
 export function Floating(props: FloatingProps, host: ComponentHost) {
   const ctrlMode = !isUndefined(props.open);
   const triggerOpt = props.triggerMethod ?? 'click';
   const safePolygonOpt = triggerOpt === 'hover' && props.safePolygon;
   const placementOpt = getPlacementOpt(props.placement);
-  const offsetOpt =
-    props.offset ?? (placementOpt.position === POS_TOP ? 20 : 10);
+  const offsetOpt = props.offset ?? (placementOpt.position === POS_TOP ? 20 : 10);
   const delayOpt = getDelayOpt(props.delay);
   const dismissableOpt = props.dismissable !== false;
 
@@ -52,9 +51,8 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
   /**
    * safePolygon 简化为覆盖 8 个点的最外矩形。简化后的算法更轻便，但可能交互上不是很符合期待。
    */
-  let safeRect:
-    | { left: number; top: number; right: number; bottom: number }
-    | undefined = undefined;
+  let safeRect: { left: number; top: number; right: number; bottom: number } | undefined =
+    undefined;
 
   function handleShown() {
     if (!triggerEl || !contentEl) return;

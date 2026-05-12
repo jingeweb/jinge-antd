@@ -26,7 +26,7 @@ export function Popover(
     triggerMethod?: FloatingTriggerMethod;
     open?: boolean;
   } & WithEvents<{
-    openChange(v: boolean): void;
+    openChange?(v: boolean): void;
   }> &
     WithChildren<JNode> &
     WithPropSlot<'content', JNode>,

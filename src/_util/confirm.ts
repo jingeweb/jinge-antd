@@ -2,7 +2,7 @@ import { context, isObject, isPromise, onUnmount } from 'jinge';
 
 export type ConfirmCallbackResult<Result> =
   | void
-  | false
+  | boolean
   | {
       result: Result;
     };

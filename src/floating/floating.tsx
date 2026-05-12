@@ -21,7 +21,7 @@ import {
   getDelayOpt,
   getPlacementOpt,
 } from './common';
-import { isPointInPolygon } from './safe-polygon';
+import { isPointInPolygon, isPointInPolygon2 } from './safe-polygon';
 
 export function Floating(props: FloatingProps, host: ComponentHost) {
   const ctrlMode = !isUndefined(props.open);
@@ -48,6 +48,10 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
   let cancelAutoUpdate: (() => void) | undefined = undefined;
 
   let safePolygonPoints: Point[] | undefined = undefined;
+  let safePolygonPoints2: Point[] | undefined = undefined;
+  let safePolygonState = 0;
+  let triggerPoint: Point | undefined = undefined;
+  // let debugCtx: CanvasRenderingContext2D | undefined = undefined;
 
   function handleShown() {
     if (!triggerEl || !contentEl) return;
@@ -67,13 +71,29 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
           close();
           return;
         }
+        safePolygonState = 0;
         hoverDereg?.();
-        hoverDereg = registerEvent(document.body, 'mouseover', (evt) => {
-          if (
-            !safePolygonPoints?.length ||
-            !isPointInPolygon(evt.pageX, evt.pageY, safePolygonPoints)
-          ) {
-            close();
+        hoverDereg = registerEvent(document.body, 'mousemove', (evt) => {
+          const { pageX: x, pageY: y } = evt;
+          if (safePolygonState === 0) {
+            if (safePolygonPoints && isPointInPolygon(x, y, safePolygonPoints)) {
+              return;
+            }
+            if (safePolygonPoints2 && isPointInPolygon2(x, y, safePolygonPoints2)) {
+              safePolygonState = 1;
+            } else {
+              safePolygonState = -1;
+              close();
+            }
+          } else if (safePolygonState > 0) {
+            if (safePolygonPoints2 && isPointInPolygon2(x, y, safePolygonPoints2)) {
+              //
+            } else {
+              safePolygonState = -1;
+              hoverDereg?.();
+              hoverDereg = undefined;
+              close();
+            }
           }
         });
       });
@@ -81,6 +101,12 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     cancelAutoUpdate = autoUpdate(triggerEl!, contentEl!, updatePos);
   }
   function handleHiden() {
+    // console.log('handle hidden');
+    triggerPoint = undefined;
+    safePolygonPoints = undefined;
+    safePolygonPoints2 = undefined;
+    hoverDereg?.();
+    hoverDereg = undefined;
     if (triggerOpt === 'click') {
       dismissDereg?.();
       dismissDereg = undefined;
@@ -96,17 +122,36 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     const triggerRect = triggerEl.getBoundingClientRect();
     const contentRect = contentEl.getBoundingClientRect();
     const windowSize = { width: window.innerWidth, height: window.innerHeight };
-    const { x, y, polygon } = calcPosition(
+    const { x, y, polygon, rect } = calcPosition(
       triggerRect,
       contentRect,
       windowSize,
       placementOpt,
       offsetOpt,
-      safePolygonOpt,
+      safePolygonOpt ? triggerPoint : undefined,
     );
-    if (polygon) {
-      safePolygonPoints = polygon;
-    }
+    safePolygonPoints = polygon;
+    safePolygonPoints2 = rect;
+
+    // if (safePolygonPoints && debugCtx) {
+    //   debugCtx.save();
+    //   debugCtx.clearRect(0, 0, 10000, 10000);
+    //   debugCtx.beginPath();
+    //   safePolygonPoints.forEach((p, i) => {
+    //     // console.log(p);
+    //     if (i === 0) {
+    //       debugCtx!.moveTo(p.x, p.y);
+    //     } else {
+    //       debugCtx!.lineTo(p.x, p.y);
+    //     }
+    //   });
+    //   debugCtx.closePath();
+    //   debugCtx.fillStyle = 'rgba(255,0,0,0.3)';
+    //   debugCtx.fill();
+    //   debugCtx.fillRect(0, 0, 100, 100);
+    //   debugCtx.restore();
+    //   // console.log('----');
+    // }
 
     state.pos = `left:${x}px;top:${y}px`;
   }
@@ -125,14 +170,15 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
       closeTm = 0;
     }
   }
-  function doOpen() {
+  function doOpen(evt: MouseEvent) {
+    triggerPoint = { x: evt.pageX, y: evt.pageY };
     if (ctrlMode) {
-      props['on:openChange']?.(true);
+      props['on:openChange']?.(true, evt);
     } else {
       state.open = true;
     }
   }
-  function open() {
+  function open(evt: MouseEvent) {
     if (closeTm > 0) {
       clearCloseTm();
       return;
@@ -144,10 +190,10 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     if (delayOpt.open > 0) {
       openTm = window.setTimeout(() => {
         openTm = 0;
-        doOpen();
+        doOpen(evt);
       }, delayOpt.open);
     } else {
-      doOpen();
+      doOpen(evt);
     }
   }
   function close() {
@@ -177,6 +223,11 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
   }
 
   onMount(() => {
+    // const debugCanvas = document.getElementById('debug-canvas') as HTMLCanvasElement;
+    // debugCanvas.width = debugCanvas.offsetWidth;
+    // debugCanvas.height = debugCanvas.offsetHeight;
+    // debugCtx = debugCanvas?.getContext('2d') ?? undefined;
+
     triggerEl = getFirstDOM(host);
     if (!triggerEl) throw new Error('trigger not found');
 
@@ -186,7 +237,7 @@ export function Floating(props: FloatingProps, host: ComponentHost) {
     } else if (triggerOpt === 'click') {
       trigerDereg = registerEvent(triggerEl, 'click', (evt) => {
         evt.stopPropagation();
-        open();
+        open(evt);
       });
     }
     return () => {

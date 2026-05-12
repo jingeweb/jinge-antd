@@ -21,7 +21,7 @@ import {
 } from '../_util';
 import { z } from '../_util/z';
 import { Button } from '../button';
-import { AntDesignCloseCircleOutlined } from '../icon';
+import { AntDesignCloseOutlined } from '../icon';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
 export type ModalContext = ConfirmContext<unknown> & {};
@@ -149,18 +149,19 @@ export function Modal<Result = unknown>(
         }}
       >
         <div className={cx(props.className, 'ja-modal')} style={`z-index:${z.currentIndex + 1}`}>
+          {props.closable !== false && (
+            <Button
+              type="text"
+              size="lg"
+              className="ja-close"
+              slot:icon={<AntDesignCloseOutlined />}
+              on:click={() => {
+                close(cancelValue);
+              }}
+            ></Button>
+          )}
           <div className="ja-modal-title">
             <span>{props['slot:title'] ?? props.title}</span>
-            {props.closable !== false && (
-              <button
-                className="ja-close"
-                on:click={() => {
-                  close(cancelValue);
-                }}
-              >
-                <AntDesignCloseCircleOutlined />
-              </button>
-            )}
           </div>
           <div className="ja-modal-content">{props.children}</div>
           <div className="ja-modal-footer">

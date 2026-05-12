@@ -1,6 +1,5 @@
+@use './mixin.scss' as popover;
+
 .ja-popover {
-  border-radius: 4px;
-  background-color: white;
-  padding: 8px 12px;
-  box-shadow: 0 0 0 3px rgb(0 0 0 / 20%);
+  @include popover.ja-popover-base;
 }

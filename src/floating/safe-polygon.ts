@@ -15,3 +15,8 @@ export function isPointInPolygon(x: number, y: number, polygon: Point[]): boolea
   }
   return inside;
 }
+
+export function isPointInPolygon2(x: number, y: number, points: Point[]): boolean {
+  const [p0, p1] = points;
+  return !(x < p0.x || x > p1.x || y < p0.y || y > p1.y);
+}

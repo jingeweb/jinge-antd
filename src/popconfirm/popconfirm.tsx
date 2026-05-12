@@ -17,6 +17,7 @@ import {
 import { z } from '../_util/z';
 import { Button } from '../button';
 import { Floating, type FloatingDuration, type FloatingPlacement } from '../floating';
+import { AntDesignExclamationCircleFilled } from '../icon';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
 export type PopconfirmContext = ConfirmContext<unknown> & {};
@@ -37,7 +38,7 @@ export function Popconfirm(
     WithPropSlot<'title', JNode> &
     WithSlots<{ content?: JNode }> &
     WithEvents<{
-      confirm?: ConfirmCallback<unknown>;
+      confirm?: ConfirmCallback<void>;
       cancel?: () => void;
     }>,
 ) {
@@ -54,8 +55,8 @@ export function Popconfirm(
       onSubmittingChange(submitting) {
         state.submitting = submitting;
       },
-      onSubmitted(submitted) {
-        if (submitted) {
+      onSubmitted(preventClose, _result) {
+        if (!preventClose) {
           state.isOpen = false;
         }
       },
@@ -76,13 +77,19 @@ export function Popconfirm(
       slot:trigger={props.children}
       className={cx('ja-popconfirm', props.className)}
     >
-      <div className="ja-popconfirm-title">{props['slot:title'] ?? props.title}</div>
+      <div className="ja-popconfirm-title">
+        <span className="ja-popconfirm-icon">
+          <AntDesignExclamationCircleFilled />
+        </span>
+        {props['slot:title'] ?? <span>{props.title}</span>}
+      </div>
       {props['slot:content'] && (
         <div className="ja-popconfirm-content">{props['slot:content']}</div>
       )}
       {props.content && <div className="ja-popconfirm-content">{props.content}</div>}
       <div className="ja-popconfirm-footer">
         <Button
+          size="sm"
           on:click={() => {
             props['on:cancel']?.();
             state.isOpen = false;
@@ -92,6 +99,7 @@ export function Popconfirm(
         </Button>
         <Button
           type="primary"
+          size="sm"
           disabled={state.submitting}
           loading={state.submitting}
           on:click={handleConfirm}

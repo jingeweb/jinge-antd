@@ -42,7 +42,7 @@ export type FloatingProps = {
   zIndex: number;
 } & WithSlots<{ default: JNode; trigger: JNode }> &
   WithEvents<{
-    openChange?(v: boolean, evt?: Event): void;
+    openChange?(v: boolean, evt?: MouseEvent): void;
   }>;
 
 export function getDelayOpt(delay: FloatingDuration | undefined) {
@@ -88,8 +88,8 @@ export function calcPosition(
   windowSize: { width: number; height: number },
   placement: { position: number; align: number },
   offset: number,
-  polygon: boolean,
-): { x: number; y: number; polygon?: Point[] } {
+  safePolygonTriggerPoint: Point | undefined,
+): { x: number; y: number; polygon?: Point[]; rect?: Point[] } {
   const { left: tl, top: tt, bottom: tb, height: th, right: tr, width: tw } = triggerRect;
   const { width: cw, height: ch } = contentRect;
   const { width: W, height: H } = windowSize;
@@ -155,47 +155,32 @@ export function calcPosition(
       }
     }
   }
+  const rectPoints = safePolygonTriggerPoint
+    ? [makePoint(x, y), makePoint(x + cw, y + ch)]
+    : undefined;
 
   let polygonPoints: Point[] | undefined = undefined;
-  if (polygon) {
-    if (position == POS_TOP) {
+  if (safePolygonTriggerPoint) {
+    if (position === POS_TOP || position === POS_BOTTOM) {
+      const tpy = safePolygonTriggerPoint.y;
+      const y2 = position === POS_TOP ? y + ch : y;
       polygonPoints = [
-        makePoint(x, y + ch),
-        makePoint(x, y),
-        makePoint(x + cw, y),
-        makePoint(x + cw, y + ch),
-        makePoint(tr, tt),
-        makePoint(tl, tt),
+        makePoint(tl, tpy),
+        makePoint(tr, tpy),
+        makePoint(x + cw, y2),
+        makePoint(x, y2),
       ];
-    } else if (position == POS_BOTTOM) {
+    } else if (position === POS_LEFT || position === POS_RIGHT) {
+      const tpx = safePolygonTriggerPoint.x;
+      const x2 = position === POS_LEFT ? x + cw : x;
       polygonPoints = [
-        makePoint(x, y),
-        makePoint(tl, tb),
-        makePoint(tr, tb),
-        makePoint(x + cw, y),
-        makePoint(x + cw, y + ch),
-        makePoint(x, y + ch),
-      ];
-    } else if (position == POS_LEFT) {
-      polygonPoints = [
-        makePoint(x + cw, y),
-        makePoint(tl, tt),
-        makePoint(tl, tb),
-        makePoint(x + cw, y + ch),
-        makePoint(x, y + ch),
-        makePoint(x, y),
-      ];
-    } else if (position == POS_RIGHT) {
-      polygonPoints = [
-        makePoint(x, y),
-        makePoint(x + cw, y),
-        makePoint(x + cw, y + ch),
-        makePoint(x, y + ch),
-        makePoint(tr, tb),
-        makePoint(tr, tt),
+        makePoint(tpx, tt),
+        makePoint(tpx, tb),
+        makePoint(x2, y + ch),
+        makePoint(x2, y),
       ];
     }
   }
 
-  return { x, y, polygon: polygonPoints };
+  return { x, y, polygon: polygonPoints, rect: rectPoints };
 }

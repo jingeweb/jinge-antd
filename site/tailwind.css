@@ -12,4 +12,6 @@ body {
 body {
   position: relative;
   color: var(--antd-normal-text);
+  font-size: 14px;
+  line-height: 1.57142857142857;
 }

@@ -3,7 +3,8 @@ import { jingeVitePlugin } from 'jinge-compiler';
 import path from 'node:path';
 import { defineConfig } from 'vite';
 
-import { TailwindThemePlugin } from './vite-plugin';
+import { TailwindThemePlugin } from './vite-plugin.ts';
+const __dirname = import.meta.dirname;
 
 // https://vitejs.dev/config/
 export default defineConfig({

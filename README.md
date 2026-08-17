@@ -2,8 +2,8 @@
 
 这个最小化模板项目集成了以下功能：
 
-- [jinge]() web 框架。
-- [tailwindcss]()。
+- [jinge](<>) web 框架。
+- [tailwindcss](<>)。
 - typescript(tsx)。
 - vite 打包器。
 - eslint 最新版配置，prettier 格式化。

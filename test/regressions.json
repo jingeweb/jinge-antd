@@ -1,0 +1,116 @@
+[
+  {
+    "id": "R01",
+    "layer": "unit",
+    "problem": "Message.clear 未结束消息生命周期",
+    "status": "fixed"
+  },
+  {
+    "id": "R02",
+    "layer": "e2e",
+    "problem": "Modal 实例共用全局 z-index",
+    "status": "fixed"
+  },
+  {
+    "id": "R03",
+    "layer": "unit",
+    "problem": "Tabs 空 options 抛错",
+    "status": "fixed"
+  },
+  {
+    "id": "R04",
+    "layer": "unit",
+    "problem": "Button loading=false 覆盖 disabled=true",
+    "status": "fixed"
+  },
+  {
+    "id": "R05",
+    "layer": "unit",
+    "problem": "Form 字段校验不支持对象级 refine",
+    "status": "fixed"
+  },
+  {
+    "id": "R06",
+    "layer": "unit",
+    "problem": "过期异步校验覆盖新结果",
+    "status": "fixed"
+  },
+  {
+    "id": "R07",
+    "layer": "unit",
+    "problem": "Floating 卸载未取消延迟任务",
+    "status": "fixed"
+  },
+  {
+    "id": "R08",
+    "layer": "unit",
+    "problem": "hover 提前离开未取消打开",
+    "status": "fixed"
+  },
+  {
+    "id": "R09",
+    "layer": "unit",
+    "problem": "Select 清空后残留标签",
+    "status": "fixed"
+  },
+  {
+    "id": "R10",
+    "layer": "unit",
+    "problem": "Controller 动态 name 绑定错位",
+    "status": "fixed"
+  },
+  {
+    "id": "R11",
+    "layer": "unit",
+    "problem": "Message.close 不幂等",
+    "status": "fixed"
+  },
+  {
+    "id": "R12",
+    "layer": "unit",
+    "problem": "InputNumber 清空被转为零",
+    "status": "fixed"
+  },
+  {
+    "id": "R13",
+    "layer": "e2e",
+    "problem": "safePolygon 页面/视口坐标混用",
+    "status": "fixed"
+  },
+  {
+    "id": "R14",
+    "layer": "unit",
+    "problem": "Message 未渲染 content 插槽",
+    "status": "fixed"
+  },
+  {
+    "id": "R15",
+    "layer": "unit",
+    "problem": "Modal footer=false 和 footer 插槽无效",
+    "status": "fixed"
+  },
+  {
+    "id": "R16",
+    "layer": "unit",
+    "problem": "modal.waitForClose 关闭后丢失结果",
+    "status": "fixed"
+  },
+  {
+    "id": "R17",
+    "layer": "unit",
+    "problem": "Select 未传递当前 value 到下拉菜单",
+    "status": "fixed"
+  },
+  {
+    "id": "R18",
+    "layer": "e2e",
+    "problem": "Tabs 指示条不跟随 options 布局变化",
+    "status": "fixed"
+  },
+  {
+    "id": "R19",
+    "layer": "unit",
+    "problem": "Confirm 同步抛错未清理 submitting",
+    "status": "fixed"
+  }
+]

@@ -1,13 +1,12 @@
 import {
-  type AnyFn,
   type ComponentHost,
   Portal,
-  Transition,
-  cx,
+  context,
   getFirstDOM,
-  isUndefined,
   onMount,
+  onUnmount,
   registerEvent,
+  uid,
   vm,
   watch,
 } from 'jinge';
@@ -15,268 +14,413 @@ import {
 import { autoUpdate } from './autoupdate';
 import {
   type FloatingProps,
-  POS_TOP,
   type Point,
   calcPosition,
   getDelayOpt,
   getPlacementOpt,
 } from './common';
+import { FloatingPanel } from './panel';
 import { isPointInPolygon, isPointInPolygon2 } from './safe-polygon';
+import {
+  type FloatingNode,
+  FLOATING_CONTEXT,
+  containsNode,
+  hideNode,
+  isTopNode,
+  showNode,
+} from './tree';
 
 export function Floating(props: FloatingProps, host: ComponentHost) {
-  const ctrlMode = !isUndefined(props.open);
-  const triggerOpt = props.triggerMethod ?? 'click';
-  const safePolygonOpt = triggerOpt === 'hover' && !!props.safePolygon;
-  const placementOpt = getPlacementOpt(props.placement);
-  const offsetOpt = props.offset ?? (placementOpt.position === POS_TOP ? 20 : 10);
-  const delayOpt = getDelayOpt(props.delay);
-  const dismissableOpt = props.dismissable !== false;
-
-  const state = vm({
-    pos: '',
-    open: !!props.open,
-  });
-
-  watch(props, 'open', (v) => {
-    state.open = !!v;
-  });
-
-  let triggerEl: HTMLElement | undefined = undefined;
-  let contentEl: HTMLDivElement | undefined = undefined;
-  let dismissDereg: (() => void) | undefined = undefined;
-  let hoverDereg: (() => void) | undefined = undefined;
-  let cancelAutoUpdate: (() => void) | undefined = undefined;
-
-  let safePolygonPoints: Point[] | undefined = undefined;
-  let safePolygonPoints2: Point[] | undefined = undefined;
-  let safePolygonState = 0;
-  let triggerPoint: Point | undefined = undefined;
-  // let debugCtx: CanvasRenderingContext2D | undefined = undefined;
-
-  function handleShown() {
-    if (!triggerEl || !contentEl) return;
-    if (triggerOpt === 'click') {
-      if (dismissableOpt) {
-        dismissDereg = registerEvent(document.body, 'mousedown', (evt) => {
-          const el = evt.target as Node;
-          if (triggerEl?.contains(el) || contentEl?.contains(el)) {
-            return;
-          }
-          doClose();
-        });
-      }
-    } else if (triggerOpt === 'hover') {
-      hoverDereg = registerEvent(triggerEl, 'mouseleave', () => {
-        if (!safePolygonOpt) {
-          close();
-          return;
-        }
-        safePolygonState = 0;
-        hoverDereg?.();
-        hoverDereg = registerEvent(document.body, 'mousemove', (evt) => {
-          const { pageX: x, pageY: y } = evt;
-          if (safePolygonState === 0) {
-            if (safePolygonPoints && isPointInPolygon(x, y, safePolygonPoints)) {
-              return;
-            }
-            if (safePolygonPoints2 && isPointInPolygon2(x, y, safePolygonPoints2)) {
-              safePolygonState = 1;
-            } else {
-              safePolygonState = -1;
-              close();
-            }
-          } else if (safePolygonState > 0) {
-            if (safePolygonPoints2 && isPointInPolygon2(x, y, safePolygonPoints2)) {
-              //
-            } else {
-              safePolygonState = -1;
-              hoverDereg?.();
-              hoverDereg = undefined;
-              close();
-            }
-          }
-        });
-      });
-    }
-    cancelAutoUpdate = autoUpdate(triggerEl!, contentEl!, updatePos);
+  const controlled = props.open !== undefined;
+  const id = props.id ?? `ja-floating-${uid()}`;
+  const parent = context<FloatingNode | undefined>(FLOATING_CONTEXT);
+  const node: FloatingNode = { children: new Set(), layer: props.zIndex };
+  parent?.children.add(node);
+  context(FLOATING_CONTEXT, node);
+  const state = vm({ open: props.open ?? props.defaultOpen ?? false, pos: '' });
+  let disposed = false,
+    hovered = false,
+    contentHovered = false,
+    suppressFocus = false;
+  let openTimer = 0,
+    closeTimer = 0;
+  let stopAutoUpdate: (() => void) | undefined;
+  let stopTracking: (() => void) | undefined;
+  let visibleStops: (() => void)[] = [];
+  let polygon: Point[] | undefined, contentRect: Point[] | undefined;
+  let reason = 'programmatic';
+  const originalAria = new Map<string, string | null>();
+  function hasMethod(method: 'click' | 'hover' | 'focus') {
+    const methods = props.triggerMethod ?? 'click';
+    return Array.isArray(methods) ? methods.includes(method) : methods === method;
   }
-  function handleHiden() {
-    // console.log('handle hidden');
-    triggerPoint = undefined;
-    safePolygonPoints = undefined;
-    safePolygonPoints2 = undefined;
-    hoverDereg?.();
-    hoverDereg = undefined;
-    if (triggerOpt === 'click') {
-      dismissDereg?.();
-      dismissDereg = undefined;
-    }
-    cancelAutoUpdate?.();
-    cancelAutoUpdate = undefined;
-  }
-
-  function updatePos() {
-    if (!triggerEl || !contentEl) {
-      return;
-    }
-    const triggerRect = triggerEl.getBoundingClientRect();
-    const contentRect = contentEl.getBoundingClientRect();
-    const windowSize = { width: window.innerWidth, height: window.innerHeight };
-    const { x, y, polygon, rect } = calcPosition(
-      triggerRect,
-      contentRect,
-      windowSize,
-      placementOpt,
-      offsetOpt,
-      safePolygonOpt ? triggerPoint : undefined,
+  function disabled() {
+    return (
+      !!props.disabled ||
+      !!node.trigger?.matches(':disabled') ||
+      node.trigger?.getAttribute('aria-disabled') === 'true'
     );
-    safePolygonPoints = polygon;
-    safePolygonPoints2 = rect;
-
-    // if (safePolygonPoints && debugCtx) {
-    //   debugCtx.save();
-    //   debugCtx.clearRect(0, 0, 10000, 10000);
-    //   debugCtx.beginPath();
-    //   safePolygonPoints.forEach((p, i) => {
-    //     // console.log(p);
-    //     if (i === 0) {
-    //       debugCtx!.moveTo(p.x, p.y);
-    //     } else {
-    //       debugCtx!.lineTo(p.x, p.y);
-    //     }
-    //   });
-    //   debugCtx.closePath();
-    //   debugCtx.fillStyle = 'rgba(255,0,0,0.3)';
-    //   debugCtx.fill();
-    //   debugCtx.fillRect(0, 0, 100, 100);
-    //   debugCtx.restore();
-    //   // console.log('----');
-    // }
-
-    state.pos = `left:${x}px;top:${y}px`;
   }
-  let openTm = 0;
-  let closeTm = 0;
-  function clearOpenTm() {
-    if (openTm > 0) {
-      clearTimeout(openTm);
-      openTm = 0;
+  function clearOpen() {
+    window.clearTimeout(openTimer);
+    openTimer = 0;
+  }
+  function clearClose() {
+    window.clearTimeout(closeTimer);
+    closeTimer = 0;
+  }
+  function clearTracking() {
+    stopTracking?.();
+    stopTracking = undefined;
+  }
+  function focusWithin() {
+    return containsNode(node, document.activeElement);
+  }
+  function clearVisibleEvents() {
+    for (const stop of visibleStops) stop();
+    visibleStops = [];
+  }
+  function bindVisibleEvents() {
+    clearVisibleEvents();
+    visibleStops = [
+      registerEvent(document, 'focusin', (event) => {
+        if (
+          hasMethod('focus') &&
+          state.open &&
+          !containsNode(node, event.target as Node) &&
+          !(hasMethod('hover') && (hovered || contentHovered))
+        )
+          request(false, event, 'focus');
+      }),
+      registerEvent(
+        document,
+        'mousedown',
+        (event) => {
+          if (
+            state.open &&
+            props.dismissable !== false &&
+            !containsNode(node, event.target as Node)
+          )
+            request(false, event, 'outside');
+        },
+        true,
+      ),
+      registerEvent(
+        document,
+        'touchstart',
+        (event) => {
+          if (
+            state.open &&
+            props.dismissable !== false &&
+            !containsNode(node, event.target as Node)
+          )
+            request(false, event, 'outside');
+        },
+        true,
+      ),
+      registerEvent(document, 'keydown', (event) => {
+        if (
+          event.key !== 'Escape' ||
+          event.isComposing ||
+          event.defaultPrevented ||
+          props.keyboard === false ||
+          !state.open ||
+          !isTopNode(node)
+        )
+          return;
+        event.preventDefault();
+        request(false, event, 'escape');
+      }),
+    ];
+  }
+  function handleFocusOut(event: FocusEvent) {
+    if (
+      !hasMethod('focus') ||
+      (event.relatedTarget instanceof Node && containsNode(node, event.relatedTarget))
+    )
+      return;
+    if (!(hasMethod('hover') && (hovered || contentHovered))) request(false, event, 'focus');
+  }
+  function request(open: boolean, event?: Event, why = 'programmatic') {
+    clearOpen();
+    clearClose();
+    if (disposed || (open && disabled()) || open === state.open) return;
+    reason = why;
+    if (!controlled) state.open = open;
+    props['on:openChange']?.(open, event);
+  }
+  function open(event: Event, delayed: boolean) {
+    clearClose();
+    clearTracking();
+    if (disposed || disabled() || state.open) return;
+    clearOpen();
+    const delay = delayed ? getDelayOpt(props.delay).open : 0;
+    if (!delay) request(true, event, 'trigger');
+    else
+      openTimer = window.setTimeout(() => {
+        openTimer = 0;
+        request(true, event, 'trigger');
+      }, delay);
+  }
+  function closeHover(event?: Event) {
+    clearOpen();
+    clearClose();
+    if (!state.open || hovered || contentHovered || (hasMethod('focus') && focusWithin())) return;
+    closeTimer = window.setTimeout(() => {
+      closeTimer = 0;
+      request(false, event, 'hover');
+    }, getDelayOpt(props.delay).close);
+  }
+  function restoreAria() {
+    if (!node.trigger) return;
+    for (const [name, value] of originalAria) {
+      if (value === null) node.trigger.removeAttribute(name);
+      else node.trigger.setAttribute(name, value);
     }
   }
-
-  function clearCloseTm() {
-    if (closeTm > 0) {
-      clearTimeout(closeTm);
-      closeTm = 0;
+  function syncAria() {
+    const trigger = node.trigger;
+    if (!trigger || disposed) return;
+    // Preserve unrelated description tokens even if another component changes them while mounted.
+    const descriptions = (trigger.getAttribute('aria-describedby') ?? '')
+      .split(/\s+/)
+      .filter((token) => token && token !== id);
+    restoreAria();
+    if (props.role === 'tooltip' && state.open && !props.disabled) descriptions.push(id);
+    if (descriptions.length) trigger.setAttribute('aria-describedby', descriptions.join(' '));
+    else trigger.removeAttribute('aria-describedby');
+    if (props.role !== 'tooltip') {
+      trigger.setAttribute('aria-haspopup', props.role ?? 'dialog');
+      trigger.setAttribute('aria-expanded', String(state.open && !props.disabled));
+      if (state.open && !props.disabled) trigger.setAttribute('aria-controls', id);
     }
   }
-  function doOpen(evt: MouseEvent) {
-    triggerPoint = { x: evt.pageX, y: evt.pageY };
-    if (ctrlMode) {
-      props['on:openChange']?.(true, evt);
-    } else {
-      state.open = true;
-    }
+  function updatePos() {
+    const trigger = node.trigger,
+      content = node.content;
+    if (!trigger || !content || disposed) return;
+    const windowSize = {
+      width: document.documentElement.clientWidth || window.innerWidth,
+      height: window.innerHeight,
+    };
+    const placement = getPlacementOpt(props.placement);
+    const offset = props.offset ?? 10;
+    const safe = props.safePolygon ? { x: 0, y: 0 } : undefined;
+    const geometry = calcPosition(
+      trigger.getBoundingClientRect(),
+      content.getBoundingClientRect(),
+      windowSize,
+      placement,
+      offset,
+      safe,
+      props.padding ?? 8,
+    );
+    content.style.maxWidth = `${geometry.maxWidth}px`;
+    content.style.maxHeight = `${geometry.maxHeight}px`;
+    const final = calcPosition(
+      trigger.getBoundingClientRect(),
+      content.getBoundingClientRect(),
+      windowSize,
+      placement,
+      offset,
+      safe,
+      props.padding ?? 8,
+    );
+    polygon = final.polygon;
+    contentRect = final.rect;
+    content.style.left = `${final.x}px`;
+    content.style.top = `${final.y}px`;
+    content.dataset.placement = final.placement;
+    state.pos = `left:${final.x}px;top:${final.y}px;max-width:${final.maxWidth}px;max-height:${final.maxHeight}px`;
   }
-  function open(evt: MouseEvent) {
-    if (closeTm > 0) {
-      clearCloseTm();
+  function trackLeave(event: MouseEvent) {
+    clearOpen();
+    if (!hasMethod('hover') || hovered || contentHovered || (hasMethod('focus') && focusWithin()))
+      return;
+    const next = event.relatedTarget;
+    if (next instanceof Node && containsNode(node, next)) {
+      clearClose();
       return;
     }
-    if (state.open) {
+    if (!props.safePolygon || !state.open || !node.content) {
+      closeHover(event);
       return;
     }
-    clearOpenTm();
-    if (delayOpt.open > 0) {
-      openTm = window.setTimeout(() => {
-        openTm = 0;
-        doOpen(evt);
-      }, delayOpt.open);
-    } else {
-      doOpen(evt);
+    clearTracking();
+    updatePos();
+    stopTracking = registerEvent(document, 'mousemove', (move) => {
+      if (move.target instanceof Node && containsNode(node, move.target)) {
+        clearClose();
+        return;
+      }
+      if (contentRect && isPointInPolygon2(move.clientX, move.clientY, contentRect)) {
+        clearClose();
+        return;
+      }
+      if (polygon && isPointInPolygon(move.clientX, move.clientY, polygon)) {
+        clearClose();
+        return;
+      }
+      clearTracking();
+      closeHover(move);
+    });
+  }
+  function handleShown(content: HTMLDivElement) {
+    stopAutoUpdate?.();
+    clearTracking();
+    node.content = content;
+    showNode(node);
+    syncAria();
+    bindVisibleEvents();
+    if (node.trigger) stopAutoUpdate = autoUpdate(node.trigger, content, updatePos);
+    if (props.autoFocus && props.role !== 'tooltip') {
+      const first = content.querySelector<HTMLElement>(
+        'button:not(:disabled), [href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])',
+      );
+      (first ?? content).focus();
     }
   }
-  function close() {
-    if (openTm > 0) {
-      clearOpenTm();
-      return;
-    }
-    if (!state.open) {
-      return;
-    }
-    clearCloseTm();
-    if (delayOpt.close > 0) {
-      closeTm = window.setTimeout(() => {
-        closeTm = 0;
-        doClose();
-      }, delayOpt.close);
-    } else {
-      doClose();
-    }
-  }
-  function doClose() {
-    if (ctrlMode) {
-      props['on:openChange']?.(false);
-    } else {
-      state.open = false;
+  function handleHidden() {
+    clearVisibleEvents();
+    const shouldFocus =
+      !disposed &&
+      props.returnFocus !== false &&
+      reason !== 'outside' &&
+      !!node.content?.contains(document.activeElement);
+    stopAutoUpdate?.();
+    stopAutoUpdate = undefined;
+    clearTracking();
+    clearClose();
+    contentHovered = false;
+    hideNode(node);
+    node.content = undefined;
+    polygon = undefined;
+    contentRect = undefined;
+    syncAria();
+    if (shouldFocus && node.trigger?.isConnected && !disabled()) {
+      suppressFocus = true;
+      node.trigger.focus();
+      suppressFocus = false;
     }
   }
-
+  watch(props, 'open', (value) => {
+    if (controlled) {
+      clearOpen();
+      clearClose();
+      state.open = !!value;
+    }
+  });
+  watch(state, 'open', () => {
+    syncAria();
+    if (!state.open) clearTracking();
+  });
+  watch(props, 'disabled', (value) => {
+    clearOpen();
+    clearClose();
+    if (value) {
+      clearTracking();
+      request(false);
+    }
+    syncAria();
+  });
+  watch(props, 'triggerMethod', () => {
+    clearOpen();
+    clearClose();
+    clearTracking();
+    hovered = false;
+  });
+  for (const key of ['placement', 'offset', 'padding', 'style'] as const)
+    watch(props, key, updatePos);
+  watch(props, 'role', syncAria);
+  watch(props, 'zIndex', (layer) => {
+    node.layer = layer;
+  });
   onMount(() => {
-    // const debugCanvas = document.getElementById('debug-canvas') as HTMLCanvasElement;
-    // debugCanvas.width = debugCanvas.offsetWidth;
-    // debugCanvas.height = debugCanvas.offsetHeight;
-    // debugCtx = debugCanvas?.getContext('2d') ?? undefined;
-
-    triggerEl = getFirstDOM(host);
-    if (!triggerEl) throw new Error('trigger not found');
-
-    let trigerDereg: AnyFn | undefined = undefined;
-    if (triggerOpt === 'hover') {
-      trigerDereg = registerEvent(triggerEl, 'mouseenter', open);
-    } else if (triggerOpt === 'click') {
-      trigerDereg = registerEvent(triggerEl, 'click', (evt) => {
-        evt.stopPropagation();
-        open(evt);
-      });
+    const trigger = getFirstDOM<Node>(host);
+    if (!(trigger instanceof HTMLElement))
+      throw new Error('Floating trigger must have a single stable HTMLElement root.');
+    node.trigger = trigger;
+    for (const name of ['aria-expanded', 'aria-controls', 'aria-haspopup'])
+      originalAria.set(name, trigger.getAttribute(name));
+    syncAria();
+    const stops = [
+      registerEvent(trigger, 'click', (event) => {
+        if (!hasMethod('click') || disabled()) return;
+        if (openTimer) clearOpen();
+        else if (state.open) request(false, event, 'trigger');
+        else open(event, true);
+      }),
+      registerEvent(trigger, 'mouseenter', (event) => {
+        hovered = true;
+        if (hasMethod('hover')) open(event, true);
+      }),
+      registerEvent(trigger, 'mouseleave', (event) => {
+        hovered = false;
+        trackLeave(event);
+      }),
+      registerEvent(trigger, 'focusin', (event) => {
+        if (!suppressFocus && hasMethod('focus')) open(event, false);
+      }),
+      registerEvent(trigger, 'focusout', handleFocusOut),
+    ];
+    // Panels initially open mount before their owning trigger's onMount.
+    if (node.content) {
+      stopAutoUpdate?.();
+      stopAutoUpdate = autoUpdate(trigger, node.content, updatePos);
     }
     return () => {
-      console.log('dismiss');
-      trigerDereg?.();
-      hoverDereg?.();
-      dismissDereg?.();
-      cancelAutoUpdate?.();
+      for (const stop of stops) stop();
     };
   });
-
+  onUnmount(() => {
+    disposed = true;
+    clearVisibleEvents();
+    clearOpen();
+    clearClose();
+    clearTracking();
+    stopAutoUpdate?.();
+    hideNode(node);
+    parent?.children.delete(node);
+    node.children.clear();
+    if (node.trigger) {
+      const descriptions = (node.trigger.getAttribute('aria-describedby') ?? '')
+        .split(/\s+/)
+        .filter((token) => token && token !== id);
+      if (descriptions.length)
+        node.trigger.setAttribute('aria-describedby', descriptions.join(' '));
+      else node.trigger.removeAttribute('aria-describedby');
+    }
+    restoreAria();
+  });
   return (
     <>
       {props['slot:trigger']}
       <Portal>
-        <Transition
-          isEnter={state.open}
-          appear={state.open}
-          enterClass={props.enterClass ?? 'ja-enter'}
-          enterActiveClass={props.enterActiveClass ?? 'ja-enter-active'}
-          leaveActiveClass={props.leaveActiveClass ?? 'ja-leave-active'}
-          leaveClass={props.leaveClass ?? 'ja-leave'}
-          destroyAfterLeave
-          on:beforeEnter={(el) => {
-            contentEl = el as HTMLDivElement;
-            handleShown();
-          }}
-          on:afterLeave={() => {
-            handleHiden();
-            contentEl = undefined;
-          }}
-        >
-          <div
-            className={cx(props.className, 'ja-floating')}
-            style={`z-index:${props.zIndex};${state.pos};${props.style ?? ''}`}
+        {state.open && !props.disabled && (
+          <FloatingPanel
+            id={id}
+            role={props.role ?? 'dialog'}
+            ariaLabel={props.ariaLabel ?? (props.role === 'tooltip' ? undefined : '浮层')}
+            ariaMultiselectable={props.ariaMultiselectable}
+            motion={props.motion}
+            className={props.className}
+            style={`${props.style ?? ''};z-index:${props.zIndex};${state.pos}`}
+            on:mount={handleShown}
+            on:unmount={handleHidden}
+            on:blur={handleFocusOut}
+            on:enter={() => {
+              contentHovered = true;
+              clearClose();
+              clearTracking();
+            }}
+            on:leave={(event) => {
+              contentHovered = false;
+              trackLeave(event);
+            }}
           >
             {props.children}
-          </div>
-        </Transition>
+          </FloatingPanel>
+        )}
       </Portal>
     </>
   );

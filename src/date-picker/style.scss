@@ -1,0 +1,196 @@
+.ja-picker {
+  display: inline-flex;
+  align-items: center;
+  min-width: 160px;
+  max-width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ja-border, #d9d9d9);
+  border-radius: 6px;
+  background: var(--ja-bg, #fff);
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+  padding: 4px 8px;
+  min-height: 32px;
+  gap: 4px;
+  &:focus-within {
+    border-color: var(--ja-primary, #1677ff);
+    box-shadow: 0 0 0 2px #1677ff20;
+  }
+  &.error {
+    border-color: #ff4d4f;
+  }
+  &.warning {
+    border-color: #faad14;
+  }
+  &.disabled {
+    background: #f5f5f5;
+    color: #bfbfbf;
+  }
+  &.sm {
+    min-height: 24px;
+    font-size: 12px;
+    padding-block: 1px;
+  }
+  &.lg {
+    min-height: 40px;
+    font-size: 16px;
+  }
+  .ja-picker-input {
+    width: 148px;
+    min-width: 0;
+    flex: 1;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    color: inherit;
+    background: transparent;
+    font: inherit;
+  }
+  button {
+    flex: none;
+    padding: 0 3px;
+    border: 0;
+    background: transparent;
+    color: #999;
+    cursor: pointer;
+    font: inherit;
+  }
+  button:disabled {
+    cursor: not-allowed;
+    color: #bfbfbf;
+  }
+}
+.ja-picker-popup {
+  max-width: calc(100vw - 16px);
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: var(--ja-bg, #fff);
+  box-shadow: 0 6px 20px #0002;
+}
+.ja-picker-panel {
+  padding: 8px;
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+}
+.ja-calendar {
+  width: 280px;
+  max-width: 100%;
+}
+.ja-calendar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.ja-calendar-heading {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+}
+.ja-calendar-header button,
+.ja-calendar-footer button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ja-primary, #1677ff);
+  padding: 4px 8px;
+}
+.ja-calendar-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px;
+  input,
+  select {
+    color: inherit;
+    background: transparent;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    font: inherit;
+    padding: 2px 4px;
+  }
+  input {
+    width: 76px;
+  }
+}
+.ja-calendar-grid {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  th {
+    font-weight: 400;
+    color: #666;
+    font-size: 12px;
+    padding: 4px 0;
+  }
+  td {
+    text-align: center;
+    padding: 2px;
+  }
+}
+.ja-calendar-day {
+  width: 100%;
+  min-width: 28px;
+  height: 30px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+.ja-calendar-grid .outside {
+  color: #aaa;
+}
+.ja-calendar-grid .selected .ja-calendar-day {
+  background: var(--ja-primary, #1677ff);
+  color: #fff;
+}
+.ja-calendar-grid .in-range {
+  background: #e6f4ff;
+}
+.ja-calendar-day:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+  background: #f5f5f5;
+}
+.ja-picker-panel button:focus-visible,
+.ja-picker-panel select:focus-visible,
+.ja-picker-panel input:focus-visible,
+.ja-picker button:focus-visible {
+  outline: 2px solid var(--ja-primary, #1677ff);
+  outline-offset: 1px;
+}
+.ja-calendar-footer {
+  border-top: 1px solid #eee;
+  margin-top: 4px;
+  text-align: center;
+}
+.ja-calendar-header button:disabled,
+.ja-calendar-footer button:disabled {
+  color: #bbb;
+  cursor: not-allowed;
+}
+.ja-picker-unsupported {
+  display: block;
+  color: #ad4e00;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.ja-range-calendars {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ja-range-panel {
+  max-width: 100%;
+}
+.ja-range-status {
+  padding-top: 6px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+.ja-picker:has(+ .ja-picker-unsupported) {
+  opacity: 0.6;
+}

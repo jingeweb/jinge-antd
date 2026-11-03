@@ -1,25 +1,107 @@
-.ja-menu {
-  padding: 8px;
+.ja-menu,
+.ja-menu-popup {
+  color: var(--antd-normal-text, #1f2329);
   background: #fff;
+  font-size: 14px;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .ja-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    min-width: 140px;
+    min-height: 36px;
+    padding: 7px 12px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: 22px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    &:hover:not(:disabled):not([aria-disabled='true']) {
+      background: #f5f5f5;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--antd-primary, #1677ff);
+      outline-offset: -2px;
+    }
+    &.ja-active {
+      background: #e6f4ff;
+      color: var(--antd-primary, #1677ff);
+      font-weight: 600;
+    }
+    &.danger {
+      color: #cf1322;
+    }
+    &:disabled,
+    &[aria-disabled='true'] {
+      color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+  .ja-menu-item-label {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .ja-menu-icon {
+    display: inline-flex;
+    flex: none;
+  }
+  .ja-menu-arrow {
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(-45deg);
+    margin-left: 8px;
+  }
+  .open > .ja-menu-item .ja-menu-arrow {
+    transform: rotate(45deg);
+  }
+  .ja-menu-submenu {
+    padding-left: 16px;
+  }
+  .ja-menu-group-label {
+    padding: 8px 12px 4px;
+    color: #666;
+    font-size: 12px;
+  }
+  .ja-menu-divider {
+    height: 1px;
+    margin: 5px 0;
+    background: #eee;
+  }
+  .ja-menu-empty {
+    padding: 12px;
+    color: #666;
+  }
 }
-.ja-menu-item {
+.ja-menu {
+  padding: 4px;
+  min-width: 0;
+}
+.ja-menu.horizontal > ul {
   display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4px;
+  > li {
+    flex: none;
+  }
+}
+.ja-menu-popup {
+  padding: 4px;
   min-width: 160px;
-  cursor: pointer;
-  align-items: center;
-  justify-content: start;
-  padding: 12px;
-
-  & > .ja-menu-item-label:not(:first-child) {
-    margin-left: 12px;
-  }
-
-  &:not(:last-child) {
-    border-bottom: 1px solid rgb(0 0 0 / 20%);
-  }
-
-  &:hover,
-  &.ja-active {
-    color: var(--antd-primary);
-  }
+  border: 1px solid #eee;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
 }

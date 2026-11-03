@@ -1,0 +1,96 @@
+.ja-form {
+  color: var(--antd-normal-text, #1f2329);
+  font-size: 14px;
+  line-height: 1.6;
+  min-width: 0;
+}
+.ja-form-content {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.ja-form-field {
+  margin-bottom: 20px;
+  min-width: 0;
+}
+.ja-form-label {
+  display: block;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+.ja-form-required {
+  color: var(--antd-error, #ff4d4f);
+}
+.ja-form-field.horizontal {
+  display: grid;
+  grid-template-columns: var(--ja-form-label-width, 140px) minmax(0, 1fr);
+  gap: 12px;
+  > .ja-form-label {
+    margin: 0;
+    padding-top: 5px;
+    text-align: right;
+  }
+  > .ja-form-field-body:only-child {
+    grid-column: 2;
+  }
+}
+.ja-form-control,
+.ja-form-field-body {
+  min-width: 0;
+}
+.ja-form-help,
+.ja-form-error,
+.ja-form-validating {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.ja-form-help,
+.ja-form-validating {
+  color: #666;
+}
+.ja-form-error {
+  color: var(--antd-error, #cf1322);
+}
+.ja-form.inline > .ja-form-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 20px;
+}
+.ja-form-field.inline {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 0;
+}
+.ja-form.sm {
+  font-size: 12px;
+}
+.ja-form.lg {
+  font-size: 16px;
+}
+.ja-form-summary {
+  padding: 8px 12px;
+  margin-top: 12px;
+  border: 1px solid #ffccc7;
+  border-radius: 6px;
+  color: #a8071a;
+  background: #fff2f0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .ja-form-field.horizontal {
+    display: block;
+    > .ja-form-label {
+      text-align: left;
+      margin-bottom: 6px;
+      padding: 0;
+    }
+  }
+  .ja-form-field.inline {
+    flex-wrap: wrap;
+  }
+}

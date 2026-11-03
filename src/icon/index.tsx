@@ -1,5 +1,13 @@
 export interface IconProps {
   className?: string;
+  size?: number | string;
+  color?: string;
+  style?: string;
+  ariaLabel?: string;
+}
+
+function iconStyle(size?: number | string, color?: string, style?: string) {
+  return `${size !== undefined ? `font-size:${typeof size === 'number' ? `${size}px` : size};` : ''}${color ? `color:${color};` : ''}${style ?? ''}`;
 }
 
 export function AntDesignLoadingOutlined(props: IconProps) {
@@ -10,6 +18,11 @@ export function AntDesignLoadingOutlined(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -27,6 +40,11 @@ export function AntDesignInfoCircleFilled(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -44,6 +62,11 @@ export function AntDesignCheckCircleFilled(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -61,6 +84,11 @@ export function AntDesignCloseCircleFilled(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -79,6 +107,11 @@ export function AntDesignExclamationCircleFilled(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -96,6 +129,11 @@ export function AntDesignCloseCircleOutlined(props: IconProps) {
       height="1em"
       viewBox="0 0 1024 1024"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
     >
       <path
         fill="currentColor"
@@ -113,6 +151,11 @@ export function AntDesignCloseOutlined(props: IconProps) {
       width="1em"
       height="1em"
       className={props.className}
+      style={iconStyle(props.size, props.color, props.style)}
+      role={props.ariaLabel ? 'img' : undefined}
+      aria-label={props.ariaLabel}
+      aria-hidden={props.ariaLabel ? undefined : true}
+      focusable="false"
       viewBox="0 0 1024 1024"
     >
       <path

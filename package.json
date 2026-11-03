@@ -8,17 +8,18 @@
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/jinge-antd.js",
-      "types": "./types/index.d.ts"
+      "types": "./types/index.d.ts",
+      "import": "./dist/jinge-antd.js"
     },
     "./colors": {
-      "import": "./dist/colors.js",
-      "types": "./types/_tool/colors.d.ts"
+      "types": "./types/_tool/colors.d.ts",
+      "import": "./dist/colors.js"
     },
     "./source": {
-      "import": "./src/index.ts",
-      "types": "./src/index.ts"
-    }
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./style.css": "./dist/jinge-antd.css"
   },
   "scripts": {
     "build": "rm -rf dist && pnpm build-types && pnpm build-lib && pnpm build-tool",
@@ -32,17 +33,33 @@
     "lint-fix": "oxlint --type-aware --fix && oxfmt",
     "lint-staged": "lint-staged",
     "prepare": "husky",
-    "preview-site": "vite preview -c scripts/vite.site.config.mts"
+    "preview-site": "vite preview -c scripts/vite.site.config.ts",
+    "test": "node test/run.mjs",
+    "test:components": "node test/run.mjs components",
+    "test:e2e": "playwright test --config test/e2e/playwright.config.mjs",
+    "test:e2e:components": "playwright test --config test/e2e/playwright.config.mjs components.spec.mjs button.spec.mjs floating.spec.mjs overlays.spec.mjs dialogs.spec.mjs notices.spec.mjs display.spec.mjs containers.spec.mjs feedback.spec.mjs inputs.spec.mjs choices.spec.mjs selects.spec.mjs forms.spec.mjs navigation.spec.mjs data.spec.mjs pickers.spec.mjs upload.spec.mjs hierarchy.spec.mjs",
+    "test:e2e:regressions": "playwright test --config test/e2e/playwright.config.mjs regressions.spec.mjs",
+    "test:framework": "node test/unit/run.mjs --prepare-only && node --test test/framework/*.test.mjs",
+    "test:regressions": "node test/run.mjs regressions",
+    "test:site": "playwright test --config test/e2e/site.config.mjs",
+    "test:sync-jinge": "node scripts/sync-local-jinge.mjs",
+    "test:types": "tsc --noEmit -p test/tsconfig.json",
+    "test:unit": "node test/unit/run.mjs",
+    "test:unit:components": "node test/unit/run.mjs components",
+    "test:unit:regressions": "node test/unit/run.mjs regressions",
+    "test:verify": "node test/verify.mjs"
   },
   "devDependencies": {
     "@ant-design/colors": "^8.0.1",
     "@iconify/json": "^2.2.551",
     "@iconify/tailwind4": "^1.2.3",
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.6",
     "husky": "^9.1.7",
     "jinge": "^4.2.0",
     "jinge-compiler": "^4.2.0",
+    "jsdom": "^30.1.3",
     "lint-staged": "^17.6.0",
     "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",

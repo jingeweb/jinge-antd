@@ -1,65 +1,17 @@
-import {
-  type JClipboardEvent,
-  type JFormEvent,
-  type JNode,
-  type WithChildren,
-  type WithEvents,
-  cx,
-  isUndefined,
-  vm,
-  watch,
-} from 'jinge';
+import { type JNode, type WithChildren, cx, expose, ref } from 'jinge';
 
-export function Input(
-  props: {
-    className?: string;
-    disabled?: boolean;
-    placeholder?: string;
-    value?: string;
-    size?: 'sm' | 'lg' | 'md';
-    noRoundedR?: boolean;
-    noRoundedL?: boolean;
-  } & WithEvents<{
-    change?: (value: string, evt: JFormEvent<HTMLInputElement>) => void;
-    blur?: (evt: JClipboardEvent<HTMLInputElement>) => void;
-    focus?: (evt: JClipboardEvent<HTMLInputElement>) => void;
-  }>,
-) {
-  const notCtrl = isUndefined(props.value);
+import type { InputProps } from './common';
 
-  const state = vm({
-    value: props.value ?? '',
+import { TextField } from './text-field';
+export type { InputProps, InputHandle, InputSize } from './common';
+export function Input(props: InputProps) {
+  const field = ref<typeof TextField>();
+  expose({
+    focus: (options?: FocusOptions) => field.value?.focus(options),
+    blur: () => field.value?.blur(),
+    select: () => field.value?.select(),
   });
-
-  watch(props, 'value', (v) => {
-    state.value = v ?? '';
-  });
-
-  return (
-    <input
-      className={cx(
-        'ja-input',
-        props.noRoundedR && 'no-rounded-r',
-        props.noRoundedL && 'no-rounded-l',
-        props.size ?? 'md',
-        props.className,
-        props.disabled && 'disabled',
-      )}
-      placeholder={props.placeholder}
-      disabled={props.disabled}
-      value={state.value}
-      on:input={(evt) => {
-        const v = evt.target.value;
-        if (notCtrl) {
-          state.value = v;
-        }
-
-        props['on:change']?.(v, evt);
-      }}
-      on:blur={props['on:blur']}
-      on:focus={props['on:focus']}
-    />
-  );
+  return <TextField kind="input" config={props} ref={field} />;
 }
 
 export function InputWrapper(props: { className?: string } & WithChildren<JNode>) {

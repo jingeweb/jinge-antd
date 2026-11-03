@@ -5,5 +5,7 @@ export type {
   FloatingPlacement,
   FloatingProps,
   FloatingTriggerMethod,
+  FloatingTrigger,
+  FloatingRole,
 } from './common';
 export { Floating } from './floating';

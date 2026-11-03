@@ -6,6 +6,7 @@ import {
   type WithSlots,
   cx,
   vm,
+  watch,
 } from 'jinge';
 
 import {
@@ -20,79 +21,100 @@ import { Floating, type FloatingDuration, type FloatingPlacement } from '../floa
 import { AntDesignExclamationCircleFilled } from '../icon';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
-export type PopconfirmContext = ConfirmContext<unknown> & {};
-
-/**
- * 监听弹窗的 confirm 按钮点击。会在 onUnmount 中自动取消监听。
- */
+export type PopconfirmContext = ConfirmContext<unknown>;
 export const onPopconfirmConfirm = createContextOnConfirm(POPCONFIRM_CONTEXT);
-export function Popconfirm(
-  props: {
-    className?: string;
-    delay?: FloatingDuration;
-    placement?: FloatingPlacement;
-    confirmText?: string;
-    cancelText?: string;
-    content?: string;
-  } & WithChildren<JNode> &
-    WithPropSlot<'title', JNode> &
-    WithSlots<{ content?: JNode }> &
-    WithEvents<{
-      confirm?: ConfirmCallback<void>;
-      cancel?: () => void;
-    }>,
-) {
+export type PopconfirmProps = {
+  className?: string;
+  style?: string;
+  open?: boolean;
+  defaultOpen?: boolean;
+  disabled?: boolean;
+  dismissable?: boolean;
+  keyboard?: boolean;
+  placement?: FloatingPlacement;
+  delay?: FloatingDuration;
+  confirmText?: string;
+  cancelText?: string;
+  content?: string;
+} & WithChildren<JNode> &
+  WithPropSlot<'title', JNode> &
+  WithSlots<{ content?: JNode; icon?: JNode }> &
+  WithEvents<{
+    confirm?: ConfirmCallback<void>;
+    cancel?: () => void;
+    openChange?(open: boolean): void;
+    error?(error: unknown): void;
+  }>;
+
+export function Popconfirm(props: PopconfirmProps) {
+  const controlled = props.open !== undefined;
   const zIndex = z.getPopoverZ();
-  const state = vm({
-    isOpen: false,
-    submitting: false,
+  const state = vm({ open: props.open ?? props.defaultOpen ?? false, submitting: false });
+  const confirm = useConfirmContext(POPCONFIRM_CONTEXT, () => props['on:confirm']?.());
+  function setOpen(open: boolean) {
+    if (!controlled) state.open = open;
+    props['on:openChange']?.(open);
+  }
+  watch(props, 'open', (open) => {
+    if (controlled) state.open = !!open;
   });
-
-  const confirmContext = useConfirmContext(POPCONFIRM_CONTEXT, () => props['on:confirm']?.());
-
+  watch(state, 'open', (open) => {
+    if (!open) {
+      confirm.invalidate();
+      state.submitting = false;
+    }
+  });
   async function handleConfirm() {
-    await confirmContext.handleConfirm({
-      onSubmittingChange(submitting) {
-        state.submitting = submitting;
+    await confirm.handleConfirm({
+      onSubmittingChange: (value) => {
+        state.submitting = value;
       },
-      onSubmitted(preventClose, _result) {
-        if (!preventClose) {
-          state.isOpen = false;
-        }
+      onSubmitted: (preventClose) => {
+        if (!preventClose) setOpen(false);
+      },
+      onError: (error) => {
+        if (props['on:error']) props['on:error'](error);
+        else console.error(error);
       },
     });
   }
   return (
     <Floating
       zIndex={zIndex}
+      autoFocus
+      role="dialog"
+      ariaLabel="操作确认"
       delay={props.delay}
-      open={state.isOpen}
-      on:openChange={(v) => {
-        state.isOpen = v;
+      open={state.open}
+      disabled={props.disabled}
+      on:openChange={(open) => {
+        if (!state.submitting) setOpen(open);
       }}
-      dismissable={false}
-      triggerMethod="click"
+      dismissable={!state.submitting && !!props.dismissable}
+      keyboard={!state.submitting && props.keyboard !== false}
+      triggerMethod={state.submitting ? 'none' : 'click'}
       offset={10}
       placement={props.placement}
       slot:trigger={props.children}
+      style={props.style}
       className={cx('ja-popconfirm', props.className)}
     >
       <div className="ja-popconfirm-title">
         <span className="ja-popconfirm-icon">
-          <AntDesignExclamationCircleFilled />
+          {props['slot:icon'] ?? <AntDesignExclamationCircleFilled />}
         </span>
         {props['slot:title'] ?? <span>{props.title}</span>}
       </div>
-      {props['slot:content'] && (
-        <div className="ja-popconfirm-content">{props['slot:content']}</div>
+      {(props['slot:content'] || props.content) && (
+        <div className="ja-popconfirm-content">{props['slot:content'] ?? props.content}</div>
       )}
-      {props.content && <div className="ja-popconfirm-content">{props.content}</div>}
       <div className="ja-popconfirm-footer">
         <Button
           size="sm"
+          disabled={state.submitting}
           on:click={() => {
             props['on:cancel']?.();
-            state.isOpen = false;
+            setOpen(false);
           }}
         >
           {props.cancelText ?? '取 消'}

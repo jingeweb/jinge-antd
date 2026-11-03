@@ -1,0 +1,53 @@
+.ja-divider {
+  color: var(--antd-normal-text, #222);
+  border-color: var(--antd-border, #d9d9d9);
+  &.horizontal {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-block: 24px;
+    gap: 16px;
+    &::before,
+    &::after {
+      content: '';
+      border-top: 1px solid;
+      border-color: inherit;
+      flex: 1;
+    }
+    &:not(.with-text)::after {
+      display: none;
+    }
+    &.left::before,
+    &.right::after {
+      flex: 0 0 5%;
+    }
+  }
+  &.vertical {
+    display: inline-block;
+    height: 0.9em;
+    margin-inline: 8px;
+    border-left: 1px solid;
+    border-color: inherit;
+    vertical-align: middle;
+    .ja-divider-text {
+      display: none;
+    }
+  }
+  &.dashed {
+    &::before,
+    &::after {
+      border-top-style: dashed;
+    }
+    &.vertical {
+      border-left-style: dashed;
+    }
+  }
+  .ja-divider-text {
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  &.plain .ja-divider-text {
+    font-weight: 400;
+  }
+}

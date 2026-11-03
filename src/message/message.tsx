@@ -1,246 +1,118 @@
 import {
-  type AnyFn,
-  Dynamic,
-  type FC,
+  For,
   type JNode,
-  TransitionGroup,
   type WithPropSlot,
   bootstrap,
-  cx,
-  expose,
-  isString,
+  destroyComponent,
   onMount,
-  uid,
   vm,
 } from 'jinge';
 
-import { z } from '../_util/z';
 import {
-  AntDesignCheckCircleFilled,
-  AntDesignCloseCircleFilled,
-  AntDesignExclamationCircleFilled,
-  AntDesignInfoCircleFilled,
-} from '../icon';
-import { LoadingOutlined } from '../loading';
+  createNoticeStore,
+  type NoticeInstance,
+  type NoticeType,
+  type NoticeUpdateOptions,
+} from '../_util/notice';
+import { NoticeCard } from '../_util/notice-view';
+import { z } from '../_util/z';
 
 export type MessageOptions = WithPropSlot<'content', JNode> & {
   duration?: number;
+  className?: string;
+  style?: string;
+  closable?: boolean;
+  pauseOnHover?: boolean;
   'on:close'?: () => void;
 };
-
+export type MessageUpdateOptions = Omit<NoticeUpdateOptions, 'title'>;
+export type MessageType = NoticeType;
+export interface MessageInstance extends Omit<NoticeInstance, 'update'> {
+  update(options: MessageUpdateOptions): void;
+}
 export interface MessageContainerConfig {
   paddingTop?: number;
   paddingLeft?: number;
   paddingRight?: number;
+  maxCount?: number;
 }
-
-const containerConfig: MessageContainerConfig = {
+const containerConfig = vm<MessageContainerConfig>({
+  paddingTop: 16,
   paddingLeft: 0,
-  paddingTop: 0,
   paddingRight: 0,
-};
-
-function configContainer(config: MessageContainerConfig) {
-  Object.assign(containerConfig, config);
+  maxCount: 5,
+});
+interface MessageService {
+  store: ReturnType<typeof createNoticeStore>;
+  destroy(): void;
 }
-
-export interface MessageUpdateOptions {
-  type?: MessageConfig['type'];
-  content?: string;
-  // 'slot:content'?: JNode; // 暂时不支持更新插槽，待jinge-compiler支持。
-  duration?: number;
-}
-
-type MessageConfig = WithPropSlot<'content', JNode> & {
-  type: 'success' | 'error' | 'info' | 'warning' | 'loading';
-  _id: string;
-  _p?: Promise<void>;
-  _r?: AnyFn;
-  _onClose?: () => void;
-  _tm: number;
-};
-
-export interface MessageInstance {
-  close: () => void;
-  update: (options: MessageUpdateOptions) => void;
-  waitClose: () => Promise<void>;
-}
-
-let messageContainer: MessageContainerInstance | undefined = undefined;
-
-function initMessageContainer() {
-  const $dv = document.createElement('div');
-  document.body.appendChild($dv);
-  messageContainer = bootstrap(MessageContainerComponent, $dv);
-}
-
-function clearAll() {
-  messageContainer?.clear();
-}
-
-interface MessageContainerInstance {
-  show: (type: MessageConfig['type'], message: string | MessageOptions) => MessageInstance;
-  clear: () => void;
-}
-function MessageContainerComponent() {
-  const containerStyle = `padding-top:${containerConfig.paddingTop ?? 0}px;padding-left:${containerConfig.paddingLeft ?? 0}px;padding-right:${containerConfig.paddingRight ?? 0}px;`;
-  const state = vm({
-    messages: [] as MessageConfig[],
-    zIndex: 0,
-  });
-  onMount(() => {
-    return z.watchMessageZ((messageZ) => (state.zIndex = messageZ));
-  });
-
-  const store = new Map<string, MessageConfig>();
-  function close(message: MessageConfig) {
-    if (message._r === undefined) {
-      return;
-    }
-    store.delete(message._id);
-    window.clearTimeout(message._tm);
-    const idx = state.messages.indexOf(message);
-    if (idx >= 0) state.messages.splice(idx, 1);
-    message._onClose?.();
-    message._r();
-  }
-  function update(message: MessageConfig, options: MessageUpdateOptions) {
-    if (options.type !== undefined) {
-      message.type = options.type;
-    }
-    if (options.content !== undefined) {
-      message.content = options.content;
-    }
-    if (options.duration !== undefined) {
-      window.clearTimeout(message._tm);
-      if (options.duration > 0) {
-        message._tm = window.setTimeout(() => close(message), options.duration);
-      }
-    }
-  }
-  function clear() {
-    state.messages.length = 0;
-    const mcs = [...store.values()];
-    store.clear();
-    mcs.forEach(close);
-  }
-  function show(type: MessageConfig['type'], contentOrOptions: string | MessageOptions) {
-    const options: MessageOptions = {
-      ...(isString(contentOrOptions) ? { content: contentOrOptions } : contentOrOptions),
-    };
-    const message: MessageConfig = vm({
-      type,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      content: options.content as any,
-      'slot:content': options['slot:content'],
-      _id: uid(),
-      _onClose: options['on:close'],
-      _p: undefined,
-      _r: undefined,
-      _tm: 0,
-    });
-
-    message._p = new Promise<void>((resolve) => {
-      message._r = resolve;
-    }).then(() => {
-      message._r = undefined;
-    });
-
-    if (options.duration !== 0) {
-      message._tm = window.setTimeout(() => close(message), options.duration ?? 4000);
-    }
-
-    state.messages.push(message);
-
-    return {
-      close: () => close(message),
-      update: (options) => update(message, options),
-      waitClose: async () => {
-        if (message._r === undefined) return;
-        await message._p;
-      },
-    } as MessageInstance;
-  }
-  expose({
-    clear,
-    show,
-  });
-
-  const icons: Record<string, FC> = vm({
-    loading: LoadingOutlined,
-    info: AntDesignInfoCircleFilled,
-    error: AntDesignCloseCircleFilled,
-    warning: AntDesignExclamationCircleFilled,
-    success: AntDesignCheckCircleFilled,
-  });
-
-  return (
-    <div className="ja-message-container" style={`z-index: ${state.zIndex};${containerStyle}`}>
-      <TransitionGroup
-        enterClass="ja-enter"
-        enterActiveClass="ja-enter-active"
-        leaveClass="ja-leave"
-        leaveActiveClass="ja-leave-active"
-        loop={state.messages}
-        key="_id"
-      >
-        {(each) => (
-          <div className="ja-message">
-            <Dynamic fc={icons[each.data.type]} className={cx('icon', each.data.type)} />
-            <div className="content">{each.data.content}</div>
-          </div>
-        )}
-      </TransitionGroup>
-    </div>
+let current: MessageService | undefined;
+function getService() {
+  if (current) return current;
+  const container = document.createElement('div');
+  document.body.append(container);
+  const store = createNoticeStore(
+    4000,
+    () => containerConfig.maxCount,
+    () => {
+      queueMicrotask(() => {
+        if (current === service && !store.items.length) {
+          current = undefined;
+          service.destroy();
+        }
+      });
+    },
   );
-}
-
-function innerShow(type: MessageConfig['type'], options: string | MessageOptions) {
-  if (!messageContainer) {
-    initMessageContainer();
+  function MessageContainer() {
+    const state = vm({ zIndex: z.currentIndex + 100 });
+    onMount(() =>
+      z.watchMessageZ((value) => {
+        state.zIndex = value;
+      }),
+    );
+    return (
+      <div
+        className="ja-message-container"
+        data-ja-notices
+        role="region"
+        aria-label="全局提示"
+        style={`z-index:${state.zIndex};padding-top:${containerConfig.paddingTop ?? 0}px;padding-left:${containerConfig.paddingLeft ?? 0}px;padding-right:${containerConfig.paddingRight ?? 0}px`}
+      >
+        <For loop={store.items} key="id">
+          {(each) => <NoticeCard kind="message" record={each.data} />}
+        </For>
+      </div>
+    );
   }
-  return messageContainer!.show(type, options);
+  const host = bootstrap(MessageContainer, container);
+  const service: MessageService = {
+    store,
+    destroy() {
+      destroyComponent(host);
+      container.remove();
+    },
+  };
+  current = service;
+  return service;
 }
-
-function showSuccess(options: MessageOptions): MessageInstance;
-function showSuccess(content: string): MessageInstance;
-function showSuccess(contentOrOptions: string | MessageOptions): MessageInstance {
-  return innerShow('success', contentOrOptions);
+function show(type: NoticeType, content: string | MessageOptions): MessageInstance {
+  return getService().store.show({
+    ...(typeof content === 'string' ? { content } : content),
+    type,
+  });
 }
-
-function showError(options: MessageOptions): MessageInstance;
-function showError(content: string): MessageInstance;
-function showError(contentOrOptions: string | MessageOptions): MessageInstance {
-  return innerShow('error', contentOrOptions);
-}
-
-function showInfo(options: MessageOptions): MessageInstance;
-function showInfo(content: string): MessageInstance;
-function showInfo(contentOrOptions: string | MessageOptions): MessageInstance {
-  return innerShow('info', contentOrOptions);
-}
-
-function showWarning(options: MessageOptions): MessageInstance;
-function showWarning(content: string): MessageInstance;
-function showWarning(contentOrOptions: string | MessageOptions): MessageInstance {
-  return innerShow('warning', contentOrOptions);
-}
-
-function showLoading(options: MessageOptions): MessageInstance;
-function showLoading(content: string): MessageInstance;
-function showLoading(contentOrOptions: string | MessageOptions): MessageInstance {
-  return innerShow('loading', contentOrOptions);
-}
-
-const message = {
-  configContainer,
-  success: showSuccess,
-  error: showError,
-  info: showInfo,
-  loading: showLoading,
-  warning: showWarning,
-  show: innerShow,
-  clear: clearAll,
+export const message = {
+  configContainer(config: MessageContainerConfig) {
+    Object.assign(containerConfig, config);
+    current?.store.trim();
+  },
+  show,
+  success: (options: string | MessageOptions) => show('success', options),
+  error: (options: string | MessageOptions) => show('error', options),
+  info: (options: string | MessageOptions) => show('info', options),
+  warning: (options: string | MessageOptions) => show('warning', options),
+  loading: (options: string | MessageOptions) => show('loading', options),
+  clear() {
+    current?.store.clear();
+  },
 };
-
-export { message };

@@ -22,9 +22,5 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
-  plugins: [
-    tailwindcss(),
-    TailwindThemePlugin(),
-    jingeVitePlugin({ loadDebugNativeBinding: true }),
-  ],
+  plugins: [tailwindcss(), TailwindThemePlugin(), jingeVitePlugin()],
 });

@@ -1,20 +1,27 @@
 .ja-floating {
   position: fixed;
-  top: 0;
   left: -10000px;
-
-  &.ja-enter {
-    opacity: 1;
-  }
-  &.ja-enter-active {
-    transition: opacity ease-in 0.25s;
-  }
-  &.ja-leave {
+  top: 0;
+  width: max-content;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100vh - 16px);
+  box-sizing: border-box;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.ja-floating-motion {
+  animation: ja-floating-enter 0.16s ease-out;
+}
+@keyframes ja-floating-enter {
+  from {
     opacity: 0;
   }
-  &.ja-leave-active {
-    transition:
-      opacity ease-out 0.25s,
-      transform ease-out 0.1s;
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-floating-motion {
+    animation: none;
   }
 }

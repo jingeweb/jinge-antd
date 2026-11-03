@@ -1,0 +1,113 @@
+.ja-upload {
+  max-width: 100%;
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+  .ja-upload-input {
+    display: none;
+  }
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+    color: #bfbfbf;
+  }
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--ja-primary, #1677ff);
+    outline-offset: 2px;
+  }
+}
+.ja-upload-trigger {
+  min-height: 32px;
+  padding: 4px 15px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  background: var(--ja-bg, #fff);
+  color: inherit;
+  &:hover:not(:disabled) {
+    border-color: var(--ja-primary, #1677ff);
+    color: var(--ja-primary, #1677ff);
+  }
+  &.drag {
+    display: block;
+    width: 100%;
+    min-height: 110px;
+    border-style: dashed;
+    background: #fafafa;
+  }
+  &.dragging {
+    border-color: var(--ja-primary, #1677ff);
+    background: #e6f4ff;
+  }
+  &:disabled {
+    background: #f5f5f5;
+  }
+}
+.ja-upload.sm .ja-upload-trigger {
+  min-height: 24px;
+  padding-block: 1px;
+}
+.ja-upload.lg .ja-upload-trigger {
+  min-height: 40px;
+  font-size: 16px;
+}
+.ja-upload-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.ja-upload-item {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.ja-upload-details {
+  flex: 1 1 160px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.ja-upload-name {
+  overflow-wrap: anywhere;
+}
+a.ja-upload-name {
+  color: var(--ja-primary, #1677ff);
+  text-decoration: none;
+}
+.ja-upload-status,
+.ja-upload-checking {
+  font-size: 12px;
+  color: #666;
+}
+.ja-upload-checking {
+  display: block;
+  margin-top: 8px;
+}
+.ja-upload-error {
+  color: #cf1322;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.ja-upload-details progress {
+  width: 100%;
+  max-width: 300px;
+  height: 6px;
+  accent-color: var(--ja-primary, #1677ff);
+}
+.ja-upload-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ja-upload-actions button {
+  border: 0;
+  background: transparent;
+  padding: 2px;
+  color: var(--ja-primary, #1677ff);
+}

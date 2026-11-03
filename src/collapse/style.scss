@@ -1,0 +1,91 @@
+.ja-collapse {
+  overflow: hidden;
+  border: 1px solid var(--ja-border, #e5e7eb);
+  border-radius: 8px;
+  background: #fafafa;
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+  &.borderless {
+    border: 0;
+  }
+  &.ghost {
+    background: transparent;
+    border: 0;
+    .ja-collapse-content {
+      background: transparent;
+    }
+  }
+}
+.ja-collapse-panel + .ja-collapse-panel {
+  border-top: 1px solid var(--ja-border, #e5e7eb);
+}
+.ja-collapse-header {
+  display: flex;
+  align-items: center;
+}
+.ja-collapse-trigger {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  &:focus-visible {
+    outline: 2px solid var(--antd-primary, #1677ff);
+    outline-offset: -3px;
+  }
+  &:disabled {
+    color: #bfbfbf;
+    cursor: not-allowed;
+  }
+}
+.ja-collapse-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ja-collapse-arrow {
+  display: inline-flex;
+  flex: none;
+  justify-content: center;
+  width: 16px;
+  font-size: 20px;
+  line-height: 1;
+}
+.ja-collapse-panel.open > .ja-collapse-header .ja-collapse-arrow {
+  transform: rotate(90deg);
+}
+.ja-collapse-extra {
+  flex: none;
+  padding-right: 16px;
+}
+.ja-collapse-content {
+  background: var(--ja-bg, #fff);
+}
+.ja-collapse-body {
+  padding: 16px;
+  border-top: 1px solid var(--ja-border, #e5e7eb);
+  overflow-wrap: anywhere;
+}
+.ja-collapse.sm {
+  .ja-collapse-trigger {
+    padding: 8px 12px;
+  }
+  .ja-collapse-body {
+    padding: 12px;
+  }
+}
+.ja-collapse.lg {
+  .ja-collapse-trigger {
+    padding: 20px 24px;
+  }
+  .ja-collapse-body {
+    padding: 24px;
+  }
+}

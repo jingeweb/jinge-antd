@@ -1,0 +1,153 @@
+.ja-steps {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+  .ja-step {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+  }
+  .ja-step:not(:last-child)::after {
+    content: '';
+    height: 1px;
+    background: var(--ja-border, #e5e7eb);
+    position: absolute;
+    top: 16px;
+    left: 44px;
+    right: -16px;
+    z-index: 0;
+  }
+  .ja-step-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+  }
+  button.ja-step-body {
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  button.ja-step-body:focus-visible {
+    outline: 2px solid var(--ja-primary, #1677ff);
+    outline-offset: 4px;
+  }
+  button.ja-step-body:disabled {
+    cursor: not-allowed;
+  }
+  .ja-step-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #666;
+  }
+  .ja-step-text {
+    padding-top: 5px;
+    min-width: 0;
+    background: var(--ja-bg, #fff);
+  }
+  .ja-step-title {
+    display: block;
+    font-weight: 500;
+    padding-inline-end: 8px;
+    overflow-wrap: anywhere;
+  }
+  .ja-step-description {
+    display: block;
+    padding-top: 4px;
+    font-size: 12px;
+    color: var(--ja-text-secondary, #666);
+    overflow-wrap: anywhere;
+  }
+  .ja-step-status {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .process .ja-step-icon {
+    background: var(--ja-primary, #1677ff);
+    color: white;
+  }
+  .finish .ja-step-icon {
+    background: #e6f4ff;
+    color: var(--ja-primary, #1677ff);
+  }
+  .finish::after {
+    background: var(--ja-primary, #1677ff);
+  }
+  .error .ja-step-icon {
+    background: #fff2f0;
+    color: var(--ja-error, #ff4d4f);
+  }
+  .error .ja-step-title {
+    color: var(--ja-error, #ff4d4f);
+  }
+  .disabled {
+    opacity: 0.55;
+  }
+  &.sm .ja-step-icon {
+    width: 24px;
+    height: 24px;
+  }
+  &.sm .ja-step-text {
+    padding-top: 1px;
+  }
+  &.sm .ja-step::after {
+    top: 12px;
+    left: 36px;
+  }
+  &.vertical {
+    flex-direction: column;
+  }
+  &.vertical .ja-step:not(:last-child)::after {
+    top: 40px;
+    bottom: -16px;
+    left: 16px;
+    right: auto;
+    height: auto;
+    width: 1px;
+  }
+  &.vertical.sm .ja-step:not(:last-child)::after {
+    top: 32px;
+    left: 12px;
+  }
+  @media (max-width: 600px) {
+    &.horizontal.responsive {
+      flex-direction: column;
+    }
+    &.horizontal.responsive .ja-step:not(:last-child)::after {
+      top: 40px;
+      bottom: -16px;
+      left: 16px;
+      right: auto;
+      height: auto;
+      width: 1px;
+    }
+    &.horizontal.responsive.sm .ja-step:not(:last-child)::after {
+      top: 32px;
+      left: 12px;
+    }
+  }
+}

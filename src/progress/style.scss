@@ -1,0 +1,95 @@
+.ja-progress {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  color: var(--ja-progress-color, #1677ff);
+  font-size: 14px;
+  &.success {
+    color: var(--ja-progress-color, #52c41a);
+  }
+  &.exception {
+    color: var(--ja-progress-color, #ff4d4f);
+  }
+  &.line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &.circle {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    aspect-ratio: 1;
+    > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .ja-progress-info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+}
+.ja-progress-track {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 99px;
+  background: var(--ja-progress-trail, #f0f0f0);
+}
+.ja-progress-bar {
+  position: relative;
+  height: 100%;
+  border-radius: inherit;
+  background: currentColor;
+  transition: width 180ms ease;
+}
+.ja-progress.active .ja-progress-bar::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 50%), transparent);
+  animation: ja-progress-active 1.5s linear infinite;
+}
+.ja-progress-info {
+  flex: none;
+  max-width: 50%;
+  color: var(--ja-text, #1f2329);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+.ja-progress.circle .ja-progress-info {
+  max-width: none;
+}
+.ja-progress-trail {
+  stroke: var(--ja-progress-trail, #f0f0f0);
+}
+.ja-progress-path {
+  stroke: currentColor;
+  transition: stroke-dasharray 180ms ease;
+}
+@keyframes ja-progress-active {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-progress-bar,
+  .ja-progress-path {
+    transition: none;
+  }
+  .ja-progress.active .ja-progress-bar::after {
+    animation: none;
+  }
+}

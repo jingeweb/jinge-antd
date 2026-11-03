@@ -1,0 +1,141 @@
+.ja-descriptions {
+  --ja-descriptions-cols: var(--ja-descriptions-cols-xs);
+  min-width: 0;
+  max-width: 100%;
+  color: var(--ja-text, #1f2329);
+  font-size: 14px;
+}
+.ja-descriptions-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 16px;
+}
+.ja-descriptions-title {
+  min-width: 0;
+  font-weight: 600;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+  h3 {
+    margin: 0;
+    font: inherit;
+  }
+}
+.ja-descriptions-extra {
+  margin-left: auto;
+}
+.ja-descriptions-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.ja-descriptions-item {
+  display: flex;
+  flex: 0 0 min(100%, calc(100% / var(--ja-descriptions-cols) * var(--ja-descriptions-span, 1)));
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 10px 12px;
+  gap: 8px;
+  &.filled {
+    flex-basis: 100%;
+  }
+}
+.ja-descriptions-label {
+  flex: 0 0 auto;
+  max-width: 50%;
+  color: #666;
+  overflow-wrap: anywhere;
+  &.colon::after {
+    content: ':';
+  }
+}
+.ja-descriptions-value {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.ja-descriptions.vertical {
+  .ja-descriptions-item {
+    flex-direction: column;
+  }
+  .ja-descriptions-label {
+    max-width: 100%;
+  }
+}
+.ja-descriptions.bordered {
+  .ja-descriptions-list {
+    border: 1px solid var(--ja-border, #e5e7eb);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ja-descriptions-item {
+    padding: 0;
+    gap: 0;
+    box-shadow:
+      1px 0 0 var(--ja-border, #e5e7eb),
+      0 1px 0 var(--ja-border, #e5e7eb);
+  }
+  .ja-descriptions-label {
+    padding: 12px 16px;
+    background: #fafafa;
+  }
+  .ja-descriptions-value {
+    padding: 12px 16px;
+  }
+}
+.ja-descriptions.sm {
+  .ja-descriptions-item {
+    padding: 6px 8px;
+  }
+  &.bordered {
+    .ja-descriptions-item {
+      padding: 0;
+    }
+    .ja-descriptions-label,
+    .ja-descriptions-value {
+      padding: 8px 12px;
+    }
+  }
+}
+.ja-descriptions.lg {
+  .ja-descriptions-item {
+    padding: 16px;
+  }
+  &.bordered {
+    .ja-descriptions-item {
+      padding: 0;
+    }
+    .ja-descriptions-label,
+    .ja-descriptions-value {
+      padding: 16px 20px;
+    }
+  }
+}
+@media (min-width: 576px) {
+  .ja-descriptions {
+    --ja-descriptions-cols: var(--ja-descriptions-cols-sm);
+  }
+}
+@media (min-width: 768px) {
+  .ja-descriptions {
+    --ja-descriptions-cols: var(--ja-descriptions-cols-md);
+  }
+}
+@media (min-width: 992px) {
+  .ja-descriptions {
+    --ja-descriptions-cols: var(--ja-descriptions-cols-lg);
+  }
+}
+@media (min-width: 1200px) {
+  .ja-descriptions {
+    --ja-descriptions-cols: var(--ja-descriptions-cols-xl);
+  }
+}
+@media (min-width: 1600px) {
+  .ja-descriptions {
+    --ja-descriptions-cols: var(--ja-descriptions-cols-xxl);
+  }
+}

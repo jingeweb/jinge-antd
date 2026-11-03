@@ -1,0 +1,50 @@
+.ja-skeleton {
+  min-width: 0;
+  max-width: 100%;
+}
+.ja-skeleton-placeholder {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.ja-skeleton-block {
+  display: block;
+  box-sizing: border-box;
+  max-width: 100%;
+  background: #f0f0f0;
+  border-radius: 4px;
+  &.round {
+    border-radius: 999px;
+  }
+  &.circle {
+    border-radius: 50%;
+  }
+}
+.ja-skeleton-avatar {
+  flex: none;
+}
+.ja-skeleton-text {
+  flex: 1;
+  min-width: 0;
+}
+.ja-skeleton-title {
+  margin-bottom: 20px;
+}
+.ja-skeleton-line + .ja-skeleton-line {
+  margin-top: 12px;
+}
+.ja-skeleton.active .ja-skeleton-block,
+.ja-skeleton-block.active {
+  animation: ja-skeleton-pulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes ja-skeleton-pulse {
+  to {
+    opacity: 0.4;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-skeleton.active .ja-skeleton-block,
+  .ja-skeleton-block.active {
+    animation: none;
+  }
+}

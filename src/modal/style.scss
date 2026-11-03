@@ -1,79 +1,173 @@
-.ja-modal-mask {
+.ja-dialog-root {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.45);
-
-  &.ja-enter {
-    opacity: 1;
-  }
-  &.ja-enter-active {
-    transition: opacity ease-in 0.2s;
-  }
-  &.ja-leave-active {
-    transition: opacity ease-out 0.2s;
-  }
-  &.ja-leave {
-    opacity: 0;
-  }
+  inset: 0;
+  pointer-events: none;
 }
-.ja-modal {
+.ja-dialog-mask {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  background-clip: padding-box;
-  border-radius: 8px;
-  padding: 20px 24px;
-  box-shadow:
-    0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 3px 6px -4px rgba(0, 0, 0, 0.12),
-    0 9px 28px 8px rgba(0, 0, 0, 0.05);
-
-  &.ja-enter {
-    opacity: 1;
-  }
-  &.ja-enter-active {
-    transition: opacity ease-in 0.3s;
-  }
-  &.ja-leave-active {
-    transition: opacity ease-out 0.3s;
-  }
-  &.ja-leave {
-    opacity: 0;
-  }
-
-  & > .ja-close {
-    cursor: pointer;
-    font-size: 16px;
+  inset: 0;
+  pointer-events: auto;
+  background: rgb(0 0 0 / 45%);
+}
+.ja-dialog-panel {
+  position: absolute;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  background: var(--ja-bg, #fff);
+  color: var(--ja-text, #1f2329);
+  box-shadow: 0 6px 28px rgb(0 0 0 / 16%);
+  outline: none;
+  > .ja-close {
     position: absolute;
     right: 12px;
     top: 12px;
     width: 32px;
     height: 32px;
+    padding: 4px;
   }
-
-  & > .ja-modal-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    line-height: 1.5;
-    font-size: 16px;
+}
+.ja-modal {
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  max-height: 80vh;
+  padding: 20px 24px;
+  border-radius: 8px;
+  &.ja-dialog-centered {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-height: calc(100% - 32px);
   }
-
-  & > .ja-modal-content {
-    margin-top: 8px;
+}
+.ja-modal-title,
+.ja-drawer-title {
+  flex: none;
+  padding-right: 32px;
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 16px;
+}
+.ja-dialog-body {
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.ja-modal-content {
+  margin-top: 8px;
+}
+.ja-modal-footer,
+.ja-drawer-footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+.ja-drawer {
+  &[data-placement='left'],
+  &[data-placement='right'] {
+    top: 0;
+    bottom: 0;
+    height: 100% !important;
   }
-
-  & > .ja-modal-footer {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 8px;
-    margin-top: 12px;
+  &[data-placement='left'] {
+    left: 0;
+  }
+  &[data-placement='right'] {
+    right: 0;
+  }
+  &[data-placement='top'],
+  &[data-placement='bottom'] {
+    left: 0;
+    right: 0;
+    width: 100% !important;
+  }
+  &[data-placement='top'] {
+    top: 0;
+  }
+  &[data-placement='bottom'] {
+    bottom: 0;
+  }
+}
+.ja-drawer-title {
+  padding: 20px 56px 20px 24px;
+  border-bottom: 1px solid var(--ja-border, #e5e7eb);
+}
+.ja-drawer-content {
+  flex: 1;
+  padding: 24px;
+}
+.ja-drawer-footer {
+  margin-top: 0;
+  padding: 12px 24px;
+  border-top: 1px solid var(--ja-border, #e5e7eb);
+}
+.ja-dialog-motion {
+  animation: ja-dialog-enter 160ms ease-out;
+}
+.ja-drawer.ja-dialog-motion {
+  &[data-placement='left'] {
+    animation-name: ja-drawer-left;
+  }
+  &[data-placement='right'] {
+    animation-name: ja-drawer-right;
+  }
+  &[data-placement='top'] {
+    animation-name: ja-drawer-top;
+  }
+  &[data-placement='bottom'] {
+    animation-name: ja-drawer-bottom;
+  }
+}
+@keyframes ja-drawer-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes ja-drawer-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes ja-drawer-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes ja-drawer-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes ja-dialog-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-dialog-motion,
+  .ja-drawer.ja-dialog-motion[data-placement] {
+    animation: none;
   }
 }

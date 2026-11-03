@@ -26,3 +26,6 @@ site/style.css
 *.sln
 *.sw?
 *.tsbuildinfo
+# Test build outputs and browser reports
+test/.compiled/
+test/.results/

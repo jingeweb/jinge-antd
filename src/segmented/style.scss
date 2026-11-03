@@ -1,0 +1,59 @@
+.ja-segmented {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 3px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--ja-bg-layout, #f5f5f5);
+  color: var(--ja-text, #1f2329);
+  .ja-segmented-options {
+    display: flex;
+    gap: 3px;
+    overflow: auto;
+  }
+  .ja-radio.button {
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .ja-radio.button input {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    z-index: 1;
+    cursor: inherit;
+  }
+  .ja-radio.button:has(input:checked) {
+    background: var(--ja-bg, #fff);
+    color: var(--ja-primary, #1677ff);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+  }
+  .ja-radio.button:has(input:disabled) {
+    color: var(--ja-text-disabled, #bfbfbf);
+  }
+  .ja-radio.button:has(input:focus-visible) {
+    outline: 2px solid var(--ja-primary, #1677ff);
+    outline-offset: -2px;
+  }
+  &.block {
+    width: 100%;
+    display: block;
+  }
+  &.block .ja-radio {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+  }
+  &.vertical .ja-segmented-options {
+    flex-direction: column;
+  }
+  &.vertical .ja-radio {
+    justify-content: center;
+  }
+}

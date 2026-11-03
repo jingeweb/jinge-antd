@@ -1,4 +1,4 @@
-import { type JNode, type WithEvents, type WithSlots, isNumber, isUndefined } from 'jinge';
+import type { JNode, WithEvents, WithSlots } from 'jinge';
 
 export type FloatingPlacement =
   | 'bottom'
@@ -7,180 +7,168 @@ export type FloatingPlacement =
   | 'top'
   | 'top-start'
   | 'top-end'
+  | 'left'
   | 'left-start'
-  | 'right'
   | 'left-end'
+  | 'right'
   | 'right-start'
   | 'right-end';
 export type FloatingDuration = number | { open: number; close: number };
-export type FloatingTriggerMethod = 'click' | 'hover' | 'none';
+export type FloatingTriggerMethod = 'click' | 'hover' | 'focus' | 'none';
+export type FloatingTrigger = FloatingTriggerMethod | Exclude<FloatingTriggerMethod, 'none'>[];
+export type FloatingRole = 'tooltip' | 'dialog' | 'menu' | 'listbox';
 export type FloatingProps = {
-  /** 浮层的 className */
+  id?: string;
   className?: string;
-  /** 浮层的 style */
   style?: string;
-  enterClass?: string;
-  enterActiveClass?: string;
-  leaveClass?: string;
-  leaveActiveClass?: string;
-
-  /** 是否打开。使用该参数搭配 on:openChange 事件可切换为受控模式。 */
   open?: boolean;
-  /** 位置，默认是 top */
+  defaultOpen?: boolean;
+  disabled?: boolean;
   placement?: FloatingPlacement;
-  /** 点击其它区域时是否关闭 */
   dismissable?: boolean;
-  /** 触发方式，默认是 click。指定为 none 时完全由外部通过 visible 属性控制。*/
-  triggerMethod?: FloatingTriggerMethod;
-  /** 延迟显示，毫秒。trigger 为 hover 时默认为 300，trigger 为 click 时默认为 0 */
+  keyboard?: boolean;
+  returnFocus?: boolean;
+  autoFocus?: boolean;
+  triggerMethod?: FloatingTrigger;
+  /** Defaults to zero. Tooltip supplies its own hover delay. Focus opens immediately. Click close is immediate. */
   delay?: FloatingDuration;
-  /** 偏移量。当 placement 是 topXX 时默认为 20，其它时默认为 10 */
   offset?: number;
-  /** 在 triggerMethod 为 hover 时，是否开启 safePolygon。详见：https://floating-ui.com/docs/usehover#safepolygon */
+  /** Safe viewport margin in CSS pixels. Defaults to 8. */
+  padding?: number;
   safePolygon?: boolean;
-  /** z-index */
   zIndex: number;
+  role?: FloatingRole;
+  ariaLabel?: string;
+  ariaMultiselectable?: boolean;
+  motion?: boolean;
 } & WithSlots<{ default: JNode; trigger: JNode }> &
   WithEvents<{
-    openChange?(v: boolean, evt?: MouseEvent): void;
+    openChange?(open: boolean, event?: Event): void;
   }>;
 
-export function getDelayOpt(delay: FloatingDuration | undefined) {
-  return isUndefined(delay)
-    ? { open: 0, close: 0 }
-    : isNumber(delay)
-      ? { open: delay, close: delay }
-      : delay;
+function nonnegative(value: number) {
+  return Number.isFinite(value) ? Math.max(0, value) : 0;
 }
-
-const POS_BOTTOM = 0;
+export function getDelayOpt(delay?: FloatingDuration) {
+  if (typeof delay === 'number') return { open: nonnegative(delay), close: nonnegative(delay) };
+  return { open: nonnegative(delay?.open ?? 0), close: nonnegative(delay?.close ?? 0) };
+}
+export const POS_BOTTOM = 0;
 export const POS_TOP = 1;
 const POS_LEFT = 2;
 const POS_RIGHT = 3;
 const ALI_START = 1;
 const ALI_END = 2;
-const ALI_CENTER = 0;
-export function getPlacementOpt(placement?: FloatingPlacement) {
-  const pl = placement ?? 'top';
-  const align = pl.endsWith('-end') ? ALI_END : pl.endsWith('-start') ? ALI_START : ALI_CENTER;
-  const position = pl.startsWith('top')
+export function getPlacementOpt(placement: FloatingPlacement = 'top') {
+  const align = placement.endsWith('-end') ? ALI_END : placement.endsWith('-start') ? ALI_START : 0;
+  const position = placement.startsWith('top')
     ? POS_TOP
-    : pl.startsWith('bottom')
+    : placement.startsWith('bottom')
       ? POS_BOTTOM
-      : pl.startsWith('left')
+      : placement.startsWith('left')
         ? POS_LEFT
         : POS_RIGHT;
   return { position, align };
 }
-
 export interface Point {
   x: number;
   y: number;
 }
+const point = (x: number, y: number): Point => ({ x, y });
+const clamp = (value: number, minimum: number, maximum: number) =>
+  Math.min(Math.max(value, minimum), Math.max(minimum, maximum));
 
-function makePoint(x: number, y: number) {
-  return { x, y } as Point;
-}
-
+/** Viewport coordinates throughout. Size constraints are applied by the caller before its final measurement. */
 export function calcPosition(
   triggerRect: DOMRect,
   contentRect: DOMRect,
   windowSize: { width: number; height: number },
   placement: { position: number; align: number },
   offset: number,
-  safePolygonTriggerPoint: Point | undefined,
-): { x: number; y: number; polygon?: Point[]; rect?: Point[] } {
-  const { left: tl, top: tt, bottom: tb, height: th, right: tr, width: tw } = triggerRect;
-  const { width: cw, height: ch } = contentRect;
-  const { width: W, height: H } = windowSize;
+  safePolygonTriggerPoint?: Point,
+  padding = 0,
+) {
+  const W = nonnegative(windowSize.width),
+    H = nonnegative(windowSize.height);
+  const margin = Math.min(nonnegative(padding), W / 2, H / 2);
+  const gap = nonnegative(offset);
+  const availableWidth = Math.max(0, W - margin * 2),
+    availableHeight = Math.max(0, H - margin * 2);
+  const spaces = [
+    clamp(H - margin - triggerRect.bottom - gap, 0, availableHeight),
+    clamp(triggerRect.top - gap - margin, 0, availableHeight),
+    clamp(triggerRect.left - gap - margin, 0, availableWidth),
+    clamp(W - margin - triggerRect.right - gap, 0, availableWidth),
+  ];
   let { position, align } = placement;
-  let x = 0;
-  let y = 0;
-  if (position === POS_TOP || position === POS_BOTTOM) {
-    if (align === ALI_START) {
-      x = tl;
-    } else if (align === ALI_END) {
-      x = tr - cw;
-    } else {
-      x = tl + (tw - cw) / 2;
-    }
-    if (x + cw > W) x = W - cw;
-    if (x < 0) x = 0;
-  } else if (position == POS_LEFT || position === POS_RIGHT) {
-    if (align === ALI_START) {
-      y = tt;
-    } else if (align === ALI_END) {
-      y = tb - ch;
-    } else {
-      y = tt + (th - ch) / 2;
-    }
-    if (y + ch > H) y = H - ch;
-    if (y < 0) y = 0;
+  const opposite =
+    position === POS_TOP
+      ? POS_BOTTOM
+      : position === POS_BOTTOM
+        ? POS_TOP
+        : position === POS_LEFT
+          ? POS_RIGHT
+          : POS_LEFT;
+  const vertical = position === POS_TOP || position === POS_BOTTOM;
+  const desiredSize = vertical ? nonnegative(contentRect.height) : nonnegative(contentRect.width);
+  if (desiredSize > spaces[position] && spaces[opposite] > spaces[position]) position = opposite;
+  const maxWidth = vertical ? availableWidth : spaces[position] || availableWidth;
+  const maxHeight = vertical ? spaces[position] || availableHeight : availableHeight;
+  const width = Math.min(nonnegative(contentRect.width), maxWidth);
+  const height = Math.min(nonnegative(contentRect.height), maxHeight);
+  let x: number, y: number;
+  if (vertical) {
+    x =
+      align === ALI_START
+        ? triggerRect.left
+        : align === ALI_END
+          ? triggerRect.right - width
+          : triggerRect.left + (triggerRect.width - width) / 2;
+    y = position === POS_TOP ? triggerRect.top - gap - height : triggerRect.bottom + gap;
+  } else {
+    y =
+      align === ALI_START
+        ? triggerRect.top
+        : align === ALI_END
+          ? triggerRect.bottom - height
+          : triggerRect.top + (triggerRect.height - height) / 2;
+    x = position === POS_LEFT ? triggerRect.left - gap - width : triggerRect.right + gap;
   }
-  if (position === POS_TOP) {
-    y = tt - offset - ch;
-    if (y < 0) {
-      const y2 = tb + offset;
-      if (y2 + ch <= H) {
-        y = y2;
-        position = POS_BOTTOM;
-      }
-    }
-  } else if (position === POS_BOTTOM) {
-    y = tb + offset;
-    if (y + ch > H) {
-      const y2 = tt - offset - ch;
-      if (y2 >= 0) {
-        y = y2;
-        position = POS_TOP;
-      }
-    }
-  }
-  if (position === POS_LEFT) {
-    x = tl - offset - cw;
-    if (x < 0) {
-      const x2 = tr + offset;
-      if (x2 <= W) {
-        x = x2;
-        position = POS_RIGHT;
-      }
-    }
-  } else if (position === POS_RIGHT) {
-    x = tr + offset;
-    if (x + cw > W) {
-      const x2 = tl - offset - cw;
-      if (x2 >= 0) {
-        x = x2;
-        position = POS_LEFT;
-      }
-    }
-  }
-  const rectPoints = safePolygonTriggerPoint
-    ? [makePoint(x, y), makePoint(x + cw, y + ch)]
-    : undefined;
-
-  let polygonPoints: Point[] | undefined = undefined;
+  x = clamp(x, margin, W - margin - width);
+  y = clamp(y, margin, H - margin - height);
+  const side =
+    position === POS_TOP
+      ? 'top'
+      : position === POS_BOTTOM
+        ? 'bottom'
+        : position === POS_LEFT
+          ? 'left'
+          : 'right';
+  const resolved =
+    `${side}${align === ALI_START ? '-start' : align === ALI_END ? '-end' : ''}` as FloatingPlacement;
+  let polygon: Point[] | undefined;
+  const rect = safePolygonTriggerPoint ? [point(x, y), point(x + width, y + height)] : undefined;
   if (safePolygonTriggerPoint) {
-    if (position === POS_TOP || position === POS_BOTTOM) {
-      const tpy = safePolygonTriggerPoint.y;
-      const y2 = position === POS_TOP ? y + ch : y;
-      polygonPoints = [
-        makePoint(tl, tpy),
-        makePoint(tr, tpy),
-        makePoint(x + cw, y2),
-        makePoint(x, y2),
+    // A corridor between the closest edges; independent of page scroll and the pointer's original entry point.
+    if (vertical) {
+      const anchorY = position === POS_TOP ? triggerRect.top : triggerRect.bottom;
+      const contentY = position === POS_TOP ? y + height : y;
+      polygon = [
+        point(triggerRect.left, anchorY),
+        point(triggerRect.right, anchorY),
+        point(x + width, contentY),
+        point(x, contentY),
       ];
-    } else if (position === POS_LEFT || position === POS_RIGHT) {
-      const tpx = safePolygonTriggerPoint.x;
-      const x2 = position === POS_LEFT ? x + cw : x;
-      polygonPoints = [
-        makePoint(tpx, tt),
-        makePoint(tpx, tb),
-        makePoint(x2, y + ch),
-        makePoint(x2, y),
+    } else {
+      const anchorX = position === POS_LEFT ? triggerRect.left : triggerRect.right;
+      const contentX = position === POS_LEFT ? x + width : x;
+      polygon = [
+        point(anchorX, triggerRect.top),
+        point(anchorX, triggerRect.bottom),
+        point(contentX, y + height),
+        point(contentX, y),
       ];
     }
   }
-
-  return { x, y, polygon: polygonPoints, rect: rectPoints };
+  return { x, y, maxWidth, maxHeight, placement: resolved, polygon, rect };
 }

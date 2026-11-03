@@ -1,0 +1,40 @@
+.ja-empty {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 24px 12px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+  overflow-wrap: anywhere;
+  &.sm {
+    padding: 12px 8px;
+    .ja-empty-image > img,
+    .ja-empty-image > svg {
+      height: 40px;
+    }
+  }
+}
+.ja-empty-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  > img,
+  > svg {
+    display: block;
+    height: 64px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+}
+.ja-empty-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}

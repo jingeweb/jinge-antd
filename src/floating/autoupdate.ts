@@ -133,6 +133,7 @@ export interface AutoUpdateOptions {
 
 // https://samthor.au/2021/observing-dom/
 function observeMove(element: Element, onMove: () => void) {
+  let active = true;
   let io: IntersectionObserver | null = null;
   let timeoutId: number;
 
@@ -145,6 +146,7 @@ function observeMove(element: Element, onMove: () => void) {
   }
 
   function refresh(skip = false, threshold = 1) {
+    if (!active) return;
     cleanup();
 
     const elementRectForRootMargin = element.getBoundingClientRect();
@@ -172,6 +174,7 @@ function observeMove(element: Element, onMove: () => void) {
     let isFirstUpdate = true;
 
     function handleObserve(entries: IntersectionObserverEntry[]) {
+      if (!active || !entries.length) return;
       const ratio = entries[0].intersectionRatio;
 
       if (ratio !== threshold) {
@@ -225,7 +228,10 @@ function observeMove(element: Element, onMove: () => void) {
 
   refresh(true);
 
-  return cleanup;
+  return () => {
+    active = false;
+    cleanup();
+  };
 }
 
 /**
@@ -264,11 +270,13 @@ export function autoUpdate(
 
   const cleanupIo = referenceEl && layoutShift ? observeMove(referenceEl, update) : null;
 
+  let active = true;
   let reobserveFrame = -1;
   let resizeObserver: ResizeObserver | null = null;
 
   if (elementResize) {
     resizeObserver = new ResizeObserver(([firstEntry]) => {
+      if (!active) return;
       if (firstEntry && firstEntry.target === referenceEl && resizeObserver) {
         // Prevent update loops when using the `size` middleware.
         // https://github.com/floating-ui/floating-ui/issues/1740
@@ -290,12 +298,14 @@ export function autoUpdate(
   update();
 
   return () => {
+    active = false;
     ancestors.forEach((ancestor) => {
       if (ancestorScroll) ancestor.removeEventListener('scroll', update);
       if (ancestorResize) ancestor.removeEventListener('resize', update);
     });
 
     cleanupIo?.();
+    cancelAnimationFrame(reobserveFrame);
     resizeObserver?.disconnect();
     resizeObserver = null;
   };

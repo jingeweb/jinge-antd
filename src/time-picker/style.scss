@@ -1,0 +1,44 @@
+.ja-time-panel {
+  width: 240px;
+  max-width: 100%;
+}
+.ja-time-columns {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px;
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+  select {
+    padding: 8px;
+    font: inherit;
+    color: inherit;
+    background: var(--ja-bg, #fff);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+}
+.ja-time-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+  button {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: var(--ja-primary, #1677ff);
+    background: var(--ja-bg, #fff);
+    font: inherit;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+  button:disabled {
+    color: #bbb;
+    cursor: not-allowed;
+  }
+}

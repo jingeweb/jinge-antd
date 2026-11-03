@@ -1,63 +1,62 @@
-import {
-  type JNode,
-  type WithChildren,
-  type WithEvents,
-  type WithPropSlot,
-  cx,
-  isUndefined,
-  vm,
-  watch,
-} from 'jinge';
+import { type JNode, type WithChildren, type WithEvents, type WithPropSlot, cx } from 'jinge';
 
 import { z } from '../_util/z';
 import {
   Floating,
   type FloatingDuration,
   type FloatingPlacement,
-  type FloatingTriggerMethod,
+  type FloatingTrigger,
 } from '../floating';
 
-export function Popover(
-  props: {
-    className?: string;
-    safePolygon?: boolean;
-    placement?: FloatingPlacement;
-    delay?: FloatingDuration;
-    triggerMethod?: FloatingTriggerMethod;
-    open?: boolean;
-  } & WithEvents<{
-    openChange?(v: boolean): void;
-  }> &
-    WithChildren<JNode> &
-    WithPropSlot<'content', JNode>,
-) {
+export type PopoverProps = {
+  id?: string;
+  className?: string;
+  style?: string;
+  safePolygon?: boolean;
+  placement?: FloatingPlacement;
+  delay?: FloatingDuration;
+  triggerMethod?: FloatingTrigger;
+  open?: boolean;
+  defaultOpen?: boolean;
+  disabled?: boolean;
+  dismissable?: boolean;
+  keyboard?: boolean;
+  returnFocus?: boolean;
+  autoFocus?: boolean;
+  offset?: number;
+  padding?: number;
+  motion?: boolean;
+  ariaLabel?: string;
+} & WithEvents<{ openChange?(open: boolean): void }> &
+  WithChildren<JNode> &
+  WithPropSlot<'content', JNode>;
+
+export function Popover(props: PopoverProps) {
   const zIndex = z.getPopoverZ();
-  const notCtrl = isUndefined(props.open);
-  const state = vm({
-    open: !!props.open,
-  });
-
-  watch(props, 'open', (v) => {
-    state.open = !!v;
-  });
-
   return (
     <Floating
+      id={props.id}
       zIndex={zIndex}
+      role="dialog"
+      ariaLabel={props.ariaLabel ?? '更多信息'}
       delay={props.delay}
-      safePolygon={props.safePolygon}
+      safePolygon={props.safePolygon ?? true}
       triggerMethod={props.triggerMethod}
-      offset={10}
+      offset={props.offset ?? 10}
+      padding={props.padding}
       placement={props.placement}
       slot:trigger={props.children}
+      style={props.style}
       className={cx('ja-popover', props.className)}
-      open={state.open}
-      on:openChange={(v) => {
-        if (notCtrl) {
-          state.open = v;
-        }
-        props['on:openChange']?.(v);
-      }}
+      open={props.open}
+      defaultOpen={props.defaultOpen}
+      disabled={props.disabled}
+      dismissable={props.dismissable}
+      keyboard={props.keyboard}
+      returnFocus={props.returnFocus}
+      autoFocus={props.autoFocus}
+      motion={props.motion}
+      on:openChange={props['on:openChange']}
     >
       {props['slot:content'] ?? props.content}
     </Floating>

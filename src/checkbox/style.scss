@@ -1,0 +1,66 @@
+.ja-choice {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--antd-normal-text, #1f2329);
+  font-size: 14px;
+  line-height: 1.6;
+  cursor: pointer;
+  max-width: 100%;
+  input {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    align-self: center;
+    accent-color: var(--antd-primary, #1677ff);
+    cursor: inherit;
+  }
+  input:focus-visible {
+    outline: 2px solid var(--antd-primary, #1677ff);
+    outline-offset: 3px;
+  }
+  &.disabled {
+    color: #999;
+    cursor: not-allowed;
+  }
+  &.sm {
+    font-size: 12px;
+    input {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  &.lg {
+    font-size: 16px;
+    input {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+.ja-choice-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.ja-choice-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  legend {
+    padding: 0;
+    margin-bottom: 8px;
+    color: var(--antd-normal-text, #1f2329);
+    font-size: 14px;
+  }
+  .ja-choice-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  &.vertical .ja-choice-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

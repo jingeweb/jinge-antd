@@ -1,78 +1,114 @@
-@keyframes antSpinMove {
-  100% {
-    opacity: 100%;
-  }
-}
-@keyframes antSpinRotate {
-  100% {
-    transform: rotate(405deg);
-  }
-}
-
 .ja-spin {
-  position: relative;
   display: inline-block;
-
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--antd-primary, #1677ff);
+  font-size: 14px;
+}
+.ja-spin-status {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2px;
+}
+.ja-spin-tip {
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+.ja-spin-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.ja-spin-dots {
+  display: inline-block;
+  position: relative;
   width: 20px;
   height: 20px;
-  color: var(--antd-primary);
   transform: rotate(45deg);
-  animation: antSpinRotate linear 1.2s infinite;
-
-  &.sm {
-    width: 14px;
-    height: 14px;
-
-    & > i {
-      width: 6px;
-      height: 6px;
-    }
-  }
-  &.lg {
-    width: 32px;
-    height: 32px;
-    & > i {
-      width: 14px;
-      height: 14px;
-    }
-  }
-
-  &.md > i {
-    width: 9px;
-    height: 9px;
-  }
-
-  & > i {
+  animation: ja-spin-rotate 1.2s linear infinite;
+  > i {
     display: block;
     position: absolute;
-
-    border-radius: 100%;
-    background-color: currentColor;
-    transform: scale(0.75);
-    transform-origin: center;
-    opacity: 0.3;
-    animation: antSpinMove linear 1s infinite;
-    animation-direction: alternate;
-
+    width: 45%;
+    height: 45%;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.35;
+    animation: ja-spin-pulse 1s ease-in-out infinite alternate;
     &:nth-child(1) {
       top: 0;
       left: 0;
-      animation-delay: 0s;
     }
     &:nth-child(2) {
       top: 0;
       right: 0;
-      animation-delay: 0.4s;
+      animation-delay: 0.25s;
     }
     &:nth-child(3) {
       bottom: 0;
-      left: 0;
-      animation-delay: 0.8s;
+      right: 0;
+      animation-delay: 0.5s;
     }
     &:nth-child(4) {
       bottom: 0;
-      right: 0;
-      animation-delay: 1.2s;
+      left: 0;
+      animation-delay: 0.75s;
     }
+  }
+}
+.ja-spin.sm {
+  .ja-spin-dots {
+    width: 14px;
+    height: 14px;
+  }
+  .ja-spin-indicator {
+    font-size: 14px;
+  }
+}
+.ja-spin.lg {
+  .ja-spin-dots {
+    width: 32px;
+    height: 32px;
+  }
+  .ja-spin-indicator {
+    font-size: 32px;
+  }
+}
+.ja-spin.with-content {
+  display: block;
+  color: inherit;
+  .ja-spin-status {
+    position: absolute;
+    inset: 0;
+    color: var(--antd-primary, #1677ff);
+    background: rgb(255 255 255 / 45%);
+  }
+  &.spinning > .ja-spin-content {
+    opacity: 0.45;
+  }
+}
+.ja-spin-content {
+  min-height: 48px;
+}
+@keyframes ja-spin-rotate {
+  to {
+    transform: rotate(405deg);
+  }
+}
+@keyframes ja-spin-pulse {
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-spin-dots,
+  .ja-spin-dots > i {
+    animation: none;
   }
 }

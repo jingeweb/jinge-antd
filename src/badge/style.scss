@@ -1,0 +1,59 @@
+.ja-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  vertical-align: middle;
+  line-height: 1;
+}
+.ja-badge-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--ja-badge-color, #ff4d4f);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  &.sm {
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+  }
+  &.dot {
+    width: 6px;
+    min-width: 6px;
+    height: 6px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  &.default {
+    background: var(--ja-badge-color, #bfbfbf);
+  }
+  &.success {
+    background: var(--ja-badge-color, #52c41a);
+  }
+  &.processing {
+    background: var(--ja-badge-color, #1677ff);
+  }
+  &.warning {
+    background: var(--ja-badge-color, #faad14);
+  }
+  &.error {
+    background: var(--ja-badge-color, #ff4d4f);
+  }
+}
+.ja-badge.with-child > .ja-badge-indicator {
+  position: absolute;
+  transform: translate(50%, -50%);
+  box-shadow: 0 0 0 1px #fff;
+}
+.ja-badge-status-text {
+  font-size: 14px;
+  line-height: 1.5;
+}

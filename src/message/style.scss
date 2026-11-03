@@ -1,82 +1,126 @@
-.ja-message-container {
+.ja-message-container,
+.ja-notification-container {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow-y: auto;
+  inset: 0;
   pointer-events: none;
-  background: none;
+  box-sizing: border-box;
+}
+.ja-message-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  gap: 12px;
+  padding: 16px;
+  overflow-y: auto;
 }
-
-.ja-message {
-  pointer-events: all;
-
+.ja-message,
+.ja-notification {
+  pointer-events: auto;
   display: flex;
-  padding: 9px 12px;
-  background: #ffffff;
-  color: var(--antd-normal-text);
-  line-height: 1.5714285714285714;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  background: var(--ja-bg, #fff);
+  color: var(--ja-text, #1f2329);
+  line-height: 1.6;
   font-size: 14px;
   border-radius: 8px;
-  margin-top: 16px;
-  align-items: center;
-  will-change: opacity, transform;
-  box-shadow:
-    0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 3px 6px -4px rgba(0, 0, 0, 0.12),
-    0 9px 28px 8px rgba(0, 0, 0, 0.05);
-
-  &.ja-enter {
-    transform: translateY(0);
-    opacity: 1;
+  box-shadow: 0 6px 28px rgb(0 0 0 / 16%);
+  overflow-wrap: anywhere;
+  animation: ja-notice-enter 160ms ease-out;
+  > .icon {
+    flex: none;
+    display: flex;
+    align-items: flex-start;
+    font-size: 18px;
+    padding-top: 2px;
   }
-  &.ja-enter-active {
-    transition:
-      transform ease-in 0.3s,
-      opacity ease-in 0.3s;
+  .error {
+    color: var(--antd-error, #ff4d4f);
   }
-  &.ja-leave {
-    transform: translateY(-80%);
+  .info,
+  .loading {
+    color: var(--antd-primary, #1677ff);
+  }
+  .success {
+    color: var(--antd-success, #52c41a);
+  }
+  .warning {
+    color: var(--antd-warning, #faad14);
+  }
+}
+.ja-message {
+  flex: none;
+  width: max-content;
+  max-width: min(640px, calc(100% - 32px));
+}
+.ja-notice-main {
+  min-width: 0;
+  flex: 1;
+}
+.ja-notice-close {
+  flex: none;
+  align-self: flex-start;
+}
+.ja-notification-stack {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 408px;
+  max-width: calc(100% - 8px);
+  max-height: calc(100% - 8px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 12px;
+  box-sizing: border-box;
+  &[data-placement='topLeft'] {
+    left: 4px;
+    top: 4px;
+  }
+  &[data-placement='topRight'] {
+    right: 4px;
+    top: 4px;
+  }
+  &[data-placement='bottomLeft'] {
+    left: 4px;
+    bottom: 4px;
+  }
+  &[data-placement='bottomRight'] {
+    right: 4px;
+    bottom: 4px;
+  }
+}
+.ja-notification {
+  flex: none;
+  width: 100%;
+  padding: 16px;
+}
+.ja-notification-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.ja-notification-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+@keyframes ja-notice-enter {
+  from {
     opacity: 0;
+    transform: translateY(-8px);
   }
-  &.ja-leave-active {
-    transition:
-      transform ease-out 0.3s,
-      opacity ease-out 0.3s;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-
-  & > .icon {
-    margin-inline-end: 8px;
-    font-size: 16px;
-    position: relative;
-    top: 0.06em;
-
-    &.error {
-      color: var(--antd-error);
-    }
-
-    &.info {
-      color: var(--antd-primary);
-    }
-
-    &.success {
-      color: var(--antd-success);
-    }
-
-    &.warning {
-      color: var(--antd-warning);
-    }
-
-    &.loading {
-      color: var(--antd-primary);
-    }
-  }
-
-  & > .content {
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-message,
+  .ja-notification {
+    animation: none;
   }
 }

@@ -1,0 +1,86 @@
+.ja-typography {
+  color: var(--antd-normal-text, #222);
+  line-height: 1.6;
+  &.secondary {
+    color: var(--antd-secondary-text, #737b87);
+  }
+  &.success {
+    color: var(--antd-success, #389e0d);
+  }
+  &.warning {
+    color: var(--antd-warning, #d48806);
+  }
+  &.danger {
+    color: var(--antd-error, #ff4d4f);
+  }
+  &.strong {
+    font-weight: 600;
+  }
+  &.italic {
+    font-style: italic;
+  }
+  &.underline {
+    text-decoration-line: underline;
+  }
+  &.deleted {
+    text-decoration-line: line-through;
+  }
+  &.underline.deleted {
+    text-decoration-line: underline line-through;
+  }
+  &.code {
+    padding: 2px 5px;
+    border: 1px solid #e8e8e8;
+    border-radius: 3px;
+    font-family: monospace;
+    background: #f5f5f5;
+  }
+  &.mark {
+    background: #ffe58f;
+  }
+  &.ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+  }
+}
+.ja-paragraph {
+  margin: 0 0 1em;
+}
+.ja-title {
+  margin: 0 0 0.5em;
+  font-weight: 600;
+}
+h1.ja-title {
+  font-size: 38px;
+}
+h2.ja-title {
+  font-size: 30px;
+}
+h3.ja-title {
+  font-size: 24px;
+}
+h4.ja-title {
+  font-size: 20px;
+}
+h5.ja-title {
+  font-size: 16px;
+}
+.ja-link {
+  color: var(--antd-primary, #1677ff);
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+  &.disabled {
+    color: var(--antd-disabled-text, #bfbfbf);
+    cursor: not-allowed;
+  }
+}

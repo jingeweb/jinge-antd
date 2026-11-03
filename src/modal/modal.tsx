@@ -1,14 +1,14 @@
 import {
   type JNode,
-  Transition,
+  type WithChildren,
   type WithEvents,
   type WithExpose,
   type WithPropSlot,
   type WithSlots,
-  cx,
+  Portal,
   expose,
-  isUndefined,
-  onMount,
+  onUnmount,
+  uid,
   vm,
   watch,
 } from 'jinge';
@@ -19,171 +19,152 @@ import {
   createContextOnConfirm,
   useConfirmContext,
 } from '../_util';
-import { z } from '../_util/z';
+import { DialogFrame } from '../_util/dialog';
 import { Button } from '../button';
-import { AntDesignCloseOutlined } from '../icon';
 
 export const MODAL_CONTEXT = Symbol('modalContext');
-export type ModalContext = ConfirmContext<unknown> & {};
-
-/**
- * 监听弹窗的 confirm 按钮点击。会在 onUnmount 中自动取消监听。
- */
+export type ModalContext = ConfirmContext<unknown>;
 export const onModalConfirm = createContextOnConfirm(MODAL_CONTEXT);
-
-export function Modal<Result = unknown>(
-  props: {
-    open?: boolean;
-    closable?: boolean;
-    className?: string;
-    maskClassName?: string;
-    showMask?: boolean;
-    closeWhenMaskClick?: boolean;
-    footer?: boolean;
-    confirmText?: string;
-    cancelText?: string;
-    confirmValue?: Result;
-    cancelValue?: Result;
-  } & WithSlots<{
-    default: JNode;
-    footer?: JNode;
+export type ModalProps<Result = unknown> = {
+  open?: boolean;
+  defaultOpen?: boolean;
+  closable?: boolean;
+  className?: string;
+  style?: string;
+  maskClassName?: string;
+  showMask?: boolean;
+  closeWhenMaskClick?: boolean;
+  keyboard?: boolean;
+  autoFocus?: boolean;
+  returnFocus?: boolean;
+  ariaLabel?: string;
+  describedBy?: string;
+  width?: number | string;
+  centered?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+  motion?: boolean;
+  footer?: boolean;
+  confirmText?: string;
+  cancelText?: string;
+  confirmValue?: Result;
+  cancelValue?: Result;
+} & WithChildren<JNode> &
+  WithSlots<{ footer?: JNode }> &
+  WithPropSlot<'title', JNode> &
+  WithEvents<{
+    openChange?(open: boolean): void;
+    afterClose?(result?: Result): void;
+    confirm?: ConfirmCallback<Result>;
+    cancel?(): void;
+    error?(error: unknown): void;
   }> &
-    WithPropSlot<'title', JNode> &
-    WithEvents<{
-      openChange?(open: boolean): void;
-      afterClose?(result?: Result): void;
-      confirm?: ConfirmCallback<Result>;
-      cancel?(): void;
-    }> &
-    WithExpose<{
-      close(result?: Result): void;
-    }>,
-) {
-  // 是否是受控模式
-  const ctrlOpt = !isUndefined(props.open);
-  const state = vm({
-    /** 非受控模式下默认自动打开弹窗 */
-    open: ctrlOpt ? !!props.open : true,
-    submitting: false,
-  });
+  WithExpose<{ close(result?: Result): void }>;
 
-  const confirmValue = props.confirmValue;
-  const cancelValue = props.cancelValue;
-  let resultValue = cancelValue as Result | undefined;
-
-  const confirmContext = useConfirmContext<Result>(MODAL_CONTEXT, () => {
-    if (props['on:confirm']) {
-      return props['on:confirm']();
-    } else {
-      return confirmValue !== undefined ? { result: confirmValue } : undefined;
-    }
-  });
-
+export function Modal<Result = unknown>(props: ModalProps<Result>) {
+  const controlled = props.open !== undefined;
+  const state = vm({ open: props.open ?? props.defaultOpen ?? true, submitting: false });
+  const titleId = `ja-modal-title-${uid()}`;
+  let resultValue: Result | undefined;
+  let disposed = false;
+  const confirm = useConfirmContext<Result>(MODAL_CONTEXT, () =>
+    props['on:confirm']
+      ? props['on:confirm']()
+      : props.confirmValue !== undefined
+        ? { result: props.confirmValue }
+        : undefined,
+  );
+  function close(result?: Result) {
+    if (disposed || !state.open) return;
+    resultValue = result;
+    if (!controlled) state.open = false;
+    props['on:openChange']?.(false);
+  }
+  function cancel() {
+    if (state.submitting) return;
+    props['on:cancel']?.();
+    close(props.cancelValue);
+  }
   async function handleConfirm() {
-    await confirmContext.handleConfirm({
-      onSubmittingChange(submitting) {
-        state.submitting = submitting;
+    await confirm.handleConfirm({
+      onSubmittingChange: (value) => {
+        state.submitting = value;
       },
-      onSubmitted(preventClose, result) {
-        if (!preventClose) {
-          close(result);
-        }
+      onSubmitted: (preventClose, result) => {
+        if (!preventClose) close(result);
+      },
+      onError: (error) => {
+        if (props['on:error']) props['on:error'](error);
+        else console.error(error);
       },
     });
   }
-
-  watch(props, 'open', (v) => {
-    state.open = !!v;
+  watch(props, 'open', (open) => {
+    if (!controlled) return;
+    if (open && !state.open) resultValue = undefined;
+    state.open = !!open;
   });
-
-  onMount(() => {
-    return z.increment();
-  });
-
-  function close(result?: Result) {
-    resultValue = result;
-    if (ctrlOpt) {
-      props['on:openChange']?.(false);
-    } else {
-      state.open = false;
+  watch(state, 'open', (open) => {
+    if (!open) {
+      confirm.invalidate();
+      state.submitting = false;
     }
-  }
-
-  expose({
-    close,
   });
-
+  onUnmount(() => {
+    disposed = true;
+  });
+  expose({ close });
   return (
-    <>
-      {props.showMask !== false && (
-        <Transition
-          isEnter={state.open}
-          appear
-          enterClass="opacity-100"
-          enterActiveClass="transition-[opacity] duration-[0.2s]"
-          leaveActiveClass="transition-[opacity] duration-[0.2s]"
-          leaveClass="opacity-0"
-          destroyAfterLeave
+    <Portal>
+      {state.open && (
+        <DialogFrame
+          kind="modal"
+          titleId={titleId}
+          labelled={!!(props.title || props['slot:title'])}
+          ariaLabel={props.ariaLabel}
+          describedBy={props.describedBy}
+          className={props.className}
+          style={props.style}
+          maskClassName={props.maskClassName}
+          showMask={props.showMask}
+          closeWhenMaskClick={props.closeWhenMaskClick}
+          keyboard={props.keyboard}
+          autoFocus={props.autoFocus}
+          returnFocus={props.returnFocus}
+          closable={props.closable}
+          submitting={state.submitting}
+          width={props.width ?? (props.size === 'sm' ? 360 : props.size === 'lg' ? 800 : 520)}
+          centered={props.centered ?? true}
+          motion={props.motion}
+          footer={props.footer}
+          on:cancel={cancel}
+          on:hidden={() => {
+            const result = resultValue;
+            queueMicrotask(() => {
+              if (!disposed) props['on:afterClose']?.(result);
+            });
+          }}
+          slot:title={props['slot:title'] ?? props.title}
+          slot:footer={
+            props['slot:footer'] ?? (
+              <>
+                <Button disabled={state.submitting} on:click={cancel}>
+                  {props.cancelText ?? '取 消'}
+                </Button>
+                <Button
+                  type="primary"
+                  disabled={state.submitting}
+                  loading={state.submitting}
+                  on:click={handleConfirm}
+                >
+                  {props.confirmText ?? '确 认'}
+                </Button>
+              </>
+            )
+          }
         >
-          <div
-            className={cx('ja-modal-mask', props.maskClassName)}
-            style={`z-index:${z.currentIndex}`}
-            on:click={() => {
-              if (props.closeWhenMaskClick !== false) {
-                close(cancelValue);
-              }
-            }}
-          ></div>
-        </Transition>
+          {props['slot:default'] && props.children}
+        </DialogFrame>
       )}
-      <Transition
-        isEnter={state.open}
-        appear
-        enterClass="ja-enter"
-        enterActiveClass="ja-enter-active"
-        leaveActiveClass="ja-leave-active"
-        leaveClass="ja-leave"
-        destroyAfterLeave
-        on:afterLeave={() => {
-          props['on:afterClose']?.(resultValue);
-        }}
-      >
-        <div className={cx(props.className, 'ja-modal')} style={`z-index:${z.currentIndex + 1}`}>
-          {props.closable !== false && (
-            <Button
-              type="text"
-              size="lg"
-              className="ja-close"
-              slot:icon={<AntDesignCloseOutlined />}
-              on:click={() => {
-                close(cancelValue);
-              }}
-            ></Button>
-          )}
-          <div className="ja-modal-title">
-            <span>{props['slot:title'] ?? props.title}</span>
-          </div>
-          <div className="ja-modal-content">{props.children}</div>
-          <div className="ja-modal-footer">
-            <Button
-              on:click={() => {
-                props['on:cancel']?.();
-                close(cancelValue);
-              }}
-            >
-              {props.cancelText ?? '取 消'}
-            </Button>
-            <Button
-              type="primary"
-              disabled={state.submitting}
-              loading={state.submitting}
-              on:click={handleConfirm}
-            >
-              {props.confirmText ?? '确 认'}
-            </Button>
-          </div>
-        </div>
-      </Transition>
-    </>
+    </Portal>
   );
 }

@@ -25,6 +25,10 @@
       "source.fixAll.oxc": "explicit"
     }
   },
+  "[html]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true
+  },
   "[scss]": {
     "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.formatOnSave": true

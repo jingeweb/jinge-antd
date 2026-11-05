@@ -3,7 +3,7 @@ import { test, expect } from './fixtures.mjs';
 test('Documentation InputNumber demonstrates decimal stepping, empty values and source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/input-number');
+  await page.goto('/zh-CN/components/input-number');
   await expect(page.locator('h1')).toHaveText('InputNumber 数字输入框');
   const field = page.getByRole('spinbutton', { name: '订单金额' });
   await field.press('ArrowUp');
@@ -23,7 +23,7 @@ test('Documentation InputNumber demonstrates decimal stepping, empty values and 
 test('Documentation Password demonstrates accessible visibility control and source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/password');
+  await page.goto('/zh-CN/components/password');
   await expect(page.locator('h1')).toHaveText('Password 密码输入');
   const field = page.getByLabel('登录密码');
   await expect(field).toHaveAttribute('autocomplete', 'current-password');
@@ -39,7 +39,7 @@ test('Documentation Password demonstrates accessible visibility control and sour
 test('Documentation TextArea demonstrates autoSize, counting, clearing and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/textarea');
+  await page.goto('/zh-CN/components/textarea');
   await expect(page.locator('h1')).toHaveText('TextArea 多行输入');
   await page.getByRole('button', { name: '填充长说明' }).click();
   const field = page.getByRole('textbox', { name: '客户说明' });
@@ -54,7 +54,7 @@ test('Documentation TextArea demonstrates autoSize, counting, clearing and exact
 test('Documentation Input supports native editing/clearing/submission and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/input');
+  await page.goto('/zh-CN/components/input');
   await expect(page.locator('h1')).toHaveText('Input 输入框');
   await page.getByRole('textbox', { name: '客户姓名' }).fill('李四');
   await page.getByRole('button', { name: '提交姓名' }).click();
@@ -69,7 +69,7 @@ test('Documentation Input supports native editing/clearing/submission and exact 
 test('Documentation Result demonstrates error pages, explicit retry and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/result');
+  await page.goto('/zh-CN/components/result');
   await expect(page.locator('h1')).toHaveText('Result 结果');
   await page.getByRole('combobox', { name: '处理结果' }).selectOption('403');
   await expect(page.getByRole('heading', { name: '无权访问' })).toBeVisible();
@@ -84,7 +84,7 @@ test('Documentation Result demonstrates error pages, explicit retry and exact so
 test('Documentation Progress updates real status and exposes formatter source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/progress');
+  await page.goto('/zh-CN/components/progress');
   await expect(page.locator('h1')).toHaveText('Progress 进度条');
   const progress = page.getByRole('progressbar', { name: '上传进度', exact: true });
   await page.getByRole('button', { name: '增加进度' }).click();
@@ -99,7 +99,7 @@ test('Documentation Progress updates real status and exposes formatter source/AP
 test('Documentation Skeleton preserves loaded state and shows exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/skeleton');
+  await page.goto('/zh-CN/components/skeleton');
   await expect(page.locator('h1')).toHaveText('Skeleton 骨架屏');
   await page.getByRole('button', { name: '切换骨架加载' }).click();
   const input = page.getByRole('textbox', { name: '骨架区域备注' });
@@ -116,7 +116,7 @@ test('Documentation Skeleton preserves loaded state and shows exact source/API',
 test('Documentation Spin demonstrates delayed blocking without losing input and exposes source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/spin');
+  await page.goto('/zh-CN/components/spin');
   await expect(page.locator('h1')).toHaveText('Spin 加载中');
   const input = page.getByRole('textbox', { name: '加载区域备注' });
   await input.fill('保留备注');
@@ -133,7 +133,7 @@ test('Documentation Spin demonstrates delayed blocking without losing input and 
 test('Documentation Alert demonstrates retry, close/restoration and source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/alert');
+  await page.goto('/zh-CN/components/alert');
   await expect(page.locator('h1')).toHaveText('Alert 警告提示');
   await page.getByRole('button', { name: '重试保存' }).click();
   await expect(page.locator('.ja-alert.error .ja-alert-description')).toHaveText(
@@ -151,7 +151,7 @@ test('Documentation Alert demonstrates retry, close/restoration and source/API',
 test('Documentation Empty demonstrates creation/reset, custom slots and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/empty');
+  await page.goto('/zh-CN/components/empty');
   await expect(page.locator('h1')).toHaveText('Empty 空状态');
   await expect(page.locator('.api-table')).toContainText('announce');
   await page.getByRole('button', { name: '新建客户', exact: true }).click();
@@ -168,7 +168,7 @@ test('Documentation Empty demonstrates creation/reset, custom slots and exact so
 test('Documentation Descriptions demonstrates semantic values, spans and source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/descriptions');
+  await page.goto('/zh-CN/components/descriptions');
   await expect(page.locator('h1')).toHaveText('Descriptions 描述列表');
   await expect(page.locator('.api-table')).toContainText('items[].span');
   const quota = page.locator('.ja-descriptions-item').filter({ hasText: '剩余额度' });
@@ -186,7 +186,7 @@ test('Documentation Descriptions demonstrates semantic values, spans and source/
 test('Documentation Collapse preserves content and exposes item slot source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/collapse');
+  await page.goto('/zh-CN/components/collapse');
   await expect(page.locator('h1')).toHaveText('Collapse 折叠面板');
   await expect(page.locator('.api-table')).toContainText('destroyOnHidden');
   await page.getByRole('textbox', { name: '折叠面板备注' }).fill('保留的备注');
@@ -204,7 +204,7 @@ test('Documentation Collapse preserves content and exposes item slot source/API'
 test('Documentation Card has source/API and preserves user input across loading', async ({
   page,
 }) => {
-  await page.goto('/#/components/card');
+  await page.goto('/zh-CN/components/card');
   await expect(page.locator('h1')).toHaveText('Card 卡片');
   await expect(page.locator('.api-table')).toContainText('slot:cover');
   const input = page.getByRole('textbox', { name: '卡片备注' });
@@ -222,7 +222,7 @@ test('Documentation Card has source/API and preserves user input across loading'
 test('Documentation Tag supports keyboard removal/restoration and exact source', async ({
   page,
 }) => {
-  await page.goto('/#/components/tag');
+  await page.goto('/zh-CN/components/tag');
   await expect(page.locator('h1')).toHaveText('Tag 标签');
   await page.getByRole('button', { name: '移除标签', exact: true }).first().focus();
   await page.keyboard.press('Space');
@@ -238,7 +238,7 @@ test('Documentation Tag supports keyboard removal/restoration and exact source',
 test('Documentation Badge updates its unread indicator and shows exact source', async ({
   page,
 }) => {
-  await page.goto('/#/components/badge');
+  await page.goto('/zh-CN/components/badge');
   await expect(page.locator('h1')).toHaveText('Badge 徽标');
   await page.getByRole('button', { name: '增加未读' }).click();
   await expect(page.locator('.ja-badge.with-child .ja-badge-indicator')).toHaveText('99+');
@@ -251,7 +251,7 @@ test('Documentation Badge updates its unread indicator and shows exact source', 
 test('Documentation Avatar includes real source and an image failure/retry demo', async ({
   page,
 }) => {
-  await page.goto('/#/components/avatar');
+  await page.goto('/zh-CN/components/avatar');
   await expect(page.locator('h1')).toHaveText('Avatar 头像');
   await expect(page.locator('.api-table')).toContainText('srcSet');
   const avatar = page.getByRole('img', { name: '客户头像' });
@@ -271,7 +271,7 @@ for (const [id, title, source] of [
   ['notification', 'Notification 通知', 'export function NotificationExample()'],
 ]) {
   test(`Documentation ${id} shows actual demos, source and API`, async ({ page }) => {
-    await page.goto(`/#/components/${id}`);
+    await page.goto(`/zh-CN/components/${id}`);
     await expect(page.locator('h1')).toHaveText(title);
     await expect(page.locator('.planned-panel')).toHaveCount(0);
     await expect(page.locator('.api-table')).toContainText(
@@ -286,14 +286,14 @@ for (const [id, title, source] of [
 test('Documentation Message and Notification examples update, close and run content actions', async ({
   page,
 }) => {
-  await page.goto('/#/components/message');
+  await page.goto('/zh-CN/components/message');
   await page.getByRole('button', { name: '开始导入', exact: true }).click();
   await expect(page.locator('.ja-message')).toHaveText('正在导入…');
   await page.getByRole('button', { name: '更新为完成' }).click();
   await expect(page.locator('.ja-message')).toHaveText('导入完成');
   await expect(page.locator('.ja-message')).toHaveCount(0);
   await expect(page.getByRole('status')).toHaveText('导入提示已关闭 1 次');
-  await page.goto('/#/components/notification');
+  await page.goto('/zh-CN/components/notification');
   await page.getByRole('combobox', { name: '通知位置' }).selectOption('bottomLeft');
   await page.getByRole('button', { name: '显示任务通知' }).click();
   await expect(page.locator('[data-placement="bottomLeft"] .ja-notification')).toBeVisible();
@@ -307,7 +307,7 @@ test('Documentation Message and Notification examples update, close and run cont
 test('Documentation Modal and Drawer demos complete real save and nested close workflows', async ({
   page,
 }) => {
-  await page.goto('/#/components/modal');
+  await page.goto('/zh-CN/components/modal');
   await page.getByRole('button', { name: '编辑客户', exact: true }).click();
   await page.getByRole('textbox', { name: '客户姓名' }).fill('李四');
   await page.getByRole('button', { name: '确 认', exact: true }).click();
@@ -316,7 +316,7 @@ test('Documentation Modal and Drawer demos complete real save and nested close w
   await page.getByRole('button', { name: '命令式确认', exact: true }).click();
   await page.getByRole('button', { name: '确 认', exact: true }).click();
   await expect(page.getByRole('status').nth(1)).toHaveText('已归档');
-  await page.goto('/#/components/drawer');
+  await page.goto('/zh-CN/components/drawer');
   await page.getByRole('button', { name: '查看客户详情' }).click();
   await page.getByRole('button', { name: '打开关联记录' }).click();
   await expect(page.getByRole('dialog', { name: '关联记录', exact: true })).toBeVisible();
@@ -331,7 +331,7 @@ test('Documentation opens with live examples, navigation, API and a desktop layo
   page,
 }) => {
   await page.goto('/');
-  await expect(page).toHaveURL(/#\/components\/button$/);
+  await expect(page).toHaveURL(/\/zh-CN\/components\/button$/);
   await expect(page.locator('h1')).toHaveText('Button 按钮');
   await expect(page.locator('.demo-card')).toHaveCount(4);
   await expect(page.locator('.api-table')).toContainText('htmlType');
@@ -351,11 +351,11 @@ test('Documentation search handles Chinese/English and an empty result', async (
 test('Documentation completed hierarchy pages, browser history and direct links work', async ({
   page,
 }) => {
-  await page.goto('/#/components/button');
-  await page.locator('a[href="#/components/tree"]').click();
+  await page.goto('/zh-CN/components/button');
+  await page.locator('a[href="/zh-CN/components/tree"]').click();
   await expect(page.locator('h1')).toHaveText('Tree 树');
   await expect(page.locator('.planned-panel')).toHaveCount(0);
-  await page.locator('a[href="#/components/cascader"]').click();
+  await page.locator('a[href="/zh-CN/components/cascader"]').click();
   await expect(page.locator('h1')).toHaveText('Cascader 级联选择');
   await page.reload();
   await expect(page.locator('h1')).toHaveText('Cascader 级联选择');
@@ -376,7 +376,7 @@ test('Documentation displays actual example source and copies it', async ({ page
   expect(await page.evaluate(() => navigator.clipboard.readText())).toContain("from 'jinge-antd'");
 });
 test('Documentation examples remain interactive and page anchors work', async ({ page }) => {
-  await page.goto('/#/components/button');
+  await page.goto('/zh-CN/components/button');
   await page.getByRole('button', { name: '保存更改' }).click();
   await expect(page.getByRole('button', { name: '保存更改' })).toBeDisabled();
   await expect(page.getByRole('status')).toHaveText('已保存 1 次');
@@ -399,11 +399,11 @@ test('Documentation navigation is usable on narrow screens and unknown links are
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/#/components/button');
+  await page.goto('/zh-CN/components/button');
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByRole('button', { name: '切换组件导航' }).click();
   await expect(page.getByRole('searchbox', { name: '搜索组件' })).toBeVisible();
-  await page.goto('/#/components/missing');
+  await page.goto('/zh-CN/components/missing');
   await expect(page.locator('h1')).toHaveText('未找到组件');
 });
 
@@ -418,8 +418,8 @@ for (const [id, name, selector] of [
   test(`Documentation ${id} page renders examples and exact source when navigated from Button`, async ({
     page,
   }) => {
-    await page.goto('/#/components/button');
-    await page.locator(`a.nav-link[href="#/components/${id}"]`).click();
+    await page.goto('/zh-CN/components/button');
+    await page.locator(`a.nav-link[href="/zh-CN/components/${id}"]`).click();
     await expect(page.locator('h1')).toHaveText(name);
     await expect(page.locator(selector).first()).toBeVisible();
     await page.getByRole('button', { name: '查看代码', exact: true }).click();
@@ -428,7 +428,7 @@ for (const [id, name, selector] of [
   });
 
 test('Space changes its real layout and Flex separates its children', async ({ page }) => {
-  await page.goto('/#/components/space');
+  await page.goto('/zh-CN/components/space');
   const space = page.locator('.ja-space');
   await expect(space).toHaveCSS('flex-direction', 'row');
   await page.getByRole('button', { name: '切换排列方向' }).click();
@@ -437,7 +437,7 @@ test('Space changes its real layout and Flex separates its children', async ({ p
   await expect(page.locator('.ja-flex')).toHaveCSS('justify-content', 'space-between');
 });
 test('Grid uses real media queries to move from two columns to stacked rows', async ({ page }) => {
-  await page.goto('/#/components/grid');
+  await page.goto('/zh-CN/components/grid');
   const cells = page.locator('.ja-row').first().locator('.ja-col');
   const desktop = await cells.evaluateAll((elements) =>
     elements.map((el) => ({
@@ -460,7 +460,7 @@ test('Grid uses real media queries to move from two columns to stacked rows', as
 test('Layout Sider can be collapsed with keyboard and returns focus to its trigger', async ({
   page,
 }) => {
-  await page.goto('/#/components/layout');
+  await page.goto('/zh-CN/components/layout');
   const button = page.getByRole('button', { name: '收起侧边栏' });
   await button.focus();
   await page.keyboard.press('Enter');
@@ -479,7 +479,7 @@ for (const [id, title] of [
   test(`Documentation ${id} page has runnable source, capabilities and limitations`, async ({
     page,
   }) => {
-    await page.goto(`/#/components/${id}`);
+    await page.goto(`/zh-CN/components/${id}`);
     await expect(page.locator('h1')).toHaveText(title);
     await expect(page.locator('.demo-card')).toHaveCount(1);
     await expect(page.locator('.api-table')).toContainText('open / defaultOpen');
@@ -491,7 +491,7 @@ for (const [id, title] of [
 test('Documentation Floating and Popconfirm examples perform their actual interactions', async ({
   page,
 }) => {
-  await page.goto('/#/components/floating');
+  await page.goto('/zh-CN/components/floating');
   await page.getByRole('button', { name: '打开定位示例' }).click();
   await expect(page.getByRole('dialog', { name: '定位演示' })).toBeVisible();
   await page.getByRole('combobox', { name: '浮层方向' }).selectOption('right');
@@ -500,7 +500,7 @@ test('Documentation Floating and Popconfirm examples perform their actual intera
     'data-placement',
     'right',
   );
-  await page.goto('/#/components/popconfirm');
+  await page.goto('/zh-CN/components/popconfirm');
   await page.getByRole('button', { name: '删除记录', exact: true }).click();
   await page.locator('.ja-popconfirm-footer button.primary').click();
   await expect(page.getByRole('status')).toHaveText('已删除 1 条');
@@ -510,7 +510,7 @@ test('Documentation Floating and Popconfirm examples perform their actual intera
 test('Documentation Checkbox demonstrates all/mixed selection and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/checkbox');
+  await page.goto('/zh-CN/components/checkbox');
   await expect(page.locator('h1')).toHaveText('Checkbox 多选框');
   const all = page.getByRole('checkbox', { name: '全部权限' });
   await expect(all).toHaveAttribute('aria-checked', 'mixed');
@@ -527,7 +527,7 @@ test('Documentation Checkbox demonstrates all/mixed selection and exact source/A
 test('Documentation Radio demonstrates native keyboard, button variant and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/radio');
+  await page.goto('/zh-CN/components/radio');
   await expect(page.locator('h1')).toHaveText('Radio 单选框');
   await page.getByRole('radio', { name: '标准版' }).focus();
   await page.keyboard.press('ArrowRight');
@@ -542,7 +542,7 @@ test('Documentation Radio demonstrates native keyboard, button variant and exact
 test('Documentation Switch demonstrates immediate settings, loading and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/switch');
+  await page.goto('/zh-CN/components/switch');
   await expect(page.locator('h1')).toHaveText('Switch 开关');
   const save = page.getByRole('switch', { name: '自动保存' });
   await save.click();
@@ -560,7 +560,7 @@ test('Documentation Switch demonstrates immediate settings, loading and exact so
 test('Documentation Select supports searchable grouped options, multiple tags and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/select');
+  await page.goto('/zh-CN/components/select');
   await expect(page.locator('h1')).toHaveText('Select 选择器');
   const owner = page.getByRole('combobox', { name: '项目负责人' });
   await owner.fill('gra');
@@ -580,7 +580,7 @@ test('Documentation Select supports searchable grouped options, multiple tags an
 test('Documentation AutoComplete demonstrates asynchronous suggestions, free input and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/autocomplete');
+  await page.goto('/zh-CN/components/autocomplete');
   await expect(page.locator('h1')).toHaveText('AutoComplete 自动完成');
   const field = page.getByRole('combobox', { name: '联系邮箱' });
   await field.fill('ada');
@@ -600,7 +600,7 @@ test('Documentation AutoComplete demonstrates asynchronous suggestions, free inp
 test('Documentation Form validates, binds mixed controls, saves transformed values and shows exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/form');
+  await page.goto('/zh-CN/components/form');
   await expect(page.locator('h1')).toHaveText('Form 表单');
   await page.getByRole('button', { name: '保存成员' }).click();
   await expect(page.getByText('姓名至少两个字符', { exact: true })).toBeVisible();
@@ -626,7 +626,7 @@ test('Documentation Form validates, binds mixed controls, saves transformed valu
 test('Documentation Menu navigates controlled side items and exposes exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/menu');
+  await page.goto('/zh-CN/components/menu');
   await expect(page.locator('h1')).toHaveText('Menu 导航菜单');
   const side = page.getByRole('menu', { name: '后台导航', exact: true });
   await side.getByRole('menuitem', { name: '角色权限', exact: true }).click();
@@ -640,7 +640,7 @@ test('Documentation Menu navigates controlled side items and exposes exact sourc
 test('Documentation Dropdown performs actions, retains selection menus and shows exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/dropdown');
+  await page.goto('/zh-CN/components/dropdown');
   await expect(page.locator('h1')).toHaveText('Dropdown 下拉菜单');
   await page.getByRole('button', { name: '更多操作' }).click();
   await page.getByRole('menuitem', { name: '复制', exact: true }).click();
@@ -657,7 +657,7 @@ test('Documentation Dropdown performs actions, retains selection menus and shows
 test('Documentation Breadcrumb updates paths, intercepts native links and exposes exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/breadcrumb');
+  await page.goto('/zh-CN/components/breadcrumb');
   await expect(page.locator('h1')).toHaveText('Breadcrumb 面包屑');
   await page
     .getByRole('navigation', { name: '面包屑', exact: true })
@@ -678,7 +678,7 @@ test('Documentation Breadcrumb updates paths, intercepts native links and expose
 test('Tabs documentation demonstrates controlled navigation, disabled items, orientation and actual source', async ({
   page,
 }) => {
-  await page.goto('/#/components/tabs');
+  await page.goto('/zh-CN/components/tabs');
   const demo = page.locator('#tabs-basic');
   await demo.getByRole('textbox', { name: '项目备注' }).fill('文档测试');
   await demo.getByRole('tab', { name: '成员管理' }).click();
@@ -706,7 +706,7 @@ test('Tabs documentation demonstrates controlled navigation, disabled items, ori
 test('Tabs card documentation demonstrates numeric default keys and manual activation', async ({
   page,
 }) => {
-  await page.goto('/#/components/tabs');
+  await page.goto('/zh-CN/components/tabs');
   const demo = page.locator('#tabs-variants');
   const selected = demo.getByRole('tab', { name: '近七日' });
   await expect(selected).toHaveAttribute('aria-selected', 'true');
@@ -720,7 +720,7 @@ test('Tabs card documentation demonstrates numeric default keys and manual activ
 test('Segmented documentation demonstrates controlled range and native form reset', async ({
   page,
 }) => {
-  await page.goto('/#/components/segmented');
+  await page.goto('/zh-CN/components/segmented');
   const demo = page.locator('#segmented-basic');
   await demo.getByRole('radio', { name: '近三十日', exact: true }).click();
   await expect(demo.locator('output')).toHaveText('报表范围：30 天');
@@ -744,7 +744,7 @@ test('Segmented documentation demonstrates controlled range and native form rese
 test('Steps documentation demonstrates requests, error status, direction and completed read-only flow', async ({
   page,
 }) => {
-  await page.goto('/#/components/steps');
+  await page.goto('/zh-CN/components/steps');
   const demo = page.locator('#steps-basic');
   await demo.getByRole('button', { name: /填写信息/ }).click();
   await expect(demo.locator('[aria-current=step]')).toContainText('填写信息');
@@ -765,7 +765,7 @@ test('Steps documentation demonstrates requests, error status, direction and com
 test('Pagination documentation changes pages and size, demonstrates simple mode and exposes exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/pagination');
+  await page.goto('/zh-CN/components/pagination');
   const demo = page.locator('#pagination-basic');
   const nav = demo.getByRole('navigation', { name: '用户列表分页' });
   await nav.getByRole('button', { name: '下一页', exact: true }).click();
@@ -782,7 +782,7 @@ test('Pagination documentation changes pages and size, demonstrates simple mode 
 test('Table documentation demonstrates controlled selection, native filters, row actions, expansion and source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/table');
+  await page.goto('/zh-CN/components/table');
   const demo = page.locator('#table-basic');
   await demo.getByRole('checkbox', { name: '选择行 1', exact: true }).check();
   await expect(demo.locator('output')).toContainText('已选：1');
@@ -800,7 +800,7 @@ test('Table documentation demonstrates controlled selection, native filters, row
 test('Table documentation remote mode sends page/sort requests without double-slicing loaded rows', async ({
   page,
 }) => {
-  await page.goto('/#/components/table');
+  await page.goto('/zh-CN/components/table');
   const demo = page.locator('#table-remote');
   await expect(demo.locator('tbody .ja-table-row')).toHaveCount(2);
   await expect(demo.locator('tbody [data-column-key=name]')).toHaveText(['Ada', 'Grace']);
@@ -815,7 +815,7 @@ test('Table documentation remote mode sends page/sort requests without double-sl
 test('DatePicker documentation demonstrates native dates, strict formats, controlled values and exact source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/date-picker');
+  await page.goto('/zh-CN/components/date-picker');
   await expect(page.locator('.import-line')).toHaveText(
     "import { DatePicker, RangePicker } from 'jinge-antd';",
   );
@@ -838,7 +838,7 @@ test('DatePicker documentation demonstrates native dates, strict formats, contro
 test('RangePicker documentation commits endpoints and exposes its real example source', async ({
   page,
 }) => {
-  await page.goto('/#/components/date-picker');
+  await page.goto('/zh-CN/components/date-picker');
   const demo = page.locator('#range-picker-basic');
   const input = demo.getByRole('combobox', { name: '报表日期范围' });
   await input.press('ArrowDown');
@@ -855,7 +855,7 @@ test('RangePicker documentation commits endpoints and exposes its real example s
 test('DatePicker documentation Form saves native values and resets the controlled field', async ({
   page,
 }) => {
-  await page.goto('/#/components/date-picker');
+  await page.goto('/zh-CN/components/date-picker');
   const demo = page.locator('#date-picker-form'),
     input = demo.getByRole('combobox', { name: '生效日期', exact: true });
   await input.fill('2026-11-03');
@@ -868,7 +868,7 @@ test('DatePicker documentation Form saves native values and resets the controlle
 test('TimePicker documentation uses native steps and confirmation and displays source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/time-picker');
+  await page.goto('/zh-CN/components/time-picker');
   const demo = page.locator('#time-picker-basic');
   const input = demo.getByRole('combobox', { name: '预约时间' });
   await input.press('ArrowDown');
@@ -886,14 +886,14 @@ test('Date documentation reports missing native Temporal without executing nativ
   await page.addInitScript(() => {
     Reflect.deleteProperty(globalThis, 'Temporal');
   });
-  await page.goto('/#/components/date-picker');
+  await page.goto('/zh-CN/components/date-picker');
   await expect(page.locator('#date-picker-basic [role=alert]')).toContainText('Temporal');
 });
 
 test('Upload documentation validates files, retries simulated failure and shows actual source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/upload');
+  await page.goto('/zh-CN/components/upload');
   const demo = page.locator('#upload-basic');
   await demo
     .locator('input')
@@ -913,7 +913,7 @@ test('Upload documentation validates files, retries simulated failure and shows 
 test('Upload Form documentation queues manual files, validates completion, saves and resets', async ({
   page,
 }) => {
-  await page.goto('/#/components/upload');
+  await page.goto('/zh-CN/components/upload');
   const demo = page.locator('#upload-form');
   await demo
     .locator('input')
@@ -934,7 +934,7 @@ test('Upload Form documentation queues manual files, validates completion, saves
 test('Tree documentation conducts checks, filters ancestors and exposes its actual source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/tree');
+  await page.goto('/zh-CN/components/tree');
   const demo = page.locator('#tree-basic'),
     root = demo.getByRole('treeitem', { name: '研发中心', exact: true });
   await root.focus();
@@ -952,7 +952,7 @@ test('Tree documentation conducts checks, filters ancestors and exposes its actu
   await expect(demo.locator('code')).toContainText('export function TreeExample()');
 });
 test('Tree lazy documentation retries failure and selects the loaded node', async ({ page }) => {
-  await page.goto('/#/components/tree');
+  await page.goto('/zh-CN/components/tree');
   const demo = page.locator('#tree-lazy');
   await demo.getByRole('button', { name: '展开 远程组织', exact: true }).click();
   await expect(demo.getByRole('alert')).toContainText('模拟加载失败');
@@ -965,7 +965,7 @@ test('Tree lazy documentation retries failure and selects the loaded node', asyn
 test('Cascader documentation searches loaded paths, selects intermediate levels and exposes source/API', async ({
   page,
 }) => {
-  await page.goto('/#/components/cascader');
+  await page.goto('/zh-CN/components/cascader');
   const demo = page.locator('#cascader-basic'),
     field = demo.getByRole('combobox', { name: '服务地区', exact: true });
   await field.fill('浙江 西湖');
@@ -984,7 +984,7 @@ test('Cascader documentation searches loaded paths, selects intermediate levels 
 test('Cascader Form documentation validates a path, saves it and resets the field', async ({
   page,
 }) => {
-  await page.goto('/#/components/cascader');
+  await page.goto('/zh-CN/components/cascader');
   const demo = page.locator('#cascader-form');
   await demo.getByRole('button', { name: '保存地区', exact: true }).click();
   await expect(demo.getByRole('combobox', { name: '审核地区', exact: true })).toBeFocused();

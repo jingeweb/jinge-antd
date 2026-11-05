@@ -1,0 +1,805 @@
+source,zh-TW,en
+'text' | 'search' | 'email' | 'url' | 'tel' / 原生 inputMode / string,'text' | 'search' | 'email' | 'url' | 'tel' / 原生 inputMode / string,'text' | 'search' | 'email' | 'url' | 'tel' / native inputMode / string
+0.1 步进、两位小数、0–100 范围；清空表示未填写。,0.1 步進、兩位小數、0–100 範圍；清空表示未填寫。,Step by 0.1 with two decimal places and a 0–100 range. Clearing leaves the value empty.
+15 分钟步长与禁用营业时间，面板更改后点确定才提交；另一输入仅显示分钟。,15 分鐘步長與禁用營業時間，面板更改後點確定才提交；另一輸入僅顯示分鐘。,15-minute steps and disabled business hours. Confirm commits panel edits; the other input displays minutes only.
+24 栅格与响应式列宽。,24 柵格與響應式列寬。,A 24-column grid with responsive column widths.
+ArrowUp/Down 导航建议，Enter 采用，Escape/Tab 关闭且保留文本；没有展开建议时 Enter 保留原生表单提交行为。,ArrowUp/Down 導航建議，Enter 採用，Escape/Tab 關閉且保留文本；沒有展開建議時 Enter 保留原生表單提交行為。,Arrow keys navigate suggestions; Enter selects; Escape/Tab close without changing text. Enter submits the native form when suggestions are closed.
+"ButtonGroup 的旧 size=""small"" / ""large"" 改为 sm / lg。中尺寸现在可显式传 md。","ButtonGroup 的舊 size=""small"" / ""large"" 改為 sm / lg。中尺寸現在可顯式傳 md。",ButtonGroup replaces small/large with sm/lg. Medium can now be set explicitly with md.
+CSS 颜色和视觉说明开关。,CSS 顏色和視覺說明開關。,CSS color and the visual description toggle.
+CascaderValue 为 (string | number)[]，空值统一 null。初始化 value 非 undefined 时受控，默认值做快照。只有选择可提交项或清空时发 change；导航、加载和搜索不提交。未知外部路径保留，选项到达后补全标签。,CascaderValue 為 (string | number)[]，空值統一 null。初始化 value 非 undefined 時受控，默認值做快照。只有選擇可提交項或清空時發 change；導航、加載和搜索不提交。未知外部路徑保留，選項到達後補全標籤。,"CascaderValue is (string | number)[], with null for empty. A defined initial value selects controlled mode; defaults are snapshotted. Only committing a selectable item or clearing emits change. Navigation, loading and search do not commit. Unknown external paths retain their value until labels load."
+CheckboxGroup 的 change 返回去重数组，保留 string/number 类型；添加值追加到数组，选项重排保持节点和勾选。原生表单提交时数值转为字符串。,CheckboxGroup 的 change 返回去重數組，保留 string/number 類型；添加值追加到數組，選項重排保持節點和勾選。原生表單提交時數值轉為字符串。,CheckboxGroup emits deduplicated arrays preserving string/number values. New values append; reordering options preserves nodes and checks. Native forms serialize numbers as strings.
+ChoiceOption<T>[]，T 为 string | number,ChoiceOption<T>[]，T 為 string | number,"ChoiceOption<T>[], where T is string | number"
+Content 使用 section，避免在文档示例或已有 main 内制造嵌套 main 地标。,Content 使用 section，避免在文檔示例或已有 main 內製造嵌套 main 地標。,Content renders a section to avoid nesting main landmarks inside documentation or an existing main.
+DatePicker 提交 yyyy-MM-dd；RangePicker 提交 yyyy-MM-dd/yyyy-MM-dd 的 ISO 日期区间，显示格式变化不改变提交格式。,DatePicker 提交 yyyy-MM-dd；RangePicker 提交 yyyy-MM-dd/yyyy-MM-dd 的 ISO 日期區間，顯示格式變化不改變提交格式。,DatePicker submits yyyy-MM-dd; RangePicker submits an ISO date pair. Display formats do not change submitted values.
+Enter / blur / 确定 / Escape,Enter / blur / 確定 / Escape,Enter / blur / Confirm / Escape
+Enter/Space 切换；上下方向键、Home/End 在同级可用触发器间导航。ARIA 的 expanded、controls、region 标题自动关联。,Enter/Space 切換；上下方向鍵、Home/End 在同級可用觸發器間導航。ARIA 的 expanded、controls、region 標題自動關聯。,"Enter/Space toggle. Arrow keys and Home/End navigate enabled sibling triggers. Expanded state, controls and region labels are linked automatically."
+Flex 对齐值 / boolean,Flex 對齊值 / boolean,Flex alignment value / boolean
+FloatingPlacement（12 个方位）,FloatingPlacement（12 個方位）,FloatingPlacement (12 positions)
+Form 与原生 Temporal,Form 與原生 Temporal,Form and native Temporal
+Form 卸载取消校验/提交 UI 事务并保留草稿以供重开；不自动中止业务 Promise 或撤销网络请求。异步业务自身的副作用仍需由业务隔离，示例会清理并结算等待计时器。,Form 卸載取消校驗/提交 UI 事務並保留草稿以供重開；不自動中止業務 Promise 或撤銷網絡請求。異步業務自身的副作用仍需由業務隔離，示例會清理並結算等待計時器。,Unmounting Form cancels validation/submission UI transactions and retains drafts. It does not abort business Promises or network requests. Business side effects require their own isolation; the demo cancels and settles its timers.
+Form 字段与重置,Form 字段與重置,Form fields and reset
+FormField 增加标签/帮助/错误布局，Controller 只绑定数据。支持运行中切换 name/control；释放旧订阅与焦点注册。,FormField 增加標籤/幫助/錯誤佈局，Controller 只綁定數據。支持運行中切換 name/control；釋放舊訂閱與焦點註冊。,"FormField adds labels, help and error layout; Controller only binds data. Changing name/control releases prior subscriptions and focus registrations."
+FormField 绑定原生日期，验证、提交和重置；无效草稿不覆盖业务值。,FormField 綁定原生日期，驗證、提交和重置；無效草稿不覆蓋業務值。,"Bind native dates to FormField for validation, submission and reset. Invalid drafts do not overwrite business values."
+HTML name 值,HTML name 值,Native HTML name
+Jinge 需包含 Temporal 内建对象的 VM 排除修复。当前本地构建经 test:sync-jinge 显式同步，未 link 或引入第二份运行时；发布前须使用包含该修复的正式 Jinge 版本。,Jinge 需包含 Temporal 內建對象的 VM 排除修復。當前本地構建經 test:sync-jinge 顯式同步，未 link 或引入第二份運行時；發佈前須使用包含該修復的正式 Jinge 版本。,Jinge must include the VM exclusion fix for native Temporal objects. Local builds are explicitly synced with test:sync-jinge without linking a second runtime. Use a released Jinge containing this fix before publishing.
+LoadingOutlined 是带动画的包装组件；尊重 prefers-reduced-motion。,LoadingOutlined 是帶動畫的包裝組件；尊重 prefers-reduced-motion。,LoadingOutlined is an animated wrapper that respects prefers-reduced-motion.
+Menu 的受控选中不再采用旧版的先本地修改、再等待外部值的混合行为。逐项插槽在初始化固定，F09 的运行中新增/替换仍暂缓；label/children/禁用数据可更新。,Menu 的受控選中不再採用舊版的先本地修改、再等待外部值的混合行為。逐項插槽在初始化固定，F09 的運行中新增/替換仍暫緩；label/children/禁用數據可更新。,"Controlled Menu selection no longer changes locally while waiting for an external value. Per-item slots are fixed at initialization; dynamic replacement remains deferred under F09. Labels, children and disabled data can update."
+MenuOption<T>[]，T 为 string | number,MenuOption<T>[]，T 為 string | number,"MenuOption<T>[], where T is string | number"
+Portal 渲染到当前页面 body；不支持自定义挂载容器、跨 iframe 或 body transform 特殊包含块。,Portal 渲染到當前頁面 body；不支持自定義掛載容器、跨 iframe 或 body transform 特殊包含塊。,"Portals render into the current document body. Custom containers, cross-frame rendering and transformed body containing blocks are not supported."
+Promise<boolean> / 生命周期 / 焦点,Promise<boolean> / 生命週期 / 焦點,Promise<boolean> / lifecycle / focus
+Radio 单项使用 checked 布尔值，RadioGroup 使用单个 value；空受控组传 value=null，0 和空字符串都是有效选项值。,Radio 單項使用 checked 布爾值，RadioGroup 使用單個 value；空受控組傳 value=null，0 和空字符串都是有效選項值。,Radio uses checked; RadioGroup uses one value. Pass null for an empty controlled group. Zero and empty strings are valid options.
+RadioGroup 未指定 name 时生成每实例独立名称，支持浏览器原生互斥和方向键；参与原生表单时请显式提供业务 name，自动名称同样会出现在 FormData 中。,RadioGroup 未指定 name 時生成每實例獨立名稱，支持瀏覽器原生互斥和方向鍵；參與原生表單時請顯式提供業務 name，自動名稱同樣會出現在 FormData 中。,"RadioGroup generates an instance-specific name when omitted, enabling native exclusivity and keyboard navigation. Provide a business name for form submission; generated names also appear in FormData."
+Row 使用负 margin 平衡列 padding；容器有 overflow 限制时需留出相应水平内边距。,Row 使用負 margin 平衡列 padding；容器有 overflow 限制時需留出相應水平內邊距。,Row balances column padding with negative margins. Add horizontal padding when a container clips overflow.
+SVG 图标、颜色尺寸和可访问名称。,SVG 圖標、顏色尺寸和可訪問名稱。,"SVG icons with colors, sizes and accessible names."
+SVG 图标的 font-size，数值为像素。,SVG 圖標的 font-size，數值為像素。,SVG font-size; numeric values are pixels.
+SVG 图标颜色。,SVG 圖標顏色。,SVG icon color.
+TXT/CSV、单文件不超过 1 MiB，最多三项，并发两项。此处模拟上传，不发送到外部服务；以 fail 开头的文件首次失败，可重试。,TXT/CSV、單文件不超過 1 MiB，最多三項，併發兩項。此處模擬上傳，不發送到外部服務；以 fail 開頭的文件首次失敗，可重試。,"TXT/CSV files, at most 1 MiB each, three files and two concurrent uploads. This demo simulates uploads without external requests. Files starting with fail fail once and can be retried."
+VM 草稿 / 字段错误 / 状态 VM,VM 草稿 / 字段錯誤 / 狀態 VM,VM draft / field errors / status VM
+Zod 数据与校验、显式字段绑定、标签布局、异步提交及动态字段。,Zod 數據與校驗、顯式字段綁定、標籤佈局、異步提交及動態字段。,"Zod validation, explicit field binding, label layouts, asynchronous submission and dynamic fields."
+autoComplete 可显式使用 current-password/new-password；当前通过公开 DOM API 同步正确的 autocomplete 属性，compiler 的对应问题记录为 F07。,autoComplete 可顯式使用 current-password/new-password；當前通過公開 DOM API 同步正確的 autocomplete 屬性，compiler 的對應問題記錄為 F07。,Set autoComplete to current-password or new-password explicitly. Native DOM APIs currently synchronize the autocomplete property; the compiler issue is tracked as F07.
+autoFocus 可以把焦点移入内容；Esc 关闭后恢复触发器焦点。,autoFocus 可以把焦點移入內容；Esc 關閉後恢復觸發器焦點。,autoFocus can move focus into content. Closing with Escape restores trigger focus.
+autoSize 通过原生 scrollHeight 和样式测量，不复制或解析业务 children；现代浏览器使用 ResizeObserver 跟随宽度，隐藏区域重新显示时重测。,autoSize 通過原生 scrollHeight 和樣式測量，不複製或解析業務 children；現代瀏覽器使用 ResizeObserver 跟隨寬度，隱藏區域重新顯示時重測。,autoSize measures native scrollHeight and styles without cloning or parsing children. ResizeObserver tracks widths; hidden fields are remeasured when shown.
+blur | change | submit / 字段名数组 / boolean,blur | change | submit / 字段名數組 / boolean,blur | change | submit / field-name array / boolean
+checked 初始化非 undefined 为受控，否则 defaultChecked 初始化；之后不切换模式。受控请求需父级写回，拒绝时下一显示帧恢复。,checked 初始化非 undefined 為受控，否則 defaultChecked 初始化；之後不切換模式。受控請求需父級寫回，拒絕時下一顯示幀恢復。,A defined initial checked selects controlled mode; otherwise defaultChecked initializes the value. Modes do not change later. Rejected controlled updates revert on the next display frame.
+className/style 作用于稳定外框，triggerClassName 作用于输入或按钮，公开方法不暴露私有宿主。,className/style 作用於穩定外框，triggerClassName 作用於輸入或按鈕，公開方法不暴露私有宿主。,className/style target the stable outer wrapper; triggerClassName targets the input or button. Public methods do not expose private hosts.
+combobox 名称和帮助/错误关联；优先用 label + id。浮层为非模态 dialog，使用已有 Floating，嵌套 Modal 时 Escape 只关闭当前面板。,combobox 名稱和幫助/錯誤關聯；優先用 label + id。浮層為非模態 dialog，使用已有 Floating，嵌套 Modal 時 Escape 只關閉當前面板。,"Combobox naming and help/error associations; prefer label + id. Panels are nonmodal dialogs using Floating. In a Modal, Escape closes only the active panel."
+count 为字符串时按标签展示，例如 NEW；不会自动转换数字字符串。,count 為字符串時按標籤展示，例如 NEW；不會自動轉換數字字符串。,"String counts render as labels, such as NEW; numeric strings are not converted automatically."
+current 等于步骤数表示全部完成，展示模式没有多余的焦点目标。,current 等於步驟數表示全部完成，展示模式沒有多餘的焦點目標。,A current index equal to the step count marks all steps complete. Display mode adds no extra focus targets.
+disabled 阻止触发动作并管理 aria-disabled；如需从 Tab 顺序跳过，请同时给触发 Button 设置 disabled，不克隆插槽元素。,disabled 阻止觸發動作並管理 aria-disabled；如需從 Tab 順序跳過，請同時給觸發 Button 設置 disabled，不克隆插槽元素。,disabled blocks actions and manages aria-disabled. Also disable the trigger Button to skip it in Tab order; slot elements are not cloned.
+duration 使用毫秒；导入提示手动更新为成功，并在完成后自动关闭。,duration 使用毫秒；導入提示手動更新為成功，並在完成後自動關閉。,duration is in milliseconds. Import feedback is updated to success manually and closes after completion.
+false 阻止关闭，异步期间去重；抛错或拒绝会保持打开并清理 loading。,false 阻止關閉，異步期間去重；拋錯或拒絕會保持打開並清理 loading。,Returning false prevents closing. Async actions are deduplicated; throwing or rejecting keeps the panel open and clears loading.
+field.ref 接收提供 focus() 的组件实例或原生元素，并在卸载时清除引用。一个字段仅注册一个焦点目标；复合业务控件可暴露自己的 focus() 或使用显式 focus。,field.ref 接收提供 focus() 的組件實例或原生元素，並在卸載時清除引用。一個字段僅註冊一個焦點目標；復合業務控件可暴露自己的 focus() 或使用顯式 focus。,field.ref accepts a component exposing focus() or a native element and clears references on unmount. Register one focus target per field; composite controls can expose focus() or use explicit focus.
+filterOption=false 可配合业务异步请求；组件不创建请求，业务负责取消旧请求或忽略过期结果，示例使用可取消计时器。加载和空选项显示状态说明。,filterOption=false 可配合業務異步請求；組件不創建請求，業務負責取消舊請求或忽略過期結果，示例使用可取消計時器。加載和空選項顯示狀態說明。,"filterOption=false supports business-managed async searches. Requests, cancellation and stale-result isolation belong to the caller; this demo uses cancellable timers. Loading and empty states provide descriptions."
+focus 为原生触发器事件，blur 在离开控件后发送，可与 FormField 绑定。,focus 為原生觸發器事件，blur 在離開控件後發送，可與 FormField 綁定。,focus is a native trigger event; blur fires when focus leaves the control. Both can bind to FormField.
+focus 可传 FocusOptions，select 选择原生控件文本，不暴露私有宿主。,focus 可傳 FocusOptions，select 選擇原生控件文本，不暴露私有宿主。,focus accepts FocusOptions; select selects native control text without exposing private hosts.
+form.reset 恢复非受控初值，受控保留父值，不触发 change。loading/disabled 都禁用原生输入，已选项也不会提交。,form.reset 恢復非受控初值，受控保留父值，不觸發 change。loading/disabled 都禁用原生輸入，已選項也不會提交。,Form reset restores uncontrolled defaults and preserves controlled values without emitting change. Loading/disabled disable native inputs and omit selected values from submission.
+hover 延迟与触发方式。,hover 延遲與觸發方式。,Hover delays and trigger modes.
+hover 开关 / click 打开延迟；focus 与 click 关闭立即执行。提前离开和卸载取消待执行任务。,hover 開關 / click 打開延遲；focus 與 click 關閉立即執行。提前離開和卸載取消待執行任務。,Hover open/close and click-open delays. Focus and click-close act immediately. Leaving early or unmounting cancels pending tasks.
+href 渲染真实 a，支持原生新标签和修饰键；禁用项不执行动作，危险协议被禁用，_blank 自动补 noopener/noreferrer。路由由业务监听 change 并选择 preventDefault 接入，不自动解析 jinge-router。,href 渲染真實 a，支持原生新標籤和修飾鍵；禁用項不執行動作，危險協議被禁用，_blank 自動補 noopener/noreferrer。路由由業務監聽 change 並選擇 preventDefault 接入，不自動解析 jinge-router。,href renders native anchors with new-tab and modifier-key behavior. Disabled items do not act; unsafe protocols are blocked and _blank adds noopener/noreferrer. Integrate routing via change and preventDefault; jinge-router is not inferred.
+id 在初始化时固定；zIndex 为层级；motion 控制入场动画并尊重 reduced-motion。,id 在初始化時固定；zIndex 為層級；motion 控制入場動畫並尊重 reduced-motion。,id is fixed at initialization; zIndex controls stacking. motion controls entry animation and respects reduced motion.
+id 指向原生触发按钮，可关联 label；form 关联原生 reset。内部 file input 不参加宿主表单的文件提交，附件使用组件传输结果或业务字段保存。,id 指向原生觸發按鈕，可關聯 label；form 關聯原生 reset。內部 file input 不參加宿主表單的文件提交，附件使用組件傳輸結果或業務字段保存。,id targets the native trigger button for labels; form associates reset. The internal file input is excluded from form file submission; save attachment results in business fields.
+input 含组合输入中间事件；change 只在 compositionend 提交一次。组合阶段 Enter 不触发 pressEnter。,input 含組合輸入中間事件；change 只在 compositionend 提交一次。組合階段 Enter 不觸發 pressEnter。,input includes intermediate IME events; change commits once at compositionend. Enter does not emit pressEnter during composition.
+key 是全树唯一的 string/有限 number，0 与字符串 0 不同；label 为搜索/可访问名称。禁止循环和重复 key，错误配置会明确抛出。children 缺失与空数组语义不同：isLeaf=false 且无 children 时才加载。,key 是全樹唯一的 string/有限 number，0 與字符串 0 不同；label 為搜索/可訪問名稱。禁止循環和重復 key，錯誤配置會明確拋出。children 缺失與空數組語義不同：isLeaf=false 且無 children 時才加載。,Keys are globally unique strings or finite numbers; 0 differs from '0'. Labels provide search and accessible names. Cycles and duplicate keys throw errors. Missing children differs from an empty array: only isLeaf=false with absent children triggers loading.
+label 插槽不要放按钮或链接；交互操作应放在 slot:extra 或内容中。,label 插槽不要放按鈕或鏈接；交互操作應放在 slot:extra 或內容中。,Keep buttons and links out of label slots. Put actions in slot:extra or panel content.
+modal.show 返回 close 和 waitForClose；关闭后再次等待仍得到同一结果。,modal.show 返回 close 和 waitForClose；關閉後再次等待仍得到同一結果。,modal.show returns close and waitForClose. Waiting again after closing returns the same result.
+mode 初始化后固定；首轮不做自动折叠溢出导航、收起侧栏图标模式、任意拖动或超大树虚拟化。,mode 初始化後固定；首輪不做自動折疊溢出導航、收起側欄圖標模式、任意拖動或超大樹虛擬化。,"mode is fixed at initialization. Automatic overflow folding, collapsed icon navigation, dragging and large-tree virtualization are deferred."
+name/form 关联原生提交值；required 使用独立原生校验控件，校验失败聚焦可见 combobox。reset 不触发 change。,name/form 關聯原生提交值；required 使用獨立原生校驗控件，校驗失敗聚焦可見 combobox。reset 不觸發 change。,name/form associate native submission. required uses a separate native validation control that focuses the visible combobox on failure. Reset does not emit change.
+name/form/disabled/size 传给所有输入；重复 name 参与 FormData，form 也绑定 fieldset 的重置。,name/form/disabled/size 傳給所有輸入；重復 name 參與 FormData，form 也綁定 fieldset 的重置。,name/form/disabled/size pass to all inputs. Repeated names participate in FormData; form also connects the fieldset reset behavior.
+nav 名称和外框样式；内部 ol/li 按唯一路径 key 保持身份，窄屏允许换行。,nav 名稱和外框樣式；內部 ol/li 按唯一路徑 key 保持身份，窄屏允許換行。,Navigation accessible name and wrapper styles. Internal ol/li preserve identity with unique path keys and wrap on narrow screens.
+none 关闭 live region 语义；banner 去掉圆角和外框；样式作用于根。,none 關閉 live region 語義；banner 去掉圓角和外框；樣式作用於根。,none disables live-region semantics. banner removes rounded corners and borders. Styles target the root.
+on:change 接收输入值和建议值，on:search 只在正常文本编辑、IME 提交或清空时触发，不因选中建议触发。组合输入 Enter 不选中建议，尾随 input 去重。,on:change 接收輸入值和建議值，on:search 只在正常文本編輯、IME 提交或清空時觸發，不因選中建議觸發。組合輸入 Enter 不選中建議，尾隨 input 去重。,"on:change receives input and suggestion values. on:search runs for text editing, IME commits or clearing, not selection. IME Enter never selects; trailing input events are deduplicated."
+open 的 type 默认 info；各状态方法固定相应类型。,open 的 type 默認 info；各狀態方法固定相應類型。,open defaults to info; each status-specific method fixes its type.
+progressbar 名称、可访问数值说明及样式；默认完成/失败增加非颜色符号和语义说明，定制 info 插槽时可另外提供 valueText。,progressbar 名稱、可訪問數值說明及樣式；默認完成/失敗增加非顏色符號和語義說明，定制 info 插槽時可另外提供 valueText。,"Progressbar name, accessible value text and styles. Completion/failure add non-color symbols and descriptions; provide valueText when customizing the info slot."
+ref 提供 focus/blur/select；尺寸/状态/样式作用于输入外框。,ref 提供 focus/blur/select；尺寸/狀態/樣式作用於輸入外框。,"ref exposes focus/blur/select. Size, status and styles apply to the input wrapper."
+ref.focus/blur 指向原生输入。样式作用于 label，轨道只是装饰；不引入第三方依赖。,ref.focus/blur 指向原生輸入。樣式作用於 label，軌道只是裝飾；不引入第三方依賴。,ref.focus/blur target the native input. Styles target the label; the track is decorative. No third-party dependency is introduced.
+reset 恢复非受控初始选项，受控保持父值，不触发 change；清空或移除选项不自动选择第一项。首轮通过 options/标签插槽组合。,reset 恢復非受控初始選項，受控保持父值，不觸發 change；清空或移除選項不自動選擇第一項。首輪通過 options/標籤插槽組合。,Reset restores uncontrolled defaults and retains controlled values without change. Clearing/removing does not select the first option. Compose options and label slots.
+role=tooltip 和 aria-describedby 自动管理，不自动给不可聚焦的静态元素添加 Tab 顺序。,role=tooltip 和 aria-describedby 自動管理，不自動給不可聚焦的靜態元素添加 Tab 順序。,role=tooltip and aria-describedby are managed automatically. Static nonfocusable triggers are not added to Tab order.
+schema 输入与输出分离；草稿为 Partial<input>，校验/提交成功得到转换后的 output。默认值深拷贝为初始快照。实例与 schema 在 Form 生命周期内保持稳定。,schema 輸入與輸出分離；草稿為 Partial<input>，校驗/提交成功得到轉換後的 output。默認值深拷貝為初始快照。實例與 schema 在 Form 生命週期內保持穩定。,schema separates input and output. Drafts are Partial<input>; successful validation/submission returns transformed output. Defaults are deep-cloned snapshots; instance and schema stay stable during the Form lifecycle.
+setField 第三参数可立即校验；setFields 第二参数可全量校验。reset() 恢复初值，reset(values) 建立新基线，清理错误/触碰/脏值和旧事务，不更换草稿 VM。,setField 第三參數可立即校驗；setFields 第二參數可全量校驗。reset() 恢復初值，reset(values) 建立新基線，清理錯誤/觸碰/髒值和舊事務，不更換草稿 VM。,"setField can validate immediately via its third argument; setFields can validate all fields via its second. reset restores defaults; reset(values) establishes a new baseline and clears errors, touched/dirty state and old transactions without replacing the draft VM."
+size 从旧 small/large 统一为 sm/md/lg；暂不支持自动测量缩字、响应式尺寸和自动折叠头像组。,size 從舊 small/large 統一為 sm/md/lg；暫不支持自動測量縮字、響應式尺寸和自動折疊頭像組。,"Sizes are normalized from small/large to sm/md/lg. Automatic text shrinking, responsive sizing and avatar-group folding are deferred."
+slot:content/title/icon/actions 在创建时固定，暂不支持 update 动态替换渲染函数；文本和状态可直接更新。,slot:content/title/icon/actions 在創建時固定，暫不支持 update 動態替換渲染函數；文本和狀態可直接更新。,slot:content/title/icon/actions are fixed at creation; update cannot replace renderers dynamically. Text and state can update directly.
+sm | md | lg / string / 公开方法,sm | md | lg / string / 公開方法,sm | md | lg / string / public methods
+sm | md | lg / string / 公开方法 / FocusEvent,sm | md | lg / string / 公開方法 / FocusEvent,sm | md | lg / string / public methods / FocusEvent
+sm=8、md=16、lg=24，数值为像素。,sm=8、md=16、lg=24，數值為像素。,"sm=8, md=16, lg=24; numeric values are pixels."
+status 为 ready/uploading/done/error/canceled。服务器已有文件可以不带 originFile；只有有原始 File 的记录可上传或重试。response 保存请求结果，组件不猜测后端 URL 字段。,status 為 ready/uploading/done/error/canceled。服務器已有文件可以不帶 originFile；只有有原始 File 的記錄可上傳或重試。response 保存請求結果，組件不猜測後端 URL 字段。,Status is ready/uploading/done/error/canceled. Existing server files may omit originFile; only records with an original File can upload/retry. response stores results without guessing backend URL fields.
+status 包含 touched/dirty/validating/submitting/validated/submitCount/formError/submitError。直接编辑草稿会更新脏值并使旧校验过期；推荐 setter 触发依赖校验。,status 包含 touched/dirty/validating/submitting/validated/submitCount/formError/submitError。直接編輯草稿會更新髒值並使舊校驗過期；推薦 setter 觸發依賴校驗。,Status includes touched/dirty/validating/submitting/validated/submitCount/formError/submitError. Direct draft edits update dirty state and expire old validation; use setters to trigger dependent validation.
+string / JNode（二选一）,string / JNode（二選一）,string / JNode (choose one)
+string / 可访问属性,string / 可訪問屬性,string / accessibility attributes
+tablist 可访问名称和外框样式；自动生成 tab/tabpanel 的双向关联与唯一 id。,tablist 可訪問名稱和外框樣式；自動生成 tab/tabpanel 的雙向關聯與唯一 id。,"Accessible tablist name and wrapper styles. Tabs and panels receive unique, bidirectional ARIA associations automatically."
+tree/treeitem、level/posinset/setsize、selected/checked/mixed/expanded/busy 与 roving focus 语义。Tree 不是原生表单字段；通过 keys 事件绑定业务字段。,tree/treeitem、level/posinset/setsize、selected/checked/mixed/expanded/busy 與 roving focus 語義。Tree 不是原生表單字段；通過 keys 事件綁定業務字段。,"tree/treeitem semantics include level, position, size, selection, checked/mixed, expansion, busy and roving focus. Tree is not a native form field; bind keys events to business fields."
+"type=checkbox/radio、selectedRowKeys/defaultSelectedRowKeys、disabled/getDisabled(row)、preserveSelectedRowKeys 与 on:change(keys,loadedRows)。全选仅当前页可选记录；跨页保留仍在 data 中的键。远程跨页可开启 preserveSelectedRowKeys，回调记录仅包含当前已加载项。","type=checkbox/radio、selectedRowKeys/defaultSelectedRowKeys、disabled/getDisabled(row)、preserveSelectedRowKeys 與 on:change(keys,loadedRows)。全選僅當前頁可選記錄；跨頁保留仍在 data 中的鍵。遠程跨頁可開啓 preserveSelectedRowKeys，回調記錄僅包含當前已加載項。","Supports checkbox/radio selection, controlled/default keys, per-row disabling, preserved keys and on:change(keys,loadedRows). Select-all affects enabled current-page rows only. For remote pages, preservation retains keys but callbacks include only loaded records."
+value 为 string/有限 number，同级唯一；不同父级允许重复 value，完整路径区分节点。disabled 作用于整个子树。无 children 且 isLeaf=false 表示懒加载。禁止循环数据和同级重复值。,value 為 string/有限 number，同級唯一；不同父級允許重復 value，完整路徑區分節點。disabled 作用於整個子樹。無 children 且 isLeaf=false 表示懶加載。禁止循環數據和同級重復值。,"Values are strings or finite numbers, unique among siblings. Full paths distinguish repeated values under different parents. disabled affects descendants. Missing children with isLeaf=false enables lazy loading. Cycles and duplicate sibling values are rejected."
+value 为唯一 string/number，label 为必需的纯文本名称；disabled 阻止选择，group 按标签分组。,value 為唯一 string/number，label 為必需的純文本名稱；disabled 阻止選擇，group 按標籤分組。,Unique string/number value and required text label; disabled prevents selection and group organizes options by label.
+value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 value 保持节点身份。,value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 value 保持節點身份。,Unique values with text labels or slot:label; supports disabled/id. Node identity follows value.
+三尺寸与说明，定制说明时可显式指定 status 的名称。,三尺寸與說明，定制說明時可顯式指定 status 的名稱。,Three sizes and descriptions. Give custom status descriptions an explicit accessible name.
+上/下、Home/End 在当前列可用项间移动；右进入下级/加载，左返回上级；Enter 提交叶子或按 changeOnSelect 规则选择，Escape 取消浏览草稿，Tab 离开。非搜索模式支持字符前缀定位。,上/下、Home/End 在當前列可用項間移動；右進入下級/加載，左返回上級；Enter 提交葉子或按 changeOnSelect 規則選擇，Escape 取消瀏覽草稿，Tab 離開。非搜索模式支持字符前綴定位。,"Up/Down and Home/End navigate enabled items in a column. Right opens/loads children; Left returns. Enter commits leaves or changeOnSelect options; Escape discards browsing drafts, Tab exits. Non-search mode supports typeahead."
+上/下在可见可用节点间移动；右展开或进入子项，左收起或回父级，Home/End 首末，Enter 选择，Space 勾选，字符前缀定位。只有一个 Tab 停靠点。focus 定位可见节点；外部收起/移除焦点节点回最近可见祖先，外部焦点不被夺取。,上/下在可見可用節點間移動；右展開或進入子項，左收起或回父級，Home/End 首末，Enter 選擇，Space 勾選，字符前綴定位。只有一個 Tab 停靠點。focus 定位可見節點；外部收起/移除焦點節點回最近可見祖先，外部焦點不被奪取。,"Up/Down navigate visible enabled nodes; Right expands/enters, Left collapses/returns, Home/End jump, Enter selects and Space checks. Typeahead and a single Tab stop are supported. Collapsed/removed focus returns to a visible ancestor without stealing external focus."
+上传,上傳,Upload
+下拉菜单,下拉菜單,Dropdown
+不传 uid 时 start/cancel 操作全部可处理文件；open 打开选择器，需用户激活。Form reset 恢复默认快照（受控恢复父值），取消请求/校验，不发送 change。卸载同样取消请求并隔离迟到结果。,不傳 uid 時 start/cancel 操作全部可處理文件；open 打開選擇器，需用戶激活。Form reset 恢復默認快照（受控恢復父值），取消請求/校驗，不發送 change。卸載同樣取消請求並隔離遲到結果。,"Without uid, start/cancel affect all eligible files. open requires user activation. Form reset restores defaults or controlled values, cancels requests/validation and emits no change. Unmount also cancels and isolates late results."
+不包装、枚举或克隆插槽子组件，间距直接作用于实际 DOM 子项。,不包裝、枚舉或克隆插槽子組件，間距直接作用於實際 DOM 子項。,"Slots are not wrapped, enumerated or cloned; spacing targets actual DOM children."
+不取消业务请求；不支持全屏加载服务或请求进度模拟。动画尊重 reduced-motion。,不取消業務請求；不支持全屏加載服務或請求進度模擬。動畫尊重 reduced-motion。,Business requests are not canceled. Fullscreen loading services and simulated request progress are not provided. Animations respect reduced motion.
+不提供波纹、渐变算法或模拟链接跳转。真正的导航链接应使用 a 或后续的 Link 组件。,不提供波紋、漸變算法或模擬鏈接跳轉。真正的導航鏈接應使用 a 或後續的 Link 組件。,"No ripple, gradient algorithm or simulated navigation. Use a real anchor or routing link for navigation."
+不提供自动重试、路由跳转或表单错误汇总；操作插槽由业务明确控制。,不提供自動重試、路由跳轉或表單錯誤匯總；操作插槽由業務明確控制。,"No automatic retries, routing or form-error summaries. Business code explicitly controls action slots."
+不提供设计规范、外部插画依赖或自动识别列表状态；加载、错误和空态由业务区分。,不提供設計規範、外部插畫依賴或自動識別列表狀態；加載、錯誤和空態由業務區分。,"No design guidelines, external illustration dependency or automatic list-state inference. Business code distinguishes loading, error and empty states."
+不支持 Ribbon、数字滚动动画、自动推断子内容的 aria 描述。,不支持 Ribbon、數字滾動動畫、自動推斷子內容的 aria 描述。,"Ribbon, rolling count animations and inferred child-content ARIA descriptions are not provided."
+不模拟任务进度或自动计时；未知进度请使用 Spin。,不模擬任務進度或自動計時；未知進度請使用 Spin。,Task progress is not simulated or timed automatically. Use Spin for unknown progress.
+不自动执行重试或导航，操作插槽由业务明确处理。,不自動執行重試或導航，操作插槽由業務明確處理。,Retries and navigation are explicit business actions supplied through slots.
+不自动折叠菜单文字，不自动生成导航，也不提供拖动调整宽度。,不自動折疊菜單文字，不自動生成導航，也不提供拖動調整寬度。,"Menu text, navigation generation and draggable resizing are not automatic."
+不自动推断 jinge-router、参数或异步路由数据，不内置折叠省略和下拉路径；可在业务中构造 items 并接入 click。,不自動推斷 jinge-router、參數或異步路由數據，不內置折疊省略和下拉路徑；可在業務中構造 items 並接入 click。,"Router integration, params and async route data are not inferred. No built-in collapsed paths or dropdown hierarchy; construct items and handle clicks in business code."
+不自动推断插槽内标题，建议给交互浮层提供明确的 ariaLabel。,不自動推斷插槽內標題，建議給交互浮層提供明確的 ariaLabel。,Floating headings are not inferred from slots. Provide an explicit ariaLabel for interactive panels.
+与 Floating 相同的交互策略。,與 Floating 相同的交互策略。,The same interaction policy as Floating.
+与 Input 的公开方法/尺寸一致；原生 number 的选区能力受浏览器限制。,與 Input 的公開方法/尺寸一致；原生 number 的選區能力受瀏覽器限制。,Public methods and sizes match Input; native number-input selection depends on the browser.
+与触发器距离 / 视口安全边距，单位像素。,與觸發器距離 / 視口安全邊距，單位像素。,"Trigger distance / viewport safety margin, in pixels."
+业务日期与格式,業務日期與格式,Business dates and formatting
+两者任一个为 true 都禁止点击，加载时显示 spinner。,兩者任一個為 true 都禁止點擊，加載時顯示 spinner。,Either flag disables clicks; loading displays a spinner.
+中后台列表，支持排序、筛选、跨页选择、分页、固定列与展开详情。,中後台列表，支持排序、篩選、跨頁選擇、分頁、固定列與展開詳情。,"Admin data lists with sorting, filters, cross-page selection, pagination, fixed columns and expandable details."
+主要、默认、文字、链接样式及危险操作。链接样式仍使用原生 button 语义。,主要、默認、文字、鏈接樣式及危險操作。鏈接樣式仍使用原生 button 語義。,"Primary, default, text, link-style and danger actions. Link styling retains native button semantics."
+主轴对齐。,主軸對齊。,Main-axis alignment.
+互斥选项、禁用与键盘切换。,互斥選項、禁用與鍵盤切換。,"Mutually exclusive options, disabling and keyboard navigation."
+"五种常用状态，message.show(type, options) 可显式指定状态。","五種常用狀態，message.show(type, options) 可顯式指定狀態。","Five common statuses; message.show(type, options) specifies a status explicitly."
+交互内容与受控显隐,交互內容與受控顯隱,Interactive content and controlled visibility
+交叉轴、主轴与换行。,交叉軸、主軸與換行。,"Cross-axis alignment, main-axis alignment and wrapping."
+交叉轴对齐。,交叉軸對齊。,Cross-axis alignment.
+仅使用浏览器原生 Temporal，不加载 polyfill、date-fns 或 Day.js。Chrome 144+ 已提供；其他浏览器须实际通过 temporalSupported()，不按 UA 猜测。缺失时组件禁用并提示，站点示例也有明确不可用状态。,僅使用瀏覽器原生 Temporal，不加載 polyfill、date-fns 或 Day.js。Chrome 144+ 已提供；其他瀏覽器須實際通過 temporalSupported()，不按 UA 猜測。缺失時組件禁用並提示，站點示例也有明確不可用狀態。,"Only native browser Temporal is used; no polyfill, date-fns or Day.js. Chrome 144+ provides it; other browsers must pass temporalSupported(), without UA inference. Missing support disables controls and shows a message, including in these demos."
+仅替代 null/undefined，数字 0 和明确的空字符串不会丢失。内容插槽优先。,僅替代 null/undefined，數字 0 和明確的空字符串不會丟失。內容插槽優先。,Only null/undefined trigger fallback; 0 and explicit empty strings are retained. Content slots take precedence.
+仅用户请求不同且可用标签时触发；受控模式由父级接受后更新内容。,僅用戶請求不同且可用標籤時觸發；受控模式由父級接受後更新內容。,Fires only when the user requests a different enabled tab. Controlled parents must accept the change to update content.
+仅选择建议时触发，输入和 clear 不触发；提交的是 option.value，不是展示 label。,僅選擇建議時觸發，輸入和 clear 不觸發；提交的是 option.value，不是展示 label。,"Fires only when a suggestion is selected, not on input or clear. Submits option.value rather than the display label."
+从 0 开始的当前索引；之前为 finish，之后为 wait。-1 全未开始，items.length 全完成。组件不自动维护业务流程。,從 0 開始的當前索引；之前為 finish，之後為 wait。-1 全未開始，items.length 全完成。組件不自動維護業務流程。,Zero-based current index: earlier steps finish and later steps wait. -1 marks none started; items.length marks all complete. Business flow is not managed automatically.
+从空列表创建记录；示例同时展示自定义内容和纯文字空态。,從空列表創建記錄；示例同時展示自定義內容和純文字空態。,"Create records from an empty list, with custom-content and text-only empty states."
+从页面边缘展示详情或编辑内容，共用 Modal 的多层、滚动锁和焦点管理。,從頁面邊緣展示詳情或編輯內容，共用 Modal 的多層、滾動鎖和焦點管理。,"Details or editing panels from the viewport edge, sharing Modal's stacking, scroll lock and focus management."
+以语义化的定义列表展示只读详情，支持响应式列数、字段跨度和自定义内容。,以語義化的定義列表展示只讀詳情，支持響應式列數、字段跨度和自定義內容。,"Semantic definition lists for read-only details, with responsive columns, spans and custom content."
+任何关闭路径只通知一次；错误会记录到 console.error，不阻止其他条目的清理。,任何關閉路徑只通知一次；錯誤會記錄到 console.error，不阻止其他條目的清理。,Every close path notifies once. Errors go to console.error without blocking cleanup of other entries.
+传入原生 type=number，保留 spinbutton 语义、原生 min/max/step 校验；status=error 默认 aria-invalid。,傳入原生 type=number，保留 spinbutton 語義、原生 min/max/step 校驗；status=error 默認 aria-invalid。,"Uses native type=number, spinbutton semantics and min/max/step validation. status=error defaults aria-invalid."
+传给原生控件，参与 label、原生校验及 FormData。禁用/只读会阻止组件编辑和清空。,傳給原生控件，參與 label、原生校驗及 FormData。禁用/只讀會阻止組件編輯和清空。,"Passes to native controls for labels, validation and FormData. Disabled/read-only controls prevent editing and clearing."
+传给原生输入。,傳給原生輸入。,Passed to the native input.
+传给实际 input；autoComplete 默认 off，可设置 email 等。只读不更改值或打开建议。清空默认按钮名称为清空输入。,傳給實際 input；autoComplete 默認 off，可設置 email 等。只讀不更改值或打開建議。清空默認按鈕名稱為清空輸入。,"Passed to the real input. autoComplete defaults to off and can use email, etc. Read-only prevents editing and suggestions. The default clear-button label is Clear input."
+传给控件 ref，注册字段焦点目标；回调身份稳定，控件卸载时解除引用。优先级为显式 focus → 注册实例 → 既有 id 回退。,傳給控件 ref，註冊字段焦點目標；回調身份穩定，控件卸載時解除引用。優先級為顯式 focus → 註冊實例 → 既有 id 回退。,"Pass to a control ref to register field focus. Callback identity is stable and unregisters on unmount. Priority: explicit focus, registered instance, then existing id fallback."
+位置与内容操作,位置與內容操作,Placement and content actions
+作用于弹出的浮层；触发按钮的样式直接传给 children。,作用於彈出的浮層；觸發按鈕的樣式直接傳給 children。,Applied to the floating panel. Pass trigger button styles directly to children.
+作用于浮层内容容器。定位和安全尺寸约束由组件管理。,作用於浮層內容容器。定位和安全尺寸約束由組件管理。,Applied to the floating content container. Positioning and safe-size constraints are managed by the component.
+使用 CSS gap 排列内容。Space 适合一组操作，Flex 适合占满容器的弹性布局。,使用 CSS gap 排列內容。Space 適合一組操作，Flex 適合佔滿容器的彈性佈局。,CSS gap lays out content. Space suits action groups; Flex suits full-width flexible layouts.
+使用 JavaScript number，常用业务小数可用，不承诺高精度金融计算或超出安全整数的精确性；stringMode、formatter/parser、货币千分位和滚轮自定义暂缓。,使用 JavaScript number，常用業務小數可用，不承諾高精度金融計算或超出安全整數的精確性；stringMode、formatter/parser、貨幣千分位和滾輪自定義暫緩。,"Uses JavaScript numbers for common decimals, without financial-grade or unsafe-integer precision guarantees. stringMode, custom formatter/parser, currency separators and custom wheel behavior are deferred."
+使用 Tab 聚焦触发器、Esc 关闭；可配置方向和触发方式。,使用 Tab 聚焦觸發器、Esc 關閉；可配置方向和觸發方式。,Tab focuses the trigger; Escape closes. Placement and trigger modes are configurable.
+使用原生 fieldset/legend，提供组名称和描述。,使用原生 fieldset/legend，提供組名稱和描述。,Native fieldset/legend provide the group name and description.
+使用语义化标题、段落、文本和链接展示业务信息。,使用語義化標題、段落、文本和鏈接展示業務信息。,"Semantic headings, paragraphs, text and links for business information."
+侧栏可访问名称。,側欄可訪問名稱。,Accessible sidebar name.
+侧边面板、焦点与关闭策略。,側邊面板、焦點與關閉策略。,"Edge panels, focus and closing policies."
+保持二至五行，超过上限内部滚动，输入节点和选择状态保持稳定。,保持二至五行，超過上限內部滾動，輸入節點和選擇狀態保持穩定。,"Keeps two to five lines, scrolling internally beyond the maximum while preserving the input node and selection."
+保持触发器和内容之间的鼠标安全通道，兼容页面滚动。,保持觸發器和內容之間的鼠標安全通道，兼容頁面滾動。,"Preserves a safe pointer corridor between trigger and content, including during page scrolling."
+信息分组容器，支持标题、封面、操作和加载占位。,信息分組容器，支持標題、封面、操作和加載佔位。,"Information containers with titles, covers, actions and loading placeholders."
+修饰标志提供视觉样式；需要额外语义时可在 children 中使用原生 strong、del、code 等标签。,修飾標誌提供視覺樣式；需要額外語義時可在 children 中使用原生 strong、del、code 等標籤。,"Modifiers are visual. Use native strong, del, code or similar elements in children when extra semantics are needed."
+值模式在初始化固定。可选空字段需要受控时用 value=null；后续受控清空仍可写回 undefined，实例保持原模式。,值模式在初始化固定。可選空字段需要受控時用 value=null；後續受控清空仍可寫回 undefined，實例保持原模式。,Value mode is fixed at initialization. Use value=null for a controlled optional empty field; later undefined clears it without changing the mode.
+像素宽度、对齐、文本省略和固定列；固定列建议给 width，缺省按 120px 初始布局，之后按真实表头尺寸测量偏移。自定义交互内容不建议 ellipsis。,像素寬度、對齊、文本省略和固定列；固定列建議給 width，缺省按 120px 初始佈局，之後按真實表頭尺寸測量偏移。自定義交互內容不建議 ellipsis。,"Pixel width, alignment, ellipsis and fixed columns. Fixed widths default to 120px before real header measurements; explicit widths are recommended. Avoid ellipsis for interactive custom content."
+入场动画，尊重 reduced-motion。关闭立即卸载。,入場動畫，尊重 reduced-motion。關閉立即卸載。,Entry animation respects reduced motion. Closing unmounts immediately.
+全局 disabled 禁止操作。节点 disabled 禁止自身及其整个子树；disableCheckbox 仅禁止当前勾选并打断关联，后代可独立操作。禁用子树不计入上级全选/半选汇总；外部已勾选的禁用值保留显示。,全局 disabled 禁止操作。節點 disabled 禁止自身及其整個子樹；disableCheckbox 僅禁止當前勾選並打斷關聯，後代可獨立操作。禁用子樹不計入上級全選/半選匯總；外部已勾選的禁用值保留顯示。,Global disabled blocks actions. Node disabled applies to the subtree; disableCheckbox affects only that checkbox and breaks linkage. Disabled descendants are excluded from ancestor summaries while externally checked disabled values remain visible.
+全局 status 仅影响当前步骤，逐项状态优先；状态同时用图标、文字和颜色呈现。,全局 status 僅影響當前步驟，逐項狀態優先；狀態同時用圖標、文字和顏色呈現。,"Global status affects the current step only; per-item status wins. Status uses icons, text and color together."
+全局提示,全局提示,Message
+全局插槽优先，其次逐项分隔符、全局文本；分隔符有 aria-hidden，不作为路径项播报。装饰插槽中不要放交互控件。,全局插槽優先，其次逐項分隔符、全局文本；分隔符有 aria-hidden，不作為路徑項播報。裝飾插槽中不要放交互控件。,"Global separator slot wins, then per-item separator, then text. Separators are aria-hidden and not announced as path items. Decorative slots should not contain controls."
+全树 value 唯一；label 或静态 slot:label、slot:icon，type=item/group/divider；支持 children/disabled/danger/href/target/rel/ariaLabel。分组/分隔线也须提供 value。,全樹 value 唯一；label 或靜態 slot:label、slot:icon，type=item/group/divider；支持 children/disabled/danger/href/target/rel/ariaLabel。分組/分隔線也須提供 value。,"Values are unique across the menu tree; text or static label/icon slots, item/group/divider types, children, disabled, danger, href, target, rel and ariaLabel are supported. Groups and dividers also need values."
+全选/半选由业务选择值推导，分组管理权限数组。,全選/半選由業務選擇值推導，分組管理權限數組。,Business selection derives checked/indeterminate state; groups manage permission arrays.
+公开 API 为 checked/defaultChecked/on:change，value 仅为原生表单提交值，不是布尔状态别名。,公開 API 為 checked/defaultChecked/on:change，value 僅為原生表單提交值，不是布爾狀態別名。,"Public checked/defaultChecked/on:change control state. value is only the native submitted value, not a checked alias."
+公开值是不可变的原生 Temporal，整体替换值；Form 会按日期/时间语义比较等值实例。TypeScript 需启用 ESNext.Temporal 标准库声明，这不是运行时 polyfill。,公開值是不可變的原生 Temporal，整體替換值；Form 會按日期/時間語義比較等值實例。TypeScript 需啓用 ESNext.Temporal 標準庫聲明，這不是運行時 polyfill。,"Public values are immutable native Temporal objects, replaced as a whole. Form compares equivalent dates/times semantically. Enable TypeScript ESNext.Temporal declarations; these are not a runtime polyfill."
+公开方法,公開方法,Public methods
+公开方法 / 尺寸 / 外框样式,公開方法 / 尺寸 / 外框樣式,Public methods / size / wrapper styles
+公开方法聚焦当前或边界项。Tab/根 Escape 可交给容器处理；样式作用于外框。,公開方法聚焦當前或邊界項。Tab/根 Escape 可交給容器處理；樣式作用於外框。,Focus the current or boundary item through public methods. Tab/root Escape can be delegated to the container; styles target the wrapper.
+关闭前事件，可 preventDefault；请求隐藏事件，受控方需写回 visible。关闭按钮不冒泡到外层点击处理。,關閉前事件，可 preventDefault；請求隱藏事件，受控方需寫回 visible。關閉按鈕不冒泡到外層點擊處理。,Cancelable before-close event and visibility request; controlled parents must update visible. The close button does not bubble to outer click handlers.
+关闭前调用，可 preventDefault；关闭按钮停止冒泡，非受控关闭幂等。,關閉前調用，可 preventDefault；關閉按鈕停止冒泡，非受控關閉冪等。,Called before closing and can preventDefault. Close buttons stop propagation; uncontrolled close is idempotent.
+关闭按钮 / Escape / 遮罩点击关闭；只处理最上层的关闭操作。,關閉按鈕 / Escape / 遮罩點擊關閉；只處理最上層的關閉操作。,Close button / Escape / backdrop click policies; only the topmost layer closes.
+关闭按钮 / 禁止关闭 / 按钮可访问名称。,關閉按鈕 / 禁止關閉 / 按鈕可訪問名稱。,Close button / prevent closing / accessible button label.
+关闭立即卸载内容；没有离场动画。,關閉立即卸載內容；沒有離場動畫。,Closing unmounts content immediately; there is no exit animation.
+关闭立即卸载，没有离场动画、跑马灯或框架级 ErrorBoundary。,關閉立即卸載，沒有離場動畫、跑馬燈或框架級 ErrorBoundary。,"Closing unmounts immediately. Exit animations, marquees and a framework ErrorBoundary are not provided."
+关闭调用时存在的全部条目，取消定时器、通知回调并完成等待；回调中新建的条目保留。Message/Notification 独立清空。,關閉調用時存在的全部條目，取消定時器、通知回調並完成等待；回調中新建的條目保留。Message/Notification 獨立清空。,"Closes entries present at invocation, cancels timers, notifies and settles waits. Entries created by callbacks remain. Message and Notification clear independently."
+内容 / 可选图标。,內容 / 可選圖標。,Content / optional icon.
+内容与加载,內容與加載,Content and loading
+内容二选一；children 为触发器。,內容二選一；children 為觸發器。,"Text or content slot, exclusively; children supply the trigger."
+内容子组件注册确认处理；随所属组件卸载解除。,內容子組件註冊確認處理；隨所屬組件卸載解除。,Content children register confirmation handlers and release them on unmount.
+内容插槽在初始化时固定；运行时替换函数属于 F09，暂缓。普通文本和 VM 数据正常响应更新。指示条响应选项增删、标签大小、容器及字体变化，卸载时清理观察器。,內容插槽在初始化時固定；運行時替換函數屬於 F09，暫緩。普通文本和 VM 數據正常響應更新。指示條響應選項增刪、標籤大小、容器及字體變化，卸載時清理觀察器。,"Content slots are fixed at initialization. Runtime renderer replacement is deferred under F09. Text and VM data remain reactive. Indicators respond to options, labels, container and font changes; observers are cleaned up."
+内容文本或插槽；插槽优先。Message 内容必填，Notification 内容可省略。,內容文本或插槽；插槽優先。Message 內容必填，Notification 內容可省略。,"Text or content slot, with slots taking precedence. Message requires content; Notification allows omission."
+分别在 0 / 576 / 768 / 992 / 1200 / 1600px 起生效；未指定的维度继承先前值。,分別在 0 / 576 / 768 / 992 / 1200 / 1600px 起生效；未指定的維度繼承先前值。,Breakpoints start at 0 / 576 / 768 / 992 / 1200 / 1600px. Unspecified dimensions inherit prior values.
+分别请求新的展开/选择数组。控制模式初始化固定，受控父级需写回相应 keys；展开/选择不会隐式触发勾选。,分別請求新的展開/選擇數組。控制模式初始化固定，受控父級需寫回相應 keys；展開/選擇不會隱式觸發勾選。,Request new expanded/selected arrays independently. Modes are fixed at initialization and controlled parents must write back keys. Expansion/selection do not implicitly check nodes.
+分割方向，同时提供 separator 语义。,分割方向，同時提供 separator 語義。,Divider direction with separator semantics.
+分割线,分割線,Divider
+分段控制,分段控制,Segmented
+分组首轮采用 options 和标签插槽，不枚举/克隆任意 children；树形级联、自动全选规则暂不内置。,分組首輪採用 options 和標籤插槽，不枚舉/克隆任意 children；樹形級聯、自動全選規則暫不內置。,Groups use options and label slots without enumerating/cloning arbitrary children. Tree cascading and automatic select-all rules are not built in.
+分隔内容区域，或在一行操作之间建立视觉间隔。,分隔內容區域，或在一行操作之間建立視覺間隔。,Separate content regions or visually divide inline actions.
+分页,分頁,Pagination
+切换即更新，模拟保存期间阻止重复操作；尺寸和禁用状态可组合。,切換即更新，模擬保存期間阻止重復操作；尺寸和禁用狀態可組合。,Changes commit immediately; simulated saving blocks repeat actions. Size and disabled options compose.
+切换同一工作区的内容，支持横纵布局、受控状态和键盘导航。,切換同一工作區的內容，支持橫縱佈局、受控狀態和鍵盤導航。,"Switch content within a workspace, with horizontal/vertical layout, controlled state and keyboard navigation."
+切换状态查看默认标题和图标；操作由业务处理，组件不会自动导航。,切換狀態查看默認標題和圖標；操作由業務處理，組件不會自動導航。,Switch statuses to see default headings and icons. Business code handles actions; the component does not navigate automatically.
+列、插槽、排序筛选、选择和分页。,列、插槽、排序篩選、選擇和分頁。,"Columns, slots, sorting/filtering, selection and pagination."
+列宽 0–24，偏移 0–23；span=0 隐藏，order 控制视觉顺序。,列寬 0–24，偏移 0–23；span=0 隱藏，order 控制視覺順序。,"Span 0–24, offset 0–23; span=0 hides the column and order changes visual order."
+创建时确定位置；每角独立滚动并受视口尺寸约束。,創建時確定位置；每角獨立滾動並受視口尺寸約束。,Placement is fixed at creation. Each corner scrolls independently within viewport constraints.
+初始化 expandedKeys 非 undefined 为受控。defaultExpandAll 仅展开首次已有分支，不无限加载未来节点。default 数组做快照；后续默认值变更不覆盖用户操作。,初始化 expandedKeys 非 undefined 為受控。defaultExpandAll 僅展開首次已有分支，不無限加載未來節點。default 數組做快照；後續默認值變更不覆蓋用戶操作。,"Defined initial expandedKeys selects controlled mode. defaultExpandAll expands only initially available branches, not future lazy nodes. Default arrays are snapshotted and later changes do not overwrite user actions."
+初始化 fileList 非 undefined 时受控，控制模式固定。稳定且唯一的 uid 标识文件。默认列表做快照，不修改传入记录。受控父级必须在 change 中写回列表；拒绝新文件时不会发送请求，外部删除在途文件会取消请求。,初始化 fileList 非 undefined 時受控，控制模式固定。穩定且唯一的 uid 標識文件。默認列表做快照，不修改傳入記錄。受控父級必須在 change 中寫回列表；拒絕新文件時不會發送請求，外部刪除在途文件會取消請求。,A defined initial fileList selects fixed controlled mode. Stable unique uids identify files; defaults are snapshotted without mutating input records. Controlled parents must write back changes. Rejected new files do not upload; removing active files cancels requests.
+初始化 open 非 undefined 为受控；禁用强制隐藏。支持 Arrow、Escape、Tab 和外部点击关闭。,初始化 open 非 undefined 為受控；禁用強制隱藏。支持 Arrow、Escape、Tab 和外部點擊關閉。,"A defined initial open selects controlled mode. Disabling forces panels closed. Arrow keys, Escape, Tab and outside clicks are supported."
+初始化 value 非 undefined 为受控，null 为受控空值；真正清空为字符串空值。父级未接受的草稿在下一显示帧回到 value。,初始化 value 非 undefined 為受控，null 為受控空值；真正清空為字符串空值。父級未接受的草稿在下一顯示幀回到 value。,A defined initial value selects controlled mode; null is controlled empty and clearing emits an empty string. Rejected drafts return to the parent value on the next display frame.
+初始化 value 非 undefined 为受控，null 显式表示受控空值；编辑发出有限数值，清空回传 undefined。草稿保留到失焦/Enter，受控提交后仍以父级 value 为准。,初始化 value 非 undefined 為受控，null 顯式表示受控空值；編輯發出有限數值，清空回傳 undefined。草稿保留到失焦/Enter，受控提交後仍以父級 value 為準。,A defined initial value selects controlled mode; null means empty. Editing emits finite numbers; clearing emits undefined. Drafts remain until blur/Enter; controlled commits still follow the parent value.
+初始化 value 非 undefined 为受控，null 表示受控无选择；父级写回请求，拒绝时保持原值。默认值只初始化。,初始化 value 非 undefined 為受控，null 表示受控無選擇；父級寫回請求，拒絕時保持原值。默認值只初始化。,"A defined initial value selects controlled mode, with null for no selection. Parents accept requests by writing back values; rejection retains the previous selection. Defaults initialize only once."
+初始化 value 非 undefined 时受控；空值使用 null。只在 Enter、离开整个控件、日历选择或面板确认时提交，键入/范围首端/时间草稿不发 change。父级可拒绝请求，下一帧恢复实际值。控制模式初始化固定。,初始化 value 非 undefined 時受控；空值使用 null。只在 Enter、離開整個控件、日曆選擇或面板確認時提交，鍵入/範圍首端/時間草稿不發 change。父級可拒絕請求，下一幀恢復實際值。控制模式初始化固定。,"A defined initial value selects controlled mode; null clears. Change commits only on Enter, leaving the whole control, calendar selection or panel confirmation, not typing or incomplete drafts. Rejected requests revert next frame. Mode is fixed initially."
+初始化存在 selectedRowKeys 时受控，父级需接受新数组。回调数组为新数组，记录仍为业务对象。配置含响应式值和函数时请声明为稳定 VM（见示例），避免 F12 的内联对象回调编译问题。选择 type 初始化固定。,初始化存在 selectedRowKeys 時受控，父級需接受新數組。回調數組為新數組，記錄仍為業務對象。配置含響應式值和函數時請聲明為穩定 VM（見示例），避免 F12 的內聯對象回調編譯問題。選擇 type 初始化固定。,"Initial selectedRowKeys selects controlled mode and parents must accept new arrays. Callback arrays are new, but records retain business identity. Keep reactive configuration objects stable in a VM. Selection type is fixed at initialization."
+初始化显隐模式固定；关闭可受控，closeOnSelect=false 用于保持菜单，不等待业务 Promise。,初始化顯隱模式固定；關閉可受控，closeOnSelect=false 用於保持菜單，不等待業務 Promise。,Visibility mode is fixed initially. Controlled closing is supported; closeOnSelect=false keeps menus open and does not await business Promises.
+初始化有 value 为受控（null 表示受控空值），否则 defaultValue 初始化；之后不切换模式。父级需写回接受值；未接受的草稿在下一显示帧回到 value。清空为字符串空值。,初始化有 value 為受控（null 表示受控空值），否則 defaultValue 初始化；之後不切換模式。父級需寫回接受值；未接受的草稿在下一顯示幀回到 value。清空為字符串空值。,"An initial value selects controlled mode, with null as empty; otherwise defaultValue initializes the field. Mode is fixed. Parents must accept changes; rejected drafts revert next frame. Clearing emits an empty string."
+初始化模式固定，value 非 undefined 为受控，null 是显式受控空值。单选清空 undefined，多选清空 []；on:change 的类型按 mode 区分。,初始化模式固定，value 非 undefined 為受控，null 是顯式受控空值。單選清空 undefined，多選清空 []；on:change 的類型按 mode 區分。,"Mode is fixed initially. A defined value selects controlled mode; null explicitly clears it. Single selection clears to undefined, multiple selection to []. on:change types depend on mode."
+初始化非 undefined 为受控，null 表示受控空选择。选项以外的值不展示；移除选项会归一化显示，不触发 change。默认数组被快照，不随之后的 defaultValue 改变。,初始化非 undefined 為受控，null 表示受控空選擇。選項以外的值不展示；移除選項會歸一化顯示，不觸發 change。默認數組被快照，不隨之後的 defaultValue 改變。,A defined initial value selects controlled mode; null clears. Values outside options are not displayed. Removing options normalizes display without change. Default arrays are snapshotted.
+初始显示月份、周起始日（0 周日）和 Intl 月份/星期语言；按钮和错误文案首轮为中文。上下月、年份输入和月份选择不提交业务值。,初始顯示月份、周起始日（0 周日）和 Intl 月份/星期語言；按鈕和錯誤文案首輪為中文。上下月、年份輸入和月份選擇不提交業務值。,"Initial month, first weekday (0=Sunday) and Intl month/weekday locale. Component button/error copy is currently Chinese. Changing month/year does not commit a business value."
+初轮不做 tags 自动创建、虚拟滚动、超大列表、任意插槽函数动态替换或内置远程请求管理。F09 已独立复现；异步业务负责取消/忽略过期结果。,初輪不做 tags 自動創建、虛擬滾動、超大列表、任意插槽函數動態替換或內置遠程請求管理。F09 已獨立復現；異步業務負責取消/忽略過期結果。,"Creating tags, virtual scrolling, very large lists, dynamic slot replacement and built-in remote request management are deferred. F09 has a separate repro; business code cancels or ignores stale requests."
+初轮不引入复杂插画、设计规范或动效依赖；小视口按内容自然换行。,初輪不引入複雜插畫、設計規範或動效依賴；小視口按內容自然換行。,"Complex illustrations, design guidelines and animation dependencies are out of scope. Content wraps naturally on small viewports."
+前置图标与默认内容插槽。,前置圖標與默認內容插槽。,Leading icon and default content slots.
+加载与禁用,加載與禁用,Loading and disabled
+加载中,加載中,Spin
+加载前展示文字、头像和块级占位，完成后显示实际内容。,加載前展示文字、頭像和塊級佔位，完成後顯示實際內容。,"Text, avatar and block placeholders appear while loading; actual content appears when ready."
+加载和空内容有状态说明。默认插槽必须是稳定的可聚焦 HTML 根；content 可替换默认菜单，复杂交互正文建议用 Popover。,加載和空內容有狀態說明。默認插槽必須是穩定的可聚焦 HTML 根；content 可替換默認菜單，複雜交互正文建議用 Popover。,Loading and empty content have status descriptions. The default slot must have a stable focusable HTML root. content replaces the menu; use Popover for complex interactive content.
+加载开始即设置 aria-busy 和正文 inert，含延迟期间；停止后解除，不主动抓取或恢复焦点。操作入口应放在外部。,加載開始即設置 aria-busy 和正文 inert，含延遲期間；停止後解除，不主動抓取或恢復焦點。操作入口應放在外部。,"Loading immediately sets aria-busy and makes content inert, including during delay. Stopping restores interaction without taking/restoring focus. Put action controls outside."
+加载时正文仍会初始化，业务需要确保数据为空时也能安全渲染。,加載時正文仍會初始化，業務需要確保數據為空時也能安全渲染。,Children initialize while loading. Ensure they can render safely with empty data.
+加载期间不选择旧结果；无结果和加载有 status 说明。浮层默认跟随触发宽度，支持尺寸/滚动跟随与嵌套 Portal。,加載期間不選擇舊結果；無結果和加載有 status 說明。浮層默認跟隨觸發寬度，支持尺寸/滾動跟隨與嵌套 Portal。,"Old results cannot be selected while loading. Loading/empty states have status descriptions. Panels follow trigger width, sizing and scrolling and support nested Portals."
+加载期间保留数据、显示 status 和 aria-busy，并禁用排序、筛选、分页、选择及展开；业务单元格自定义操作仍由业务管理禁用。空态保留表头和跨全部列的提示。,加載期間保留數據、顯示 status 和 aria-busy，並禁用排序、篩選、分頁、選擇及展開；業務單元格自定義操作仍由業務管理禁用。空態保留表頭和跨全部列的提示。,"Loading preserves data, displays status/aria-busy and disables sorting, filters, paging, selection and expansion. Business cell actions manage their own disabled state. Empty tables retain headers and a full-width message."
+加载期间隐藏正文并保留内部输入状态；标题和操作区仍可使用。,加載期間隱藏正文並保留內部輸入狀態；標題和操作區仍可使用。,Loading hides content while preserving internal input state. Title and action areas remain usable.
+加载状态、脉冲动画、status 名称；动画尊重 reduced-motion。,加載狀態、脈衝動畫、status 名稱；動畫尊重 reduced-motion。,"Loading state, pulse animation and status name. Motion respects reduced-motion."
+加载结果按节点对象和完整路径缓存。浏览面板关闭后可以继续缓存结果，不会自动选中；数据替换与卸载中止旧请求。Cascader 不改变传入 options。,加載結果按節點對象和完整路徑緩存。瀏覽面板關閉後可以繼續緩存結果，不會自動選中；數據替換與卸載中止舊請求。Cascader 不改變傳入 options。,Loaded results are cached by node object and full path. Closing browsing panels may finish caching but never selects automatically. Replacing data or unmounting aborts requests. Input options are not mutated.
+动态字段的 schema 不会被组件改写；移除后可缺省的字段应在 schema 中 optional 或通过业务条件规则表达。默认不保留已移除字段的焦点目标。,動態字段的 schema 不會被組件改寫；移除後可缺省的字段應在 schema 中 optional 或通過業務條件規則表達。默認不保留已移除字段的焦點目標。,Components do not rewrite schemas for dynamic fields. Removed optional fields must be optional or conditional in the schema. Removed focus targets are not retained by default.
+勾选父级关联可用子项，部分子项勾选时父级半选。停用部门形成禁用边界；筛选保留祖先并展开路径，清空后恢复原展开状态。选中与勾选分别受控。,勾選父級關聯可用子項，部分子項勾選時父級半選。停用部門形成禁用邊界；篩選保留祖先並展開路徑，清空後恢復原展開狀態。選中與勾選分別受控。,Parent checking links enabled descendants and derives mixed state. Disabled departments form boundaries. Filtering retains ancestors and expands paths; clearing restores expansion. Selection and checking are controlled independently.
+单一路径、逐级选择、可选中间层、路径搜索、异步加载、清空与表单。,單一路徑、逐級選擇、可選中間層、路徑搜索、異步加載、清空與表單。,"Single-path hierarchy selection, optional intermediate levels, path search, async loading, clearing and forms."
+单位毫秒，0 保持显示；负数与非有限值按 0 处理。update(duration) 从更新时重新计时。,單位毫秒，0 保持顯示；負數與非有限值按 0 處理。update(duration) 從更新時重新計時。,Milliseconds; 0 keeps entries open. Negative/nonfinite values behave as 0. update(duration) restarts timing.
+单列升序→降序→取消，比较函数稳定排序且不修改源数据。true 只提供请求按钮，供远程排序。sortOrder 初始化存在时为受控，null 清空；最多一列设置有效受控顺序。,單列升序→降序→取消，比較函數穩定排序且不修改源數據。true 只提供請求按鈕，供遠程排序。sortOrder 初始化存在時為受控，null 清空；最多一列設置有效受控順序。,One-column ascending/descending/none cycle. Comparators sort stably without mutating input. true supplies remote-sort requests only. Initial sortOrder controls state; null clears it. At most one column has an active controlled order.
+单多选、搜索、清空、加载和选项插槽。,單多選、搜索、清空、加載和選項插槽。,"Single/multiple selection, search, clearing, loading and option slots."
+单日期、范围、禁用和格式。,單日期、範圍、禁用和格式。,"Dates, ranges, disabled rules and formatting."
+单行 CSS 省略，需要可约束的宽度。,單行 CSS 省略，需要可約束的寬度。,Single-line CSS ellipsis requires a constrained width.
+单选、多选、搜索和分组，使用 combobox/listbox 键盘与焦点语义。,單選、多選、搜索和分組，使用 combobox/listbox 鍵盤與焦點語義。,"Single/multiple selection, search and groups with combobox/listbox keyboard and focus semantics."
+单选提交空字符串或选中值，多选按同名字段重复提交；数值转原生字符串。非受控 reset 恢复默认快照，受控保持父值。,單選提交空字符串或選中值，多選按同名字段重復提交；數值轉原生字符串。非受控 reset 恢復默認快照，受控保持父值。,Single selection submits empty text or its value; multiple selection repeats the same field name. Numbers serialize as native strings. Reset restores uncontrolled defaults and preserves controlled values.
+单选框,單選框,Radio
+单选默认不搜索，多选默认搜索；showSearch 和 mode 初始化后不变。maxTagCount 仅折叠展示，不丢失选择；多选空查询 Backspace 移除末项。,單選默認不搜索，多選默認搜索；showSearch 和 mode 初始化後不變。maxTagCount 僅折疊展示，不丟失選擇；多選空查詢 Backspace 移除末項。,Search defaults off for single and on for multiple selection. showSearch and mode are fixed initially. maxTagCount folds display without dropping values. Backspace removes the last tag when search is empty.
+单项、分组、半选和禁用。,單項、分組、半選和禁用。,"Single checkboxes, groups, mixed state and disabling."
+单项、分组及键盘切换。,單項、分組及鍵盤切換。,"Single radios, groups and keyboard switching."
+卡片,卡片,Card
+卡片与手动激活,卡片與手動激活,Cards and manual activation
+卡片样式 / 关闭按钮；按钮有可访问名称。,卡片樣式 / 關閉按鈕；按鈕有可訪問名稱。,Card styles / close button with an accessible name.
+危险色、透明底、块级宽度。,危險色、透明底、塊級寬度。,"Danger color, transparent background and full width."
+原始 File 使用公开 vmRaw/vmIgnore 保持浏览器原生内部槽；没有修改 Jinge、读取私有宿主或新增依赖。普通 JSON 元数据仍响应式。,原始 File 使用公開 vmRaw/vmIgnore 保持瀏覽器原生內部槽；沒有修改 Jinge、讀取私有宿主或新增依賴。普通 JSON 元數據仍響應式。,"Original File objects retain native internals via public vmRaw/vmIgnore, without framework changes, private hosts or new dependencies. Plain JSON metadata remains reactive."
+原生 Event / FocusEvent / KeyboardEvent / MouseEvent,原生 Event / FocusEvent / KeyboardEvent / MouseEvent,Native Event / FocusEvent / KeyboardEvent / MouseEvent
+"原生 Temporal 值 | null / 初始值 / (value,event) => void","原生 Temporal 值 | null / 初始值 / (value,event) => void","Native Temporal value | null / initial value / (value,event) => void"
+原生 Temporal 日期与日期范围，严格输入、月历、键盘和表单集成。,原生 Temporal 日期與日期範圍，嚴格輸入、月曆、鍵盤和表單集成。,"Native Temporal dates/ranges, strict input, calendar, keyboard and form integration."
+原生 Temporal.PlainTime，分钟/秒精度、步长、禁用规则和显式确认。,原生 Temporal.PlainTime，分鐘/秒精度、步長、禁用規則和顯式確認。,"Native Temporal.PlainTime with minute/second precision, steps, disabled rules and explicit confirmation."
+原生 checkbox input 使用 role=switch，可用 Space 和 Enter 切换；Enter 不提交表单。提供稳定名称，不依赖开/关状态文案作为名称。,原生 checkbox input 使用 role=switch，可用 Space 和 Enter 切換；Enter 不提交表單。提供穩定名稱，不依賴開/關狀態文案作為名稱。,A native checkbox with role=switch supports Space and Enter. Enter does not submit forms. Provide a stable accessible name independent of on/off labels.
+原生 form.reset 会恢复非受控初值且不触发 change；受控字段仍由父级 value 决定。,原生 form.reset 會恢復非受控初值且不觸發 change；受控字段仍由父級 value 決定。,Native form.reset restores uncontrolled initial values without change; controlled fields still follow the parent value.
+原生 select 对应选项禁用；更改上级可能令当前组合失效，需调整后确认，不自动替换下级选择。,原生 select 對應選項禁用；更改上級可能令當前組合失效，需調整後確認，不自動替換下級選擇。,Native selects disable corresponding options. Changing an earlier column can invalidate the combination; adjust and confirm instead of automatically replacing lower selections.
+原生 select 筛选；默认单选，多选时是原生多选列表，同列多值 OR、不同列 AND。无 onFilter 时按 dataIndex 严格相等匹配。空数组代表全部。,原生 select 篩選；默認單選，多選時是原生多選列表，同列多值 OR、不同列 AND。無 onFilter 時按 dataIndex 嚴格相等匹配。空數組代表全部。,"Native select filters support single/multiple values. Values within one column use OR; columns use AND. Without onFilter, values match dataIndex by strict equality. Empty arrays mean all records."
+原生 select 选择页大小；去重过滤无效项，并补入当前大小，原生表单 reset 不改变组件受控状态。,原生 select 選擇頁大小；去重過濾無效項，並補入當前大小，原生表單 reset 不改變組件受控狀態。,"Native select page-size options are deduplicated and filtered, retaining the current size. Native form reset does not change controlled component state."
+原生 type=number 保留未完成的负号/指数等 badInput 草稿，期间不把它当空值；提交恢复上一次有效数值。真正清空回传 undefined，绝不转成 0。,原生 type=number 保留未完成的負號/指數等 badInput 草稿，期間不把它當空值；提交恢復上一次有效數值。真正清空回傳 undefined，絕不轉成 0。,"Native number inputs preserve unfinished signs/exponents as badInput drafts, not empty values. Committing restores the last valid number. Real clearing emits undefined, never zero."
+原生 type，普通按钮不会意外提交表单。,原生 type，普通按鈕不會意外提交表單。,Native type; ordinary buttons do not accidentally submit forms.
+原生事件；通过 on:change 读取数值，不把 event.target.value 当成归一化结果。,原生事件；通過 on:change 讀取數值，不把 event.target.value 當成歸一化結果。,"Native events. Read normalized numbers through on:change, not event.target.value."
+原生关联 / horizontal | vertical / sm | md | lg,原生關聯 / horizontal | vertical / sm | md | lg,Native association / horizontal | vertical / sm | md | lg
+原生关闭按钮、按钮名称和独立操作区。,原生關閉按鈕、按鈕名稱和獨立操作區。,"Native close button, accessible name and independent action area."
+原生单选、方向键切换和按钮样式，支持单项和分组。,原生單選、方向鍵切換和按鈕樣式，支持單項和分組。,"Native radios, arrow-key selection and button styling, for individual controls or groups."
+原生图片加载结果，失败回调前已请求切换回退。,原生圖片加載結果，失敗回調前已請求切換回退。,Native image load result. Failure requests fallback before invoking the callback.
+原生图片失败事件，不影响说明和操作区。,原生圖片失敗事件，不影響說明和操作區。,"Native image error event, without affecting descriptions or actions."
+原生图片源和候选源，修改后清除失败状态并重试。,原生圖片源和候選源，修改後清除失敗狀態並重試。,Native image and candidate sources. Changes clear failure state and retry.
+原生复选、半选与分组，保留表单及空格键语义。,原生復選、半選與分組，保留表單及空格鍵語義。,"Native checkboxes, mixed state and groups retain form and Space-key semantics."
+原生属性,原生屬性,Native attributes
+原生属性 / boolean / string,原生屬性 / boolean / string,Native attributes / boolean / string
+原生按钮可键盘操作，清空后聚焦输入；计数不主动播报并加入 describedby，保留其他描述 id。,原生按鈕可鍵盤操作，清空後聚焦輸入；計數不主動播報並加入 describedby，保留其他描述 id。,The native clear button supports keyboard operation and refocuses the input. Counts are not live-announced; they join describedby while preserving other ids.
+原生按钮和表单相关属性。,原生按鈕和表單相關屬性。,Native button and form attributes.
+原生按钮有 aria-pressed 和 controls；禁用时不可操作，readonly 仍可切换查看。,原生按鈕有 aria-pressed 和 controls；禁用時不可操作，readonly 仍可切換查看。,Native visibility buttons expose aria-pressed and controls. Disabled controls cannot toggle; read-only fields can still reveal content.
+原生表单使用 JSON 路径字符串；FormField 使用原生路径数组，并将 change 的第一个参数传给字段回调。示例不访问外部服务。,原生表單使用 JSON 路徑字符串；FormField 使用原生路徑數組，並將 change 的第一個參數傳給字段回調。示例不訪問外部服務。,Native forms submit JSON path strings. FormField uses path arrays and forwards the first change argument to field handlers. Demos do not access external services.
+原生表格标题、可访问名称与行样式。保留 table/thead/th/tbody/td 语义，不伪装为 spreadsheet grid。,原生表格標題、可訪問名稱與行樣式。保留 table/thead/th/tbody/td 語義，不偽裝為 spreadsheet grid。,"Native table caption, accessible name and row styles. Retains table/thead/th/tbody/td semantics instead of pretending to be a spreadsheet grid."
+原生触发按钮事件，可与 FormField 触碰/校验绑定。,原生觸發按鈕事件，可與 FormField 觸碰/校驗綁定。,Native trigger-button events for FormField touch/validation integration.
+原生输入 disabled 且 aria-busy=true，阻止键盘/鼠标修改；加载指示遵循 reduced-motion。加载期间与禁用相同，不参与 FormData。,原生輸入 disabled 且 aria-busy=true，阻止鍵盤/鼠標修改；加載指示遵循 reduced-motion。加載期間與禁用相同，不參與 FormData。,"Native inputs become disabled and aria-busy while loading, blocking keyboard/mouse edits. Motion respects reduced-motion. Like disabled controls, loading fields are excluded from FormData."
+原生链接。target=_blank 默认补充 noopener noreferrer。,原生鏈接。target=_blank 默認補充 noopener noreferrer。,Native anchor. target=_blank defaults to noopener noreferrer.
+参与 label、FormData 和原生约束；reset 恢复非受控初值，受控保持父级 value，不触发 change。,參與 label、FormData 和原生約束；reset 恢復非受控初值，受控保持父級 value，不觸發 change。,"Participates in labels, FormData and native constraints. Reset restores uncontrolled defaults, retains parent-controlled values and emits no change."
+参考：https://ant.design/components/pagination/ 。,參考：https://ant.design/components/pagination/ 。,Reference: https://ant.design/components/pagination/ .
+参考：https://ant.design/components/segmented/ 。,參考：https://ant.design/components/segmented/ 。,Reference: https://ant.design/components/segmented/ .
+参考：https://ant.design/components/steps/ 。,參考：https://ant.design/components/steps/ 。,Reference: https://ant.design/components/steps/ .
+参考：https://ant.design/components/table/ 和 https://element-plus.org/en-US/component/table.html 。,參考：https://ant.design/components/table/ 和 https://element-plus.org/en-US/component/table.html 。,References: https://ant.design/components/table/ and https://element-plus.org/en-US/component/table.html .
+参考：https://ant.design/components/tabs/ 和 https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ 。,參考：https://ant.design/components/tabs/ 和 https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ 。,References: https://ant.design/components/tabs/ and https://www.w3.org/WAI/ARIA/apg/patterns/tabs/ .
+双月历选择两个端点才提交，支持悬浮预览；反向点击自动排序，文本输入必须按开始/结束顺序。,雙月曆選擇兩個端點才提交，支持懸浮預覽；反向點擊自動排序，文本輸入必須按開始/結束順序。,"Two calendars commit after both endpoints are selected, with hover preview. Reverse clicks are sorted; typed text must remain start/end ordered."
+反馈,反饋,Feedback
+发布流程,發佈流程,Release workflow
+取消事件只由取消按钮触发；点击触发器、Esc 或允许的外部点击仅请求关闭。,取消事件只由取消按鈕觸發；點擊觸發器、Esc 或允許的外部點擊僅請求關閉。,"Only the cancel button emits cancel. Trigger clicks, Escape and permitted outside clicks request closing only."
+取消按钮、关闭按钮、允许的遮罩或 Escape 触发 cancel；实际关闭后触发 afterClose，owner 卸载不触发。,取消按鈕、關閉按鈕、允許的遮罩或 Escape 觸發 cancel；實際關閉後觸發 afterClose，owner 卸載不觸發。,"Cancel buttons, close buttons, permitted backdrop clicks or Escape emit cancel. afterClose follows actual closing; owner unmount does not emit it."
+取消按钮事件 / 错误回调，未指定 error 时 console.error。,取消按鈕事件 / 錯誤回調，未指定 error 時 console.error。,"Cancel event / error callback, defaulting to console.error."
+受控 / 非受控显隐。初始化后不切换模式。,受控 / 非受控顯隱。初始化後不切換模式。,Controlled/uncontrolled visibility; mode does not change after initialization.
+受控 / 默认可见 / 用户关闭请求，初始化后不切换模式。,受控 / 默認可見 / 用戶關閉請求，初始化後不切換模式。,Controlled / default visibility / user close requests; mode is fixed initially.
+受控 / 默认可见；初始化后不切换模式。,受控 / 默認可見；初始化後不切換模式。,Controlled / default visibility; mode is fixed initially.
+受控 / 默认展开 / 用户请求。忽略重复与不存在的 key；受控数组原地修改同样更新。初始化后不切换控制模式。,受控 / 默認展開 / 用戶請求。忽略重復與不存在的 key；受控數組原地修改同樣更新。初始化後不切換控制模式。,Controlled / default expansion / user requests. Duplicate and missing keys are ignored; controlled array mutations also update. Mode is fixed initially.
+受控 / 默认明文显示 / 切换请求；切换不触发文本 change，初始化后不切换可见性的控制模式。,受控 / 默認明文顯示 / 切換請求；切換不觸發文本 change，初始化後不切換可見性的控制模式。,Controlled / default plain-text visibility / toggle requests. Toggling does not change text. Visibility mode is fixed initially.
+受控/初始值。未传时选首个可用项；非受控删除或禁用当前项后回退首个可用项，结构同步不触发 change。受控无效 key 不选中任何项。控制模式初始化固定。,受控/初始值。未傳時選首個可用項；非受控刪除或禁用當前項後回退首個可用項，結構同步不觸發 change。受控無效 key 不選中任何項。控制模式初始化固定。,Controlled/initial value; defaults to the first enabled tab. Uncontrolled removal/disabling falls back without change events. Invalid controlled keys select nothing. Mode is fixed initially.
+受控/初始值；未指定时选首个可用项。非受控当前项被移除或禁用后回退；受控 null 或无效值为空选择。控制模式初始化固定。,受控/初始值；未指定時選首個可用項。非受控當前項被移除或禁用後回退；受控 null 或無效值為空選擇。控制模式初始化固定。,Controlled/initial value; defaults to the first enabled option. Uncontrolled removal/disabling falls back; controlled null/invalid values select nothing. Mode is fixed initially.
+"受控/初始展开行；移除记录时清理，不保留未加载行。on:expand(open,row) 和 on:expandedRowsChange(keys) 发送请求。","受控/初始展開行；移除記錄時清理，不保留未加載行。on:expand(open,row) 和 on:expandedRowsChange(keys) 發送請求。","Controlled/initial expanded rows. Removed records are cleaned up; unloaded rows are not retained. on:expand(open,row) and on:expandedRowsChange(keys) request changes."
+受控/初始每页条数，与 current 分别控制；用户修改页大小请求第 1 页。无效值回退 10。,受控/初始每頁條數，與 current 分別控制；用戶修改頁大小請求第 1 頁。無效值回退 10。,"Controlled/initial page size, independent of current. User size changes request page 1; invalid sizes fall back to 10."
+受控/初始浮层，禁用或只读会关闭并禁止打开。输入点击打开不抢焦点，ArrowDown 或图标打开后进入面板；Escape 取消草稿并回输入。Tab 正常遍历面板，在边界返回触发位置后离开。,受控/初始浮層，禁用或只讀會關閉並禁止打開。輸入點擊打開不搶焦點，ArrowDown 或圖標打開後進入面板；Escape 取消草稿並回輸入。Tab 正常遍歷面板，在邊界返回觸發位置後離開。,Controlled/initial panel visibility. Disabled/read-only closes and prevents opening. Input clicks open without stealing focus; ArrowDown/icon opening focuses the panel. Escape discards drafts and refocuses input; Tab traverses normally and exits at boundaries.
+受控/初始过滤值。受控父级拒绝请求时恢复原生选择显示；结构同步不发 change。筛选/排序请求回到第 1 页。控制模式初始化固定。,受控/初始過濾值。受控父級拒絕請求時恢復原生選擇顯示；結構同步不發 change。篩選/排序請求回到第 1 頁。控制模式初始化固定。,Controlled/initial filtered values. Rejected requests restore native selection. Structural sync emits no change. Filtering/sorting request page 1. Mode is fixed initially.
+受控/初始页码，从 1 开始；越界自动按总量和页大小收敛。外部总量变化不发 change。控制模式初始化固定。,受控/初始頁碼，從 1 開始；越界自動按總量和頁大小收斂。外部總量變化不發 change。控制模式初始化固定。,Controlled/initial page number starts at 1 and is clamped to total/size. External totals do not emit change. Mode is fixed initially.
+受控与手风琴,受控與手風琴,Controlled state and accordion
+受控关闭可恢复；on:close 中 preventDefault 可以保留固定标签。,受控關閉可恢復；on:close 中 preventDefault 可以保留固定標籤。,Controlled closing can restore tags; preventDefault in on:close keeps pinned tags.
+受控切换、禁用与面板保留；输入值保存在父级 VM，销毁内容后也能恢复。,受控切換、禁用與面板保留；輸入值保存在父級 VM，銷毀內容後也能恢復。,"Controlled tabs, disabling and retained panels. Inputs are kept in the parent VM and survive content destruction."
+受控定位,受控定位,Controlled placement
+受控或非受控的折叠状态；初始化后不切换模式。,受控或非受控的折疊狀態；初始化後不切換模式。,Controlled/uncontrolled collapsed state; mode is fixed initially.
+受控显隐 / 默认显隐，初始化后不切换模式。Modal 默认打开，Drawer 默认关闭。,受控顯隱 / 默認顯隱，初始化後不切換模式。Modal 默認打開，Drawer 默認關閉。,"Controlled/default visibility, fixed initially. Modal opens by default; Drawer starts closed."
+受控父级需写回每次 change 的完整列表，包含状态与进度。外部传入 uploading 只展示状态，不代表组件持有或恢复该请求；恢复传输请重新添加原始 File 为 ready 或使用 start。,受控父級需寫回每次 change 的完整列表，包含狀態與進度。外部傳入 uploading 只展示狀態，不代表組件持有或恢復該請求；恢復傳輸請重新添加原始 File 為 ready 或使用 start。,"Controlled parents must write back complete lists, including progress and status. External uploading records are display-only and do not restore requests; add the original File as ready or call start."
+受控空字段初始请传 null，初始化后不切换控制模式；外框稳定，className/style 作用于外框。,受控空字段初始請傳 null，初始化後不切換控制模式；外框穩定，className/style 作用於外框。,Use initial null for controlled empty fields; mode is fixed afterward. className/style target the stable outer wrapper.
+只在用户选择新值时触发。原生 radio 的短暂勾选会在下一帧按父值校正，支持父级拒绝请求。,只在用戶選擇新值時觸發。原生 radio 的短暫勾選會在下一幀按父值校正，支持父級拒絕請求。,"Fires only for a user-selected new value. Temporary native radio checks revert next frame to the parent value, supporting rejected requests."
+可交互浮层与内容插槽。,可交互浮層與內容插槽。,Interactive floating panels and content slots.
+可使用键盘操作切换按钮；只读示例可关闭切换入口。,可使用鍵盤操作切換按鈕；只讀示例可關閉切換入口。,Keyboard-operable toggle button; read-only examples can hide the toggle entry.
+可关联 label/FormField。combobox 控制一个 listbox，列为命名 group，选项以完整路径命名，aria-activedescendant 保留触发器焦点。,可關聯 label/FormField。combobox 控制一個 listbox，列為命名 group，選項以完整路徑命名，aria-activedescendant 保留觸發器焦點。,Associates with labels/FormField. The combobox controls one listbox; columns are named groups and full paths name options. aria-activedescendant keeps focus on the trigger.
+可折叠侧栏,可折疊側欄,Collapsible sidebar
+可用状态下的原生点击事件。,可用狀態下的原生點擊事件。,Native click event when enabled.
+可见 input 原生参与表单、required/minLength/maxLength 校验和 label；reset 非受控恢复初值，受控保持父值，不触发 change/search。,可見 input 原生參與表單、required/minLength/maxLength 校驗和 label；reset 非受控恢復初值，受控保持父值，不觸發 change/search。,"The visible input participates in native forms, required/minLength/maxLength validation and labels. Uncontrolled reset restores defaults; controlled reset follows the parent, without change/search."
+可见文本参与原生校验，另一个 hidden input 按 ISO 提交 name 值；form 支持外部表单关联。reset 恢复非受控初始值，受控保留父值，不发 change。autocomplete 固定 off。,可見文本參與原生校驗，另一個 hidden input 按 ISO 提交 name 值；form 支持外部表單關聯。reset 恢復非受控初始值，受控保留父值，不發 change。autocomplete 固定 off。,Visible text uses native validation; a hidden input submits ISO values. External forms are supported. Reset restores uncontrolled defaults or parent values without change. autocomplete stays off.
+可见标签，默认插槽优先；交互控件不要嵌套在 label 内。无可见文本时必须提供 ariaLabel/ariaLabelledby。,可見標籤，默認插槽優先；交互控件不要嵌套在 label 內。無可見文本時必須提供 ariaLabel/ariaLabelledby。,Visible label; the default slot wins. Do not nest interactive controls inside labels. Provide ariaLabel/ariaLabelledby when no visible text exists.
+可访问名称和状态,可訪問名稱和狀態,Accessible name and state
+可访问名称和说明,可訪問名稱和說明,Accessible name and description
+可访问名称和错误说明传给原生控件；错误状态默认设置 aria-invalid，可显式覆盖。,可訪問名稱和錯誤說明傳給原生控件；錯誤狀態默認設置 aria-invalid，可顯式覆蓋。,Accessible names and error descriptions target native controls. Error status defaults aria-invalid and can be overridden explicitly.
+可返回 Promise、false 或 { result }。false 或错误保持打开；期间去重，关闭后的旧请求不能影响新一轮打开。,可返回 Promise、false 或 { result }。false 或錯誤保持打開；期間去重，關閉後的舊請求不能影響新一輪打開。,"Can return Promise, false or { result }. False/errors keep panels open. Pending actions are deduplicated and obsolete requests cannot affect reopened panels."
+可选头像占位，非法尺寸回退 40px。,可選頭像佔位，非法尺寸回退 40px。,Optional avatar placeholder; invalid sizes fall back to 40px.
+同 Floating,同 Floating,Same as Floating
+同 Modal 的配置，正文用 content 或 slot:content；独立根无法继承调用方 context。Promise 在卸载清理后完成。,同 Modal 的配置，正文用 content 或 slot:content；獨立根無法繼承調用方 context。Promise 在卸載清理後完成。,"Same configuration as Modal, with content/slot:content. Independent roots cannot inherit caller context. Promises settle after unmount cleanup."
+同组方向键跳过禁用选项，Tab 进入下一组；按钮样式保留原生键盘语义。,同組方向鍵跳過禁用選項，Tab 進入下一組；按鈕樣式保留原生鍵盤語義。,Group arrow navigation skips disabled items; Tab enters the next group. Button styling retains native keyboard semantics.
+名称/说明/错误状态,名稱/說明/錯誤狀態,Name / description / error state
+后台导航,後台導航,Admin navigation
+含边界上下限与逐日禁用；范围检查两个端点，允许中间经过禁用日期。函数固定或用新函数触发配置更新，外部闭包变化不会自动重新枚举日期。,含邊界上下限與逐日禁用；範圍檢查兩個端點，允許中間經過禁用日期。函數固定或用新函數觸發配置更新，外部閉包變化不會自動重新枚舉日期。,"Boundary limits and per-day disabling. Ranges validate endpoints, allowing disabled dates between them. Replace functions to update configuration; changes to external closure state do not re-enumerate dates automatically."
+命名 radiogroup、关联说明和错误，legend 可提供可见标题。className/style 作用于 fieldset。,命名 radiogroup、關聯說明和錯誤，legend 可提供可見標題。className/style 作用於 fieldset。,"Named radiogroup, descriptions and errors, with legend for a visible title. className/style target the fieldset."
+响应式与间距,響應式與間距,Responsive layout and spacing
+响应式判断依据视口宽度，不是父容器宽度。,響應式判斷依據視口寬度，不是父容器寬度。,"Responsive rules use viewport width, not parent-container width."
+响应式字段插槽数据,響應式字段插槽數據,Reactive field slot data
+响应式按视口宽度变化，不自动测量外层容器，也不做精确表格列对齐。,響應式按視口寬度變化，不自動測量外層容器，也不做精確表格列對齊。,Responds to viewport width without measuring its container or enforcing exact table-column alignment.
+响应式详情,響應式詳情,Responsive details
+唯一 key、title、description、disabled、status；固定 slot:title/description/icon 支持自定义内容，标题插槽不要嵌套交互控件。,唯一 key、title、description、disabled、status；固定 slot:title/description/icon 支持自定義內容，標題插槽不要嵌套交互控件。,"Unique key, title, description, disabled and status. Fixed title/description/icon slots customize content; do not nest interactive controls in titles."
+唯一 key、文本 label、href/target/rel/disabled，及初始化固定的 slot:label/slot:icon。最后一项为当前页，显示文本而不导航。,唯一 key、文本 label、href/target/rel/disabled，及初始化固定的 slot:label/slot:icon。最後一項為當前頁，顯示文本而不導航。,"Unique key, text label, href/target/rel/disabled and fixed label/icon slots. The final item is the current page and does not navigate."
+唯一 key（string/number）、label、disabled、ariaLabel、content；固定 slot:label/icon/content 支持自定义展示。不放嵌套交互控件到标签中。,唯一 key（string/number）、label、disabled、ariaLabel、content；固定 slot:label/icon/content 支持自定義展示。不放嵌套交互控件到標籤中。,"Unique string/number key, label, disabled, ariaLabel and content. Fixed label/icon/content slots allow custom rendering; tab labels should not contain nested controls."
+唯一 value（string/number）、label、disabled、id、初始化固定 slot:label；复杂图文/图标通过 label 插槽组合，并提供可访问文本。,唯一 value（string/number）、label、disabled、id、初始化固定 slot:label；複雜圖文/圖標通過 label 插槽組合，並提供可訪問文本。,"Unique string/number value, label, disabled, id and fixed label slot. Compose rich text/icons with label slots and supply accessible text."
+四个方向和自定义页脚；关联记录展示第二层抽屉。,四個方向和自定義頁腳；關聯記錄展示第二層抽屜。,Four placements and custom footers; related records open a second drawer.
+四个角落展示；通知中的操作完成后可显式关闭，鼠标和焦点停留期间暂停计时。,四個角落展示；通知中的操作完成後可顯式關閉，鼠標和焦點停留期間暫停計時。,Four corners with explicit action-driven closing. Hover and focus pause timing.
+四种状态和图标；showIcon=false 也隐藏自定义图标。,四種狀態和圖標；showIcon=false 也隱藏自定義圖標。,Four statuses and icons. showIcon=false also hides custom icons.
+四种结果和三个常见错误页，复用内置图标或状态码，不依赖外部插画。,四種結果和三個常見錯誤頁，復用內置圖標或狀態碼，不依賴外部插畫。,"Four result states and three common error pages, using built-in icons/status codes without external illustrations."
+团队成员列表,團隊成員列表,Team members
+固定列偏移通过公开 DOM ref/ResizeObserver 测量，卸载清理；不改变框架、克隆插槽或接管 DOM 行渲染。大数据请服务端分页，暂不承诺虚拟列表性能。,固定列偏移通過公開 DOM ref/ResizeObserver 測量，卸載清理；不改變框架、克隆插槽或接管 DOM 行渲染。大數據請服務端分頁，暫不承諾虛擬列表性能。,"Fixed offsets use public DOM refs and ResizeObserver with cleanup. No framework modifications, slot cloning or DOM-row takeover. Use server paging for large datasets; virtualization performance is not promised."
+固定或六档响应式列数；范围 1–6，遗漏断点继承前档，初始为 1。使用与 Grid 相同的视口断点。,固定或六檔響應式列數；範圍 1–6，遺漏斷點繼承前檔，初始為 1。使用與 Grid 相同的視口斷點。,"Fixed or responsive column counts, 1–6, with missing breakpoints inheriting previous values. Initially one column. Uses Grid viewport breakpoints."
+图标,圖標,Icon
+图标开关、自定义图标、操作区与结果详情；图标是装饰性内容。,圖標開關、自定義圖標、操作區與結果詳情；圖標是裝飾性內容。,"Icon toggle, custom icons, action area and result details. Icons are decorative."
+图标插槽 / 触发器。,圖標插槽 / 觸發器。,Icon slot / trigger.
+图标获得 img 语义；LoadingOutlined 获得 status 语义。未指定时为装饰元素。,圖標獲得 img 語義；LoadingOutlined 獲得 status 語義。未指定時為裝飾元素。,Named icons use img semantics; LoadingOutlined uses status. Unnamed icons are decorative.
+图片 URL 或插槽；false 隐藏全部插图。URL 加载失败回退到内置 SVG，换源后重试。,圖片 URL 或插槽；false 隱藏全部插圖。URL 加載失敗回退到內置 SVG，換源後重試。,Image URL or slot; false hides illustrations. URL errors fall back to built-in SVG; changing the source retries.
+图片、文字、图标与失败回退。,圖片、文字、圖標與失敗回退。,"Image, text, icons and failure fallback."
+图片、文字或图标头像，支持失败回退和重试，提供可访问名称。,圖片、文字或圖標頭像，支持失敗回退和重試，提供可訪問名稱。,"Image, text or icon avatars with failure fallback, retry and accessible names."
+图片失败后显示文字；切换源后重新尝试加载。,圖片失敗後顯示文字；切換源後重新嘗試加載。,Text appears after image failure; changing the source retries loading.
+图片失败或未提供图片时回退；优先文字内容，其次图标，最后 alt 首字符或 ?。,圖片失敗或未提供圖片時回退；優先文字內容，其次圖標，最後 alt 首字符或 ?。,"Falls back when the image fails or is absent: text, then icon, then the first alt character or ?."
+圆形或圆角方形。,圓形或圓角方形。,Circle or rounded square.
+圆点或状态优先于计数；text 是相邻说明。,圓點或狀態優先於計數；text 是相鄰說明。,Dots/status override counts; text provides an adjacent description.
+在视口四角展示较详细的信息和操作，支持自定义内容、图标与按钮。,在視口四角展示較詳細的信息和操作，支持自定義內容、圖標與按鈕。,"Detailed notices and actions at viewport corners, with custom content, icons and buttons."
+在触发操作附近进行确认。支持同步/异步确认、返回 false 阻止关闭，以及错误反馈。,在觸發操作附近進行確認。支持同步/異步確認、返回 false 阻止關閉，以及錯誤反饋。,"Confirm near the trigger, synchronously or asynchronously. Returning false prevents closing; errors provide feedback."
+在页面内展示需要关注的信息，可附带说明和明确操作。,在頁面內展示需要關注的信息，可附帶說明和明確操作。,"In-page information needing attention, with descriptions and explicit actions."
+块默认装饰性隐藏；显式命名时独立成为 status。,塊默認裝飾性隱藏；顯式命名時獨立成為 status。,Blocks are decorative by default; explicitly named blocks become independent status regions.
+垂直子菜单原地展开，水平子菜单 Portal 显示；点击或键盘展开。disabled 作用于整棵树，父级禁用传到后代。,垂直子菜單原地展開，水平子菜單 Portal 顯示；點擊或鍵盤展開。disabled 作用於整棵樹，父級禁用傳到後代。,Vertical submenus expand inline; horizontal submenus use Portals. Click or keyboard opens them. Parent disabled state applies to the whole subtree.
+垂直展开和水平菜单，支持原生链接、选择、分组及键盘焦点。,垂直展開和水平菜單，支持原生鏈接、選擇、分組及鍵盤焦點。,"Vertical and horizontal menus with native links, selection, groups and keyboard focus."
+基于 24 列的响应式布局，使用 CSS 媒体查询，不监听窗口尺寸。,基於 24 列的響應式佈局，使用 CSS 媒體查詢，不監聽窗口尺寸。,"A responsive 24-column layout using CSS media queries, without window resize listeners."
+基础、文本域、密码、清空和输入法处理。,基礎、文本域、密碼、清空和輸入法處理。,"Basic input, textarea, passwords, clearing and IME handling."
+基础机制,基礎機制,Infrastructure
+复用 Floating 的嵌套、定位、清理及模态层上下文；关闭立即卸载。右键坐标菜单、自动拆分按钮和复杂级联弹出菜单不在首轮范围。,復用 Floating 的嵌套、定位、清理及模態層上下文；關閉立即卸載。右鍵坐標菜單、自動拆分按鈕和複雜級聯彈出菜單不在首輪範圍。,"Reuses Floating nesting, positioning, cleanup and modal context. Closing unmounts immediately. Context-coordinate menus, automatic split buttons and complex cascading popups are deferred."
+复用 Floating；键盘 ArrowDown/Up、Enter/Space 可打开，Escape/Tab 关闭并处理焦点。,復用 Floating；鍵盤 ArrowDown/Up、Enter/Space 可打開，Escape/Tab 關閉並處理焦點。,"Reuses Floating; ArrowUp/Down and Enter/Space open, Escape/Tab close with focus handling."
+复用 Pagination；current/defaultCurrent、pageSize/defaultPageSize 独立控制，支持大小选择、总数、跳转/精简/隐藏单页。未启用时显示所有记录；本地总数使用过滤后条数。,復用 Pagination；current/defaultCurrent、pageSize/defaultPageSize 獨立控制，支持大小選擇、總數、跳轉/精簡/隱藏單頁。未啓用時顯示所有記錄；本地總數使用過濾後條數。,"Reuses Pagination with independent current/page-size modes, size choices, totals, jump/simple modes and single-page hiding. Without paging, all records show; local totals follow filtering."
+复用 Radio 与已有组状态逻辑。原生方向键移动并选中，跳过禁用项，Tab 进入组内选中项；与 Tabs 不同，本组件不创建关联内容面板。,復用 Radio 與已有組狀態邏輯。原生方向鍵移動並選中，跳過禁用項，Tab 進入組內選中項；與 Tabs 不同，本組件不創建關聯內容面板。,"Reuses native Radio and group state. Arrows move and select, skip disabled items and Tab enters the selected item. Unlike Tabs, this component does not create associated panels."
+外层 role=img 的可访问名称；内部图片为空 alt，避免重复朗读。,外層 role=img 的可訪問名稱；內部圖片為空 alt，避免重復朗讀。,Accessible name for the outer role=img; internal images use empty alt to avoid duplicate announcements.
+外层样式入口。,外層樣式入口。,Outer style hooks.
+外层样式入口；图片 cover 裁切，长文字单行裁切。,外層樣式入口；圖片 cover 裁切，長文字單行裁切。,"Outer styles, cover-cropped images and single-line text clipping."
+外框现在是稳定 span，className/style 作用于外框；id/name/ARIA/ref 方法作用于原生控件。与 Tooltip 组合需要把提示 id 显式传入 ariaDescribedby，避免只给外框建立描述关系。,外框現在是穩定 span，className/style 作用於外框；id/name/ARIA/ref 方法作用於原生控件。與 Tooltip 組合需要把提示 id 顯式傳入 ariaDescribedby，避免只給外框建立描述關係。,"A stable outer span owns className/style; id/name/ARIA/ref methods target the native control. With Tooltip, pass its id explicitly to ariaDescribedby rather than describing only the wrapper."
+外部鼠标/触摸关闭 / Esc 关闭最上层浮层。,外部鼠標/觸摸關閉 / Esc 關閉最上層浮層。,Outside mouse/touch closing / Escape closes the topmost panel.
+多行文本、清空和计数，支持按内容及宽度自动调整高度。,多行文本、清空和計數，支持按內容及寬度自動調整高度。,"Multiline text, clearing and counts with automatic content/width-based sizing."
+多行输入,多行輸入,TextArea
+多选 change 为去重的新数组，父级需写回受控请求；选项内容按唯一 value 保持身份。搜索单选的已选文案使用纯文本 label；selection 插槽用于非搜索单选及多选标签。,多選 change 為去重的新數組，父級需寫回受控請求；選項內容按唯一 value 保持身份。搜索單選的已選文案使用純文本 label；selection 插槽用於非搜索單選及多選標籤。,Multiple changes emit new deduplicated arrays for parent acceptance. Options keep value-based identity. Searchable single selection uses plain labels; selection slots customize non-search single selections and multiple tags.
+多选框,多選框,Checkbox
+失焦、Enter 和步进时限制边界与精度（0–15 位）；边界优先。要求 min ≤ max；外部 value 或范围更新不静默裁剪值、不触发 change。,失焦、Enter 和步進時限制邊界與精度（0–15 位）；邊界優先。要求 min ≤ max；外部 value 或範圍更新不靜默裁剪值、不觸發 change。,"Blur, Enter and stepping clamp bounds and precision (0–15 digits), with bounds taking precedence. Requires min <= max. External values/range changes are not silently clamped and emit no change."
+头像,頭像,Avatar
+姓名转换、邮箱异步校验、跨字段密码确认、选择/开关、动态备注和提交/重置。,姓名轉換、郵箱異步校驗、跨字段密碼確認、選擇/開關、動態備注和提交/重置。,"Name conversion, async email validation, matching passwords, choices/switches, dynamic notes and submit/reset."
+字段/批量赋值、服务端错误、清错、重置,字段/批量賦值、服務端錯誤、清錯、重置,"Field/batch assignment, server errors, error clearing and reset"
+字段也校验完整数据快照，保留对象 refine/superRefine，嵌套错误归到顶层字段，无 path 的错误放 status.formError。过期结果不覆盖 UI，不作为有效提交。,字段也校驗完整數據快照，保留對象 refine/superRefine，嵌套錯誤歸到頂層字段，無 path 的錯誤放 status.formError。過期結果不覆蓋 UI，不作為有效提交。,"Fields validate full snapshots, retaining object refine/superRefine. Nested errors map to the top field; errors without paths use status.formError. Stale results do not update UI or count as valid submissions."
+字段内标签和值的方向、边框、水平冒号与间距。,字段內標籤和值的方向、邊框、水平冒號與間距。,"Label/value direction, borders, horizontal colons and spacing within a field."
+字段名首轮只支持顶层字符串键；嵌套数据可以整体赋值/校验，错误归到第一段路径。任意路径 Controller、Form.List、Schema 表单生成器暂缓。,字段名首輪只支持頂層字符串鍵；嵌套數據可以整體賦值/校驗，錯誤歸到第一段路徑。任意路徑 Controller、Form.List、Schema 表單生成器暫緩。,"Only top-level string field names are supported initially. Nested data can be assigned/validated as a whole; errors map to the first path segment. Arbitrary paths, Form.List and schema-driven generators are deferred."
+字段绑定、提交重置和同步/异步校验。,字段綁定、提交重置和同步/異步校驗。,"Field binding, submit/reset and synchronous/asynchronous validation."
+安全通道、定位与键盘参数。,安全通道、定位與鍵盤參數。,"Safe pointer corridors, positioning and keyboard options."
+完整时间组合的额外校验；不推断所有列的组合可达性，当前组合禁用时显示状态并禁止确认。此刻按钮也需符合所有规则。,完整時間組合的額外校驗；不推斷所有列的組合可達性，當前組合禁用時顯示狀態並禁止確認。此刻按鈕也需符合所有規則。,Additional full-time validation does not infer all reachable column combinations. Disabled combinations show status and block confirmation. Now must also satisfy all rules.
+完整路径进入业务字段，支持必填校验、首错焦点、保存与重置。数字 0 原样保留。,完整路徑進入業務字段，支持必填校驗、首錯焦點、保存與重置。數字 0 原樣保留。,"Full paths bind to business fields, with required validation, first-error focus, saving and reset. Numeric zero is preserved."
+实例 / horizontal | vertical | inline / string | number / sm | md | lg / boolean,實例 / horizontal | vertical | inline / string | number / sm | md | lg / boolean,Instance / horizontal | vertical | inline / string | number / sm | md | lg / boolean
+实际内容和根样式入口；初次完成后使用 hidden 保留挂载。,實際內容和根樣式入口；初次完成後使用 hidden 保留掛載。,"Actual content and root styles. After initial loading, hidden preserves mounted state."
+客户姓名与表单,客戶姓名與表單,Customer name and forms
+宽度；预设 360/520/800px；默认居中，false 时距顶部 10vh。均受视口约束。,寬度；預設 360/520/800px；默認居中，false 時距頂部 10vh。均受視口約束。,Width with 360/520/800px presets. Centered by default; false offsets 10vh from the top. Sizes remain viewport constrained.
+密码输入,密碼輸入,Password
+对话框,對話框,Modal
+对话框名称与定位参数。,對話框名稱與定位參數。,Dialog accessible name and positioning options.
+导航,導航,Navigation
+导航、分组、展开、选中与键盘交互。,導航、分組、展開、選中與鍵盤交互。,"Navigation, grouping, expansion, selection and keyboard interaction."
+导航只发出请求，不自行请求数据或滚动页面；远程列表可将 current/pageSize/total 绑定到业务状态。,導航只發出請求，不自行請求數據或滾動頁面；遠程列表可將 current/pageSize/total 綁定到業務狀態。,Navigation emits requests without fetching data or scrolling. Bind current/pageSize/total to remote business state.
+导航菜单,導航菜單,Menu
+小尺寸完成流程,小尺寸完成流程,Compact workflow
+小时 1–24、分秒 1–60 的整数步长，无效参数回退 1。输入和确认都校验整除规则；已传入的非步长值在面板保留为不可选项，不自动悄悄改值。,小時 1–24、分秒 1–60 的整數步長，無效參數回退 1。輸入和確認都校驗整除規則；已傳入的非步長值在面板保留為不可選項，不自動悄悄改值。,Integer hour steps 1–24 and minute/second steps 1–60; invalid steps default to 1. Input/confirmation enforce divisibility. Existing off-step values stay visible but unselectable rather than changing silently.
+尺寸、外层样式和无结果/空数据说明。,尺寸、外層樣式和無結果/空數據說明。,"Size, wrapper styles and no-results/empty descriptions."
+尺寸、延迟与内容遮罩,尺寸、延遲與內容遮罩,"Sizes, delay and content blocking"
+尺寸、状态、外层样式、占位/空态和初始焦点。,尺寸、狀態、外層樣式、佔位/空態和初始焦點。,"Sizes, states, wrapper styles, placeholder/empty text and initial focus."
+尺寸、说明和容器覆盖。,尺寸、說明和容器覆蓋。,"Sizes, descriptions and container overlays."
+尺寸、边框与外框样式。className/style 现在作用于 ja-table-container，表格仍有 ja-table 类。,尺寸、邊框與外框樣式。className/style 現在作用於 ja-table-container，表格仍有 ja-table 類。,"Size, border and wrapper styles. className/style target ja-table-container; the table retains ja-table."
+尺寸、颜色与加载,尺寸、顏色與加載,"Sizes, colors and loading"
+尺寸与形状,尺寸與形狀,Sizes and shapes
+尺寸和外框样式；原生控件仍带 ja-input。动态清空/计数/前后缀不重建控件。,尺寸和外框樣式；原生控件仍帶 ja-input。動態清空/計數/前後綴不重建控件。,"Size and wrapper styles; native controls retain ja-input. Dynamic clearing, counts and affixes do not rebuild the input."
+层级展开、选择、关联或独立勾选、过滤、异步加载与键盘导航。,層級展開、選擇、關聯或獨立勾選、過濾、異步加載與鍵盤導航。,"Hierarchy expansion, selection, linked/independent checking, filtering, async loading and keyboard navigation."
+层级选项、禁用、加载与键盘交互。,層級選項、禁用、加載與鍵盤交互。,"Hierarchical options, disabling, loading and keyboard interaction."
+展开、手风琴和键盘操作。,展開、手風琴和鍵盤操作。,"Expansion, accordion mode and keyboard operation."
+展开、选择、勾选、过滤和加载。,展開、選擇、勾選、過濾和加載。,"Expansion, selection, checking, filtering and loading."
+展开和折叠宽度，数值为像素。,展開和折疊寬度，數值為像素。,Expanded/collapsed widths; numbers are pixels.
+展开模式初始化固定，按父子关系清理关闭项；手风琴关闭同级及其后代，移除选项会归一化展开。,展開模式初始化固定，按父子關係清理關閉項；手風琴關閉同級及其後代，移除選項會歸一化展開。,Expansion mode is fixed initially. Parent-child relationships clean up closed branches; accordion mode closes siblings and descendants. Removing options normalizes expansion.
+展开详情与逐行可展开判断；原生按钮提供 aria-expanded/controls。关闭立即销毁详情，跨销毁需要保留的值放业务 VM。分页隐藏行时详情也卸载。,展開詳情與逐行可展開判斷；原生按鈕提供 aria-expanded/controls。關閉立即銷毀詳情，跨銷毀需要保留的值放業務 VM。分頁隱藏行時詳情也卸載。,Expandable details with per-row eligibility and native aria-expanded/controls buttons. Closing or paging out unmounts details immediately; retain persistent values in business VMs.
+展开远程组织加载子节点；示例首次模拟失败，可点击重试或按右方向键重试。仅本地模拟，不访问外部服务。,展開遠程組織加載子節點；示例首次模擬失敗，可點擊重試或按右方向鍵重試。僅本地模擬，不訪問外部服務。,Expand a remote organization to load children. The demo fails once and supports click/Right-arrow retry. Everything is simulated locally.
+展示字段不提供输入绑定；编辑流程应组合 Form/Input。,展示字段不提供輸入綁定；編輯流程應組合 Form/Input。,Display fields do not bind inputs. Compose Form/Input for editing.
+展示操作结果和下一步动作，支持常用状态及无权限、未找到、服务错误页面。,展示操作結果和下一步動作，支持常用狀態及無權限、未找到、服務錯誤頁面。,"Operation results and next actions, including standard statuses and forbidden/not-found/server-error pages."
+展示未读数量、圆点或状态，可独立使用或附着在子内容角落。,展示未讀數量、圓點或狀態，可獨立使用或附著在子內容角落。,"Unread counts, dots or status, standalone or attached to a child's corner."
+展示确定进度，支持线形、圆形、常用状态与自定义说明。,展示確定進度，支持線形、圓形、常用狀態與自定義說明。,"Determinate progress with lines, circles, standard statuses and custom descriptions."
+展示补充信息或少量交互操作，支持受控显示和嵌套 Portal。,展示補充信息或少量交互操作，支持受控顯示和嵌套 Portal。,"Supplementary information or small interactions, with controlled visibility and nested Portals."
+嵌套、焦点管理、异步确认和结果。,嵌套、焦點管理、異步確認和結果。,"Nesting, focus management, asynchronous confirmation and results."
+工作空间路径,工作空間路徑,Workspace path
+左右方向使用 width，上下使用 height；预设宽度 256/378/736px。另一轴铺满视口。,左右方向使用 width，上下使用 height；預設寬度 256/378/736px。另一軸鋪滿視口。,Horizontal placements use width; vertical placements use height. Width presets are 256/378/736px. The other axis fills the viewport.
+已有图标：LoadingOutlined、InfoCircleFilled、CheckCircleFilled、CloseCircleFilled、ExclamationCircleFilled、CloseCircleOutlined、CloseOutlined（SVG 名称前均带 AntDesign）。,已有圖標：LoadingOutlined、InfoCircleFilled、CheckCircleFilled、CloseCircleFilled、ExclamationCircleFilled、CloseCircleOutlined、CloseOutlined（SVG 名稱前均帶 AntDesign）。,"Available AntDesign-prefixed SVG icons: LoadingOutlined, InfoCircleFilled, CheckCircleFilled, CloseCircleFilled, ExclamationCircleFilled, CloseCircleOutlined and CloseOutlined."
+布局,佈局,Layout
+布局容器,佈局容器,Layout containers
+常用文本样式，可组合。,常用文本樣式，可組合。,Composable text styles.
+幂等关闭；等待关闭状态，始终返回同一个 Promise，关闭后仍可等待。,冪等關閉；等待關閉狀態，始終返回同一個 Promise，關閉後仍可等待。,"Idempotent closing and close-state waiting. Always returns the same Promise, including after closing."
+并发提交复用同一个 Promise；校验、回调期间 submitting=true。异常可恢复；reset/unmount/dispose 后忽略旧 UI 完成。dispose 用于手动结束无组件拥有的实例。,併發提交復用同一個 Promise；校驗、回調期間 submitting=true。異常可恢復；reset/unmount/dispose 後忽略舊 UI 完成。dispose 用於手動結束無組件擁有的實例。,Concurrent submissions share one Promise; submitting remains true during validation/callbacks. Errors are recoverable. Reset/unmount/dispose isolate obsolete UI results. dispose ends ownerless instances manually.
+建议为文字、图标或图片都提供 alt/ariaLabel，避免只读到通用名称。,建議為文字、圖標或圖片都提供 alt/ariaLabel，避免只讀到通用名稱。,"Provide alt/ariaLabel for text, icon and image avatars to avoid generic names."
+开关,開關,Switch
+开关状态、加载与禁用。,開關狀態、加載與禁用。,"Checked state, loading and disabling."
+异步确认和阻止关闭,異步確認和阻止關閉,Async confirmation and preventing close
+异步组织与失败重试,異步組織與失敗重試,Async organizations and retry
+当前仅提供入场动画，关闭立即移除；waitClose 表示状态结束，响应式 DOM 清理在随后渲染中完成。,當前僅提供入場動畫，關閉立即移除；waitClose 表示狀態結束，響應式 DOM 清理在隨後渲染中完成。,"Entry animation only; closing removes immediately. waitClose reports state completion, with reactive DOM cleanup in the following render."
+当前步骤、状态和说明。,當前步驟、狀態和說明。,"Current step, status and description."
+当前页面唯一 aria-current=page，祖先链接支持键盘及浏览器原生修饰键/新标签。_blank 补齐安全 rel，disabled 和不支持的协议显示为不可导航文本。,當前頁面唯一 aria-current=page，祖先鏈接支持鍵盤及瀏覽器原生修飾鍵/新標籤。_blank 補齊安全 rel，disabled 和不支持的協議顯示為不可導航文本。,Only the current page uses aria-current=page. Ancestor links support keyboard and native modifier/new-tab actions. _blank adds safe rel; disabled/unsafe links become nonnavigable text.
+徽标,徽標,Badge
+快照覆盖非循环的普通对象/数组/Date；文件等实例保留引用。schema 转换不会改写草稿。输入值变化、重置、清错、动态解绑和新校验会使相应旧结果失效。,快照覆蓋非循環的普通對象/數組/Date；文件等實例保留引用。schema 轉換不會改寫草稿。輸入值變化、重置、清錯、動態解綁和新校驗會使相應舊結果失效。,"Snapshots cover noncyclic plain objects, arrays and Date; files and other instances retain references. Schema transforms do not mutate drafts. Edits, resets, error clearing, unbinding and new validations expire old results."
+悬浮、聚焦与点击,懸浮、聚焦與點擊,"Hover, focus and click"
+悬浮与聚焦提示。,懸浮與聚焦提示。,Hover and focus hints.
+悬浮时暂停剩余时间，离开后继续；内容内有键盘焦点时也暂停。,懸浮時暫停剩餘時間，離開後繼續；內容內有鍵盤焦點時也暫停。,Hover/focus pauses remaining time; leaving resumes it.
+所有布局部件支持。,所有佈局部件支持。,Supported by all layout parts.
+手动上传与 Form,手動上傳與 Form,Manual upload and Form
+打开后修改方向，观察定位更新、边界翻转和关闭。,打開後修改方向，觀察定位更新、邊界翻轉和關閉。,"Change placement while open to observe updates, edge flipping and closing."
+打开时聚焦首个可聚焦元素；关闭时按需要恢复触发器焦点，外部点击不抢焦点。,打開時聚焦首個可聚焦元素；關閉時按需要恢復觸發器焦點，外部點擊不搶焦點。,Opening focuses the first focusable element. Closing restores trigger focus where appropriate; outside clicks do not steal focus.
+折叠面板,折疊面板,Collapse
+报表与视图切换,報表與視圖切換,Reports and views
+报表附件与拖放,報表附件與拖放,Report attachments and drag-and-drop
+抽屉,抽屜,Drawer
+抽屉方向，支持打开期间修改。,抽屜方向，支持打開期間修改。,Drawer placement can change while open.
+拖放区、触发按钮内容和列表显示开关。children 是按钮内容，不嵌入另一个可交互控件。默认文字列表，不自动生成本地图片预览。,拖放區、觸發按鈕內容和列表顯示開關。children 是按鈕內容，不嵌入另一個可交互控件。默認文字列表，不自動生成本地圖片預覽。,"Drop zone, trigger content and list visibility. children is button content, not another interactive control. Defaults to a text list without automatic local image previews."
+拦截原生 submit 并使用 Zod；不叠加浏览器原生校验。reset 事件可 preventDefault；公开方法走原生表单事件。,攔截原生 submit 並使用 Zod；不疊加瀏覽器原生校驗。reset 事件可 preventDefault；公開方法走原生表單事件。,Intercepts native submit and validates through Zod without stacking browser validation. Reset can preventDefault; public methods use native form events.
+指示器延迟显示，内容从请求开始就不可操作；停止后保留输入。,指示器延遲顯示，內容從請求開始就不可操作；停止後保留輸入。,Only the indicator is delayed; content becomes noninteractive immediately. Stopping preserves input state.
+按钮,按鈕,Button
+按钮文本。,按鈕文本。,Button text.
+按钮类型,按鈕類型,Button types
+按钮组,按鈕組,Button groups
+"按钮默认 htmlType=""button""；提交或重置表单需显式指定 htmlType。","按鈕默認 htmlType=""button""；提交或重置表單需顯式指定 htmlType。",Buttons default to htmlType=button. Explicitly set submit/reset for form actions.
+按需展开内容，支持多面板、手风琴、受控状态和键盘导航。,按需展開內容，支持多面板、手風琴、受控狀態和鍵盤導航。,"On-demand panels with multiple expansion, accordion, controlled state and keyboard navigation."
+换行；Space 是否占满容器。Flex 默认块级。,換行；Space 是否佔滿容器。Flex 默認塊級。,Wrapping and full-width Space. Flex defaults to block display.
+排列、间距与对齐,排列、間距與對齊,"Direction, spacing and alignment"
+排列方向。,排列方向。,Layout direction.
+排列方向与组的无障碍名称。,排列方向與組的無障礙名稱。,Direction and group accessible name.
+排版,排版,Typography
+控制模式、插槽和选择类型在初始化时确定。不要运行中替换插槽函数（F09）；普通字段、记录、顺序、查询值正常响应。复杂配置先放稳定 VM，避免编译器在含响应式字段的内联对象中提升回调局部参数（F12）。,控制模式、插槽和選擇類型在初始化時確定。不要運行中替換插槽函數（F09）；普通字段、記錄、順序、查詢值正常響應。複雜配置先放穩定 VM，避免編譯器在含響應式字段的內聯對象中提升回調局部參數（F12）。,"Modes, slots and selection type are fixed initially. Dynamic slot replacement remains deferred (F09). Fields, records, ordering and queries update reactively. Stable VM configurations avoid callback dependency-hoisting issues tracked as F12."
+描述列表,描述列表,Descriptions
+提交/取消,提交/取消,Submit/cancel
+提交时禁用按钮与 Escape，避免重复请求；取消按钮明确关闭。,提交時禁用按鈕與 Escape，避免重復請求；取消按鈕明確關閉。,Submission disables buttons and Escape to prevent duplicates; cancel explicitly closes.
+提交期间关闭请求被阻止；父级仍可通过 open 主动关闭。,提交期間關閉請求被阻止；父級仍可通過 open 主動關閉。,Pending submissions block user close requests; parents may still close through open.
+提供回调后启用原生按钮导航，请求后由父级更新 current；当前项、禁用项不重复触发。Tab 移动、Enter/Space 激活。无回调时只展示有序列表。,提供回調後啓用原生按鈕導航，請求後由父級更新 current；當前項、禁用項不重復觸發。Tab 移動、Enter/Space 激活。無回調時只展示有序列表。,"A callback enables native navigation buttons. Parents update current after requests; current/disabled steps do not repeat requests. Tab moves focus, Enter/Space activates. Without callbacks, renders only an ordered list."
+提示不会主动移动焦点。error 使用 role=alert，其余状态使用 role=status；容器随最高活动弹窗调整层级，空容器自动销毁并释放订阅。,提示不會主動移動焦點。error 使用 role=alert，其餘狀態使用 role=status；容器隨最高活動彈窗調整層級，空容器自動銷毀並釋放訂閱。,Messages do not move focus. Errors use alert and other states use status. Containers follow the highest modal layer; empty containers destroy and release subscriptions.
+提示内容；没有内容时不打开。,提示內容；沒有內容時不打開。,Message content; empty content does not open an entry.
+插图区域按装饰内容隐藏于读屏；有意义的信息放在说明，交互元素放在操作区。,插圖區域按裝飾內容隱藏於讀屏；有意義的信息放在說明，交互元素放在操作區。,Illustrations are decorative for screen readers. Put meaningful information in descriptions and interactive elements in actions.
+插图和留白尺寸；announce=true 使用 status 语义进行礼貌播报，静态空态默认不主动播报。,插圖和留白尺寸；announce=true 使用 status 語義進行禮貌播報，靜態空態默認不主動播報。,Illustration/spacing size. announce=true politely announces status; static empty states do not announce by default.
+插槽优先；未提供标题时使用状态标题，错误页有默认说明。显式空字符串可以隐藏对应文本。文字标题为 h2。,插槽優先；未提供標題時使用狀態標題，錯誤頁有默認說明。顯式空字符串可以隱藏對應文本。文字標題為 h2。,"Slots win. Without a title, use the status title; error pages have default descriptions. Explicit empty strings hide text. Text headings use h2."
+搜索已加载的叶子完整标签路径；开启 changeOnSelect 时也包含中间层。空格分词，各词均须匹配。不自动加载未知后代或提供远程搜索；IME 期间不选中，结束后报告一次搜索。,搜索已加載的葉子完整標籤路徑；開啓 changeOnSelect 時也包含中間層。空格分詞，各詞均須匹配。不自動加載未知後代或提供遠程搜索；IME 期間不選中，結束後報告一次搜索。,"Searches loaded leaf label paths, including intermediate nodes with changeOnSelect. All space-separated tokens must match. No automatic descendant loading or remote search. IME cannot select mid-composition and reports once on completion."
+搜索负责人或选择多位评审人，分组、禁用和清空可组合。,搜索負責人或選擇多位評審人，分組、禁用和清空可組合。,"Search assignees or choose multiple reviewers, combining grouping, disabling and clearing."
+操作与视图,操作與視圖,Actions and views
+操作区，通常放新建、重试或清除筛选的按钮。,操作區，通常放新建、重試或清除篩選的按鈕。,"Action area, usually for create, retry or clear-filter buttons."
+操作菜单和触发器插槽。,操作菜單和觸發器插槽。,Action menus and trigger slots.
+操作菜单，支持键盘打开、焦点返回、受控显隐及选择保留。,操作菜單，支持鍵盤打開、焦點返回、受控顯隱及選擇保留。,"Action menus with keyboard opening, focus return, controlled visibility and persistent selection."
+支持受控/默认值、原生表单语义、输入法、清空、计数和前后缀。,支持受控/默認值、原生表單語義、輸入法、清空、計數和前後綴。,"Controlled/default values, native forms, IME, clearing, counts and affixes."
+支持组合；none 仅由外部 open 控制。,支持組合；none 僅由外部 open 控制。,Trigger modes can combine; none is controlled only by external open.
+数值、精度、步长、边界和空值。,數值、精度、步長、邊界和空值。,"Numbers, precision, steps, bounds and empty values."
+数值像素或 sm/md/lg；列通过 padding 分配水平间距。,數值像素或 sm/md/lg；列通過 padding 分配水平間距。,Pixel numbers or sm/md/lg; columns distribute horizontal spacing through padding.
+数值草稿、空值、精度与范围提交，以及键盘和按钮步进。,數值草稿、空值、精度與範圍提交，以及鍵盤和按鈕步進。,"Numeric drafts, empty values, precision/bound commits and keyboard/button stepping."
+数值跨逻辑列，超过总列数时限制为整行；filled 始终整行。剩余空间不足则换行，不自动补齐上一行。,數值跨邏輯列，超過總列數時限制為整行；filled 始終整行。剩餘空間不足則換行，不自動補齊上一行。,Spans logical columns and clamps to a full row. filled always takes a full row. Insufficient space wraps without automatically filling the previous row.
+数值限制在 0–100；未显式指定状态时，100 自动使用成功色。,數值限制在 0–100；未顯式指定狀態時，100 自動使用成功色。,"Values clamp to 0–100. Without an explicit status, 100 uses the success color."
+数字值、受控、禁用、铺满宽度与原生表单重置。,數字值、受控、禁用、鋪滿寬度與原生表單重置。,"Numeric values, controlled/disabled state, full width and native form reset."
+数字溢出显示上限，圆点不展示数量；状态有独立语义和文字说明。,數字溢出顯示上限，圓點不展示數量；狀態有獨立語義和文字說明。,Large counts display the maximum; dots hide counts. Status uses independent semantics and descriptions.
+数字输入框,數字輸入框,InputNumber
+数字高度 16/20px；角标偏移为向右/向下；可用 CSS 颜色覆盖。,數字高度 16/20px；角標偏移為向右/向下；可用 CSS 顏色覆蓋。,Numeric heights are 16/20px. Offsets move right/down; CSS colors can override defaults.
+数据展示,數據展示,Data display
+数据录入,數據錄入,Data entry
+数据遍历位于普通 .ts 模块；TSX 普通回调返回 node.children 被误识别为插槽的框架问题已记录为 F14，独立探针保持真实失败，未修改框架。,數據遍歷位於普通 .ts 模塊；TSX 普通回調返回 node.children 被誤識別為插槽的框架問題已記錄為 F14，獨立探針保持真實失敗，未修改框架。,Data traversal lives in ordinary .ts modules. TSX callbacks returning node.children were misclassified as slots (F14); a separate probe records the framework issue.
+数量和状态,數量和狀態,Counts and status
+整体禁用、尺寸、nav 名称与样式；按钮 type=button，当前页 aria-current=page，省略按钮前后跳 5 页。,整體禁用、尺寸、nav 名稱與樣式；按鈕 type=button，當前頁 aria-current=page，省略按鈕前後跳 5 頁。,"Global disabling, sizes, nav name and styles. Buttons use type=button, current pages use aria-current=page and ellipsis buttons jump five pages."
+整体禁用、线条/卡片、小中大尺寸、居中。标签溢出时原生滚动，键盘导航自动滚入视口。,整體禁用、線條/卡片、小中大尺寸、居中。標籤溢出時原生滾動，鍵盤導航自動滾入視口。,"Global disabling, line/card variants, sizes and centering. Overflow scrolls natively; keyboard navigation reveals the focused tab."
+整组禁用、铺满父容器、横纵布局与尺寸。长列表原生滚动。,整組禁用、鋪滿父容器、橫縱佈局與尺寸。長列表原生滾動。,"Group disabling, full width, direction and size. Long lists scroll natively."
+文件选择、校验、自定义上传和进度。,文件選擇、校驗、自定義上傳和進度。,"File selection, validation, custom upload and progress."
+文件选择和拖放、异步校验、受控列表、手动或自动上传、进度与取消重试。,文件選擇和拖放、異步校驗、受控列表、手動或自動上傳、進度與取消重試。,"Selection/drop, asynchronous validation, controlled lists, manual/automatic uploads, progress, cancel and retry."
+文字 value 用 ?? 空字符串，空受控 Select/数字用 ?? null，布尔控件绑定 checked。不克隆 children，所有属性传递可见。,文字 value 用 ?? 空字符串，空受控 Select/數字用 ?? null，布爾控件綁定 checked。不克隆 children，所有屬性傳遞可見。,Text values use ?? ''. Empty controlled Select/numeric values use ?? null; booleans bind checked. Children are not cloned and attribute passing stays explicit.
+文字位置。,文字位置。,Text alignment.
+文字使用默认插槽，竖向分割线不展示文字。,文字使用默認插槽，竪向分割線不展示文字。,Text uses the default slot. Vertical dividers do not display text.
+文字提示,文字提示,Tooltip
+文本、头像和块级占位。,文本、頭像和塊級佔位。,"Text, avatar and block placeholders."
+文本字段或单元格插槽；插槽收到 data、rowIndex、columnIndex、columnDefine。标题插槽收到 define/index。rowIndex 为排序筛选后索引，分页时含偏移；远程时按当前页计算。插槽初始化固定。,文本字段或單元格插槽；插槽收到 data、rowIndex、columnIndex、columnDefine。標題插槽收到 define/index。rowIndex 為排序篩選後索引，分頁時含偏移；遠程時按當前頁計算。插槽初始化固定。,"Text fields or cell slots receive data, rowIndex, columnIndex and columnDefine. Headers receive define/index. rowIndex follows sorting/filtering and local page offsets; remote rows use current-page indexes. Slots are fixed initially."
+新建成员,新建成員,New member
+方向与 start/end 对齐，支持打开期间动态更新。,方向與 start/end 對齊，支持打開期間動態更新。,Placement and start/end alignment can update while open.
+方向与嵌套,方向與嵌套,Placements and nesting
+方向键、Home/End、Enter/Space、文字前缀查找使用单一 roving tab stop；Escape/Left 关闭当前子菜单并恢复父项。水平叶子激活后关闭子菜单。,方向鍵、Home/End、Enter/Space、文字前綴查找使用單一 roving tab stop；Escape/Left 關閉當前子菜單並恢復父項。水平葉子激活後關閉子菜單。,"Arrow keys, Home/End, Enter/Space and typeahead use one roving tab stop. Escape/Left close submenus and restore parent focus. Activating horizontal leaves closes submenus."
+方向键只移动焦点，Enter 或 Space 才切换内容，适合加载较慢的面板。,方向鍵只移動焦點，Enter 或 Space 才切換內容，適合加載較慢的面板。,Arrows move focus only; Enter/Space activates content. Suitable for slow-loading panels.
+方向键按日/周移动并跳过禁用项，Home/End 到周边界，Page 切月、Shift+Page 切年；Enter/Space 选中，Escape 取消。全部禁用时搜索有上限，不阻塞页面。,方向鍵按日/周移動並跳過禁用項，Home/End 到周邊界，Page 切月、Shift+Page 切年；Enter/Space 選中，Escape 取消。全部禁用時搜索有上限，不阻塞頁面。,Arrows navigate days/weeks and skip disabled dates; Home/End target week boundaries. Page changes month; Shift+Page changes year. Enter/Space selects; Escape cancels. Searches are bounded when all dates are disabled.
+方案与展示方式,方案與展示方式,Plans and presentation
+无 children 且 isLeaf=false 的节点可懒加载；返回子节点数组，不需修改父数据。同节点去重、成功缓存，空数组成为叶子，失败可重试。替换节点对象/移除节点/提供显式 children/卸载会中止旧请求并隔离旧结果。折叠或关闭可继续完成缓存；自定义 loader 应响应 AbortSignal 清理资源。,無 children 且 isLeaf=false 的節點可懶加載；返回子節點數組，不需修改父數據。同節點去重、成功緩存，空數組成為葉子，失敗可重試。替換節點對象/移除節點/提供顯式 children/卸載會中止舊請求並隔離舊結果。折疊或關閉可繼續完成緩存；自定義 loader 應響應 AbortSignal 清理資源。,"Missing children with isLeaf=false enables lazy loading. Return child arrays without mutating parents. Same-node requests deduplicate; success caches, empty results become leaves and failures can retry. Replacing/removing nodes, explicit children or unmount aborts stale work. Closing/collapsing can finish caching; loaders should honor AbortSignal."
+无标题时的可访问名称 / 描述元素 id。标题存在时自动使用 aria-labelledby。,無標題時的可訪問名稱 / 描述元素 id。標題存在時自動使用 aria-labelledby。,Accessible name without a title / description element id. Existing titles use aria-labelledby automatically.
+无障碍名称与描述关联。,無障礙名稱與描述關聯。,Accessible name and description association.
+日期范围与快捷范围,日期範圍與快捷範圍,Date ranges and presets
+日期选择,日期選擇,DatePicker
+时分秒选择与禁用。,時分秒選擇與禁用。,Hour/minute/second selection and disabled rules.
+时间选择,時間選擇,TimePicker
+明确支持三种固定日期格式，严格补零/分隔符/真实日期校验，不兼容 Day.js/date-fns 任意 token 模板。范围输入形如 开始日期 ~ 结束日期。,明確支持三種固定日期格式，嚴格補零/分隔符/真實日期校驗，不兼容 Day.js/date-fns 任意 token 模板。範圍輸入形如 開始日期 ~ 結束日期。,"Three fixed date formats with strict padding, separators and valid-date checks; arbitrary Day.js/date-fns tokens are unsupported. Range input uses start ~ end."
+是否加载 / 显示延迟（毫秒）；短请求、关闭及卸载会取消待执行任务。修改延迟会重排未显示的任务，不隐藏已显示的指示器。,是否加載 / 顯示延遲（毫秒）；短請求、關閉及卸載會取消待執行任務。修改延遲會重排未顯示的任務，不隱藏已顯示的指示器。,"Loading and indicator delay in milliseconds. Short requests, closing or unmount cancel pending work. Delay changes reschedule hidden indicators without hiding visible ones."
+显式切换为横向包含侧栏；不反射检查 children。,顯式切換為橫向包含側欄；不反射檢查 children。,Explicit horizontal layout with a sidebar; children are not introspected.
+显式开启礼貌播报；默认命名 section，不抢焦点。自定义无标题页面可使用 ariaLabel。,顯式開啓禮貌播報；默認命名 section，不搶焦點。自定義無標題頁面可使用 ariaLabel。,Opt-in polite announcements; otherwise a named section that does not grab focus. Custom untitled results can use ariaLabel.
+显式重测高度；内容变化和 ResizeObserver 宽度变化也会触发测量，卸载后清理监听及帧任务。,顯式重測高度；內容變化和 ResizeObserver 寬度變化也會觸發測量，卸載後清理監聽及幀任務。,Explicit height recalculation. Content changes and ResizeObserver width changes also measure; listeners and frames are cleaned up.
+显示与隐藏,顯示與隱藏,Show and hide
+显示任务进度，支持状态、说明、可选导航和响应式方向。,顯示任務進度，支持狀態、說明、可選導航和響應式方向。,"Task progress with statuses, descriptions, optional navigation and responsive direction."
+显示原生键盘可访问的折叠按钮。,顯示原生鍵盤可訪問的折疊按鈕。,Displays a native keyboard-accessible collapse button.
+显示遮罩。隐藏遮罩仍是模态窗口，背景不可交互。,顯示遮罩。隱藏遮罩仍是模態窗口，背景不可交互。,Backdrop visibility. Hiding it does not make the dialog nonmodal; background interaction stays blocked.
+普通动作选中后关闭；视图菜单可保持展开，重复操作仍可通知。,普通動作選中後關閉；視圖菜單可保持展開，重復操作仍可通知。,Ordinary actions close on selection; view menus can remain open and repeat actions still notify.
+普通圆点或按钮外观，不改变 input 的 radio 语义。,普通圓點或按鈕外觀，不改變 input 的 radio 語義。,Dot or button appearance without changing native radio semantics.
+暂不实现富文本编辑、复制控制器或 JavaScript 精确多行截断。,暫不實現富文本編輯、複製控制器或 JavaScript 精確多行截斷。,"Rich-text editing, copy controllers and precise JavaScript multiline truncation are deferred."
+暂不提供自动 separator；需要分隔内容时显式组合 Divider。,暫不提供自動 separator；需要分隔內容時顯式組合 Divider。,No automatic separators. Compose Divider explicitly when needed.
+暴露聚焦与失焦方法。,暴露聚焦與失焦方法。,Exposes focus and blur methods.
+更新文本、type、duration、className/style、closable、pauseOnHover；关闭后无效。插槽及通知位置不参与更新。,更新文本、type、duration、className/style、closable、pauseOnHover；關閉後無效。插槽及通知位置不參與更新。,"Update text, type, duration, className/style, closable and pauseOnHover. Updates after closing do nothing. Slots and notification placement cannot update."
+替换 XHR，接收 file、filename、action、signal、onProgress(percent)。Promise 完成/拒绝驱动成功/失败；必须自行响应 AbortSignal 停止实际传输。组件仍会忽略取消/移除后的迟到结果，进度限制在 0–100。,替換 XHR，接收 file、filename、action、signal、onProgress(percent)。Promise 完成/拒絕驅動成功/失敗；必須自行響應 AbortSignal 停止實際傳輸。組件仍會忽略取消/移除後的遲到結果，進度限制在 0–100。,"Replace XHR with a handler receiving file, filename, action, signal and onProgress(percent). Promise resolution/rejection determines success/failure. Honor AbortSignal to stop transport. Late canceled/removed results are ignored and progress clamps to 0–100."
+最多展开一项。多个有效 key 时使用首项，不自动展开其他面板。,最多展開一項。多個有效 key 時使用首項，不自動展開其他面板。,"At most one panel expands. With multiple valid keys, only the first is used; other panels are not opened automatically."
+有子内容时定位到右上角，不克隆或改写子组件；无子内容时作为行内标记。,有子內容時定位到右上角，不克隆或改寫子組件；無子內容時作為行內標記。,"With children, anchors at the top-right without cloning/modifying them. Without children, renders inline."
+有序列表名称和外框样式，当前项使用 aria-current=step，装饰图标不会重复播报。,有序列表名稱和外框樣式，當前項使用 aria-current=step，裝飾圖標不會重復播報。,Ordered-list accessible name and wrapper styles. Current items use aria-current=step; decorative icons are not announced twice.
+有弹窗时通知仍可被读屏获取；键盘焦点遵守弹窗范围，先关闭模态窗口再操作外部通知。,有彈窗時通知仍可被讀屏獲取；鍵盤焦點遵守彈窗範圍，先關閉模態窗口再操作外部通知。,Notifications remain exposed to screen readers while modals are open. Keyboard focus stays in the modal; close it before interacting with outside notices.
+有效 http/https/blob URL 显示安全外链；其余显示文本。preview 提供独立预览按钮，由业务打开详情或图片。,有效 http/https/blob URL 顯示安全外鏈；其餘顯示文本。preview 提供獨立預覽按鈕，由業務打開詳情或圖片。,Valid http/https/blob URLs render safe external links; other values render text. preview adds a separate business-controlled detail/image preview button.
+有边界的页码导航、页大小选择和快速跳转。,有邊界的頁碼導航、頁大小選擇和快速跳轉。,"Bounded page navigation, page-size choices and quick jumping."
+服务地区与路径搜索,服務地區與路徑搜索,Service regions and path search
+服务端参数与受控状态,服務端參數與受控狀態,Server parameters and controlled state
+未找到的 value 保留并临时展示其字符串，适合远程选项未加载场景；选项更新时重新解析标签，不触发 change。,未找到的 value 保留並臨時展示其字符串，適合遠程選項未加載場景；選項更新時重新解析標籤，不觸發 change。,Unknown values temporarily display their string form until remote options arrive. New options resolve labels without change events.
+末项始终标记当前页，祖先可通过链接或回调接入业务路由。,末項始終標記當前頁，祖先可通過鏈接或回調接入業務路由。,The last item is always current. Ancestor links/callbacks integrate with business routing.
+本地排序筛选与分页、受控跨页选择、固定列、加载/空态、单元格操作和展开行。,本地排序篩選與分頁、受控跨頁選擇、固定列、加載/空態、單元格操作和展開行。,"Local sorting/filtering/paging, controlled cross-page selection, fixed columns, loading/empty states, cell actions and expandable rows."
+栅格,柵格,Grid
+标签,標籤,Tag
+标签/说明/必填标记/布局/附加描述/焦点回调,標籤/說明/必填標記/佈局/附加描述/焦點回調,Label / help / required mark / layout / extra description / focus callback
+标签页,標籤頁,Tabs
+标识状态或分类，支持图标、无边框和键盘可操作的关闭按钮。,標識狀態或分類，支持圖標、無邊框和鍵盤可操作的關閉按鈕。,"Status/category labels with icons, borderless styling and keyboard-operable close buttons."
+标题、操作、内容插槽和加载。,標題、操作、內容插槽和加載。,"Title, actions, content slots and loading."
+标题、文本、段落与链接。,標題、文本、段落與鏈接。,"Headings, text, paragraphs and links."
+标题、文本与链接,標題、文本與鏈接,"Headings, text and links"
+标题与段落；rows 限制为 0–20，数值宽度为像素，字符串可用百分比。,標題與段落；rows 限制為 0–20，數值寬度為像素，字符串可用百分比。,Heading/paragraph placeholders. rows clamps to 0–20; numeric widths are pixels and strings may be percentages.
+标题必填（文字或插槽），说明可选；插槽优先。,標題必填（文字或插槽），說明可選；插槽優先。,"Required text or slotted title, optional description; slots take precedence."
+标题插槽优先，extra 是标题旁操作；无标题时可命名容器。,標題插槽優先，extra 是標題旁操作；無標題時可命名容器。,Title slots take precedence; extra supplies adjacent actions. Untitled containers can receive an accessible name.
+标题插槽优先；文字标题用 h3。无标题时可用 ariaLabel 命名 section。,標題插槽優先；文字標題用 h3。無標題時可用 ariaLabel 命名 section。,Title slots win; text headings use h3. ariaLabel names untitled sections.
+标题文本或插槽必填；图标与操作插槽可选。,標題文本或插槽必填；圖標與操作插槽可選。,Required text/title slot with optional icon and action slots.
+标题文本或插槽；children 为内容。,標題文本或插槽；children 為內容。,Title text or slot; children provide content.
+树,樹,Tree
+样式作用于 label，焦点方法及事件作用于原生输入。,樣式作用於 label，焦點方法及事件作用於原生輸入。,Styles target the label; focus methods and events target the native input.
+根 span 样式入口。,根 span 樣式入口。,Root span styles.
+根容器样式入口。,根容器樣式入口。,Root container styles.
+根容器样式入口，宽度由外部布局控制。,根容器樣式入口，寬度由外部佈局控制。,Root styles; external layout controls width.
+根容器样式入口；原四个点移动到 .ja-spin-dots 内。,根容器樣式入口；原四個點移動到 .ja-spin-dots 內。,Root styles; the original four dots now live inside .ja-spin-dots.
+格式函数应为仅依赖参数的纯函数；info 插槽优先，用归一化值和解析后的状态渲染。,格式函數應為僅依賴參數的純函數；info 插槽優先，用歸一化值和解析後的狀態渲染。,Formatters should be pure functions of their arguments. The info slot wins and renders normalized values with the resolved status.
+模拟异步保存；返回 false 保持打开，提交期间禁用关闭操作。,模擬異步保存；返回 false 保持打開，提交期間禁用關閉操作。,Simulated async saving. Returning false keeps the panel open; pending submission blocks closing actions.
+模拟异步建议并显示加载，清理旧计时器；可以采用建议或保留任意文本。,模擬異步建議並顯示加載，清理舊計時器；可以採用建議或保留任意文本。,Simulated async suggestions with loading and old-timer cleanup. Select a suggestion or retain arbitrary text.
+横向、文字与竖向分隔,橫向、文字與竪向分隔,"Horizontal, labeled and vertical dividers"
+横向左右键、纵向上下键循环跳过禁用项，Home/End 到首尾；手动模式用 Enter/Space 激活。修饰键及垂直方向以外的滚动键保留浏览器行为。,橫向左右鍵、縱向上下鍵循環跳過禁用項，Home/End 到首尾；手動模式用 Enter/Space 激活。修飾鍵及垂直方向以外的滾動鍵保留瀏覽器行為。,Left/Right or Up/Down cycle enabled tabs; Home/End target boundaries. Manual mode uses Enter/Space. Modifier keys and unrelated scrolling keys retain browser behavior.
+横向表格最小宽度、纵向滚动区最大高度；设置 y 后固定表头。固定列合计实际宽度应小于滚动区可见宽度，至少留一列不固定以容纳滚动内容；在表格自身滚动区内固定，不随窗口页面吸顶。,橫向表格最小寬度、縱向滾動區最大高度；設置 y 後固定表頭。固定列合計實際寬度應小於滾動區可見寬度，至少留一列不固定以容納滾動內容；在表格自身滾動區內固定，不隨窗口頁面吸頂。,"Horizontal minimum table width and vertical maximum scroll height; y fixes the header. Fixed columns must leave room for at least one unfixed column. Headers stick within the table scroller, not the window."
+横纵分割线、虚线和带文字分割。,橫縱分割線、虛線和帶文字分割。,"Horizontal/vertical dividers, dashed lines and labels."
+横纵排列、间距、对齐和换行。,橫縱排列、間距、對齊和換行。,"Horizontal/vertical layout, spacing, alignment and wrapping."
+横纵方向，窄于 600px 默认转纵向，可关闭响应式；支持小尺寸及整体禁止跳转。,橫縱方向，窄於 600px 默認轉縱向，可關閉響應式；支持小尺寸及整體禁止跳轉。,Horizontal/vertical direction. Below 600px defaults to vertical unless responsiveness is disabled. Supports small size and disabled navigation.
+正文 / 标题旁操作 / 封面 / 底部操作；不枚举、克隆或注入子组件。,正文 / 標題旁操作 / 封面 / 底部操作；不枚舉、克隆或注入子組件。,"Content / header actions / cover / footer actions, without enumerating, cloning or injecting children."
+正文保留挂载但通过 hidden 禁止显示和聚焦，同时显示有状态语义的占位。额外操作、封面和底部操作不禁用。,正文保留掛載但通過 hidden 禁止顯示和聚焦，同時顯示有狀態語義的佔位。額外操作、封面和底部操作不禁用。,"Content stays mounted but hidden and unfocusable while semantic placeholders show. Header extras, cover and footer actions remain enabled."
+正文子组件注册确认处理，卸载自动解除。,正文子組件註冊確認處理，卸載自動解除。,Content children register confirmation handlers and unregister on unmount.
+正文状态不由骨架读取或克隆，内容始终由业务插槽提供。,正文狀態不由骨架讀取或克隆，內容始終由業務插槽提供。,Skeleton never reads or clones content state; business slots always provide content.
+正步长，ArrowUp/Down 和原生按钮操作；普通小数步进消除浮点尾数。空值从 0 加减步长并裁剪范围。controls=false 隐藏按钮；keyboard=false 禁用方向键步进。,正步長，ArrowUp/Down 和原生按鈕操作；普通小數步進消除浮點尾數。空值從 0 加減步長並裁剪範圍。controls=false 隱藏按鈕；keyboard=false 禁用方向鍵步進。,"Positive steps through arrows/native buttons, avoiding ordinary decimal rounding tails. Empty values step from zero and clamp. controls=false hides buttons; keyboard=false disables arrow stepping."
+步骤条,步驟條,Steps
+步骤条不内置向导页面、校验、路由或异步推进，业务负责接受跳转请求及控制当前值。待用户可访问前可将后续项 disabled。,步驟條不內置嚮導頁面、校驗、路由或異步推進，業務負責接受跳轉請求及控制當前值。待用戶可訪問前可將後續項 disabled。,"Steps does not supply wizard pages, validation, routing or automatic async progression. Business code accepts navigation and controls current. Disable inaccessible future steps until ready."
+每次字段校验执行完整 schema，保留跨字段规则；Zod 在类型不满足时可能不执行对象 refine，应提供合理初值并按 Zod 语义组织规则。昂贵的远程校验由业务节流、取消或缓存。,每次字段校驗執行完整 schema，保留跨字段規則；Zod 在類型不滿足時可能不執行對象 refine，應提供合理初值並按 Zod 語義組織規則。昂貴的遠程校驗由業務節流、取消或緩存。,"Each field validation runs the full schema, preserving cross-field rules. Zod may skip object refinements for invalid base types; provide suitable defaults and organize rules accordingly. Throttle, cancel or cache expensive remote checks in business code."
+每行需要唯一且稳定的字符串或有限数字键；每列唯一字符串 key。缺失/重复行键、重复列键报错。数据和列改变时保持仍可见的 keyed 行及单元格身份。,每行需要唯一且穩定的字符串或有限數字鍵；每列唯一字符串 key。缺失/重復行鍵、重復列鍵報錯。數據和列改變時保持仍可見的 keyed 行及單元格身份。,Rows need stable unique string/finite-number keys; columns need unique string keys. Missing/duplicate row or column keys throw. Data/column updates preserve visible keyed rows and cells.
+每项 key 为唯一且稳定的字符串；label 或 slot:label 必填，content/slot:content、slot:extra、disabled 可选。,每項 key 為唯一且穩定的字符串；label 或 slot:label 必填，content/slot:content、slot:extra、disabled 可選。,"Each item needs a stable unique string key and label/label slot; optional content/content slot, extra slot and disabled state."
+每项 key 唯一且稳定；label/slot:label 必填，content/slot:content、span 可选。使用 dl、dt、dd 表达字段和值。,每項 key 唯一且穩定；label/slot:label 必填，content/slot:content、span 可選。使用 dl、dt、dd 表達字段和值。,"Each item has a stable unique key, required label/label slot and optional content/content slot/span. dl/dt/dd express fields and values."
+气泡卡片,氣泡卡片,Popover
+气泡确认,氣泡確認,Popconfirm
+水平子菜单使用 Floating；侧栏展开可受控，方向键跳过禁用项。,水平子菜單使用 Floating；側欄展開可受控，方向鍵跳過禁用項。,Horizontal submenus use Floating. Sidebar expansion can be controlled; arrows skip disabled items.
+没有展开/折叠动画，不枚举或反向解析 children；项目按 items 的 key 保持身份。,沒有展開/折疊動畫，不枚舉或反向解析 children；項目按 items 的 key 保持身份。,No expansion/collapse animation or reverse parsing of children. Item identity follows keys.
+没有离场动画，afterClose 表示实际卸载，不等待动画。框架 Transition 的快速关闭问题记录为 F04。,沒有離場動畫，afterClose 表示實際卸載，不等待動畫。框架 Transition 的快速關閉問題記錄為 F04。,No exit animation; afterClose signals actual unmount rather than animation completion. The rapid Transition-close issue is tracked as F04.
+没有默认页脚和确认流程，业务通过 slot:footer 与受控 open 组合提交/加载；不做拖拽缩放或嵌套推挤效果。,沒有默認頁腳和確認流程，業務通過 slot:footer 與受控 open 組合提交/加載；不做拖拽縮放或嵌套推擠效果。,No default footer or confirmation flow. Compose slot:footer and controlled open for submission/loading. Drag resizing and nested push effects are out of scope.
+沿用现有七个图标，不增加图标库依赖。,沿用現有七個圖標，不增加圖標庫依賴。,Reuses the existing seven icons without adding an icon-library dependency.
+浮层使用当前页面 body 的 fixed 定位。暂不承诺跨 iframe、虚拟锚点、任意自定义定位容器或 body transform 后的特殊包含块。,浮層使用當前頁面 body 的 fixed 定位。暫不承諾跨 iframe、虛擬錨點、任意自定義定位容器或 body transform 後的特殊包含塊。,"Fixed-position panels in the current document body. Cross-frame rendering, virtual anchors, arbitrary containers and transformed-body containing blocks are not guaranteed."
+浮层基础,浮層基礎,Floating foundation
+消息、更新、关闭、清空与等待。,消息、更新、關閉、清空與等待。,"Messages, updates, closing, clearing and waiting."
+点击保存触发模拟异步操作。loading=false 不会覆盖 disabled。,點擊保存觸發模擬異步操作。loading=false 不會覆蓋 disabled。,Save triggers simulated async work. loading=false never overrides disabled.
+"点击切换横纵方向；Flex 可以分散对齐。二元间距数组遵循 [rowGap, columnGap]。","點擊切換橫縱方向；Flex 可以分散對齊。二元間距數組遵循 [rowGap, columnGap]。","Toggle horizontal/vertical directions and distributed Flex alignment. Gap pairs follow [rowGap, columnGap]."
+点击首端和完成端点时通知草稿，不代表已提交；面板内置预览和进度文案。Escape/外部关闭丢弃部分选择，无 change。,點擊首端和完成端點時通知草稿，不代表已提交；面板內置預覽和進度文案。Escape/外部關閉丟棄部分選擇，無 change。,"Selecting each range endpoint emits a draft, not a commit. Panels include preview/progress text. Escape/outside closing discards partial choices without change."
+父级管理当前步骤；已禁用步骤不可跳转，错误状态可直接显示。,父級管理當前步驟；已禁用步驟不可跳轉，錯誤狀態可直接顯示。,Parents manage the current step. Disabled steps cannot be visited; errors can be shown directly.
+状态、关闭与操作,狀態、關閉與操作,"Status, closing and actions"
+状态、更新与关闭,狀態、更新與關閉,"Status, updates and closing"
+状态、标题说明和关闭。,狀態、標題說明和關閉。,"Status, title/description and closing."
+状态与后续操作,狀態與後續操作,Status and next actions
+状态与移除,狀態與移除,Status and removal
+独立加载指示或内容区域遮罩，支持延迟显示和无障碍状态。,獨立加載指示或內容區域遮罩，支持延遲顯示和無障礙狀態。,"Standalone loading indicators or content-blocking overlays, with delayed display and accessible status."
+独立受控/默认浮层。ArrowDown/Enter 打开；Escape 仅关闭当前浮层并保留父 Modal。Tab 自然离开，外部点击保留外部焦点。父级可以拒绝显隐请求。,獨立受控/默認浮層。ArrowDown/Enter 打開；Escape 僅關閉當前浮層並保留父 Modal。Tab 自然離開，外部點擊保留外部焦點。父級可以拒絕顯隱請求。,"Independent controlled/default panel. ArrowDown/Enter opens; Escape closes only this panel, preserving parent Modals. Tab exits naturally and outside clicks retain external focus. Parents may reject visibility requests."
+独立块占位；数值尺寸用像素，圆形建议提供相同宽高。,獨立塊佔位；數值尺寸用像素，圓形建議提供相同寬高。,Standalone block placeholder. Numeric dimensions are pixels; circles should use equal width and height.
+生成 id、标签 htmlFor 和 help/error id。将 field.id/ariaDescribedby/invalid 显式传给控件；required 标记不自动改 Zod 规则。通过 ref={field.ref} 注册控件后按实例聚焦；显式 focus 回调优先，未注册 ref 时兼容按 id 聚焦。,生成 id、標籤 htmlFor 和 help/error id。將 field.id/ariaDescribedby/invalid 顯式傳給控件；required 標記不自動改 Zod 規則。通過 ref={field.ref} 註冊控件後按實例聚焦；顯式 focus 回調優先，未註冊 ref 時兼容按 id 聚焦。,"Generates id, label htmlFor and help/error ids. Pass field.id/ariaDescribedby/invalid explicitly. Required marks do not modify Zod rules. Register control instances with field.ref; explicit focus wins, then registered instances, then id fallback."
+用于编辑、确认等需要暂时阻断页面的操作。支持多层、键盘焦点管理与异步确认。,用於編輯、確認等需要暫時阻斷頁面的操作。支持多層、鍵盤焦點管理與異步確認。,"Editing/confirmation that temporarily blocks the page, with stacked dialogs, keyboard focus and async confirmation."
+用户列表分页,用戶列表分頁,User-list pagination
+用户请求变化时触发。页大小变更先发 pageSizeChange，再发一次 change；重复页码和禁用交互不触发。受控父级可以拒绝请求。,用戶請求變化時觸發。頁大小變更先發 pageSizeChange，再發一次 change；重復頁碼和禁用交互不觸發。受控父級可以拒絕請求。,Fires on user requests. Size changes emit pageSizeChange before one change. Repeated-page/disabled actions do not emit. Controlled parents may reject requests.
+用户请求显隐时通知；受控模式需要使用方写回 open。,用戶請求顯隱時通知；受控模式需要使用方寫回 open。,Notifies user visibility requests. Controlled consumers must write back open.
+用简洁说明和可选操作解释当前无数据的原因，支持自定义插图。,用簡潔說明和可選操作解釋當前無數據的原因，支持自定義插圖。,"Explain why no data exists with concise descriptions, optional actions and custom illustrations."
+百分比圆环、点状/导航/内联变体、折叠大量步骤与复杂自定义布局暂缓；基础横纵流程覆盖首轮中后台使用。,百分比圓環、點狀/導航/內聯變體、折疊大量步驟與複雜自定義佈局暫緩；基礎橫縱流程覆蓋首輪中後台使用。,"Percentage circles, dotted/navigation/inline variants, large-step folding and complex layouts are deferred. Basic horizontal/vertical flows cover common admin use."
+目前提供 CSS 入场动画，关闭立即卸载。离场动画暂缓，框架 Transition 的快速关闭问题已独立记录为 F04。,目前提供 CSS 入場動畫，關閉立即卸載。離場動畫暫緩，框架 Transition 的快速關閉問題已獨立記錄為 F04。,CSS entry animation only; closing unmounts immediately. Exit animations are deferred; the rapid Transition-close issue is tracked separately as F04.
+直接使用具名 SVG 图标。装饰图标默认对辅助技术隐藏，有意义的图标需提供 ariaLabel。,直接使用具名 SVG 圖標。裝飾圖標默認對輔助技術隱藏，有意義的圖標需提供 ariaLabel。,Use named SVG icons directly. Decorative icons are hidden from assistive technology; meaningful icons require ariaLabel.
+真实 h1–h5，动态切换会重建对应标题节点。,真實 h1–h5，動態切換會重建對應標題節點。,Real h1–h5 elements; changing the level rebuilds the heading node.
+真实 input 可关联 label，参与 FormData 和原生校验；默认提交值 on。未勾选和禁用项不提交。,真實 input 可關聯 label，參與 FormData 和原生校驗；默認提交值 on。未勾選和禁用項不提交。,"Real inputs participate in labels, FormData and validation. Default submission value is on; unchecked/disabled items are omitted."
+真实 radio 的表单提交、外部表单关联与校验。未传 name 自动生成独立组名。非受控 reset 回到初始值；受控 reset 保留父值。,真實 radio 的表單提交、外部表單關聯與校驗。未傳 name 自動生成獨立組名。非受控 reset 回到初始值；受控 reset 保留父值。,"Real radio submission, external forms and validation. Omitted names generate independent groups. Reset restores uncontrolled initial selection and preserves controlled values."
+短暂反馈操作结果，居中顶部展示，支持加载状态更新、手动关闭与等待关闭。,短暫反饋操作結果，居中頂部展示，支持加載狀態更新、手動關閉與等待關閉。,"Brief operation feedback at top-center, with loading updates, manual closing and close waits."
+确认、取消及异步操作。,確認、取消及異步操作。,"Confirm, cancel and asynchronous actions."
+确认异常回调；未指定时 console.error。,確認異常回調；未指定時 console.error。,Confirmation error callback; defaults to console.error.
+确认标题。,確認標題。,Confirmation title.
+示例用内存函数模拟服务端：Table 只提交查询参数，不对已加载数据二次分页或排序；生产中可替换为业务请求并自行处理竞态。,示例用內存函數模擬服務端：Table 只提交查詢參數，不對已加載數據二次分頁或排序；生產中可替換為業務請求並自行處理競態。,The demo simulates a server in memory. Table submits query parameters without re-paging or sorting loaded results. Replace with business requests and race handling in production.
+祖先真实链接点击事件，默认保留浏览器行为，可 preventDefault 交给业务路由；禁用/危险协议和当前页不触发导航。,祖先真實鏈接點擊事件，默認保留瀏覽器行為，可 preventDefault 交給業務路由；禁用/危險協議和當前頁不觸發導航。,Native ancestor-link clicks preserve browser behavior by default. preventDefault delegates to business routing. Current/disabled/unsafe links do not navigate.
+禁止打开；已打开时卸载浮层内容。,禁止打開；已打開時卸載浮層內容。,Prevents opening; existing floating content is unmounted.
+禁止触发器操作，不强制关闭已展开内容。附加操作由业务自己控制。,禁止觸發器操作，不強制關閉已展開內容。附加操作由業務自己控制。,Disables trigger actions without forcing expanded content closed. Business code controls extra actions.
+禁用、只读、清空和原生必填。无效输入保留并设置 aria-invalid/customValidity，不提交业务值；Escape 恢复已提交值。清空回传 null。组合输入 Enter 不提交。,禁用、只讀、清空和原生必填。無效輸入保留並設置 aria-invalid/customValidity，不提交業務值；Escape 恢復已提交值。清空回傳 null。組合輸入 Enter 不提交。,Disabled/read-only/clear/native required. Invalid drafts remain with aria-invalid/customValidity and do not commit. Escape restores the last value; clear emits null. IME Enter does not submit.
+禁用或只读关闭并禁止打开/修改。只读保留提交值；disabled 不参加原生提交。清空发 null，受控父级可拒绝。,禁用或只讀關閉並禁止打開/修改。只讀保留提交值；disabled 不參加原生提交。清空發 null，受控父級可拒絕。,Disabled/read-only closes panels and prevents opening/editing. Read-only retains submitted values; disabled omits submission. Clearing emits null; controlled parents may reject it.
+禁用时移除 href 并退出 Tab 顺序；可指定可访问名称。,禁用時移除 href 並退出 Tab 順序；可指定可訪問名稱。,Disabling removes href and Tab access. An accessible name can be provided.
+禁用选择/拖放/手动操作；已开始请求继续上报进度。应用取消应使用 cancel。自定义类名/样式作用于外层。,禁用選擇/拖放/手動操作；已開始請求繼續上報進度。應用取消應使用 cancel。自定義類名/樣式作用於外層。,"Disables selection, drop and manual actions. Existing requests continue reporting progress; call cancel to stop them. Custom class/style targets the wrapper."
+稳定的 content 插槽由调用方负责其菜单语义与交互；首轮不支持运行中替换插槽函数（F09），动作业务的加载/错误和异步结果由业务管理。,穩定的 content 插槽由調用方負責其菜單語義與交互；首輪不支持運行中替換插槽函數（F09），動作業務的加載/錯誤和異步結果由業務管理。,"The stable content slot owns its menu semantics and interaction. Dynamic renderer replacement remains deferred (F09). Business code manages loading, errors and async results."
+稳定的 option 插槽接收更新后的数据；暂缓运行中替换插槽函数、自定义输入组件、虚拟化与任意自动填充策略控制。,穩定的 option 插槽接收更新後的數據；暫緩運行中替換插槽函數、自定義輸入組件、虛擬化與任意自動填充策略控制。,"Stable option slots receive updated data. Dynamic renderer replacement, custom inputs, virtualization and arbitrary autofill strategies are deferred."
+稳定的选项/已选展示插槽，数据跟随选项更新；文本 label 仍用于搜索及可访问名称。,穩定的選項/已選展示插槽，數據跟隨選項更新；文本 label 仍用於搜索及可訪問名稱。,Stable option/selection slots follow option updates. Plain labels remain necessary for search and accessible names.
+空态说明、插图和操作。,空態說明、插圖和操作。,"Empty descriptions, illustrations and actions."
+空状态,空狀態,Empty
+窄屏一列、桌面三列；数字 0 正常显示，缺失值使用占位，字段可包含标签或链接。,窄屏一列、桌面三列；數字 0 正常顯示，缺失值使用佔位，字段可包含標籤或鏈接。,One narrow-screen column and three desktop columns. Zero displays normally; missing values use placeholders. Fields may contain tags or links.
+立即切换布尔状态，支持加载、禁用、状态文案及原生表单。,立即切換布爾狀態，支持加載、禁用、狀態文案及原生表單。,"Immediate boolean switching with loading, disabling, status text and native forms."
+竖向分割线高度为 .9em，随文字字号缩放。,竪向分割線高度為 .9em，隨文字字號縮放。,"Vertical dividers use .9em height, scaling with text size."
+等待结果,等待結果,Awaiting results
+管理触发器的 aria-controls/expanded 或 tooltip 的 describedby。,管理觸發器的 aria-controls/expanded 或 tooltip 的 describedby。,Manages trigger aria-controls/expanded or tooltip describedby.
+类型与图片回退,類型與圖片回退,Types and image fallback
+紧凑的互斥选项组，适合视图和筛选范围切换。,緊湊的互斥選項組，適合視圖和篩選範圍切換。,Compact exclusive choices for views and filter ranges.
+紧凑间距、边框和悬浮阴影；hoverable 不会把整个卡片变成按钮。,緊湊間距、邊框和懸浮陰影；hoverable 不會把整個卡片變成按鈕。,"Compact spacing, borders and hover shadows. hoverable does not make the whole card a button."
+级联选择,級聯選擇,Cascader
+纯日期，没有时间和时区。ISO 日历，UI 年份范围 0001–9999；输入日期值转成 iso8601 日历，非 ISO 日历的 UI 暂不支持。,純日期，沒有時間和時區。ISO 日曆，UI 年份範圍 0001–9999；輸入日期值轉成 iso8601 日曆，非 ISO 日曆的 UI 暫不支持。,"Date-only values, without time or timezone. Uses ISO calendars and UI years 0001–9999. Inputs convert to iso8601; non-ISO calendar UI is deferred."
+纯时间，不附加日期或时区；秒以下精度归零，HH:mm 模式秒也归零，默认名值始终按 HH:mm:ss 提交。,純時間，不附加日期或時區；秒以下精度歸零，HH:mm 模式秒也歸零，默認名值始終按 HH:mm:ss 提交。,Time-only values without dates/timezones. Subsecond precision is zeroed; HH:mm also zeroes seconds. Native submitted values always use HH:mm:ss.
+线形、圆形、状态与进度。,線形、圓形、狀態與進度。,"Lines, circles, status and progress."
+组件卸载后不会提交异步处理的 UI 完成回调；业务自身的异步副作用仍由业务管理。,組件卸載後不會提交異步處理的 UI 完成回調；業務自身的異步副作用仍由業務管理。,Unmounted components do not deliver obsolete async UI completion callbacks. Business async side effects remain caller-managed.
+组件尺寸；未指定时继承 ButtonGroup。,組件尺寸；未指定時繼承 ButtonGroup。,Component size; inherits ButtonGroup when omitted.
+组件库内部共用的定位与交互基础，也可以直接组合使用。沿用本项目实现，不新增定位依赖。,組件庫內部共用的定位與交互基礎，也可以直接組合使用。沿用本項目實現，不新增定位依賴。,"Shared positioning and interaction primitives, also directly composable. Uses this project's implementation without adding positioning dependencies."
+组件级稳定标题插槽。label 仍是必需文本；不支持运行中给单个数据节点插入渲染函数。,組件級穩定標題插槽。label 仍是必需文本；不支持運行中給單個數據節點插入渲染函數。,Stable component-level title slot. label remains required text. Runtime renderer insertion into individual nodes is unsupported.
+组件级稳定选项内容插槽；label 用于触发器展示、搜索与可访问名称。,組件級穩定選項內容插槽；label 用於觸發器展示、搜索與可訪問名稱。,"Stable component-level option slot; label supplies trigger display, search and accessible names."
+组内原生必选校验，样式传给每项；RadioGroup.change 回传 T | undefined，界面选择只发出有效 T。,組內原生必選校驗，樣式傳給每項；RadioGroup.change 回傳 T | undefined，界面選擇只發出有效 T。,"Native group-required validation; styles pass to each item. RadioGroup.change returns T | undefined, while UI selections emit valid T only."
+组内响应式默认值；子项 size 可覆盖组尺寸，禁用组不可被子项取消。,組內響應式默認值；子項 size 可覆蓋組尺寸，禁用組不可被子項取消。,"Reactive group defaults. Children can override size, but cannot override a disabled group."
+组合占位与内容保留,組合佔位與內容保留,Combined placeholders and retained content
+组合受控 Radio 建议使用 RadioGroup，确保父级拒绝请求后整组恢复。独立 Radio 同名互斥由浏览器管理，不建议多个独立受控实例混用互相矛盾的 checked 值。,組合受控 Radio 建議使用 RadioGroup，確保父級拒絕請求後整組恢復。獨立 Radio 同名互斥由瀏覽器管理，不建議多個獨立受控實例混用互相矛盾的 checked 值。,Use RadioGroup for controlled radio sets so rejected requests restore the whole group. Independent same-name radios rely on browser exclusivity; avoid conflicting checked values across controlled instances.
+组合页头、侧栏、内容和页脚，承载 PC 中台的基础结构。,組合頁頭、側欄、內容和頁腳，承載 PC 中台的基礎結構。,"Compose headers, sidebars, content and footers for desktop admin applications."
+结果,結果,Result
+结果状态、说明和操作。,結果狀態、說明和操作。,"Result status, descriptions and actions."
+统一 sm / md / lg；纯图标按钮需要 ariaLabel。,統一 sm / md / lg；純圖標按鈕需要 ariaLabel。,Standard sm/md/lg sizes; icon-only buttons require ariaLabel.
+编辑与异步确认,編輯與異步確認,Editing and async confirmation
+编辑时可以暂时超出 min/max；提交归一化。step 是步进大小，不会把手工输入强制吸附网格；原生 form 校验仍受 step 限制。,編輯時可以暫時超出 min/max；提交歸一化。step 是步進大小，不會把手工輸入強制吸附網格；原生 form 校驗仍受 step 限制。,"Drafts may temporarily exceed min/max; commits normalize them. step controls stepping, not snapping typed numbers to a grid, though native form validation still applies step rules."
+缩小浏览器宽度后，两列自动改为单列。偏移同样遵循 24 列比例。,縮小瀏覽器寬度後，兩列自動改為單列。偏移同樣遵循 24 列比例。,Narrowing the browser switches two columns to one. Offsets also follow the 24-column grid.
+背景 inert 与滚动锁按层管理；第三方自行创建的 Portal 不自动属于焦点范围，优先使用本库浮层。,背景 inert 與滾動鎖按層管理；第三方自行創建的 Portal 不自動屬於焦點範圍，優先使用本庫浮層。,Background inert and scroll locks are layered. Third-party Portals are not automatically included in focus scope; prefer this library's floating components.
+能力范围参考 Ant Design 和 Element Plus 的 Upload：先支持中台常用文字列表、自动/手动上传及请求生命周期。目录上传、粘贴、图片墙/裁剪、文件转换、排序、分片/断点续传、云 SDK 暂缓。,能力範圍參考 Ant Design 和 Element Plus 的 Upload：先支持中台常用文字列表、自動/手動上傳及請求生命週期。目錄上傳、粘貼、圖片牆/裁剪、文件轉換、排序、分片/斷點續傳、雲 SDK 暫緩。,"Upload scope follows common Ant Design/Element Plus admin use: text lists, automatic/manual uploads and request lifecycle. Directory/paste uploads, image walls/cropping, transforms, sorting, chunk/resume and cloud SDK integration are deferred."
+自动保存设置,自動保存設置,Autosaved settings
+自动发送 ready 文件；否则使用单项上传按钮或公开 start。正整数并发数，其余回退 3。取消或完成释放名额；error/canceled 不自动重试。,自動發送 ready 文件；否則使用單項上傳按鈕或公開 start。正整數併發數，其餘回退 3。取消或完成釋放名額；error/canceled 不自動重試。,Automatically starts ready files; otherwise use per-file buttons or start. Positive integer concurrency is supported; other values default to 3. Cancel/completion frees slots; error/canceled files do not retry automatically.
+自动完成,自動完成,AutoComplete
+自动高度与长度限制,自動高度與長度限制,Auto height and length limits
+自定义图标 / 被加载区域；有正文时按块级容器覆盖，正文始终保留挂载。,自定義圖標 / 被加載區域；有正文時按塊級容器覆蓋，正文始終保留掛載。,"Custom icon / loading region. With children, covers a block container while retaining mounted content."
+自定义外观不再复用 Menu 的菜单语义；选项是 role=option。文字 label 必填，旧 MenuOption 插槽字段改为组件级 slot:option/selection。,自定義外觀不再復用 Menu 的菜單語義；選項是 role=option。文字 label 必填，舊 MenuOption 插槽字段改為組件級 slot:option/selection。,Custom presentation no longer reuses Menu semantics; options use role=option. Text labels remain required. Old MenuOption slots become component-level option/selection slots.
+自定义建议展示；选择原生文本；Enter 回调可通过 defaultPrevented 判断是否已被建议选择消费。,自定義建議展示；選擇原生文本；Enter 回調可通過 defaultPrevented 判斷是否已被建議選擇消費。,Custom suggestion rendering and native text selection. Enter handlers can inspect defaultPrevented to detect consumed suggestion selection.
+自定义请求负责实际中止资源，组件负责 AbortSignal 和迟到结果隔离；移除/重置/卸载均可触发取消。beforeUpload 校验任务无法强制终止，但过期结果不会加入列表。,自定義請求負責實際中止資源，組件負責 AbortSignal 和遲到結果隔離；移除/重置/卸載均可觸發取消。beforeUpload 校驗任務無法強制終止，但過期結果不會加入列表。,"Custom requests stop their own resources; the component supplies AbortSignal and late-result isolation. Remove/reset/unmount may cancel. Validation tasks cannot be forcibly stopped, but stale results never enter the list."
+自定义页脚；footer=false 隐藏包括自定义内容的整个页脚。,自定義頁腳；footer=false 隱藏包括自定義內容的整個頁腳。,"Custom footer; footer=false hides the entire footer, including custom content."
+自由文本和输入建议，复用选择列表但不限制用户必须选择。,自由文本和輸入建議，復用選擇列表但不限制用戶必須選擇。,"Free text with input suggestions, reusing selection lists without requiring an option match."
+自由文本始终有效，不要求匹配 options；value 和 options.value 都为 string，Select 的 mode/多选/已选标签不适用。,自由文本始終有效，不要求匹配 options；value 和 options.value 都為 string，Select 的 mode/多選/已選標籤不適用。,Free text is always valid. Values and option values are strings; Select's mode/multiple/selected-tag semantics do not apply.
+节点键稳定且全树唯一；可对已有 VM 数据做响应式修改，也可替换 treeData。异步子项由组件缓存而非回写业务对象。替换父节点对象会使其缓存失效。,節點鍵穩定且全樹唯一；可對已有 VM 數據做響應式修改，也可替換 treeData。異步子項由組件緩存而非回寫業務對象。替換父節點對象會使其緩存失效。,Stable globally unique tree keys. Mutate existing VM data or replace treeData. Async children are cached rather than written into business objects; replacing a parent invalidates its cache.
+范围参考 Ant Design Tabs 常用能力与 WAI-ARIA Tabs 模式；编辑/新增/关闭、拖拽排序、自定义标签栏、溢出下拉、上下左右四边位置和内容离场动画暂不支持。,範圍參考 Ant Design Tabs 常用能力與 WAI-ARIA Tabs 模式；編輯/新增/關閉、拖拽排序、自定義標籤欄、溢出下拉、上下左右四邊位置和內容離場動畫暫不支持。,"Scope follows common Ant Design/WAI-ARIA Tabs. Editing/add/close, dragging, custom tab bars, overflow dropdowns, four-edge placement and content exit animation are deferred."
+虚线 / 普通字重。,虛線 / 普通字重。,Dashed / normal font weight.
+表单,表單,Form
+表单与焦点属性,表單與焦點屬性,Form and focus attributes
+表格,表格,Table
+装饰内容，插槽优先；可继续组合 InputWrapper/InputAddon。,裝飾內容，插槽優先；可繼續組合 InputWrapper/InputAddon。,"Decorative content, with slots taking precedence. Can compose InputWrapper/InputAddon."
+视觉类型；link 仍是按钮。,視覺類型；link 仍是按鈕。,Visual variant; link remains a button.
+角色权限与全选,角色權限與全選,Role permissions and select-all
+触发一个操作。区分主要与次要操作，并通过加载和禁用状态防止重复提交。,觸發一個操作。區分主要與次要操作，並通過加載和禁用狀態防止重復提交。,Trigger actions with primary/secondary hierarchy; loading and disabled states prevent duplicate submission.
+触发器。,觸發器。,Trigger.
+触发器插槽 / 浮层内容插槽。,觸發器插槽 / 浮層內容插槽。,Trigger slot / floating content slot.
+触发插槽必须是一个首根为 HTMLElement 的稳定元素/组件；不接裸文本、纯注释或初始隐藏的条件根。,觸發插槽必須是一個首根為 HTMLElement 的穩定元素/組件；不接裸文本、純注釋或初始隱藏的條件根。,"The trigger slot needs a stable element/component whose first root is an HTMLElement. Bare text, comments or initially hidden conditional roots are unsupported."
+警告提示,警告提示,Alert
+计数、圆点、上限和状态。,計數、圓點、上限和狀態。,"Counts, dots, limits and status."
+订单金额,訂單金額,Order amount
+记录总数，非有限/负值按 0 处理；空集合仍显示第 1 页。页码数量按常数上限渲染，支持大总量。,記錄總數，非有限/負值按 0 處理；空集合仍顯示第 1 頁。頁碼數量按常數上限渲染，支持大總量。,Record total; negative/nonfinite totals become zero. Empty lists still show page 1. Bounded page-button rendering supports large totals.
+设置原生 indeterminate 和 aria-checked=mixed；只表示外观及语义，不替代 checked 或表单提交值，由父级控制。,設置原生 indeterminate 和 aria-checked=mixed；只表示外觀及語義，不替代 checked 或表單提交值，由父級控制。,"Sets native indeterminate and aria-checked=mixed. Mixed state affects display/semantics, not checked or submitted values, and is parent-controlled."
+设置在真正获得焦点的 combobox 上；aria-controls/activedescendant 关联实际 listbox/option。自定义选项内容不要放可交互控件。,設置在真正獲得焦點的 combobox 上；aria-controls/activedescendant 關聯實際 listbox/option。自定義選項內容不要放可交互控件。,Applied to the focusable combobox. aria-controls/activedescendant associate actual listboxes/options. Do not put interactive controls inside custom option content.
+详情信息和响应式布局。,詳情信息和響應式佈局。,Detail information and responsive layout.
+语义色、关闭和自定义内容。,語義色、關閉和自定義內容。,"Semantic colors, closing and custom content."
+语义色和边框；自定义颜色用 style，不内置颜色算法。,語義色和邊框；自定義顏色用 style，不內置顏色算法。,Semantic colors and borders. Use style for custom colors; no built-in color algorithm.
+语义颜色。,語義顏色。,Semantic color.
+说明与操作,說明與操作,Description and actions
+说明插槽优先，false 隐藏整块说明，包括插槽。,說明插槽優先，false 隱藏整塊說明，包括插槽。,"Description slots win. false hides the whole description, including the slot."
+说明，插槽优先，不重复渲染两份。,說明，插槽優先，不重復渲染兩份。,Description with slot precedence; duplicate text/slot output is avoided.
+请求关闭并携带结果。可由外部主动结束，包括正在提交的窗口。,請求關閉並攜帶結果。可由外部主動結束，包括正在提交的窗口。,Request closing with a result. External callers may close even while submitting.
+请求关闭时通知；受控模式需写回 open。,請求關閉時通知；受控模式需寫回 open。,Notifies close requests; controlled parents must update open.
+请求完整勾选数组与半选信息；键盘 Space 和点击复选标记一致。输出顺序为树的深度优先顺序，未知 key 保留等待后续数据。,請求完整勾選數組與半選信息；鍵盤 Space 和點擊復選標記一致。輸出順序為樹的深度優先順序，未知 key 保留等待後續數據。,Requests complete checked keys and mixed-state information. Space and checkbox clicks match. Keys follow depth-first order; unknown keys remain pending future data.
+请求新的折叠状态。,請求新的折疊狀態。,Requests a new collapsed state.
+路径导航、真实祖先链接、当前页面和可定制分隔符。,路徑導航、真實祖先鏈接、當前頁面和可定制分隔符。,"Path navigation with real ancestor links, current page and custom separators."
+跳转框用正整数字符串 + Enter 提交，超大页码收敛，Escape/失焦清空；总条数、精简前后页和只有一页时隐藏。,跳轉框用正整數字符串 + Enter 提交，超大頁碼收斂，Escape/失焦清空；總條數、精簡前後頁和只有一頁時隱藏。,"Jump with positive-integer text and Enter; oversized pages clamp. Escape/blur clears drafts. Supports totals, simplified previous/next and single-page hiding."
+轨道中的开/关文案，仅作状态装饰，名称由 label/children/ariaLabel 提供且保持稳定。,軌道中的開/關文案，僅作狀態裝飾，名稱由 label/children/ariaLabel 提供且保持穩定。,On/off text within the track is decorative; label/children/ariaLabel provide a stable accessible name.
+轻量解释信息，默认通过悬浮和键盘聚焦触发。提示自身不接收焦点。,輕量解釋信息，默認通過懸浮和鍵盤聚焦觸發。提示自身不接收焦點。,Lightweight explanations on hover or keyboard focus. Tooltips do not receive focus.
+输入 Enter/离开控件提交合法文本；面板选择只改草稿，确定或合法的此刻才发 change；Escape/外部关闭丢弃面板草稿。,輸入 Enter/離開控件提交合法文本；面板選擇只改草稿，確定或合法的此刻才發 change；Escape/外部關閉丟棄面板草稿。,Enter/leaving the control commits valid text. Panel choices edit drafts; Confirm or a valid Now commits. Escape/outside closing discards panel drafts.
+输入、清空、切换前缀并提交；附加内容变化会保留焦点与原生节点。,輸入、清空、切換前綴並提交；附加內容變化會保留焦點與原生節點。,"Edit, clear, change prefixes and submit while preserving native nodes and focus."
+输入事件遵循现代浏览器。自动填充、移动端键盘和具体 IME 平台行为以真实浏览器为准；不提供输入掩码或自定义字符计数算法。,輸入事件遵循現代瀏覽器。自動填充、移動端鍵盤和具體 IME 平台行為以真實瀏覽器為準；不提供輸入掩碼或自定義字符計數算法。,"Input events follow modern browsers. Autofill, mobile keyboards and IME details require real-browser verification. Input masks and custom count algorithms are not supplied."
+输入建议与键盘选择。,輸入建議與鍵盤選擇。,Suggestions and keyboard selection.
+输入框,輸入框,Input
+输入用途与原生约束；密码请使用 Password。,輸入用途與原生約束；密碼請使用 Password。,Input purpose and native constraints; use Password for passwords.
+输出/错误/原生 reset / 方法,輸出/錯誤/原生 reset / 方法,Output / errors / native reset / methods
+返回 false 或拒绝则保留；等待期间防止重复请求移除。受控父级保留记录也可拒绝移除，只有接受删除才取消在途请求。,返回 false 或拒絕則保留；等待期間防止重復請求移除。受控父級保留記錄也可拒絕移除，只有接受刪除才取消在途請求。,False/rejected removal keeps files and deduplicates pending removal. Controlled parents may also retain records; active requests are canceled only after deletion is accepted.
+进度与状态,進度與狀態,Progress and status
+进度条,進度條,Progress
+远程模式不处理排序、过滤或分页切片，total 从 pagination 提供。事件包含 action、pagination、sorter、filters、currentData（过滤排序后、分页前的记录；远程为已加载记录）。父级负责接受请求、加载及过期请求取消。,遠程模式不處理排序、過濾或分頁切片，total 從 pagination 提供。事件包含 action、pagination、sorter、filters、currentData（過濾排序後、分頁前的記錄；遠程為已加載記錄）。父級負責接受請求、加載及過期請求取消。,"Remote mode does not sort, filter or slice pages locally; pagination supplies total. Events include action, pagination, sorter, filters and currentData before local paging (loaded records in remote mode). Parents accept requests and manage loading/stale cancellation."
+选中、内容插槽、禁用和动态指示条。,選中、內容插槽、禁用和動態指示條。,"Selection, content slots, disabling and a dynamic indicator."
+选择、开始、进度、成功、失败、取消、移除时发出快照。type 为 select/start/progress/success/error/cancel/remove；取消保留 canceled 项，移除才删除。,選擇、開始、進度、成功、失敗、取消、移除時發出快照。type 為 select/start/progress/success/error/cancel/remove；取消保留 canceled 項，移除才刪除。,Emits snapshots for select/start/progress/success/error/cancel/remove. Cancellation retains canceled records; removal deletes them.
+选择与勾选独立。单选点击产生单元素数组，多选不要求 Ctrl，点击/Enter/非勾选树 Space 可切换；节点 selectable=false 仅禁止自身选择。受控父级可拒绝。,選擇與勾選獨立。單選點擊產生單元素數組，多選不要求 Ctrl，點擊/Enter/非勾選樹 Space 可切換；節點 selectable=false 僅禁止自身選擇。受控父級可拒絕。,Selection and checking are independent. Single selection emits one key; multiple selection does not require Ctrl. Click/Enter and non-checkable Space toggle selection. selectable=false affects only that node. Controlled parents may reject requests.
+"选择值 / 初始值 / (value, event: Event) => void","選擇值 / 初始值 / (value, event: Event) => void","Value / initial value / (value, event: Event) => void"
+选择器,選擇器,Select
+选择完整地区路径，搜索已加载的完整名称；切换中间级选择后可选择省/市。远程地区首次模拟失败，可重试。,選擇完整地區路徑，搜索已加載的完整名稱；切換中間級選擇後可選擇省/市。遠程地區首次模擬失敗，可重試。,Select full region paths and search loaded names. Intermediate changes allow province/city selection. The remote demo fails once and supports retry.
+选择纯日期，禁用周末及超界值；外部更新和手动输入使用同一规则。第二个输入展示 dd/MM/yyyy。,選擇純日期，禁用週末及超界值；外部更新和手動輸入使用同一規則。第二個輸入展示 dd/MM/yyyy。,Date-only selection disabling weekends/out-of-range values. External and typed values share rules. A second input displays dd/MM/yyyy.
+选文件后点击开始上传，全部完成后才可保存。FormField 将文件列表绑定到业务字段，重置清空列表并取消请求。示例同样使用本地模拟请求。,選文件後點擊開始上傳，全部完成後才可保存。FormField 將文件列表綁定到業務字段，重置清空列表並取消請求。示例同樣使用本地模擬請求。,Choose files and start manually; save only after all uploads finish. FormField binds the list; reset clears it and cancels requests. Requests are locally simulated.
+逐项按选择顺序校验。beforeUpload 返回 false 或抛出/拒绝时不加入列表；异步校验期间可继续选择，批次排队处理。reason 为 accept/size/count/beforeUpload。手动上传请用 autoUpload=false。,逐項按選擇順序校驗。beforeUpload 返回 false 或拋出/拒絕時不加入列表；異步校驗期間可繼續選擇，批次排隊處理。reason 為 accept/size/count/beforeUpload。手動上傳請用 autoUpload=false。,"Validate files in selection order. beforeUpload false, throws or rejection omits a file. Async validation allows further selection with queued batches. Reasons: accept/size/count/beforeUpload. Set autoUpload=false for manual upload."
+通用,通用,General
+通知,通知,Notification
+通知位置、标题、内容与关闭。,通知位置、標題、內容與關閉。,"Notification placement, title, content and closing."
+通过 context 提供响应式尺寸和禁用状态，不克隆子组件。,通過 context 提供響應式尺寸和禁用狀態，不克隆子組件。,Context supplies reactive size/disabled state without cloning children.
+通过具名导出组合使用；不是 Typography.Title 风格的 React 复合 API。,通過具名導出組合使用；不是 Typography.Title 風格的 React 復合 API。,Compose named exports rather than React-style Typography.Title compound APIs.
+通过受控 collapsed 和 collapse 事件切换；侧栏内容由使用方决定折叠后如何展示。,通過受控 collapsed 和 collapse 事件切換；側欄內容由使用方決定折疊後如何展示。,Controlled collapsed plus collapse events toggle the sidebar; consumers decide how collapsed content appears.
+邮箱建议,郵箱建議,Email suggestions
+部门权限与过滤,部門權限與過濾,Department permissions and filtering
+配置对活动容器即时生效。超过 maxCount 关闭最旧条目；非正或非有限上限表示不限制。,配置對活動容器即時生效。超過 maxCount 關閉最舊條目；非正或非有限上限表示不限制。,Configuration affects active containers immediately. Excess maxCount closes oldest entries; nonpositive/nonfinite limits mean unlimited.
+链接、分隔符和自定义展示。,鏈接、分隔符和自定義展示。,"Links, separators and custom rendering."
+错误使用 alert 语义，普通通知用 status；静态信息可关闭播报。,錯誤使用 alert 語義，普通通知用 status；靜態信息可關閉播報。,Errors use alert and ordinary notices use status. Static information may disable announcements.
+键盘,鍵盤,Keyboard
+键盘 / ref,鍵盤 / ref,Keyboard / ref
+长度沿用浏览器 UTF-16 单位，不会截断外部给定值。,長度沿用瀏覽器 UTF-16 單位，不會截斷外部給定值。,Lengths use native UTF-16 units and do not truncate external values.
+间距、外框与透明背景。,間距、外框與透明背景。,"Spacing, wrapper and transparent background."
+间距与弹性布局,間距與彈性佈局,Space and Flex
+附加 class 与内联 CSS。,附加 class 與內聯 CSS。,Additional class and inline CSS.
+附加样式与默认插槽。,附加樣式與默認插槽。,Additional styles and default slot.
+附加样式；LoadingOutlined 可通过 style 设置字号和颜色。,附加樣式；LoadingOutlined 可通過 style 設置字號和顏色。,Additional styles; LoadingOutlined can set size/color via style.
+隐藏字段以 JSON 数组序列化，保留数字类型、特殊字符及层级，空值为空字符串。原生必填校验聚焦可见触发器；reset 恢复默认快照或受控父值，不发 change。,隱藏字段以 JSON 數組序列化，保留數字類型、特殊字符及層級，空值為空字符串。原生必填校驗聚焦可見觸發器；reset 恢復默認快照或受控父值，不發 change。,"Hidden fields serialize JSON arrays, preserving numbers, special characters and hierarchy; empty paths submit empty text. Required validation focuses the visible trigger. Reset restores defaults or controlled values without change."
+需要输入框、按钮等交互内容时应使用 Popover。,需要輸入框、按鈕等交互內容時應使用 Popover。,"Use Popover for inputs, buttons or other interactive content."
+静态方法创建独立 bootstrap 根，不继承调用处 context。复杂业务应让插槽内容显式接收所需数据。,靜態方法創建獨立 bootstrap 根，不繼承調用處 context。複雜業務應讓插槽內容顯式接收所需數據。,Static methods create independent bootstrap roots without caller context. Complex business slots should receive required data explicitly.
+非受控 form.reset 恢复初始勾选/选择数组，受控保持父值；重置不触发 change。,非受控 form.reset 恢復初始勾選/選擇數組，受控保持父值；重置不觸發 change。,Uncontrolled form.reset restores initial checked/selected arrays; controlled fields retain parent values. Reset emits no change.
+非有限值为 0，数值截到 0–100 并保留两位精度；显式状态优先。active 提供线形动效。,非有限值為 0，數值截到 0–100 並保留兩位精度；顯式狀態優先。active 提供線形動效。,Nonfinite values become zero; numbers clamp to 0–100 with two decimal places. Explicit status wins. active animates line progress.
+非模态焦点管理和关闭策略；不限制 Tab 在浮层中循环。,非模態焦點管理和關閉策略；不限制 Tab 在浮層中循環。,Nonmodal focus and close policies; Tab is not trapped within the panel.
+非负整数计数，超限显示上限+；负数/非有限数按 0，字符串原样展示。默认隐藏数字 0。,非負整數計數，超限顯示上限+；負數/非有限數按 0，字符串原樣展示。默認隱藏數字 0。,Nonnegative integer counts; overflow displays limit+. Negative/nonfinite values become zero; strings display literally. Numeric zero is hidden by default.
+面包屑,麵包屑,Breadcrumb
+面板类名与样式 / 遮罩类名。,面板類名與樣式 / 遮罩類名。,Panel class/style / backdrop class.
+面板首次访问才挂载，默认保留已访问的内容；true 时切走立即销毁。需要跨销毁保留的数据请放父级 VM。,面板首次訪問才掛載，默認保留已訪問的內容；true 時切走立即銷毀。需要跨銷毀保留的數據請放父級 VM。,Panels mount on first visit and stay mounted by default; true destroys them immediately on departure. Store values in parent VMs to survive destruction.
+页头、侧栏、内容和页脚。,頁頭、側欄、內容和頁腳。,"Header, sidebar, content and footer."
+页码、页大小和快速跳转。,頁碼、頁大小和快速跳轉。,"Page numbers, page sizes and quick jumping."
+页码和页大小独立受控，页大小变化回到首页；支持总条数、禁用和精简模式。,頁碼和頁大小獨立受控，頁大小變化回到首頁；支持總條數、禁用和精簡模式。,"Page number and size are independently controlled. Size changes request page 1; supports totals, disabling and simple mode."
+顶层字段名 / form.control / (field) => JNode,頂層字段名 / form.control / (field) => JNode,Top-level field name / form.control / (field) => JNode
+项目成员,項目成員,Project members
+项目详情,項目詳情,Project details
+预约时间,預約時間,Appointment time
+预设 24/32/40px 或正数像素；非法数值回退到 32px。,預設 24/32/40px 或正數像素；非法數值回退到 32px。,24/32/40px presets or positive pixel values; invalid values default to 32px.
+预设尺寸；width 只用于圆形，限制 48–512px 且不超过父容器；线宽限制 1–20，线形为 px，圆形为 viewBox 单位。,預設尺寸；width 只用於圓形，限制 48–512px 且不超過父容器；線寬限制 1–20，線形為 px，圓形為 viewBox 單位。,"Preset sizes. width affects circles only, clamped to 48–512px and parent width. Stroke clamps to 1–20, using pixels for lines and viewBox units for circles."
+首次加载不挂载正文，首次完成后会保留输入，后续加载只隐藏正文。,首次加載不掛載正文，首次完成後會保留輸入，後續加載只隱藏正文。,"Initial loading does not mount content. Once loaded, content stays mounted and later loading only hides it, preserving inputs."
+首次展开前不挂载正文；之后默认通过 hidden 保留，true 时折叠即销毁。,首次展開前不掛載正文；之後默認通過 hidden 保留，true 時折疊即銷毀。,Content mounts on first expansion. Thereafter hidden preserves it by default; true destroys it when collapsed.
+首轮不含 CheckableTag、标签组、拖拽和自动颜色算法。,首輪不含 CheckableTag、標籤組、拖拽和自動顏色算法。,"CheckableTag, tag groups, dragging and automatic color algorithms are out of scope."
+首轮不含拖动、虚拟化、大树增量计算、连线或任意每节点渲染函数；更新时遍历已加载节点，不提供增量计算，适合中小规模业务树。,首輪不含拖動、虛擬化、大樹增量計算、連線或任意每節點渲染函數；更新時遍歷已加載節點，不提供增量計算，適合中小規模業務樹。,"Dragging, virtualization, large-tree incremental calculations, connectors and arbitrary per-node renderers are deferred. Updates traverse loaded nodes, suiting small/medium business trees."
+首轮不提供 Card.Grid、内置 Tabs、拖拽、子项克隆或完整 Skeleton 配置；可组合现有布局组件。,首輪不提供 Card.Grid、內置 Tabs、拖拽、子項克隆或完整 Skeleton 配置；可組合現有佈局組件。,"Card.Grid, built-in Tabs, dragging, child cloning and complete Skeleton configuration are deferred; compose existing layouts instead."
+首轮不提供 key 去重、复杂堆叠折叠、进度环、跨页面队列或拖拽。,首輪不提供 key 去重、複雜堆疊折疊、進度環、跨頁面隊列或拖拽。,"Key deduplication, complex stack folding, progress rings, cross-page queues and dragging are not supplied."
+首轮不提供专门的 Button/Input/Image 静态子组件和复杂列表生成器，可用 SkeletonBlock 组合。,首輪不提供專門的 Button/Input/Image 靜態子組件和複雜列表生成器，可用 SkeletonBlock 組合。,Dedicated Button/Input/Image static subcomponents and complex list generators are deferred. Compose SkeletonBlock instead.
+首轮不提供复杂行合并或自动推算填充跨度，避免改变字段列表的身份与插槽状态。,首輪不提供複雜行合併或自動推算填充跨度，避免改變字段列表的身份與插槽狀態。,Complex row merging and automatically inferred fill spans are deferred to preserve field identity and slot state.
+首轮不提供自定义 itemRender、总计插槽、自动尺寸响应式及路由链接；需要链接式分页可在业务层构造。,首輪不提供自定義 itemRender、總計插槽、自動尺寸響應式及路由鏈接；需要鏈接式分頁可在業務層構造。,"Custom itemRender, total slots, automatic responsive sizing and routing links are deferred. Build link-based pagination in business code."
+首轮不支持 12 小时制、AM/PM、跨日时间范围、毫秒/纳秒 UI 和时区。需要时间区间可在业务中组合两个 TimePicker。,首輪不支持 12 小時制、AM/PM、跨日時間範圍、毫秒/納秒 UI 和時區。需要時間區間可在業務中組合兩個 TimePicker。,"12-hour time, AM/PM, cross-day ranges, subsecond UI and timezones are deferred. Compose two TimePickers for business ranges."
+首轮不支持仪表盘、分段成功率、渐变或复杂 SVG 特效。几何和过渡尊重 reduced-motion。,首輪不支持儀錶盤、分段成功率、漸變或複雜 SVG 特效。幾何和過渡尊重 reduced-motion。,"Dashboard gauges, segmented success rates, gradients and complex SVG effects are deferred. Geometry and transitions respect reduced motion."
+首轮为单一路径；多选级联、悬浮展开、字段别名适配、虚拟化、远程搜索和每节点运行时新增插槽暂缓。多节点选择优先使用 Tree 勾选。,首輪為單一路徑；多選級聯、懸浮展開、字段別名適配、虛擬化、遠程搜索和每節點運行時新增插槽暫緩。多節點選擇優先使用 Tree 勾選。,"Single paths initially. Multiple cascading selection, hover expansion, field aliases, virtualization, remote search and per-node dynamic slots are deferred. Use Tree checking for multiple nodes."
+首轮为单日期和闭合范围。日期时间组合、月/季/年专用选择器、开放端点、任意格式模板、业务时区、非公历 UI、自定义日期格和运行中插槽替换暂缓；可用 PlainDate.toPlainDateTime(PlainTime) 在业务层组合日期时间。,首輪為單日期和閉合範圍。日期時間組合、月/季/年專用選擇器、開放端點、任意格式模板、業務時區、非公曆 UI、自定義日期格和運行中插槽替換暫緩；可用 PlainDate.toPlainDateTime(PlainTime) 在業務層組合日期時間。,"Single dates and closed ranges initially. Date-time composition, dedicated month/quarter/year pickers, open endpoints, arbitrary formats, business timezones, non-Gregorian UI, custom cells and dynamic slots are deferred. Compose PlainDate.toPlainDateTime(PlainTime) in business code."
+首轮为平面数据、单列排序、原生单/多选过滤、单选/多选行、基本分页与展开。分组表头、树表、合并单元格、汇总、列显隐面板、自定义筛选弹层、编辑、拖拽和虚拟化暂缓。,首輪為平面數據、單列排序、原生單/多選過濾、單選/多選行、基本分頁與展開。分組表頭、樹表、合併單元格、匯總、列顯隱面板、自定義篩選彈層、編輯、拖拽和虛擬化暫緩。,"Flat data, single-column sorting, native single/multi filters, row selection, basic paging and expansion. Grouped headers, tree tables, merged cells, summaries, column panels, custom filter popups, editing, dragging and virtualization are deferred."
+首轮关闭即销毁内容，再次打开会重新挂载。需要保留的表单值应放在父级 VM；暂不提供保留内部状态的关闭模式。,首輪關閉即銷毀內容，再次打開會重新掛載。需要保留的表單值應放在父級 VM；暫不提供保留內部狀態的關閉模式。,Closing destroys content; reopening mounts it again. Keep persistent form values in parent VMs. Preserving internal closed state is deferred.
+首轮统一使用对象选项，不接收 string[]/number[] 简写；不内置滑块动画、异步加载、拖动或圆角形状配置。复杂图标/标签可用稳定插槽。,首輪統一使用對象選項，不接收 string[]/number[] 簡寫；不內置滑塊動畫、異步加載、拖動或圓角形狀配置。複雜圖標/標籤可用穩定插槽。,"Uses object options, not string[]/number[] shorthand. Sliding indicators, async loading, dragging and custom rounded-shape configuration are not built in. Compose stable icon/label slots."
+骨架屏,骨架屏,Skeleton
+默认 XHR 使用 multipart FormData；name 是文件字段名。未配置 action/customRequest 时文件进入失败状态并显示配置提示。,默認 XHR 使用 multipart FormData；name 是文件字段名。未配置 action/customRequest 時文件進入失敗狀態並顯示配置提示。,Default XHR uses multipart FormData and name as the file field. Missing action/customRequest marks files failed with a configuration message.
+默认 XHR 的额外请求头、表单字段、凭证和毫秒超时。不要手动设置 multipart Content-Type，浏览器生成 boundary。2xx 成功，JSON 结果解析为值，其他响应保留文本。,默認 XHR 的額外請求頭、表單字段、憑證和毫秒超時。不要手動設置 multipart Content-Type，瀏覽器生成 boundary。2xx 成功，JSON 結果解析為值，其他響應保留文本。,"XHR extra headers, fields, credentials and timeout in milliseconds. Do not set multipart Content-Type manually; browsers generate boundaries. 2xx succeeds, JSON parses to values and other responses remain text."
+默认 blur；已触碰字段及提交后重新编辑会校验。依赖变化重验已触碰/已提交字段。默认保留动态字段草稿，preserve=false 最后一个绑定卸载时移除。,默認 blur；已觸碰字段及提交後重新編輯會校驗。依賴變化重驗已觸碰/已提交字段。默認保留動態字段草稿，preserve=false 最後一個綁定卸載時移除。,"Default blur validation, with touched fields and post-submit edits revalidated. Dependency changes recheck touched/submitted fields. Dynamic drafts are preserved by default; preserve=false removes them after the last binding unmounts."
+默认、圆形、胶囊形。,默認、圓形、膠囊形。,"Default, circle or pill."
+默认传输使用 XMLHttpRequest 和 FormData，字段及响应结构由业务约定。示例只模拟传输，不会把选择的文件发送给外部服务。,默認傳輸使用 XMLHttpRequest 和 FormData，字段及響應結構由業務約定。示例只模擬傳輸，不會把選擇的文件發送給外部服務。,Default transport uses XMLHttpRequest/FormData with business-defined fields and responses. Demos simulate transfers and never send selected files to external services.
+默认位置/持续时间仅影响后续创建；maxCount 跨四角计数，修改时立即关闭超限的旧通知。,默認位置/持續時間僅影響後續創建；maxCount 跨四角計數，修改時立即關閉超限的舊通知。,Default placement/duration affects future entries only. maxCount spans corners and closes excess old notices immediately when changed.
+默认关联勾选，返回全部已知完整勾选节点，halfCheckedKeys 单列。关闭 checkStrictly 时勾选传递给可用后代并向祖先汇总。尚未加载的已勾选父级会在加载后传递给新子项；未触发用户操作时不额外发 check。,默認關聯勾選，返回全部已知完整勾選節點，halfCheckedKeys 單列。關閉 checkStrictly 時勾選傳遞給可用後代並向祖先匯總。尚未加載的已勾選父級會在加載後傳遞給新子項；未觸發用戶操作時不額外發 check。,"Linked checking by default returns all known fully checked nodes, with halfCheckedKeys separately. Disabling checkStrictly propagates checks to enabled descendants and summarizes ancestors. Checked lazy parents pass state to newly loaded descendants without an extra check event absent user action."
+默认内容插槽。,默認內容插槽。,Default content slot.
+默认动作模式；显式 value/defaultValue 或 selectable 可标记当前项。默认值在弹层多次打开间保留。菜单选中和回调遵循受控写回。,默認動作模式；顯式 value/defaultValue 或 selectable 可標記當前項。默認值在彈層多次打開間保留。菜單選中和回調遵循受控寫回。,Action mode by default; explicit value/defaultValue/selectable marks current items. Defaults persist across panel reopenings. Selection/callbacks follow controlled write-back.
+默认匹配 label/value，忽略大小写；false 关闭本地过滤以接入业务异步搜索。IME 只在 compositionend 发一次 search。,默認匹配 label/value，忽略大小寫；false 關閉本地過濾以接入業務異步搜索。IME 只在 compositionend 發一次 search。,Case-insensitive label/value filtering by default; false disables local filters for async business search. IME search emits once at compositionend.
+默认单次只选一个；accept 同时用于原生选择器和扩展名/MIME 校验，大小以字节计，数量包含现有全部记录。超额项拒绝，不替换旧文件。未指定数量或大小则不限制。客户端校验不替代服务端校验。,默認單次只選一個；accept 同時用於原生選擇器和擴展名/MIME 校驗，大小以字節計，數量包含現有全部記錄。超額項拒絕，不替換舊文件。未指定數量或大小則不限制。客戶端校驗不替代服務端校驗。,One file per selection by default. accept controls the native chooser and extension/MIME checks. Sizes are bytes; counts include all records. Excess files are rejected rather than replacing existing ones. Omitted limits are unlimited. Client checks do not replace server validation.
+默认按 label 不区分大小写匹配，保留匹配节点及祖先。过滤期间祖先强制展开，清空恢复用户展开状态；不后台加载未展开数据。自定义匹配器在普通 JS 中执行。,默認按 label 不區分大小寫匹配，保留匹配節點及祖先。過濾期間祖先強制展開，清空恢復用戶展開狀態；不後台加載未展開數據。自定義匹配器在普通 JS 中執行。,"Case-insensitive label filtering retains matches and ancestors. Ancestors expand during filtering, then restore user state on clear. Unexpanded data is not loaded in the background. Custom matchers run in ordinary JS."
+默认操作菜单保持真实 menu/menuitem 语义；ArrowUp 打开末项，Tab 以触发器为起点自然离开 body Portal，Escape 返回触发器。外部点击保留外部目标焦点；hover/focus 展示菜单时不抢走现有焦点，方向键可进入菜单。,默認操作菜單保持真實 menu/menuitem 語義；ArrowUp 打開末項，Tab 以觸發器為起點自然離開 body Portal，Escape 返回觸發器。外部點擊保留外部目標焦點；hover/focus 展示菜單時不搶走現有焦點，方向鍵可進入菜單。,Native menu/menuitem semantics. ArrowUp opens the last item; Tab leaves naturally from the trigger and Escape restores it. Outside clicks retain external focus. Hover/focus does not steal focus; arrows can enter the menu.
+默认竖向、140px、md；提交中默认禁用。原生 fieldset 与字段 disabled 共同约束，尺寸通过 field.size 显式传给控件。窄屏横向标签改为竖向。,默認竪向、140px、md；提交中默認禁用。原生 fieldset 與字段 disabled 共同約束，尺寸通過 field.size 顯式傳給控件。窄屏橫向標籤改為竪向。,"Defaults to vertical, 140px and md, disabling while submitting. Native fieldsets and field flags combine; sizes pass explicitly through field.size. Narrow horizontal labels become vertical."
+默认聚焦正文首个可聚焦元素，Tab 留在模态范围；关闭后恢复原焦点。子浮层 Portal 属于同一焦点范围。,默認聚焦正文首個可聚焦元素，Tab 留在模態範圍；關閉後恢復原焦點。子浮層 Portal 屬於同一焦點範圍。,Focuses the first focusable child by default and traps Tab within the modal. Closing restores focus. Child floating Portals belong to the same scope.
+默认行数、自动高度和手工拖动方向；autoSize 开启时使用内容高度，禁用手工拖动，缺省最小一行、最大不限制。,默認行數、自動高度和手工拖動方向；autoSize 開啓時使用內容高度，禁用手工拖動，缺省最小一行、最大不限制。,"Default rows, auto height and manual resize direction. autoSize measures content and disables manual resizing, defaulting to one minimum row without a maximum."
+默认选叶子才提交。开启后点击中间层也提交并保留面板，仍可继续选择下级；方向键导航不提交。,默認選葉子才提交。開啓後點擊中間層也提交並保留面板，仍可繼續選擇下級；方向鍵導航不提交。,Defaults to leaf-only commits. Enabling intermediate selection commits while retaining the panel for further browsing. Arrow navigation does not commit.
+默认遮罩密码，显示切换保留输入节点、文本及选区。,默認遮罩密碼，顯示切換保留輸入節點、文本及選區。,"Passwords start masked; toggling preserves input node, text and selection."
+默认页脚按钮文本与结果。注册 confirm 时以回调结果为准。,默認頁腳按鈕文本與結果。註冊 confirm 時以回調結果為準。,Default footer button labels and results. Registered confirm handlers determine results.
+默认首次展开才挂载，折叠后保留输入；附加操作放在独立区域，不会触发展开。,默認首次展開才掛載，折疊後保留輸入；附加操作放在獨立區域，不會觸發展開。,Initially lazy-mounted panels preserve inputs when collapsed. Extra actions have independent areas and do not toggle expansion.
+鼠标提示 / 可访问名称，数字名称使用完整计数而非上限+。,鼠標提示 / 可訪問名稱，數字名稱使用完整計數而非上限+。,"Tooltip / accessible name. Numeric accessible names use the full count, not the overflow limit."

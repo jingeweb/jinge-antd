@@ -29,3 +29,5 @@ site/style.css
 # Test build outputs and browser reports
 test/.compiled/
 test/.results/
+# Localized documentation and compiled UI dictionaries
+/site/generated/

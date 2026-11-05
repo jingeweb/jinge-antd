@@ -3,5 +3,6 @@ import './docs.css';
 import { bootstrap } from 'jinge';
 
 import { App } from './App';
+import { siteReady } from './i18n';
 
-bootstrap(App, document.getElementById('root')!);
+void siteReady.then(() => bootstrap(App, document.getElementById('root')!));

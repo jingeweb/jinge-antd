@@ -1,0 +1,470 @@
+source,zh-TW,en
+2026-11-03：已完成首次联系。,2026-11-03：已完成首次聯繫。,2026-11-03: Initial contact completed.
+ISO 日期：,ISO 日期：,ISO date:
+ISO 范围：,ISO 範圍：,ISO range:
+taken@example.com 用于演示异步校验失败,taken@example.com 用於演示異步校驗失敗,taken@example.com demonstrates failed asynchronous validation
+{0} 未加入：{1},{0} 未加入：{1},{0} was not added: {1}
+{0}，第 {1} 页,{0}，第 {1} 頁,"{0}, page {1}"
+。修改方向后，已打开的浮层会重新定位。,。修改方向後，已打開的浮層會重新定位。,. Changing placement repositions open panels.
+上传进度,上傳進度,Upload progress
+上方,上方,Top
+上海市徐汇区示例路 100 号，完整行可用 filled 跨越全部列。,上海市徐匯區示例路 100 號，完整行可用 filled 跨越全部列。,"100 Example Road, Xuhui, Shanghai. Use filled to span all columns."
+下方,下方,Bottom
+不可移除,不可移除,Cannot remove
+不可编辑,不可編輯,Cannot edit
+不支持的文件类型,不支持的文件類型,Unsupported file type
+专业版,專業版,Professional
+业务,業務,Business
+业务日期,業務日期,Business date
+两次密码不一致,兩次密碼不一致,Passwords do not match
+个人信息,個人信息,Personal information
+中按钮,中按鈕,Medium button
+主要操作,主要操作,Primary action
+也可以只保留文字，不展示插图。,也可以只保留文字，不展示插圖。,You can show text without an illustration.
+今日,今日,Today
+今日报表。,今日報表。,Today's report.
+任务完成度,任務完成度,Task completion
+任务编号：EX-2026-001。结果详情和下一步操作由业务提供。,任務編號：EX-2026-001。結果詳情和下一步操作由業務提供。,Task EX-2026-001. Business code provides details and next actions.
+企业客户 · 上海,企業客戶 · 上海,Enterprise customer · Shanghai
+余杭,餘杭,Yuhang
+使用明确的标题与段落组织业务信息。,使用明確的標題與段落組織業務信息。,Organize business information with clear headings and paragraphs.
+保存地区,保存地區,Save region
+保存失败,保存失敗,Save failed
+保存失败，请重试,保存失敗，請重試,Save failed; retry
+保存成功,保存成功,Saved successfully
+保存成员,保存成員,Save member
+保存日期,保存日期,Save date
+保存时会去掉首尾空格,保存時會去掉首尾空格,Leading and trailing whitespace is trimmed on save
+保存更改,保存更改,Save changes
+保存结果：,保存結果：,Saved result:
+保存附件,保存附件,Save attachments
+信,信,Mail
+信息,信息,Information
+停用的选择器,停用的選擇器,Disabled selector
+全部任务已完成,全部任務已完成,All tasks completed
+全部权限,全部權限,All permissions
+公司,公司,Company
+关,關,Off
+关联记录,關聯記錄,Related record
+关闭,關閉,Close
+关闭后可通过按钮恢复。,關閉後可通過按鈕恢復。,Restore it with the button after closing.
+关闭本示例提示,關閉本示例提示,Close demo messages
+关闭本示例通知,關閉本示例通知,Close demo notifications
+其他信息,其他信息,Other information
+内容之间用横向分割线建立结构。,內容之間用橫向分割線建立結構。,Horizontal dividers organize content.
+内容区自适应剩余宽度。点击侧栏底部按钮切换折叠。,內容區自適應剩餘寬度。點擊側欄底部按鈕切換折疊。,Content fills the remaining width. Toggle the sidebar using its bottom button.
+再次加载时保留输入,再次加載時保留輸入,Preserve input on subsequent loads
+再次点击或按 Esc 可关闭。,再次點擊或按 Esc 可關閉。,Click again or press Escape to close.
+分钟精度,分鐘精度,Minute precision
+切换上传禁用,切換上傳禁用,Toggle upload disabling
+切换中间级选择,切換中間級選擇,Toggle intermediate selection
+切换分页禁用,切換分頁禁用,Toggle pagination disabling
+切换前缀,切換前綴,Change prefix
+切换加载,切換加載,Toggle loading
+切换加载后保留输入,切換加載後保留輸入,Preserve input after toggling loading
+切换加载遮罩,切換加載遮罩,Toggle loading overlay
+切换圆点,切換圓點,Toggle dot
+切换地区只读,切換地區只讀,Toggle region read-only
+切换异常状态,切換異常狀態,Toggle exception status
+切换排列方向,切換排列方向,Toggle direction
+切换数据总量,切換數據總量,Change total
+切换日期禁用,切換日期禁用,Toggle date disabling
+切换时间禁用,切換時間禁用,Toggle time disabling
+切换树禁用,切換樹禁用,Toggle tree disabling
+切换横纵布局,切換橫縱佈局,Toggle layout direction
+切换步骤方向,切換步驟方向,Toggle step direction
+切换独立勾选,切換獨立勾選,Toggle independent checking
+切换禁用,切換禁用,Toggle disabled
+切换空数据,切換空數據,Toggle empty data
+切换表格加载,切換表格加載,Toggle table loading
+切换详情,切換詳情,Toggle details
+切换详情方向,切換詳情方向,Toggle detail direction
+切换详情边框,切換詳情邊框,Toggle detail borders
+切换销毁模式,切換銷毀模式,Toggle destruction mode
+切换错误状态,切換錯誤狀態,Toggle error state
+切换面板后保留备注,切換面板後保留備注,Preserve notes between panels
+切换骨架加载,切換骨架加載,Toggle skeleton loading
+列表,列表,List
+列表视图,列表視圖,List view
+初始列表,初始列表,Initial list
+删除,刪除,Delete
+删除记录,刪除記錄,Delete record
+剩余额度,剩餘額度,Remaining quota
+加载区域备注,加載區域備注,Loading-region notes
+南京,南京,Nanjing
+占满容器,佔滿容器,Fill container
+卡片,卡片,Card
+卡片备注,卡片備注,Card notes
+卡片视图,卡片視圖,Card view
+历史团队,歷史團隊,Former team
+参考 Typography,參考 Typography,See Typography
+发布上线,發佈上線,Deploy release
+发布流程,發佈流程,Release workflow
+发生错误,發生錯誤,An error occurred
+受控信息,受控信息,Controlled information
+受控浮层,受控浮層,Controlled panel
+只读数量,只讀數量,Read-only quantity
+只读编号,只讀編號,Read-only identifier
+只读邮箱,只讀郵箱,Read-only email
+可交互的浮层内容,可交互的浮層內容,Interactive panel content
+可保留自由输入,可保留自由輸入,Free text is retained
+可用于业务校验未通过的情况。,可用於業務校驗未通過的情況。,Suitable for failed business validation.
+可移除筛选,可移除篩選,Removable filter
+可自由输入，也可采用建议,可自由輸入，也可採用建議,Type freely or choose a suggestion
+右上,右上,Top right
+右下,右下,Bottom right
+右侧,右側,Right
+右侧提示,右側提示,Right tooltip
+右侧操作,右側操作,Right actions
+同步中,同步中,Synchronizing
+后台导航,後台導航,Admin navigation
+启用分组,啓用分組,Enable group
+启用账户,啓用賬戶,Enable account
+命令式确认,命令式確認,Imperative confirmation
+团队,團隊,Team
+团队成员,團隊成員,Team members
+固定标签,固定標籤,Pinned tag
+固定隐藏的密码,固定隱藏的密碼,Always-masked password
+圆角按钮,圓角按鈕,Rounded button
+地区路径：,地區路徑：,Region path:
+基础信息,基礎信息,Basic information
+填充长说明,填充長說明,Fill long description
+填写信息,填寫信息,Enter information
+增加未读,增加未讀,Increase unread
+增加进度,增加進度,Increase progress
+增加额度,增加額度,Increase quota
+处理中,處理中,Processing
+处理结果,處理結果,Operation result
+备注,備注,Notes
+复制,複製,Copy
+外部更新日期,外部更新日期,Update date externally
+大按钮,大按鈕,Large button
+天,天,days
+失败,失敗,Failed
+姓名,姓名,Name
+姓名至少两个字符,姓名至少兩個字符,Name needs at least two characters
+季度（禁用）,季度（禁用）,Quarter (disabled)
+宁波,寧波,Ningbo
+安全设置,安全設置,Security settings
+完成,完成,Complete
+完成并关闭,完成並關閉,Complete and close
+定位演示,定位演示,Positioning demo
+审核地区,審核地區,Review region
+审核确认,審核確認,Review confirmation
+审核通过,審核通過,Approved
+审核附件,審核附件,Review attachments
+审计记录,審計記錄,Audit history
+客户,客戶,Customer
+客户信息,客戶信息,Customer information
+客户备注,客戶備注,Customer notes
+客户头像,客戶頭像,Customer avatar
+客户姓名,客戶姓名,Customer name
+客户清单已生成，可查看导出结果。悬浮或聚焦内容会暂停自动关闭。,客戶清單已生成，可查看導出結果。懸浮或聚焦內容會暫停自動關閉。,The customer list is ready. View the export result. Hover or focus pauses automatic closing.
+客户详情,客戶詳情,Customer details
+客户说明,客戶說明,Customer description
+客户资料,客戶資料,Customer profile
+密码,密碼,Password
+密码至少六位,密碼至少六位,Password needs at least six characters
+导入完成,導入完成,Import complete
+导入提示已关闭,導入提示已關閉,Import message closed
+导出,導出,Export
+导出任务已完成,導出任務已完成,Export completed
+小按钮,小按鈕,Small button
+小林,小林,Lin
+尚未保存,尚未保存,Not saved
+尚未导航,尚未導航,No navigation yet
+尚未提交,尚未提交,Not submitted
+尚未操作,尚未操作,No action yet
+尚未选择文件,尚未選擇文件,No files selected
+尝试移除固定标签,嘗試移除固定標籤,Try removing the pinned tag
+展示方式,展示方式,Presentation
+工作台,工作台,Dashboard
+工作空间,工作空間,Workspace
+工作空间成员,工作空間成員,Workspace members
+左上,左上,Top left
+左下,左下,Bottom left
+左侧,左側,Left
+左侧内容,左側內容,Left content
+已保存,已保存,Saved
+已保存：,已保存：,Saved:
+已保存：{0}（{1}）,已保存：{0}（{1}）,Saved: {0} ({1})
+已停用部门,已停用部門,Disabled department
+已关闭,已關閉,Closed
+已创建 1 条客户记录,已創建 1 條客戶記錄,Created 1 customer record
+已删除,已刪除,Deleted
+已加载内容,已加載內容,Loaded content
+已勾选：,已勾選：,Checked:
+已取消,已取消,Canceled
+已完成,已完成,Completed
+已归档,已歸檔,Archived
+已提交：,已提交：,Submitted:
+已操作,已操作,Action recorded
+已查看,已查看,Viewed
+已离职,已離職,Former employee
+已移除,已移除,Removed
+已签约,已簽約,Contract signed
+已选择：,已選擇：,Selected:
+已选：,已選：,Selected:
+已采用建议：{0},已採用建議：{0},Suggestion selected: {0}
+已重试,已重試,Retried
+已重试 {0} 次，请检查网络后重试。,已重試 {0} 次，請檢查網絡後重試。,Retried {0} times; check your connection and try again.
+平台,平台,Platform
+平台开发,平台開發,Platform development
+年龄,年齡,Age
+幽灵按钮,幽靈按鈕,Ghost button
+应用页头,應用頁頭,Application header
+底部,底部,Bottom
+开,開,On
+开启,開啓,Enable
+开始上传附件,開始上傳附件,Start attachment upload
+开始导入,開始導入,Start import
+开始日期 ~ 结束日期,開始日期 ~ 結束日期,Start date ~ end date
+张,張,Z
+张三,張三,Zhang San
+张三 · 企业客户,張三 · 企業客戶,Zhang San · Enterprise customer
+张三 · 已签约客户,張三 · 已簽約客戶,Zhang San · Contracted customer
+归档后可在历史记录中查询。,歸檔後可在歷史記錄中查詢。,Archived records remain available in history.
+归档完成,歸檔完成,Archive complete
+归档流程,歸檔流程,Archiving
+归档（不可用）,歸檔（不可用）,Archive (unavailable)
+当前标签：,當前標籤：,Current tab:
+当前步骤：,當前步驟：,Current step:
+当前金额：{0},當前金額：{0},Current amount: {0}
+当前页面：,當前頁面：,Current page:
+待确认,待確認,Pending confirmation
+恢复筛选标签,恢復篩選標籤,Restore filter tag
+恢复系统通知,恢復系統通知,Restore system notice
+悬浮或聚焦,懸浮或聚焦,Hover or focus
+悬浮或键盘聚焦时显示，Esc 关闭。,懸浮或鍵盤聚焦時顯示，Esc 關閉。,Appears on hover or keyboard focus; Escape closes.
+成功,成功,Success
+成功提示,成功提示,Success message
+成员信息,成員信息,Member information
+成员列表与权限配置。,成員列表與權限配置。,Member list and permission settings.
+成员管理,成員管理,Member management
+成员详情,成員詳情,Member details
+手风琴模式,手風琴模式,Accordion mode
+打开关联记录,打開關聯記錄,Open related record
+打开定位示例,打開定位示例,Open positioning example
+折叠面板备注,折疊面板備注,Panel notes
+报表日期范围,報表日期範圍,Report date range
+报表时间范围,報表時間範圍,Report time range
+报表范围,報表範圍,Report range
+报表范围：,報表範圍：,Report range:
+报表附件,報表附件,Report attachments
+抽屉方向,抽屜方向,Drawer placement
+提交姓名,提交姓名,Submit name
+提交申请,提交申請,Submit application
+搜索并选择负责人,搜索並選擇負責人,Search and choose an assignee
+操作,操作,Actions
+操作成功,操作成功,Operation succeeded
+支持 Tab 循环、Escape 关闭和关闭后的焦点恢复。提交期间禁止重复操作。,支持 Tab 循環、Escape 關閉和關閉後的焦點恢復。提交期間禁止重復操作。,"Tab stays in the dialog, Escape closes and focus returns afterward. Submission blocks duplicate actions."
+文件校验未通过,文件校驗未通過,File validation failed
+文件超过 1 MiB,文件超過 1 MiB,File exceeds 1 MiB
+文字按钮,文字按鈕,Text button
+斜线日期,斜線日期,Slash-separated date
+新增,新增,Add
+新建客户,新建客戶,Create customer
+方向：,方向：,Direction:
+无,無,None
+无标题、无边框的紧凑卡片。hoverable 只提供视觉反馈，操作应使用明确的按钮或链接。,無標題、無邊框的緊湊卡片。hoverable 只提供視覺反饋，操作應使用明確的按鈕或鏈接。,Compact borderless card without a title. hoverable is visual only; use explicit buttons or links for actions.
+旧版入口,舊版入口,Legacy entry
+旧版（不可用）,舊版（不可用）,Legacy (unavailable)
+显示任务通知,顯示任務通知,Show task notification
+显示选项,顯示選項,Display options
+普通成员,普通成員,Member
+暂无客户记录,暫無客戶記錄,No customer records
+更多操作,更多操作,More actions
+更新为完成,更新為完成,Mark complete
+更新并保持显示,更新並保持顯示,Update and keep open
+最多添加三个附件,最多添加三個附件,Add up to three attachments
+最近七天,最近七天,Last seven days
+最近导航：,最近導航：,Last navigation:
+最近操作：,最近操作：,Last action:
+服务在线,服務在線,Service online
+服务地区,服務地區,Service region
+服务方案,服務方案,Service plan
+未填写,未填寫,Not provided
+未选择,未選擇,Not selected
+本记录不允许勾选。,本記錄不允許勾選。,This record cannot be checked.
+条,條,items
+杭州,杭州,Hangzhou
+查看,查看,View
+查看客户详情,查看客戶詳情,View customer details
+查看结果,查看結果,View result
+查看详情,查看詳情,View details
+标准版,標準版,Standard
+标记,標記,Label
+概览,概覽,Overview
+模拟加载失败，请重试,模擬加載失敗，請重試,Simulated load failure; retry
+模拟图片失败,模擬圖片失敗,Simulate image failure
+模拟地区加载失败,模擬地區加載失敗,Simulated region load failure
+模拟失败，请重试,模擬失敗，請重試,Simulated failure; retry
+模拟校验不通过，返回 false,模擬校驗不通過，返回 false,Reject validation by returning false
+次,次,times
+次结果,次結果,results
+次要说明,次要說明,Secondary description
+正在加载,正在加載,Loading
+正在加载客户信息,正在加載客戶信息,Loading customer information
+正在导入…,正在導入…,Importing…
+此示例需要浏览器原生支持 Temporal，不加载 polyfill。,此示例需要瀏覽器原生支持 Temporal，不加載 polyfill。,This example requires native browser Temporal support; no polyfill is loaded.
+江苏,江蘇,Jiangsu
+没有匹配的结果，请调整搜索条件。,沒有匹配的結果，請調整搜索條件。,No matching results. Adjust the search criteria.
+浙江,浙江,Zhejiang
+浮层方向,浮層方向,Floating placement
+消息收件箱,消息收件箱,Inbox
+添加备注,添加備注,Add notes
+清空未读,清空未讀,Clear unread
+清空范围,清空範圍,Clear range
+清空选择,清空選擇,Clear selection
+清空金额,清空金額,Clear amount
+点击提示,點擊提示,Click tooltip
+点击选择或将 TXT / CSV 文件拖到这里,點擊選擇或將 TXT / CSV 文件拖到這裡,Click to select or drop TXT / CSV files here
+状态,狀態,Status
+生效日期,生效日期,Effective date
+用户列表,用戶列表,Users
+用户列表分页,用戶列表分頁,User-list pagination
+登录密码,登錄密碼,Login password
+研发,研發,Engineering
+研发中心,研發中心,Engineering center
+确认,確認,Confirm
+确认删除这条记录？,確認刪除這條記錄？,Delete this record?
+确认后模拟异步操作，提交期间防止重复点击。,確認後模擬異步操作，提交期間防止重復點擊。,Confirmation starts simulated async work and prevents duplicate clicks while pending.
+确认密码,確認密碼,Confirm password
+确认归档？,確認歸檔？,Archive this record?
+确认成员与权限,確認成員與權限,Confirm member and permissions
+示例导航,示例導航,Example navigation
+示例科技有限公司,示例科技有限公司,Example Technology Ltd.
+禁用分组,禁用分組,Disable group
+禁用按钮,禁用按鈕,Disabled button
+禁用示例,禁用示例,Disabled example
+禁用选项,禁用選項,Disabled option
+移除备注,移除備注,Remove notes
+移除此字段时会丢弃草稿,移除此字段時會丟棄草稿,Removing this field discards its draft
+空间不足时会自动翻转。,空間不足時會自動翻轉。,Placement flips automatically when space is insufficient.
+第,第,Page
+第二层关闭后，焦点回到第一层触发按钮。背景保持不可操作。,第二層關閉後，焦點回到第一層觸發按鈕。背景保持不可操作。,Closing the second layer restores focus to its trigger in the first. Background interaction remains blocked.
+等待确认,等待確認,Awaiting confirmation
+等待管理员授权,等待管理員授權,Awaiting administrator approval
+筛选部门,篩選部門,Filter departments
+管理员,管理員,Administrator
+精简分页,精簡分頁,Simple pagination
+系统,系統,System
+系统维护（不可修改）,系統維護（不可修改）,System maintenance (read-only)
+系统通知,系統通知,System notice
+紧凑摘要,緊湊摘要,Compact summary
+编辑,編輯,Edit
+编辑备注,編輯備注,Edit notes
+编辑客户,編輯客戶,Edit customer
+联系人,聯繫人,Contact
+联系地址,聯繫地址,Address
+联系记录,聯繫記錄,Contact history
+联系邮箱,聯繫郵箱,Contact email
+自动保存,自動保存,Autosave
+自动增长，最多五行,自動增長，最多五行,Grows automatically up to five lines
+自定义图标,自定義圖標,Custom icon
+自定义进度,自定義進度,Custom progress
+表格,表格,Table
+表格视图,表格視圖,Table view
+西湖,西湖,West Lake
+视图切换,視圖切換,Switch views
+视图模式,視圖模式,View mode
+角色,角色,Role
+角色权限,角色權限,Role permissions
+警告,警告,Warning
+订单金额,訂單金額,Order amount
+记录操作,記錄操作,Record actions
+记录详情,記錄詳情,Record details
+设置,設置,Settings
+评审人,評審人,Reviewers
+说明,說明,Description
+请修正表单中的错误,請修正表單中的錯誤,Fix the form errors
+请先完成全部附件上传,請先完成全部附件上傳,Complete all attachment uploads first
+请添加附件,請添加附件,Add attachments
+请确认账号信息,請確認賬號信息,Confirm account information
+请输入有效邮箱,請輸入有效郵箱,Enter a valid email
+请选择地区,請選擇地區,Select a region
+请选择日期,請選擇日期,Select a date
+负责体验优化。,負責體驗優化。,Responsible for experience improvements.
+负责基础设施。,負責基礎設施。,Responsible for infrastructure.
+负责数据服务。,負責數據服務。,Responsible for data services.
+负责权限与工作空间。,負責權限與工作空間。,Responsible for permissions and workspaces.
+负责项目交付。,負責項目交付。,Responsible for project delivery.
+账单（无权限）,賬單（無權限）,Billing (no permission)
+输入会保留；加载期间不可点击或 Tab 进入。,輸入會保留；加載期間不可點擊或 Tab 進入。,Input is preserved; clicks and Tab access are blocked during loading.
+输入备注,輸入備注,Enter notes
+输入密码,輸入密碼,Enter password
+输入部门名称,輸入部門名稱,Enter department name
+输入项目基本信息,輸入項目基本信息,Enter basic project information
+运维团队,運維團隊,Operations team
+运营,運營,Operations
+近七日,近七日,Last seven days
+近七日报表。,近七日報表。,Report for the last seven days.
+近三十日,近三十日,Last thirty days
+近三十日报表。,近三十日報表。,Report for the last thirty days.
+返回 false 时保持打开,返回 false 時保持打開,Keep open when returning false
+返回客户详情,返回客戶詳情,Back to customer details
+这是一段超过容器宽度后会自动省略的较长说明文字。,這是一段超過容器寬度後會自動省略的較長說明文字。,This long description is truncated automatically when it exceeds the container width.
+远程业务团队,遠程業務團隊,Remote business team
+远程地区,遠程地區,Remote region
+远程城市,遠程城市,Remote city
+远程成员,遠程成員,Remote member
+远程组织,遠程組織,Remote organization
+远程组织树,遠程組織樹,Remote organization tree
+选择多位评审人,選擇多位評審人,Choose multiple reviewers
+选择待上传附件,選擇待上傳附件,Choose attachments to upload
+通知位置,通知位置,Notification placement
+邮件通知,郵件通知,Email notifications
+邮箱,郵箱,Email
+邮箱已被占用,郵箱已被佔用,Email is already in use
+部门权限树,部門權限樹,Department permission tree
+重新加载图片,重新加載圖片,Reload image
+重新显示空态,重新顯示空態,Restore empty state
+重点内容,重點內容,Important content
+重置地区,重置地區,Reset region
+重置日期,重置日期,Reset date
+重置表单,重置表單,Reset form
+重置视图,重置視圖,Reset view
+重置进度,重置進度,Reset progress
+重置附件,重置附件,Reset attachments
+重试保存,重試保存,Retry saving
+重试操作,重試操作,Retry action
+链接样式,鏈接樣式,Link styling
+错误提示,錯誤提示,Error message
+阻止关闭示例,阻止關閉示例,Prevent-close example
+附加操作,附加操作,Extra actions
+需要管理员权限。,需要管理員權限。,Administrator permission required.
+页脚信息,頁腳信息,Footer information
+页，每页,頁，每頁,", items per page:"
+顶部,頂部,Top
+顶部导航,頂部導航,Top navigation
+项目列表,項目列表,Projects
+项目备注,項目備注,Project notes
+项目概览,項目概覽,Project overview
+项目详情,項目詳情,Project details
+项目负责人,項目負責人,Project owner
+预约时间,預約時間,Appointment time
+预约时间：,預約時間：,Appointment time:
+"首次联系
+了解需求
+发送资料
+演示产品
+确认预算
+安排签约","首次聯繫
+瞭解需求
+發送資料
+演示產品
+確認預算
+安排簽約","Initial contact
+Understand requirements
+Send materials
+Demonstrate product
+Confirm budget
+Arrange contract"
+骨架区域备注,骨架區域備注,Skeleton-area notes
+高级设置（禁用）,高級設置（禁用）,Advanced settings (disabled)
+默认,默認,Default
+默认按钮,默認按鈕,Default button
+；内容销毁：,；內容銷毀：,; destroy content:
+；半选：,；半選：,; mixed:
+；最近查看：,；最近查看：,; last viewed:
+；视图：,；視圖：,; view:

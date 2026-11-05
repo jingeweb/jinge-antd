@@ -21,6 +21,7 @@
   },
   "ignorePatterns": [
     "intl/",
+    "site/generated/",
     "**/types/",
     "**/node_modules/",
     "**/dist/",

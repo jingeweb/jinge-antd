@@ -1,2 +1,35 @@
-id,file,orig,en,zh
-0a35hc,src/App.tsx,A:{n},A:{n},欸:{n}哦
+id,file,orig,zh-CN,zh-TW,en
+5FboZ/,site/components/ComponentPage.tsx,类型,类型,類型,Type
+RW1a3J,site/components/ComponentPage.tsx,属性 / 事件 / 插槽,属性 / 事件 / 插槽,屬性 / 事件 / 插槽,Property / event / slot
+XoeAt/,site/components/ComponentPage.tsx,当前页面用于说明范围，不代表组件能力已经实现。,当前页面用于说明范围，不代表组件能力已经实现。,當前頁面用於說明範圍，不代表組件能力已經實現。,"This page describes planned scope, not implemented capabilities."
+YwSrou,site/components/ComponentPage.tsx,默认值,默认值,默認值,Default
+cX28ez,site/components/ComponentPage.tsx,已列入实施范围,已列入实施范围,已列入實施範圍,Planned implementation
+touwMy,site/components/ComponentPage.tsx,本组件尚未按新的能力清单完成交付。实现、验证和示例完成后，会在此提供可运行文档。,本组件尚未按新的能力清单完成交付。实现、验证和示例完成后，会在此提供可运行文档。,本組件尚未按新的能力清單完成交付。實現、驗證和示例完成後，會在此提供可運行文檔。,"This component has not completed the capability checklist. Runnable documentation will follow implementation, verification and examples."
+ux3AEe,site/components/ComponentPage.tsx,说明,说明,說明,Description
+y4WP0j,site/components/ComponentPage.tsx,使用 on: 绑定事件、slot: 传递命名插槽。以下类型对应当前实现。默认文案保留组件当前原文，组件本身暂未国际化。,使用 on: 绑定事件、slot: 传递命名插槽。以下类型对应当前实现。默认文案保留组件当前原文，组件本身暂未国际化。,使用 on: 綁定事件、slot: 傳遞具名插槽。以下型別對應目前實作。預設文案保留元件目前原文，元件本身暫未國際化。,Use on: for events and slot: for named slots. The types below match the current implementation. Default text is shown in the library’s original language; component localization is not provided yet.
+G25sJg,site/components/DemoCard.tsx,复制代码,复制代码,複製代碼,Copy code
+UM3EY7,site/components/DemoCard.tsx,查看代码,查看代码,查看代碼,Show code
+WQdJEK,site/components/DemoCard.tsx,请展开源码后手动复制,请展开源码后手动复制,請展開源碼後手動複製,Expand the source and copy it manually
+X9eyA2,site/components/DemoCard.tsx,收起代码,收起代码,收起代碼,Hide code
+aIrpM5,site/components/DemoCard.tsx,已复制,已复制,已複製,Copied
+mt3BzS,site/components/DemoCard.tsx,复制失败，请手动复制,复制失败，请手动复制,複製失敗，請手動複製,Copy failed; copy manually
+EZKAGm,site/components/DocRoute.tsx,查看 Button,查看 Button,查看 Button,View Button
+OBXBAJ,site/components/DocRoute.tsx,未找到组件,未找到组件,未找到組件,Component not found
+wbZEqK,site/components/DocRoute.tsx,请从左侧目录选择组件。,请从左侧目录选择组件。,請從左側目錄選擇組件。,Choose a component from the navigation.
+3LIT+Q,site/components/DocsLayout.tsx,没有匹配的组件,没有匹配的组件,沒有匹配的組件,No matching components
+4dlLl4,site/components/DocsLayout.tsx,搜索组件,搜索组件,搜索組件,Search components
+FzueR7,site/components/DocsLayout.tsx,搜索组件…,搜索组件…,搜索組件…,Search components…
+Gdq8gm,site/components/DocsLayout.tsx,本页内容,本页内容,本頁內容,On this page
+PP0SsU,site/components/DocsLayout.tsx,组件目录,组件目录,組件目錄,Component directory
+PeJeGG,site/components/DocsLayout.tsx,为 PC 中台构建,为 PC 中台构建,為 PC 中台構建,Built for desktop admin systems
+WpBk1h,site/components/DocsLayout.tsx,语言,语言,語言,Language
+Xcnnf4,site/components/DocsLayout.tsx,待实现,待实现,待實現,Planned
+aTLtIt,site/components/DocsLayout.tsx,本页目录,本页目录,本頁目錄,Page contents
+gLVYUT,site/components/DocsLayout.tsx,组件导航,组件导航,組件導航,Component navigation
+iCjdFI,site/components/DocsLayout.tsx,Jinge Antd · 实现、示例与测试同步演进,Jinge Antd · 实现、示例与测试同步演进,Jinge Antd · 實現、示例與測試同步演進,"Jinge Antd · Implementation, examples and tests evolve together"
+kjglgV,site/components/DocsLayout.tsx,组件文档,组件文档,組件文檔,Components
+nzCBf9,site/components/DocsLayout.tsx,代码演示,代码演示,代碼演示,Examples
+rf0j3b,site/components/DocsLayout.tsx,跳到内容,跳到内容,跳到內容,Skip to content
+sYs8df,site/components/DocsLayout.tsx,说明与限制,说明与限制,說明與限制,Notes and limitations
+w6Ta3u,site/components/DocsLayout.tsx,已交付,已交付,已交付,Delivered
+wGEnEV,site/components/DocsLayout.tsx,切换组件导航,切换组件导航,切換組件導航,Toggle component navigation

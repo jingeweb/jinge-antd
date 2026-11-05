@@ -1,19 +1,19 @@
-import { Dynamic, vm } from 'jinge';
+import { Dynamic, t, vm } from 'jinge';
 
 import type { Demo } from '../data/types';
 
 export function DemoCard(props: { demo: Demo }) {
-  const state = vm({ expanded: false, copy: '复制代码' });
+  const state = vm({ expanded: false, copy: t('复制代码') });
   async function copy() {
     if (!navigator.clipboard) {
-      state.copy = '请展开源码后手动复制';
+      state.copy = t('请展开源码后手动复制');
       return;
     }
     try {
       await navigator.clipboard.writeText(props.demo.source);
-      state.copy = '已复制';
+      state.copy = t('已复制');
     } catch {
-      state.copy = '复制失败，请手动复制';
+      state.copy = t('复制失败，请手动复制');
     }
   }
   return (
@@ -32,7 +32,7 @@ export function DemoCard(props: { demo: Demo }) {
               state.expanded = !state.expanded;
             }}
           >
-            {state.expanded ? '收起代码' : '查看代码'}
+            {state.expanded ? t('收起代码') : t('查看代码')}
           </button>
           <button type="button" on:click={copy}>
             {state.copy}

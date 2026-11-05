@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
   "singleQuote": true,
+  "ignorePatterns": ["site/generated/"],
   "sortImports": {
     "groups": [
       "type-import",

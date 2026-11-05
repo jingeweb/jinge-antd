@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <title>Jinge Antd</title>
+  <rect width="64" height="64" rx="16" fill="#1677FF" />
+  <path
+    d="M18 14h28v23c0 11-6 17-16 17S13 48 13 38h9c0 5 3 8 8 8s7-3 7-9V23H18z"
+    fill="#FFF"
+  />
+</svg>

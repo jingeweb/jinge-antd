@@ -200,7 +200,7 @@ function MenuNode<T extends MenuValue>(props: {
                   role="menu"
                   aria-label={menuLabel(props.option)}
                   id={id}
-                  hidden={menuOpen(state.open, props.option.value) ? undefined : true}
+                  hidden={!menuOpen(state.open, props.option.value)}
                   className="ja-menu-submenu"
                 >
                   <MenuBranch

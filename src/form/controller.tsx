@@ -16,10 +16,15 @@ import {
   type FormPresentation,
   FORM_PRESENTATION,
 } from './common';
+/** 控件可公开组件实例或原生元素，只需提供 focus 方法。 */
+export type FormFieldHandle = { focus(): void };
+export type FormFieldRef = (handle: FormFieldHandle | undefined) => void;
+
 export type FormFieldValue<T extends object, P extends FormName<T>> = {
   value?: T[P];
   name: P;
   id: string;
+  ref: FormFieldRef;
   error?: string;
   invalid: boolean;
   touched: boolean;
@@ -54,6 +59,7 @@ export function Controller<T extends object, P extends FormName<T>>(props: Contr
   let boundControl: FormControl<T> | undefined, boundName: P | undefined;
   let focusFrame = 0,
     disposed = false;
+  let focusTarget: FormFieldHandle | undefined;
   let stops: (() => void)[] = [],
     unregister: (() => void) | undefined;
   function disabled() {
@@ -67,6 +73,9 @@ export function Controller<T extends object, P extends FormName<T>>(props: Contr
     value: undefined,
     name: props.name,
     id: props.id ?? id,
+    ref: (handle) => {
+      if (!disposed) focusTarget = handle;
+    },
     invalid: false,
     touched: false,
     dirty: false,
@@ -136,6 +145,7 @@ export function Controller<T extends object, P extends FormName<T>>(props: Contr
           focusFrame = 0;
           if (!disposed) {
             if (props.focus) props.focus();
+            else if (focusTarget) focusTarget.focus();
             else document.getElementById(state.id)?.focus();
           }
         });
@@ -162,6 +172,7 @@ export function Controller<T extends object, P extends FormName<T>>(props: Contr
   if (presentation) watch(presentation, sync);
   onUnmount(() => {
     disposed = true;
+    focusTarget = undefined;
     cleanup();
   });
   return <>{props.children({ ...state })}</>;

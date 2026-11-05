@@ -95,12 +95,14 @@ test('Form dynamic names keep the native node, preserve drafts and optionally di
 }) => {
   await page.goto('/?case=formdynamic');
   const input = page.getByRole('textbox', { name: 'Current field' });
+  const initialId = await input.getAttribute('id');
   await input.evaluate((el) => {
     el.dataset.identity = 'kept';
   });
   await input.fill('Edited first');
   await page.getByRole('button', { name: 'Swap field' }).click();
   await expect(input).toHaveValue('Second');
+  await expect(input).toHaveAttribute('id', initialId);
   await expect(input).toHaveAttribute('data-identity', 'kept');
   await input.fill('Edited second');
   await page.getByRole('button', { name: 'Swap field' }).click();
@@ -128,4 +130,20 @@ test('Form horizontal labels switch to a narrow layout without overflowing the v
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(
     true,
   );
+});
+
+test('Form generated control ids are unique and native label activation focuses the control', async ({
+  page,
+}) => {
+  await page.goto('/?case=form');
+  const name = page.getByRole('textbox', { name: 'Account name', exact: true });
+  const labelIds = await page
+    .locator('label[for]')
+    .evaluateAll((labels) => labels.map((label) => label.htmlFor));
+  expect(new Set(labelIds).size).toBe(labelIds.length);
+  await page
+    .locator('label')
+    .filter({ hasText: /^Account name$/ })
+    .click();
+  await expect(name).toBeFocused();
 });

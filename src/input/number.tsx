@@ -156,11 +156,6 @@ export function InputNumber(props: InputNumberProps) {
         })
       : undefined;
   }
-  function syncAutoComplete() {
-    if (!element.value || disposed) return;
-    if (props.autoComplete === undefined) element.value.removeAttribute('autocomplete');
-    else element.value.setAttribute('autocomplete', props.autoComplete);
-  }
   watch(props, 'value', (value) => {
     if (!controlled || disposed) return;
     const next = finite(value);
@@ -168,12 +163,10 @@ export function InputNumber(props: InputNumberProps) {
     if (!editing || next !== state.numeric) setValue(next);
     lastPublished = next;
   });
-  watch(props, 'autoComplete', syncAutoComplete);
   watch(props, 'form', settle);
   onMount(() => {
     const field = element.value!;
     field.defaultValue = state.value;
-    syncAutoComplete();
     bindForm();
     const stops = [
       registerEvent(field, 'input', (event) => {
@@ -244,6 +237,7 @@ export function InputNumber(props: InputNumberProps) {
         id={props.id}
         name={props.name}
         form={props.form}
+        autoComplete={props.autoComplete ?? ''}
         placeholder={props.placeholder}
         disabled={props.disabled}
         readOnly={props.readOnly}

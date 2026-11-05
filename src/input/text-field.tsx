@@ -118,12 +118,6 @@ export function TextField(
         })
       : undefined;
   }
-  function syncAutoComplete() {
-    const field = getElement();
-    if (!field || disposed) return;
-    if (config.autoComplete === undefined) field.removeAttribute('autocomplete');
-    else field.setAttribute('autocomplete', config.autoComplete);
-  }
   function schedule() {
     if (disposed) return;
     cancelAnimationFrame(frame);
@@ -210,10 +204,8 @@ export function TextField(
     { deep: true },
   );
   watch(config, 'form', schedule);
-  watch(config, 'autoComplete', syncAutoComplete);
   onMount(() => {
     const field = getElement()!;
-    syncAutoComplete();
     field.defaultValue = state.value;
     const stops = [
       registerEvent(field, 'input', handleInput),
@@ -324,6 +316,7 @@ export function TextField(
           id={config.id ?? internalId}
           name={config.name}
           form={config.form}
+          autoComplete={config.autoComplete ?? ''}
           value={state.value}
           placeholder={config.placeholder}
           disabled={config.disabled}
@@ -352,6 +345,7 @@ export function TextField(
           id={config.id ?? internalId}
           name={config.name}
           form={config.form}
+          autoComplete={config.autoComplete ?? ''}
           value={state.value}
           placeholder={config.placeholder}
           disabled={config.disabled}

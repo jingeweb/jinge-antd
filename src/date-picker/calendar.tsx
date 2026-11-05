@@ -320,7 +320,7 @@ export function CalendarPanel(props: CalendarProps) {
                         id={`${id}-${day.data.key}`}
                         aria-label={day.data.key}
                         aria-current={sameDate(day.data.date, today) ? 'date' : undefined}
-                        hidden={props.hideOutside && day.data.outside ? true : undefined}
+                        hidden={props.hideOutside && day.data.outside}
                         data-picker-focus={
                           sameDate(day.data.date, state.cursor) &&
                           !day.data.disabled &&

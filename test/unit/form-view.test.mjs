@@ -86,3 +86,51 @@ void test('Form field validateTrigger=submit delays blur errors and after submis
   await flush();
   assert.equal(form.formErrors.name, undefined);
 });
+
+for (const native of [false, true])
+  void test(`Controller ref focuses its ${native ? 'native' : 'component'} control without matching ids and clears on control unmount`, async () => {
+    const form = ui.useForm(zod.z.object({ name: zod.z.string().optional() }));
+    const view = mount(ui.FieldRefProbe, { form, native });
+    const first = document.querySelector('input');
+    let calls = 0;
+    const focus = first.focus.bind(first);
+    first.focus = () => {
+      calls++;
+      focus();
+    };
+    form.focusField('name');
+    await flush();
+    assert.equal(document.activeElement, first);
+    assert.equal(calls, 1);
+    view.host.hide();
+    await flush();
+    form.focusField('name');
+    await flush();
+    assert.equal(calls, 1);
+    view.host.show();
+    await flush();
+    const second = document.querySelector('input');
+    assert.notEqual(second, first);
+    form.focusField('name');
+    await flush();
+    assert.equal(document.activeElement, second);
+    form.focusField('name');
+    view.dispose();
+    await flush();
+    assert.equal(form.focusField('name'), false);
+  });
+void test('Controller explicit focus takes precedence over its registered ref', async () => {
+  const form = ui.useForm(zod.z.object({ name: zod.z.string().optional() }));
+  let calls = 0;
+  mount(ui.FieldRefProbe, {
+    form,
+    focus: () => {
+      calls++;
+    },
+  });
+  const field = document.querySelector('input');
+  form.focusField('name');
+  await flush();
+  assert.equal(calls, 1);
+  assert.notEqual(document.activeElement, field);
+});

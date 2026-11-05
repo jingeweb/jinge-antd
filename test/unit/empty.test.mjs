@@ -59,3 +59,19 @@ void test('Empty image failures fall back to the built-in illustration and a new
   await flush();
   assert.equal(document.querySelector('.ja-empty-image img').getAttribute('src'), '/second.svg');
 });
+
+void test('Empty chained description fallback keeps text updates and empty strings', async () => {
+  const options = rt.vm({ description: undefined });
+  mount(ui.Empty, options);
+  const description = document.querySelector('.ja-empty-description');
+  assert.equal(description.textContent, '暂无数据');
+  options.description = 'No matches';
+  await flush();
+  assert.equal(description.textContent, 'No matches');
+  options.description = '';
+  await flush();
+  assert.equal(description.textContent, '');
+  options.description = undefined;
+  await flush();
+  assert.equal(description.textContent, '暂无数据');
+});

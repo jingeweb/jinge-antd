@@ -1,4 +1,4 @@
-import { ref, vm } from 'jinge';
+import { vm } from 'jinge';
 import {
   Button,
   Cascader,
@@ -93,7 +93,6 @@ export function CascaderExample() {
   );
 }
 export function CascaderFormExample() {
-  const control = ref<typeof Cascader>();
   const form = useForm(
     z.object({
       region: z
@@ -111,16 +110,10 @@ export function CascaderFormExample() {
         state.saved = pathText(values.region);
       }}
     >
-      <FormField
-        name="region"
-        control={form.control}
-        label="审核地区"
-        required
-        focus={() => control.value?.focus()}
-      >
+      <FormField name="region" control={form.control} label="审核地区" required>
         {(field) => (
           <Cascader
-            ref={control}
+            ref={field.ref}
             id={field.id}
             options={regions}
             value={field.value ?? null}

@@ -1215,6 +1215,7 @@ function FormLab() {
         >
           {(field) => (
             <Input
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? ''}
@@ -1229,6 +1230,7 @@ function FormLab() {
         <FormField name="password" control={form.control} label="Account password" required>
           {(field) => (
             <Password
+              ref={field.ref}
               id={field.id}
               value={field.value ?? ''}
               disabled={field.disabled}
@@ -1248,6 +1250,7 @@ function FormLab() {
         >
           {(field) => (
             <Password
+              ref={field.ref}
               id={field.id}
               value={field.value ?? ''}
               disabled={field.disabled}
@@ -1261,6 +1264,7 @@ function FormLab() {
         <FormField name="role" control={form.control} label="Account role">
           {(field) => (
             <Select
+              ref={field.ref}
               id={field.id}
               value={field.value ?? null}
               disabled={field.disabled}
@@ -1276,6 +1280,7 @@ function FormLab() {
         <FormField name="enabled" control={form.control} label="Account enabled">
           {(field) => (
             <Switch
+              ref={field.ref}
               id={field.id}
               ariaLabel="Account enabled"
               checked={field.value ?? false}
@@ -1288,6 +1293,7 @@ function FormLab() {
           <FormField name="note" control={form.control} label="Account note" preserve={false}>
             {(field) => (
               <TextArea
+                ref={field.ref}
                 id={field.id}
                 value={field.value ?? ''}
                 disabled={field.disabled}
@@ -1350,6 +1356,7 @@ function FormRaceLab() {
         <FormField name="name" control={form.control} label="Async name" validateTrigger="change">
           {(field) => (
             <Input
+              ref={field.ref}
               id={field.id}
               value={field.value ?? ''}
               ariaInvalid={field.invalid}
@@ -1382,6 +1389,7 @@ function FormDynamicLab() {
           >
             {(field) => (
               <Input
+                ref={field.ref}
                 id={field.id}
                 value={field.value ?? ''}
                 on:change={field['on:change']}

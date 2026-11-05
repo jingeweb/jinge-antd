@@ -184,6 +184,10 @@ void test('Controller rebinds a new control and name, resets touched state per f
   props.name = 'second';
   await flush();
   assert.equal(document.querySelector('input').value, 'Target');
+  assert.equal(first.focusField('first'), false);
+  assert.equal(second.focusField('second'), true);
+  await flush();
+  assert.equal(document.activeElement, document.querySelector('input'));
   input('Edited');
   assert.equal(second.formState.second, 'Edited');
   assert.equal(first.formState.first, 'Old');

@@ -68,9 +68,7 @@ export function Empty(props: EmptyProps) {
       )}
       {props.description !== false && (
         <div className="ja-empty-description">
-          {props['slot:description']
-            ? props['slot:description']
-            : (props.description ?? '暂无数据')}
+          {props['slot:description'] ?? props.description ?? '暂无数据'}
         </div>
       )}
       {props['slot:default'] && <div className="ja-empty-footer">{props.children}</div>}

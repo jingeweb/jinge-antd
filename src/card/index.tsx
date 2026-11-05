@@ -48,7 +48,7 @@ export function Card(props: CardProps) {
           <i />
         </div>
       )}
-      <div className="ja-card-body" hidden={props.loading ? true : undefined}>
+      <div className="ja-card-body" hidden={props.loading}>
         {props['slot:default'] && props.children}
       </div>
       {props['slot:actions'] && (

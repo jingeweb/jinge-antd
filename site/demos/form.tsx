@@ -91,6 +91,7 @@ export function FormExample() {
         >
           {(field) => (
             <Input
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? ''}
@@ -112,6 +113,7 @@ export function FormExample() {
         >
           {(field) => (
             <Input
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? ''}
@@ -128,6 +130,7 @@ export function FormExample() {
         <FormField name="password" control={form.control} label="密码" required>
           {(field) => (
             <Password
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? ''}
@@ -149,6 +152,7 @@ export function FormExample() {
         >
           {(field) => (
             <Password
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? ''}
@@ -164,6 +168,7 @@ export function FormExample() {
         <FormField name="role" control={form.control} label="角色" required>
           {(field) => (
             <Select
+              ref={field.ref}
               id={field.id}
               name={field.name}
               value={field.value ?? null}
@@ -182,6 +187,7 @@ export function FormExample() {
         <FormField name="enabled" control={form.control} label="启用账户">
           {(field) => (
             <Switch
+              ref={field.ref}
               id={field.id}
               name={field.name}
               ariaLabel="启用账户"
@@ -202,6 +208,7 @@ export function FormExample() {
           >
             {(field) => (
               <TextArea
+                ref={field.ref}
                 id={field.id}
                 value={field.value ?? ''}
                 disabled={field.disabled}

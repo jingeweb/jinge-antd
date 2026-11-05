@@ -107,7 +107,7 @@ export function Skeleton(props: SkeletonProps) {
         </div>
       )}
       {props['slot:default'] && state.seen && (
-        <div className="ja-skeleton-content" hidden={props.loading !== false ? true : undefined}>
+        <div className="ja-skeleton-content" hidden={props.loading !== false}>
           {props.children}
         </div>
       )}

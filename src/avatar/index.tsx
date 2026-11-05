@@ -60,11 +60,7 @@ export function Avatar(props: AvatarProps) {
         />
       ) : (
         <span className="ja-avatar-fallback" aria-hidden="true">
-          {props['slot:default']
-            ? props.children
-            : props['slot:icon']
-              ? props['slot:icon']
-              : initial(props.alt)}
+          {props.children ?? props['slot:icon'] ?? initial(props.alt)}
         </span>
       )}
     </span>

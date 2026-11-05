@@ -40,10 +40,12 @@ void test('Menu inline submenus open/close with arrows and Escape returns focus 
   key(tools, 'ArrowRight');
   await flush();
   assert.equal(tools.getAttribute('aria-expanded'), 'true');
+  assert.equal(document.querySelector('.ja-menu-submenu').hasAttribute('hidden'), false);
   assert.equal(document.activeElement.textContent.trim(), 'Users');
   key(document.activeElement, 'Escape');
   await flush();
   assert.equal(tools.getAttribute('aria-expanded'), 'false');
+  assert.equal(document.querySelector('.ja-menu-submenu').hidden, true);
   assert.equal(document.activeElement, tools);
   assert.deepEqual(opens, [['tools'], []]);
 });

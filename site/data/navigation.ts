@@ -56,7 +56,6 @@ export const navigationDocs: ComponentDoc[] = [
     notes: [
       '当前页面唯一 aria-current=page，祖先链接支持键盘及浏览器原生修饰键/新标签。_blank 补齐安全 rel，disabled 和不支持的协议显示为不可导航文本。',
       '不自动推断 jinge-router、参数或异步路由数据，不内置折叠省略和下拉路径；可在业务中构造 items 并接入 click。',
-      'For 的 isFirst/isLast 声明与运行时不一致已记录为 F11，本组件通过 index 和列表长度正常判断末项，不修改框架。',
     ],
   },
   {

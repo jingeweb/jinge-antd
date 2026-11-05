@@ -142,6 +142,9 @@ void test('Pagination handles disabled, hide-on-single-page, simple mode and zer
   props.hideOnSinglePage = true;
   await flush();
   assert.equal(document.querySelector('nav').hidden, true);
+  props.hideOnSinglePage = false;
+  await flush();
+  assert.equal(document.querySelector('nav').hasAttribute('hidden'), false);
 });
 
 void test('Pagination form reset keeps the component page size and restores native select display', async () => {

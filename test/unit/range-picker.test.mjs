@@ -25,6 +25,10 @@ void test('RangePicker commits once only after two dates, sorts reversed clicks 
   open();
   await flush();
   assert.equal(document.querySelectorAll('.ja-calendar').length, 2);
+  for (const day of document.querySelectorAll('.outside .ja-calendar-day'))
+    assert.equal(day.hidden, true);
+  for (const day of document.querySelectorAll('td:not(.outside) .ja-calendar-day'))
+    assert.equal(day.hasAttribute('hidden'), false);
   day('2026-11-10').click();
   await flush();
   assert.equal(changes.length, 0);

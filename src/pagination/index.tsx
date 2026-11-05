@@ -95,9 +95,7 @@ export function Pagination(props: PaginationProps) {
       aria-label={props.ariaLabel ?? '分页'}
       className={cx('ja-pagination', props.size ?? 'md', props.className)}
       style={props.style}
-      hidden={
-        props.hideOnSinglePage && pageCount(props.total ?? 0, state.size) <= 1 ? true : undefined
-      }
+      hidden={props.hideOnSinglePage && pageCount(props.total ?? 0, state.size) <= 1}
     >
       {props.showTotal && (
         <span className="ja-pagination-total">共 {itemTotal(props.total)} 条</span>

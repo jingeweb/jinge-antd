@@ -103,16 +103,13 @@ export function UploadFormExample() {
         state.saved = values.files.map((file) => file.name).join('、');
       }}
     >
-      <FormField
-        name="files"
-        control={form.control}
-        label="审核附件"
-        required
-        focus={() => uploader.value?.focus()}
-      >
+      <FormField name="files" control={form.control} label="审核附件" required>
         {(field) => (
           <Upload
-            ref={uploader}
+            ref={(handle) => {
+              uploader.value = handle;
+              field.ref(handle);
+            }}
             id={field.id}
             fileList={field.value ?? []}
             autoUpload={false}

@@ -1,12 +1,4 @@
-import {
-  For,
-  expose,
-  vm,
-  Transition,
-  type JNode,
-  type WithOptChildren,
-  type WithSlots,
-} from 'jinge';
+import { expose, vm, Transition, type JNode, type WithOptChildren, type WithSlots } from 'jinge';
 
 import {
   Form,
@@ -73,7 +65,12 @@ export function ControllerField(props: {
   return (
     <Controller name={props.name} control={props.control}>
       {(field) => (
-        <Input value={field.value} on:change={field['on:change']} on:blur={field['on:blur']} />
+        <Input
+          ref={field.ref}
+          value={field.value}
+          on:change={field['on:change']}
+          on:blur={field['on:blur']}
+        />
       )}
     </Controller>
   );
@@ -336,13 +333,13 @@ export function FormTriggerProbe(props: { form: FormInstance<{ name: string }> }
 
 export function ForBoundaryProbe(props: { items: string[] }) {
   return (
-    <For loop={props.items}>
-      {(each) => (
-        <span data-first={each.isFirst} data-last={each.isLast}>
-          {each.data}
+    <>
+      {props.items.map((item, index) => (
+        <span key={item} data-first={index === 0} data-last={index === props.items.length - 1}>
+          {item}
         </span>
-      )}
-    </For>
+      ))}
+    </>
   );
 }
 
@@ -424,5 +421,35 @@ export function MemberCallProbe(props: { query: string }) {
     <span>
       {methodCallLabels.some((label) => label === props.query)}:{props.query.trim()}
     </span>
+  );
+}
+
+export function FieldRefProbe(props: {
+  form: FormInstance<{ name?: string }>;
+  focus?: () => void;
+  native?: boolean;
+}) {
+  const state = vm({ visible: true });
+  expose({
+    hide: () => {
+      state.visible = false;
+    },
+    show: () => {
+      state.visible = true;
+    },
+  });
+  return (
+    <Controller name="name" control={props.form.control} focus={props.focus}>
+      {(field) => (
+        <>
+          {state.visible &&
+            (props.native ? (
+              <input ref={field.ref} />
+            ) : (
+              <Input ref={field.ref} value={field.value ?? ''} />
+            ))}
+        </>
+      )}
+    </Controller>
   );
 }

@@ -63,7 +63,7 @@ function TabPanel<K>(props: {
       aria-labelledby={props.id}
       className="ja-tab-panel"
       tabIndex={0}
-      hidden={props.active ? undefined : true}
+      hidden={!props.active}
     >
       {(props.active || (state.seen && !props.destroyOnHidden)) && (
         <div className="ja-tab-content">{props.item['slot:content'] ?? props.item.content}</div>

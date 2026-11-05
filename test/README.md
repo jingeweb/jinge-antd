@@ -96,7 +96,7 @@ Avatar/ButtonGroup 的早期容器用例仍保留；现在两者均有补充的�
 
 五个独立 unit 文件共 20 个新增用例先确认失败，再逐组件实现。`e2e/feedback.spec.mjs` 覆盖关闭/恢复/阻止关闭、原生键盘操作、Spin 忙碌期间跳过 inert 正文、延迟取消、Skeleton 懒挂载/保留输入、线形实际宽度/圆形 SVG/小容器适配、reduce-motion，以及结果页标题与明确重试。普通测试另直接确认 Spin 清除待执行计时器、0 进度不显示前景圆点和完成/失败的非颜色语义。站点每项都有交互、同源源码和 API 检查。原 Spin 四点基础用例保留其断言意图，选择器随新指示器包装调整；迁移见 docs/MIGRATIONS.md。
 
-F06 仅记录当前 JSX 的 inert 类型缺口，组件用公开 ref/DOM API 实现并通过类型及真实浏览器测试，不增加独立运行时失败数量。原 F04/F05 两项继续独立保留。
+F06 的 JSX inert 类型已在相邻 Jinge 源仓库补齐，消费包待更新；组件仍使用公开 ref/DOM API。F11 删除无运行时实现的 isFirst/isLast 类型，原探针改用 .map 的 index 与列表长度计算首尾并验证更新。原 F04/F05 探针与其他历史验收记录见 docs/FRAMEWORK-GAPS.md。
 
 ## Input/TextArea/Password/InputNumber 批次
 

@@ -82,7 +82,7 @@ function CollapsePanel(
         role="region"
         aria-labelledby={`${id}-trigger`}
         className="ja-collapse-content"
-        hidden={props.open ? undefined : true}
+        hidden={!props.open}
       >
         {(props.open || (!props.destroyOnHidden && state.seen)) && (
           <div className="ja-collapse-body">{props.item['slot:content'] ?? props.item.content}</div>

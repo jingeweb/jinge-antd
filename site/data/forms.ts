@@ -72,7 +72,13 @@ export const formDoc: ComponentDoc = {
       name: 'FormField.label / help / required / layout / descriptionId / focus',
       type: '标签/说明/必填标记/布局/附加描述/焦点回调',
       description:
-        '生成 id、标签 htmlFor 和 help/error id。将 field.id/ariaDescribedby/invalid 显式传给控件；required 标记不自动改 Zod 规则。默认按明确 id 聚焦，也可用公开 ref 自定义 focus 回调。',
+        '生成 id、标签 htmlFor 和 help/error id。将 field.id/ariaDescribedby/invalid 显式传给控件；required 标记不自动改 Zod 规则。通过 ref={field.ref} 注册控件后按实例聚焦；显式 focus 回调优先，未注册 ref 时兼容按 id 聚焦。',
+    },
+    {
+      name: 'field.ref',
+      type: '(handle: { focus(): void } | undefined) => void',
+      description:
+        '传给控件 ref，注册字段焦点目标；回调身份稳定，控件卸载时解除引用。优先级为显式 focus → 注册实例 → 既有 id 回退。',
     },
     {
       name: 'validateTrigger / dependencies / preserve',
@@ -93,6 +99,6 @@ export const formDoc: ComponentDoc = {
     '快照覆盖非循环的普通对象/数组/Date；文件等实例保留引用。schema 转换不会改写草稿。输入值变化、重置、清错、动态解绑和新校验会使相应旧结果失效。',
     '动态字段的 schema 不会被组件改写；移除后可缺省的字段应在 schema 中 optional 或通过业务条件规则表达。默认不保留已移除字段的焦点目标。',
     'Form 卸载取消校验/提交 UI 事务并保留草稿以供重开；不自动中止业务 Promise 或撤销网络请求。异步业务自身的副作用仍需由业务隔离，示例会清理并结算等待计时器。',
-    '组件 ref 回调的运行时虽可用，当前 WithExpose 类型只允许 ref 对象，记录为 F10；首轮使用明确 id 或可选 focus 回调配合正常 ref，不使用类型断言绕过。',
+    'field.ref 接收提供 focus() 的组件实例或原生元素，并在卸载时清除引用。一个字段仅注册一个焦点目标；复合业务控件可暴露自己的 focus() 或使用显式 focus。',
   ],
 };

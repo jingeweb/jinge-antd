@@ -82,16 +82,13 @@ export function App() {
         </label>
         <nav aria-label="组件导航">
           {groups.map((group) => (
-            <section
-              key={group.name}
-              hidden={hasMatches(group.items, state.search) ? undefined : true}
-            >
+            <section key={group.name} hidden={!hasMatches(group.items, state.search)}>
               <h2>{group.name}</h2>
               {group.items.map((doc) => (
                 <a
                   key={doc.id}
                   href={`#/components/${doc.id}`}
-                  hidden={matches(doc, state.search) ? undefined : true}
+                  hidden={!matches(doc, state.search)}
                   className={state.page.id === doc.id ? 'nav-link active' : 'nav-link'}
                   aria-current={state.page.id === doc.id ? 'page' : undefined}
                 >

@@ -12,6 +12,6 @@
 
 默认部署在 `/`。子目录部署通过 `VITE_BASE=/jinge-antd/ pnpm build-site` 设置，必须以 `/` 开头和结尾。构建会生成 `404.html`，用于 GitHub Pages 的深层地址回跳与恢复。其他静态服务器应将未知路径回退到 `index.html`。
 
-`.github/workflows/pages.yml` 沿用 jinge-website 的构建、上传、部署流程，推送 main 时发布，PR 只构建；使用仓库名作为 Pages 基路径。GitHub 仓库 Pages 的发布来源需设置为 GitHub Actions。
+`.github/workflows/pages.yml` 沿用 jinge-website 的构建、上传、部署流程，推送 main 时发布，PR 只构建；自定义域名 `jinge-antd.embjs.com` 使用根路径 `/` 作为构建基路径。GitHub 仓库 Pages 的发布来源需设置为 GitHub Actions。
 
 组件库 `src` 暂未国际化。其默认按钮、空状态、无障碍标签等仍使用现有文案，详见 `docs/COMPONENT-I18N-REVIEW.md`。

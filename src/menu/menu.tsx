@@ -1,5 +1,6 @@
 import { For, cx, expose, onMount, ref, uid } from 'jinge';
 
+import { AntDesignRightOutlined } from '../_icon';
 import { navigationHref, navigationRel } from '../_util/navigation';
 import { Floating } from '../floating';
 import {
@@ -118,7 +119,7 @@ function MenuEntry<T extends MenuValue>(props: {
             {props.option['slot:label'] ?? menuLabel(props.option)}
           </span>
           {menuChildren(props.option.children) && (
-            <span className="ja-menu-arrow" aria-hidden="true" />
+            <AntDesignRightOutlined className="ja-menu-arrow" />
           )}
         </button>
       )}

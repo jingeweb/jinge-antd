@@ -1,4 +1,3 @@
-import './style.scss';
 import {
   type WithEvents,
   type WithExpose,
@@ -12,7 +11,10 @@ import {
   watch,
 } from 'jinge';
 
+import './style.scss';
 import type { InputHandle, TextControlProps } from './common';
+
+import { AntDesignPlusOutlined, AntDesignMinusOutlined } from '../_icon';
 
 export type InputNumberProps = Omit<
   TextControlProps,
@@ -264,7 +266,7 @@ export function InputNumber(props: InputNumberProps) {
             on:mouseDown={(event) => event.preventDefault()}
             on:click={(event) => stepBy(1, event)}
           >
-            +
+            <AntDesignPlusOutlined />
           </button>
           <button
             type="button"
@@ -277,7 +279,7 @@ export function InputNumber(props: InputNumberProps) {
             on:mouseDown={(event) => event.preventDefault()}
             on:click={(event) => stepBy(-1, event)}
           >
-            −
+            <AntDesignMinusOutlined />
           </button>
         </span>
       )}

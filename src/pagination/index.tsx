@@ -1,6 +1,8 @@
-import './style.scss';
-import { For, type WithEvents, cx, onMount, onUnmount, ref, registerEvent, vm, watch } from 'jinge';
+import { For, type WithEvents, cx, onUnmount, vm, watch } from 'jinge';
 
+import './style.scss';
+import { AntDesignLeftOutlined, AntDesignRightOutlined, AntDesignEllipsisOutlined } from '../_icon';
+import { Select } from '../select';
 import { clampPage, itemTotal, pageCount, pageItems, positiveInteger, sizeOptions } from './common';
 export type PaginationProps = {
   total?: number;
@@ -23,6 +25,9 @@ export type PaginationProps = {
   change?(current: number, pageSize: number): void;
   pageSizeChange?(pageSize: number): void;
 }>;
+function options(values: number[] | undefined, current: number) {
+  return sizeOptions(values, current).map((value) => ({ value, label: `${value} 条/页` }));
+}
 export function Pagination(props: PaginationProps) {
   const controlledPage = props.current !== undefined,
     controlledSize = props.pageSize !== undefined;
@@ -32,9 +37,6 @@ export function Pagination(props: PaginationProps) {
     draft: '',
   });
   state.current = clampPage(props.current ?? props.defaultCurrent, props.total ?? 0, state.size);
-  const select = ref<HTMLSelectElement>();
-  const root = ref<HTMLElement>();
-  let stopReset: (() => void) | undefined;
   let frame = 0,
     disposed = false;
   function sync() {
@@ -44,7 +46,6 @@ export function Pagination(props: PaginationProps) {
       props.total ?? 0,
       state.size,
     );
-    if (select.value) select.value.value = `${state.size}`;
   }
   watch(props, 'total', sync);
   watch(props, 'current', sync);
@@ -73,25 +74,12 @@ export function Pagination(props: PaginationProps) {
       state.draft = '';
     } else if (event.key === 'Escape') state.draft = '';
   }
-  onMount(() => {
-    const form = root.value?.closest('form');
-    if (form)
-      stopReset = registerEvent(form, 'reset', () => {
-        cancelAnimationFrame(frame);
-        frame = requestAnimationFrame(() => {
-          frame = 0;
-          if (!disposed) sync();
-        });
-      });
-  });
   onUnmount(() => {
     disposed = true;
     cancelAnimationFrame(frame);
-    stopReset?.();
   });
   return (
     <nav
-      ref={root}
       aria-label={props.ariaLabel ?? '分页'}
       className={cx('ja-pagination', props.size ?? 'md', props.className)}
       style={props.style}
@@ -106,7 +94,7 @@ export function Pagination(props: PaginationProps) {
         disabled={props.disabled || state.current <= 1}
         on:click={() => change(state.current - 1)}
       >
-        ‹
+        <AntDesignLeftOutlined />
       </button>
       {props.simple ? (
         <span className="ja-pagination-simple" aria-live="polite">
@@ -130,7 +118,7 @@ export function Pagination(props: PaginationProps) {
               disabled={props.disabled}
               on:click={() => change(each.data.page)}
             >
-              {each.data.jump ? '•••' : each.data.page}
+              {each.data.jump ? <AntDesignEllipsisOutlined /> : each.data.page}
             </button>
           )}
         </For>
@@ -141,22 +129,20 @@ export function Pagination(props: PaginationProps) {
         disabled={props.disabled || state.current >= pageCount(props.total ?? 0, state.size)}
         on:click={() => change(state.current + 1)}
       >
-        ›
+        <AntDesignRightOutlined />
       </button>
       {props.showSizeChanger && (
-        <select
-          aria-label="每页条数"
-          ref={select}
-          value={`${state.size}`}
+        <Select
+          ariaLabel="每页条数"
+          className="ja-pagination-size"
+          size={props.size ?? 'md'}
+          value={state.size}
+          options={options(props.pageSizeOptions, state.size)}
           disabled={props.disabled}
-          on:change={(event) =>
-            change(1, positiveInteger(Number((event.target as HTMLSelectElement).value)))
-          }
-        >
-          <For loop={sizeOptions(props.pageSizeOptions, state.size)}>
-            {(each) => <option value={`${each.data}`}>{each.data} 条/页</option>}
-          </For>
-        </select>
+          on:change={(value) => {
+            if (value !== undefined) change(1, positiveInteger(value));
+          }}
+        />
       )}
       {props.showQuickJumper && (
         <label className="ja-pagination-jumper">

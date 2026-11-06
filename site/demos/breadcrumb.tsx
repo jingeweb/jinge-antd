@@ -5,7 +5,9 @@ export function BreadcrumbExample() {
   return (
     <Space direction="vertical" style="width:100%">
       <Breadcrumb
-        separator="›"
+        slot:separator={
+          <span className="icon-[ant-design--right-outlined] text-xs" aria-hidden="true" />
+        }
         items={[
           { key: 'workspace', label: '工作空间', href: '#workspace' },
           { key: 'projects', label: '项目列表', href: '#projects' },

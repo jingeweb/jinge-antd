@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { flush, mount, rt, ui } from './harness.mjs';
+import { chooseOption } from './select-choice.mjs';
 const data = () => [
   { id: 1, name: 'Ada', age: 30, team: 'A' },
   { id: 2, name: 'Grace', age: 20, team: 'B' },
@@ -95,10 +96,8 @@ void test('Table local filters reset page, respect controlled rejection and pres
     'on:change': (v) => changes.push(v),
   });
   mount(ui.Table, props);
-  const filter = document.querySelector('select.ja-table-filter');
-  filter.value = '0';
-  filter.dispatchEvent(new Event('change', { bubbles: true }));
-  await flush();
+  const filter = document.querySelector('.ja-table-filter [role=combobox]');
+  await chooseOption(filter, 'Team A');
   assert.deepEqual(names(), ['Ada']);
   assert.equal(changes[0].action, 'filter');
   assert.deepEqual(changes[0].filters, { team: ['A'] });
@@ -109,7 +108,7 @@ void test('Table applies controlled multi-value filters and exposes actual curre
   cols[2].filteredValue = ['A', 'B'];
   cols[2].filterMultiple = true;
   mount(ui.Table, { rowKey: 'id', columns: cols, data: data() });
-  assert.equal(document.querySelector('select').multiple, true);
+  assert.equal(document.querySelectorAll('.ja-table-filter .ja-select-tag').length, 2);
   assert.equal(rows().length, 3);
 });
 void test('Table pagination slices local data and clamps when records disappear', async () => {
@@ -321,7 +320,7 @@ void test('Table observes a stable selection VM passed through static parent pro
   await flush();
   assert.equal(checkbox('选择行 1').checked, true);
 });
-void test('Table controlled filters restore rejected native selection and accept an external multi-filter update', async () => {
+void test('Table controlled filters retain rejected selection and accept an external multi-filter update', async () => {
   const changes = [],
     cols = columns();
   cols[2].filteredValue = [];
@@ -332,17 +331,15 @@ void test('Table controlled filters restore rejected native selection and accept
     'on:change': (value) => changes.push(value),
   });
   mount(ui.Table, props);
-  const select = document.querySelector('select');
-  select.value = '0';
-  select.dispatchEvent(new Event('change', { bubbles: true }));
-  await flush();
-  assert.equal(select.value, '');
+  const select = document.querySelector('.ja-table-filter [role=combobox]');
+  await chooseOption(select, 'Team A');
+  assert.equal(select.textContent, '全部');
   assert.deepEqual(names(), ['Ada', 'Grace', 'Linus']);
   assert.deepEqual(changes[0].filters, { team: ['A'] });
   props.columns[2].filterMultiple = true;
   props.columns[2].filteredValue = ['A', 'B'];
   await flush();
-  assert.equal(select.selectedOptions.length, 2);
+  assert.equal(document.querySelectorAll('.ja-table-filter .ja-select-tag').length, 2);
 });
 void test('Table custom empty slots and native zero/boolean text values render without raw objects', () => {
   const view = mount(ui.Table, {
@@ -433,4 +430,49 @@ void test('Table disconnects layout observers and ignores measurements queued af
   } finally {
     globalThis.ResizeObserver = original;
   }
+});
+
+void test('Table Select filters preserve empty strings and numeric zero and support clearing multi-values', async () => {
+  const changes = [];
+  const props = rt.vm({
+    rowKey: 'id',
+    pagination: false,
+    data: [
+      { id: 1, tag: '' },
+      { id: 2, tag: 0 },
+      { id: 3, tag: '0' },
+    ],
+    columns: [
+      {
+        key: 'tag',
+        title: 'Tag',
+        dataIndex: 'tag',
+        filterMultiple: true,
+        filters: [
+          { value: '', text: 'Empty' },
+          { value: 0, text: 'Zero number' },
+          { value: '0', text: 'Zero string' },
+        ],
+      },
+    ],
+    'on:change': (value) => changes.push(value),
+  });
+  mount(ui.Table, props);
+  const select = document.querySelector('.ja-table-filter [role=combobox]');
+  await chooseOption(select, 'Empty');
+  assert.deepEqual(changes.at(-1).filters.tag, ['']);
+  assert.equal(rows().length, 1);
+  await chooseOption(select, 'Zero number');
+  assert.deepEqual(changes.at(-1).filters.tag, ['', 0]);
+  assert.equal(rows().length, 2);
+  assert.equal(
+    document.querySelector('[role=listbox]').getAttribute('aria-multiselectable'),
+    'true',
+  );
+  const clear = document.querySelector('.ja-table-filter .ja-select-clear');
+  clear.click();
+  await flush();
+  assert.deepEqual(changes.at(-1).filters, {});
+  assert.equal(rows().length, 3);
+  assert.equal(document.querySelectorAll('.ja-table-filter .ja-select-tag').length, 0);
 });

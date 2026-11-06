@@ -28,6 +28,16 @@ export function Actions() {
 
 项目使用 Jinge 编译器编译 TSX；组件事件、插槽与 ref 遵循 Jinge API。已有 API 的变更记录见 [MIGRATIONS](docs/MIGRATIONS.md)。
 
+## 下拉组件复用
+
+DatePicker / RangePicker 的月份、TimePicker 的时分秒、Pagination 的页大小和 Table 的列筛选统一使用 `Select`，保留受控值、禁用、键盘和表单行为。
+
+Cascader 保留独立级联面板，处理路径、逐列导航和异步加载；Dropdown 复用 Menu，处理操作菜单、子菜单和链接。它们与平铺选项选择的语义不同。
+
+AutoComplete 与 Select 共享 `useCombo` 和 `ComboList`。自由文本、输入法、原生文本校验、表单提交及文本选择仍由 AutoComplete 处理；直接封装 Select 需要新增独立输入模式，暂不扩大 Select 的接口。
+
+内部图标位于 `src/_icon`，从 `@iconify-json/ant-design` 提取为静态 SVG 组件，不作为公共 API 导出。新增图标时修改 `scripts/generate-icons.mjs` 中的清单，再执行 `pnpm generate:icons`；组件运行时不依赖图标 JSON 或 Tailwind。
+
 ## 验证
 
 ```sh

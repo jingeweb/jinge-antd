@@ -16,7 +16,8 @@ void test('Progress clamps values, provides a named progressbar and infers compl
   assert.equal(bar.getAttribute('aria-valuenow'), '100');
   assert.ok(bar.classList.contains('success'));
   assert.equal(bar.getAttribute('aria-valuetext'), '100%（完成）');
-  assert.equal(document.querySelector('.ja-progress-info').textContent, '✓ 100%');
+  assert.equal(document.querySelector('.ja-progress-info').textContent, '100%');
+  assert.equal(document.querySelector('.ja-progress-info svg').getAttribute('aria-hidden'), 'true');
   assert.equal(document.querySelector('.ja-progress-bar').style.width, '100%');
   options.percent = Number.NaN;
   await flush();
@@ -62,7 +63,9 @@ void test('Progress supports formats, explicit status, colors and information hi
   options.showInfo = true;
   await flush();
   assert.equal(progress.getAttribute('aria-valuetext'), '70%（失败）');
-  assert.equal(document.querySelector('.ja-progress-info').textContent, '! 70%');
+  assert.equal(document.querySelector('.ja-progress-info').textContent, '70%');
+  assert.ok(document.querySelector('.ja-progress-info svg'));
+  assert.equal(document.querySelector('.ja-progress-info svg').getAttribute('aria-hidden'), 'true');
 });
 
 void test('Progress scoped info receives normalized values and a separate accessible value text', async () => {

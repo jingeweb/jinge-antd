@@ -42,6 +42,16 @@ void test('Select opens a listbox and arrows skip disabled choices, select once 
   await flush();
   const active = document.getElementById(trigger.getAttribute('aria-activedescendant'));
   assert.equal(active.textContent.trim(), 'Two');
+  document
+    .querySelector('[role=option][aria-label=One]')
+    .dispatchEvent(new window.MouseEvent('mousemove', { bubbles: true }));
+  await flush();
+  assert.equal(trigger.getAttribute('aria-activedescendant'), active.id);
+  const zero = document.querySelector('[role=option][aria-label=Zero]');
+  zero.dispatchEvent(new window.MouseEvent('mousemove', { bubbles: true }));
+  await flush();
+  assert.equal(trigger.getAttribute('aria-activedescendant'), zero.id);
+  key(trigger, 'ArrowDown');
   key(trigger, 'Enter');
   await flush();
   assert.equal(trigger.textContent, 'Two');

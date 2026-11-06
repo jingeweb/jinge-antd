@@ -1,4 +1,3 @@
-import './style.scss';
 import {
   type JNode,
   type WithOptChildren,
@@ -8,6 +7,9 @@ import {
   vm,
   watch,
 } from 'jinge';
+
+import './style.scss';
+import { AntDesignUserOutlined } from '../_icon';
 export type AvatarSize = 'sm' | 'md' | 'lg' | number;
 export type AvatarProps = {
   src?: string;
@@ -30,7 +32,7 @@ function avatarStyle(style: string | undefined, size: AvatarSize | undefined) {
   return `${style ?? ''};width:${pixels}px;height:${pixels}px;font-size:${Math.max(12, pixels / 2)}px`;
 }
 function initial(alt: string | undefined) {
-  return Array.from(alt?.trim() ?? '')[0] ?? '?';
+  return Array.from(alt?.trim() ?? '')[0];
 }
 export function Avatar(props: AvatarProps) {
   const state = vm({ failed: false });
@@ -60,7 +62,7 @@ export function Avatar(props: AvatarProps) {
         />
       ) : (
         <span className="ja-avatar-fallback" aria-hidden="true">
-          {props.children ?? props['slot:icon'] ?? initial(props.alt)}
+          {props.children ?? props['slot:icon'] ?? initial(props.alt) ?? <AntDesignUserOutlined />}
         </span>
       )}
     </span>

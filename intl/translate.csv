@@ -22,14 +22,27 @@ FzueR7,site/components/DocsLayout.tsx,搜索组件…,搜索组件…,搜索組�
 Gdq8gm,site/components/DocsLayout.tsx,本页内容,本页内容,本頁內容,On this page
 PP0SsU,site/components/DocsLayout.tsx,组件目录,组件目录,組件目錄,Component directory
 PeJeGG,site/components/DocsLayout.tsx,为 PC 中台构建,为 PC 中台构建,為 PC 中台構建,Built for desktop admin systems
-WpBk1h,site/components/DocsLayout.tsx,语言,语言,語言,Language
-Xcnnf4,site/components/DocsLayout.tsx,待实现,待实现,待實現,Planned
 aTLtIt,site/components/DocsLayout.tsx,本页目录,本页目录,本頁目錄,Page contents
 gLVYUT,site/components/DocsLayout.tsx,组件导航,组件导航,組件導航,Component navigation
-iCjdFI,site/components/DocsLayout.tsx,Jinge Antd · 实现、示例与测试同步演进,Jinge Antd · 实现、示例与测试同步演进,Jinge Antd · 實現、示例與測試同步演進,"Jinge Antd · Implementation, examples and tests evolve together"
 kjglgV,site/components/DocsLayout.tsx,组件文档,组件文档,組件文檔,Components
+kknawd,site/components/DocsLayout.tsx,Jinge Antd · 由 AI 主导实现组件库和文档站,Jinge Antd · 由 AI 主导实现组件库和文档站,Jinge Antd · 由 AI 主導實作元件庫和文件網站,Jinge Antd · AI-led development of the component library and documentation site
 nzCBf9,site/components/DocsLayout.tsx,代码演示,代码演示,代碼演示,Examples
 rf0j3b,site/components/DocsLayout.tsx,跳到内容,跳到内容,跳到內容,Skip to content
 sYs8df,site/components/DocsLayout.tsx,说明与限制,说明与限制,說明與限制,Notes and limitations
-w6Ta3u,site/components/DocsLayout.tsx,已交付,已交付,已交付,Delivered
 wGEnEV,site/components/DocsLayout.tsx,切换组件导航,切换组件导航,切換組件導航,Toggle component navigation
++NHLKt,site/components/IconPage.tsx,Ant Design 图标全集,Ant Design 图标全集,Ant Design 圖示全集,All Ant Design icons
+2NNU2L,site/components/IconPage.tsx,图标类名应完整写在源码中，避免运行时拼接导致 Tailwind 无法扫描。装饰图标使用 aria-hidden；有意义的图标或纯图标按钮需要提供可访问名称。,图标类名应完整写在源码中，避免运行时拼接导致 Tailwind 无法扫描。装饰图标使用 aria-hidden；有意义的图标或纯图标按钮需要提供可访问名称。,圖示類名應完整寫在原始碼中，避免執行時拼接導致 Tailwind 無法掃描。裝飾圖示使用 aria-hidden；有意義的圖示或純圖示按鈕需要提供無障礙名稱。,Write complete icon classes in source code so Tailwind can detect them; avoid building class names at runtime. Use aria-hidden for decorative icons and accessible names for meaningful icons or icon-only buttons.
+3oH8vx,site/components/IconPage.tsx,查看，并通过 Iconify Search 插件直接插入业务代码。,查看，并通过 Iconify Search 插件直接插入业务代码。,查看，並透過 Iconify Search 擴充功能直接插入應用程式碼。, and use Iconify Search to insert them directly into your application code.
+6+kmb/,site/components/IconPage.tsx,安装与使用,安装与使用,安裝與使用,Installation and usage
+9WVlbk,site/components/IconPage.tsx,在引入 Tailwind 的 CSS 入口中启用插件，并确保应用已引入该 CSS 文件：,在引入 Tailwind 的 CSS 入口中启用插件，并确保应用已引入该 CSS 文件：,在引入 Tailwind 的 CSS 入口中啟用外掛，並確保應用程式已引入該 CSS 檔案：,Enable the plugin in your Tailwind CSS entry and import that CSS file into your application:
+9gA0P3,site/components/IconPage.tsx,查看 Iconify Search 插件,查看 Iconify Search 插件,查看 Iconify Search 擴充功能,View Iconify Search
+Lrhrwc,site/components/IconPage.tsx,推荐使用 @iconify-json/ant-design，获取完整的 Ant Design 图标数据；搭配 @iconify/tailwind4，在构建时按需生成图标 CSS，随业务产物一起发布，无需运行时请求图标服务。,推荐使用 @iconify-json/ant-design，获取完整的 Ant Design 图标数据；搭配 @iconify/tailwind4，在构建时按需生成图标 CSS，随业务产物一起发布，无需运行时请求图标服务。,建議使用 @iconify-json/ant-design 取得完整的 Ant Design 圖示資料；搭配 @iconify/tailwind4，在建置時按需產生圖示 CSS，隨應用程式產物一起發布，無需在執行時請求圖示服務。,"Use @iconify-json/ant-design for the complete Ant Design icon set. With @iconify/tailwind4, only the icons used in your source are generated as CSS at build time and shipped with your application, without runtime requests to an icon service."
+MHJBk1,site/components/IconPage.tsx,打开 VS Code 命令面板，搜索 Iconify，进入搜索或浏览界面。选择 Ant Design 图标后，可在详情中插入代码；用于 Jinge TSX 时，将插件的代码类型配置为 Tailwind CSS React（使用 className）。,打开 VS Code 命令面板，搜索 Iconify，进入搜索或浏览界面。选择 Ant Design 图标后，可在详情中插入代码；用于 Jinge TSX 时，将插件的代码类型配置为 Tailwind CSS React（使用 className）。,開啟 VS Code 命令選擇區，搜尋 Iconify，進入搜尋或瀏覽介面。選擇 Ant Design 圖示後，可在詳細資訊中插入程式碼；用於 Jinge TSX 時，將擴充功能的程式碼類型設定為 Tailwind CSS React（使用 className）。,"Open the VS Code Command Palette and search for Iconify to browse or search icons. Choose an Ant Design icon and insert its code from the details view. For Jinge TSX, set the extension’s code type to Tailwind CSS React (uses className)."
+Te3Mtw,site/components/IconPage.tsx,更多图标请前往,更多图标请前往,更多圖示請前往,Explore more icons in
+TxWdez,site/components/IconPage.tsx,推荐在 VS Code 中安装 Iconify Search（发布者 geekabe），直接在编辑器内浏览、搜索、预览和收藏图标，并复制代码或插入当前文件。,推荐在 VS Code 中安装 Iconify Search（发布者 geekabe），直接在编辑器内浏览、搜索、预览和收藏图标，并复制代码或插入当前文件。,建議在 VS Code 中安裝 Iconify Search（發行者 geekabe），直接在編輯器內瀏覽、搜尋、預覽及收藏圖示，並複製程式碼或插入目前檔案。,"Install Iconify Search by geekabe in VS Code to browse, search, preview and favorite icons, then copy their code or insert it into the active file."
+gSdZU1,site/components/IconPage.tsx,从 VS Code Marketplace 安装,从 VS Code Marketplace 安装,從 VS Code Marketplace 安裝,Install from VS Code Marketplace
+mryWy+,site/components/IconPage.tsx,以下以已配置 Tailwind CSS 4 的项目为例，先安装图标集与插件：,以下以已配置 Tailwind CSS 4 的项目为例，先安装图标集与插件：,以下以已設定 Tailwind CSS 4 的專案為例，先安裝圖示集與外掛：,"In a project already configured with Tailwind CSS 4, install the icon set and plugin:"
+vMAUKN,site/components/IconPage.tsx,常用图标,常用图标,常用圖示,Common icons
+wchFHZ,site/components/IconPage.tsx,在业务 TSX 中直接使用静态图标类名，用字号控制尺寸、文字颜色控制单色图标的颜色：,在业务 TSX 中直接使用静态图标类名，用字号控制尺寸、文字颜色控制单色图标的颜色：,在應用程式 TSX 中直接使用靜態圖示類名，用字級控制尺寸、文字顏色控制單色圖示的顏色：,"Use static icon classes directly in your TSX. Font size controls their dimensions, and text color controls monochrome icon colors:"
+WpBk1h,site/components/LanguageMenu.tsx,语言,语言,語言,Language
+eRyueo,site/components/LanguageMenu.tsx,语言资源加载失败，当前语言未更改。,语言资源加载失败，当前语言未更改。,語言資源載入失敗，目前語言未變更。,Language resources could not be loaded. The current language has not changed.

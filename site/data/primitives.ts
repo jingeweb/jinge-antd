@@ -180,43 +180,20 @@ export const primitiveDocs: ComponentDoc[] = [
   {
     id: 'icon',
     name: 'Icon',
-    imports: ['AntDesignCheckCircleFilled', 'LoadingOutlined'],
     title: '图标',
     category: '通用',
     status: 'ready',
-    description:
-      '直接使用具名 SVG 图标。装饰图标默认对辅助技术隐藏，有意义的图标需提供 ariaLabel。',
+    description: '使用 Iconify 的 Ant Design 图标集，搭配 Tailwind 插件将业务用到的图标按需打包。',
     demos: [
       {
         id: 'icon-basic',
-        title: '尺寸、颜色与加载',
-        description: '沿用现有七个图标，不增加图标库依赖。',
+        title: '常用图标',
+        description: '以下 48 个常用图标均通过静态 Tailwind 类名展示，可展开源码复制使用。',
         render: IconExample,
         source: iconSource,
       },
     ],
-    api: [
-      {
-        name: 'size',
-        type: 'number | string',
-        default: '继承字号',
-        description: 'SVG 图标的 font-size，数值为像素。',
-      },
-      { name: 'color', type: 'string', default: 'currentColor', description: 'SVG 图标颜色。' },
-      {
-        name: 'ariaLabel',
-        type: 'string',
-        description: '图标获得 img 语义；LoadingOutlined 获得 status 语义。未指定时为装饰元素。',
-      },
-      {
-        name: 'className / style',
-        type: 'string',
-        description: '附加样式；LoadingOutlined 可通过 style 设置字号和颜色。',
-      },
-    ],
-    notes: [
-      '已有图标：LoadingOutlined、InfoCircleFilled、CheckCircleFilled、CloseCircleFilled、ExclamationCircleFilled、CloseCircleOutlined、CloseOutlined（SVG 名称前均带 AntDesign）。',
-      'LoadingOutlined 是带动画的包装组件；尊重 prefers-reduced-motion。',
-    ],
+    api: [],
+    notes: [],
   },
 ];

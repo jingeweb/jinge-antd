@@ -1,4 +1,5 @@
 import { test, expect } from './fixtures.mjs';
+import { chooseOption } from './select-choice.mjs';
 test('Pagination keyboard changes page and size, bounds quick jumping and never submits its parent form', async ({
   page,
 }) => {
@@ -6,7 +7,7 @@ test('Pagination keyboard changes page and size, bounds quick jumping and never 
   await page.getByRole('button', { name: '下一页', exact: true }).focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('[aria-current=page]')).toHaveText('4');
-  await page.getByRole('combobox', { name: '每页条数' }).selectOption('20');
+  await chooseOption(page, page.getByRole('combobox', { name: '每页条数' }), '20 条/页');
   await expect(page.locator('[aria-current=page]')).toHaveText('1');
   const jump = page.getByRole('textbox', { name: '跳转页码' });
   await jump.fill('99');
@@ -26,8 +27,8 @@ test('Pagination rejects controlled page/size requests, clamps total changes and
   await page.getByRole('button', { name: 'Reject pages' }).click();
   await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('[aria-current=page]')).toHaveText('3');
-  await page.getByRole('combobox', { name: '每页条数' }).selectOption('50');
-  await expect(page.getByRole('combobox', { name: '每页条数' })).toHaveValue('10');
+  await chooseOption(page, page.getByRole('combobox', { name: '每页条数' }), '50 条/页');
+  await expect(page.getByRole('combobox', { name: '每页条数' })).toHaveText('10 条/页');
   await page.getByRole('button', { name: 'Shrink total' }).click();
   await expect(page.locator('[aria-current=page]')).toHaveText('2');
   await page.getByRole('button', { name: 'Disable pages' }).click();
@@ -39,7 +40,7 @@ test('Table keyboard sorting, filters and pagination transform local rows and re
   page,
 }) => {
   await page.goto('/?case=tablelab');
-  await page.getByRole('combobox', { name: '每页条数' }).selectOption('20');
+  await chooseOption(page, page.getByRole('combobox', { name: '每页条数' }), '20 条/页');
   const first = page.locator('tbody .ja-table-row').first();
   await first.evaluate((el) => {
     el.dataset.original = 'user1';
@@ -53,10 +54,10 @@ test('Table keyboard sorting, filters and pagination transform local rows and re
     'data-original',
     'user1',
   );
-  await page.getByRole('combobox', { name: '每页条数' }).selectOption('5');
+  await chooseOption(page, page.getByRole('combobox', { name: '每页条数' }), '5 条/页');
   await page.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(page.locator('[aria-current=page]')).toHaveText('2');
-  await page.getByRole('combobox', { name: '筛选 Team' }).selectOption('0');
+  await chooseOption(page, page.getByRole('combobox', { name: '筛选 Team' }), 'Team A');
   await expect(page.locator('[aria-current=page]')).toHaveText('1');
   await expect(page.locator('tbody [data-column-key=team]')).toHaveText(['A', 'A', 'A', 'A', 'A']);
   expect(await page.evaluate(() => window.testApp.events)).not.toContain('submit');

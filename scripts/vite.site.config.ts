@@ -4,6 +4,7 @@ import { execFileSync } from 'node:child_process';
 import path from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
 
+import { siteCodeHighlights } from './site-code-highlights.ts';
 import { TailwindThemePlugin } from './vite-plugin.ts';
 const __dirname = import.meta.dirname;
 
@@ -41,5 +42,11 @@ export default defineConfig({
     tsconfigPaths: true,
     dedupe: ['jinge', 'jinge-router'],
   },
-  plugins: [tailwindcss(), TailwindThemePlugin(), jingeVitePlugin({ intl: true }), pagesFallback],
+  plugins: [
+    siteCodeHighlights(),
+    tailwindcss(),
+    TailwindThemePlugin(),
+    jingeVitePlugin({ intl: true }),
+    pagesFallback,
+  ],
 });

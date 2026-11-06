@@ -3,6 +3,7 @@ import {
   type WithSlots,
   type WithChildren,
   cx,
+  context,
   onMount,
   ref,
   registerEvent,
@@ -11,9 +12,17 @@ import {
 import type { PickerProps } from './common';
 import type { PickerControl } from './use-picker';
 
+import {
+  AntDesignCloseOutlined,
+  AntDesignCalendarOutlined,
+  AntDesignClockCircleOutlined,
+} from '../_icon';
+import { Z_CONTEXT } from '../_util/z';
 import { Floating } from '../floating';
 function PickerPopup<T>(props: { control: PickerControl<T> } & WithChildren<JNode>) {
   const control = props.control;
+  // Nested Select popups must appear above the calendar/time panel (also inside a Modal).
+  context(Z_CONTEXT, control.layer);
   onMount(() => registerEvent(control.popup.value!, 'focusout', control.blur));
   return (
     <div className="ja-picker-panel" ref={control.popup} on:keyDown={control.popupKey}>
@@ -101,7 +110,7 @@ export function PickerView<T>(
                 on:mouseDown={(event) => event.preventDefault()}
                 on:click={(event) => control.choose(null, event)}
               >
-                ×
+                <AntDesignCloseOutlined />
               </button>
             )}
             <button
@@ -121,7 +130,11 @@ export function PickerView<T>(
                 control.focusPanel();
               }}
             >
-              ▦
+              {props.kind === 'time' ? (
+                <AntDesignClockCircleOutlined />
+              ) : (
+                <AntDesignCalendarOutlined />
+              )}
             </button>
             <input
               ref={hidden}

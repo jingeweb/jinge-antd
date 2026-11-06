@@ -1,13 +1,13 @@
 import { Dynamic, type FC, cx, onMount, ref, registerEvent } from 'jinge';
 
-import { Button } from '../button';
 import {
   AntDesignCheckCircleFilled,
   AntDesignCloseCircleFilled,
   AntDesignExclamationCircleFilled,
   AntDesignInfoCircleFilled,
   AntDesignCloseOutlined,
-} from '../icon';
+} from '../_icon';
+import { Button } from '../button';
 import { LoadingOutlined } from '../loading';
 import { type NoticeRecord, type NoticeType } from './notice';
 

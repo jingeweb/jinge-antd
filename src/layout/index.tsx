@@ -1,5 +1,6 @@
 import { type JNode, type WithChildren, type WithEvents, cx, vm, watch } from 'jinge';
 
+import { AntDesignLeftOutlined, AntDesignRightOutlined } from '../_icon';
 import './style.scss';
 export type LayoutPartProps = { className?: string; style?: string } & WithChildren<JNode>;
 export type LayoutProps = LayoutPartProps & { hasSider?: boolean };
@@ -70,7 +71,9 @@ export function Sider(props: SiderProps) {
             props['on:collapse']?.(next);
           }}
         >
-          <span aria-hidden="true">{state.collapsed ? '›' : '‹'}</span>
+          <span aria-hidden="true">
+            {state.collapsed ? <AntDesignRightOutlined /> : <AntDesignLeftOutlined />}
+          </span>
         </button>
       )}
     </aside>

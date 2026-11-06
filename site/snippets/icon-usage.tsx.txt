@@ -1,0 +1,4 @@
+<button type="button">
+  <span className="icon-[ant-design--search-outlined] text-lg" aria-hidden="true" />
+  Search
+</button>

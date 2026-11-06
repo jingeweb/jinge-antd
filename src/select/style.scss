@@ -15,6 +15,13 @@
   color: var(--antd-normal-text, #1f2329);
   font-size: 14px;
   cursor: pointer;
+  // Compact single selects keep the arrow beside the ellipsized value; only tags wrap.
+  &.single {
+    flex-wrap: nowrap;
+    > .ja-select {
+      min-width: 0;
+    }
+  }
   &:hover,
   &:focus-within {
     border-color: var(--antd-primary, #1677ff);
@@ -68,6 +75,17 @@
     cursor: text;
   }
 }
+// Search input stays empty until typing. Its selected-label placeholder uses normal text color
+// while collapsed; opening restores the ordinary placeholder color for the search state.
+.ja-select.has-selection::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+// The field owns the focus ring, including when nested in a form/table or documentation page.
+.ja-select-field > .ja-select:focus {
+  outline: none;
+  box-shadow: none;
+}
 .ja-select-value {
   min-width: 0;
 }
@@ -110,22 +128,14 @@
   outline-offset: 2px;
 }
 .ja-select-arrow {
+  display: inline-flex;
+  align-items: center;
   flex: none;
-  width: 7px;
-  height: 7px;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
-  transform: rotate(45deg);
-  margin: 0 2px 4px 4px;
-  &.loading {
-    border: 1px solid #ddd;
-    border-top-color: #1677ff;
-    border-radius: 50%;
-    width: 12px;
-    height: 12px;
-    margin-bottom: 0;
-    animation: ja-select-spin 0.8s linear infinite;
-  }
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  color: inherit;
+  font-size: 12px;
 }
 .ja-select-popup {
   box-sizing: border-box;
@@ -140,9 +150,10 @@
   font-size: 14px;
   .ja-select-option {
     display: block;
-    min-height: 30px;
+    min-height: 32px;
+    line-height: 22px;
     box-sizing: border-box;
-    padding: 5px 8px;
+    padding: 5px 12px;
     border: 0;
     border-radius: 4px;
     text-align: left;
@@ -150,15 +161,12 @@
     overflow-wrap: anywhere;
     &.highlighted {
       background: #f5f5f5;
-      outline: 1px solid #d9d9d9;
-      outline-offset: -1px;
     }
     &.ja-active {
       background: #e6f4ff;
       font-weight: 600;
     }
-    &.ja-active::after {
-      content: '✓';
+    .ja-select-check {
       float: right;
       margin-left: 8px;
     }
@@ -188,17 +196,6 @@
   overflow: hidden;
   white-space: nowrap;
 }
-@keyframes ja-select-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ja-select-arrow.loading {
-    animation: none;
-  }
-}
-
 .ja-select-field.sm .ja-select {
   min-height: 20px;
   line-height: 20px;

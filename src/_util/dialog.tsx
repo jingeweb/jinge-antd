@@ -12,6 +12,7 @@ import {
   uid,
 } from 'jinge';
 
+import { AntDesignCloseOutlined } from '../_icon';
 import { Button } from '../button';
 import {
   type FloatingNode,
@@ -21,7 +22,6 @@ import {
   isTopNode,
   showNode,
 } from '../floating/tree';
-import { AntDesignCloseOutlined } from '../icon';
 import { Z_CONTEXT, z } from './z';
 
 interface DialogEntry {

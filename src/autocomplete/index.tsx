@@ -1,4 +1,3 @@
-import '../select/style.scss';
 import {
   type JNode,
   type WithEvents,
@@ -14,6 +13,8 @@ import {
   watch,
 } from 'jinge';
 
+import '../select/style.scss';
+import { AntDesignCloseOutlined } from '../_icon';
 import { z } from '../_util/z';
 import { Floating } from '../floating';
 import { type ComboBase, type ComboHandle, type SelectOption } from '../select/common';
@@ -273,7 +274,7 @@ export function AutoComplete(props: AutoCompleteProps) {
               on:mouseDown={(event) => event.preventDefault()}
               on:click={clear}
             >
-              ×
+              <AntDesignCloseOutlined />
             </button>
           )}
         </span>

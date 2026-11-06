@@ -10,7 +10,6 @@ export * from './button';
 export * from './dropdown';
 export * from './floating';
 export * from './form';
-export * from './icon';
 export * from './input';
 export * from './loading';
 export * from './menu';

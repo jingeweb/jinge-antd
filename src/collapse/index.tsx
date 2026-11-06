@@ -1,4 +1,3 @@
-import './style.scss';
 import {
   For,
   type JNode,
@@ -11,6 +10,9 @@ import {
   vm,
   watch,
 } from 'jinge';
+
+import './style.scss';
+import { AntDesignRightOutlined } from '../_icon';
 
 export type CollapseItem = { key: string; disabled?: boolean; content?: string } & WithPropSlot<
   'label',
@@ -69,7 +71,7 @@ function CollapsePanel(
           on:keyDown={props['on:navigate']}
         >
           <span className="ja-collapse-arrow" aria-hidden="true">
-            ›
+            <AntDesignRightOutlined />
           </span>
           <span className="ja-collapse-label">{props.item['slot:label'] ?? props.item.label}</span>
         </button>

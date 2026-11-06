@@ -1,7 +1,7 @@
 import './style.scss';
 import { cx } from 'jinge';
 
-import { AntDesignLoadingOutlined } from '../icon';
+import { AntDesignLoadingOutlined } from '../_icon';
 export interface LoadingOutlinedProps {
   className?: string;
   style?: string;

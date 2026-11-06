@@ -1,4 +1,4 @@
-import { Button, AntDesignCheckCircleFilled } from 'jinge-antd';
+import { Button } from 'jinge-antd';
 
 export function ButtonSizes() {
   return (
@@ -8,7 +8,11 @@ export function ButtonSizes() {
         <Button size="md">中按钮</Button>
         <Button size="lg">大按钮</Button>
         <Button shape="round">圆角按钮</Button>
-        <Button shape="circle" ariaLabel="确认" slot:icon={<AntDesignCheckCircleFilled />} />
+        <Button
+          shape="circle"
+          ariaLabel="确认"
+          slot:icon={<span className="icon-[ant-design--check-circle-filled]" aria-hidden="true" />}
+        />
       </div>
       <Button block type="primary">
         占满容器

@@ -52,7 +52,7 @@ export const paginationDoc: ComponentDoc = {
       type: 'boolean / number[]',
       default: 'false / [10,20,50,100]',
       description:
-        '原生 select 选择页大小；去重过滤无效项，并补入当前大小，原生表单 reset 不改变组件受控状态。',
+        '通过 Select 选择页大小；去重过滤无效项，并补入当前大小，原生表单 reset 不改变组件受控状态。',
     },
     {
       name: 'showQuickJumper / showTotal / simple / hideOnSinglePage',

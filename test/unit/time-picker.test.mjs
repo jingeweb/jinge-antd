@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { flush, mount, rt, ui } from './harness.mjs';
+import { chooseOption } from './select-choice.mjs';
 const time = (text) => Temporal.PlainTime.from(text);
 const button = (label) =>
   [...document.querySelectorAll('button')].find((el) => el.getAttribute('aria-label') === label);
@@ -26,7 +27,7 @@ void test('TimePicker rejects overflow, leap-second notation and disabled combin
   }
   assert.equal(changes.length, 0);
 });
-void test('TimePicker steps and per-unit disabled rules drive its native select options and explicit confirmation', async () => {
+void test('TimePicker steps and per-unit disabled rules drive its Select options and explicit confirmation', async () => {
   const changes = [];
   mount(ui.TimePicker, {
     defaultValue: time('10:00:00'),
@@ -39,11 +40,17 @@ void test('TimePicker steps and per-unit disabled rules drive its native select 
   await flush();
   const hour = document.querySelector('[aria-label=小时]'),
     minute = document.querySelector('[aria-label=分钟]');
-  assert.equal([...minute.options].filter((el) => !el.disabled).length, 3);
-  assert.equal([...hour.options].find((el) => el.value === '11').disabled, true);
-  minute.value = '15';
-  minute.dispatchEvent(new Event('change', { bubbles: true }));
+  hour.click();
   await flush();
+  assert.equal(
+    document.querySelector('[role=option][aria-label="11"]').getAttribute('aria-disabled'),
+    'true',
+  );
+  hour.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+  minute.click();
+  await flush();
+  assert.equal(document.querySelectorAll('[role=option]:not([aria-disabled="true"])').length, 3);
+  await chooseOption(minute, '15');
   assert.equal(changes.length, 0);
   [...document.querySelectorAll('button')].find((el) => el.textContent === '确定').click();
   await flush();

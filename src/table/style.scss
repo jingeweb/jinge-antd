@@ -110,15 +110,9 @@
     cursor: not-allowed;
   }
   .ja-table-filter {
-    display: block;
+    display: flex;
     max-width: 100%;
     margin-top: 6px;
-    border: 1px solid var(--ja-border, #d9d9d9);
-    border-radius: 4px;
-    background: var(--ja-bg, #fff);
-    color: inherit;
-    font: inherit;
-    padding: 2px;
   }
   .ja-table-expand {
     width: 24px;

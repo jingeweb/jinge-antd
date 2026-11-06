@@ -1,11 +1,19 @@
-import { For, cx, ref, uid, watch } from 'jinge';
+import { For, cx, uid } from 'jinge';
 
 import type { ColumnType, FilterValue, TableProps, TableSorter } from './common';
 
+import {
+  AntDesignUpOutlined,
+  AntDesignDownOutlined,
+  AntDesignSwapOutlined,
+  AntDesignPlusOutlined,
+  AntDesignMinusOutlined,
+} from '../_icon';
 import { Checkbox } from '../checkbox';
 import { Pagination } from '../pagination';
 import { Radio } from '../radio';
-import { pageSelectionFlag, cellText, columnStyle, filterSelected, hasKey } from './data';
+import { Select } from '../select';
+import { pageSelectionFlag, cellText, columnStyle, hasKey } from './data';
 import { useTableLayout } from './layout';
 import { useTable } from './use-table';
 function Title<T>(props: { column: ColumnType<T>; index: number }) {
@@ -50,48 +58,42 @@ function Filter<T>(props: {
   disabled?: boolean;
   change(values: FilterValue[]): void;
 }) {
-  const element = ref<HTMLSelectElement>();
-  function sync() {
-    if (!element.value) return;
-    for (const option of element.value.options)
-      option.selected =
-        option.value !== '' &&
-        filterSelected(props.values, props.column.filters![Number(option.value)].value);
-    if (!props.column.filterMultiple && !props.values?.length) element.value.value = '';
+  function options(filters: { value: FilterValue; text: string }[] | undefined) {
+    return (filters ?? []).map((filter) => ({ value: filter.value, label: filter.text }));
   }
-  watch(props, 'values', sync, { deep: true });
   return (
-    <select
-      ref={element}
-      className="ja-table-filter"
-      aria-label={`筛选 ${props.column.title ?? props.column.key}`}
-      multiple={props.column.filterMultiple}
-      disabled={props.disabled}
-      on:change={(event) => {
-        const select = event.target as HTMLSelectElement;
-        props.change(
-          [...select.selectedOptions]
-            .filter((option) => option.value !== '')
-            .map((option) => props.column.filters![Number(option.value)].value),
-        );
-        sync();
-      }}
-    >
-      {!props.column.filterMultiple && (
-        <option value="" selected={!props.values?.length}>
-          全部
-        </option>
+    <>
+      {props.column.filterMultiple ? (
+        <Select
+          mode="multiple"
+          className="ja-table-filter"
+          size="sm"
+          showSearch={false}
+          ariaLabel={`筛选 ${props.column.title ?? props.column.key}`}
+          value={props.values ?? []}
+          options={options(props.column.filters)}
+          disabled={props.disabled}
+          allowClear
+          placeholder="全部"
+          on:change={(values) => props.change(values)}
+        />
+      ) : (
+        <Select
+          className="ja-table-filter"
+          size="sm"
+          ariaLabel={`筛选 ${props.column.title ?? props.column.key}`}
+          value={props.values?.[0] ?? null}
+          options={options(props.column.filters)}
+          disabled={props.disabled}
+          allowClear
+          placeholder="全部"
+          on:change={(value) => props.change(value === undefined ? [] : [value])}
+        />
       )}
-      <For loop={props.column.filters ?? []} key="value">
-        {(each) => (
-          <option value={`${each.index}`} selected={filterSelected(props.values, each.data.value)}>
-            {each.data.text}
-          </option>
-        )}
-      </For>
-    </select>
+    </>
   );
 }
+
 export function Table<T>(props: TableProps<T>) {
   const { state, paginate, sort, filter, disabled, selectRow, selectPage, expandable, expand } =
     useTable(props);
@@ -204,11 +206,13 @@ export function Table<T>(props: TableProps<T>) {
                       >
                         <Title column={each.data} index={each.index} />
                         <span aria-hidden="true">
-                          {sortDirection(state.sorter, each.data.key) === 'ascending'
-                            ? ' ↑'
-                            : sortDirection(state.sorter, each.data.key) === 'descending'
-                              ? ' ↓'
-                              : ' ↕'}
+                          {sortDirection(state.sorter, each.data.key) === 'ascending' ? (
+                            <AntDesignUpOutlined />
+                          ) : sortDirection(state.sorter, each.data.key) === 'descending' ? (
+                            <AntDesignDownOutlined />
+                          ) : (
+                            <AntDesignSwapOutlined style="transform:rotate(90deg)" />
+                          )}
                         </span>
                       </button>
                     ) : (
@@ -276,7 +280,11 @@ export function Table<T>(props: TableProps<T>) {
                             disabled={props.loading}
                             on:click={() => expand(each.data)}
                           >
-                            {hasKey(state.expanded, each.data.key) ? '−' : '+'}
+                            {hasKey(state.expanded, each.data.key) ? (
+                              <AntDesignMinusOutlined />
+                            ) : (
+                              <AntDesignPlusOutlined />
+                            )}
                           </button>
                         )}
                       </td>

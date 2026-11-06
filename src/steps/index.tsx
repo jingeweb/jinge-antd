@@ -1,5 +1,7 @@
-import './style.scss';
 import { For, type JNode, type WithEvents, type WithPropSlot, type WithSlots, cx } from 'jinge';
+
+import './style.scss';
+import { AntDesignCheckOutlined, AntDesignCloseOutlined } from '../_icon';
 export type StepStatus = 'wait' | 'process' | 'finish' | 'error';
 export type StepItem = {
   key: string | number;
@@ -28,8 +30,18 @@ function stepStatus(
 ): StepStatus {
   return item.status ?? (index < current ? 'finish' : index === current ? status : 'wait');
 }
-function symbol(status: StepStatus, index: number) {
-  return status === 'finish' ? '✓' : status === 'error' ? '×' : `${index + 1}`;
+function StepSymbol(props: { status: StepStatus; index: number }) {
+  return (
+    <>
+      {props.status === 'finish' ? (
+        <AntDesignCheckOutlined />
+      ) : props.status === 'error' ? (
+        <AntDesignCloseOutlined />
+      ) : (
+        props.index + 1
+      )}
+    </>
+  );
 }
 function statusText(status: StepStatus) {
   return { wait: '未开始', process: '进行中', finish: '已完成', error: '错误' }[status];
@@ -38,7 +50,7 @@ function StepBody(props: { item: StepItem; index: number; status: StepStatus }) 
   return (
     <>
       <span className="ja-step-icon" aria-hidden="true">
-        {props.item['slot:icon'] ?? symbol(props.status, props.index)}
+        {props.item['slot:icon'] ?? <StepSymbol status={props.status} index={props.index} />}
       </span>
       <span className="ja-step-text">
         <span className="ja-step-title">{props.item['slot:title'] ?? props.item.title}</span>

@@ -7,19 +7,12 @@
   justify-content: center;
   gap: 12px;
   padding: 8px;
-  label {
+  .ja-time-column {
+    width: 64px;
     display: flex;
     flex-direction: column;
     gap: 4px;
     text-align: center;
-  }
-  select {
-    padding: 8px;
-    font: inherit;
-    color: inherit;
-    background: var(--ja-bg, #fff);
-    border: 1px solid #ddd;
-    border-radius: 4px;
   }
 }
 .ja-time-actions {

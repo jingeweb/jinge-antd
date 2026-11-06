@@ -57,13 +57,13 @@ export const tableDoc: ComponentDoc = {
       type: '{text,value}[] / (value,row) => boolean / boolean',
       default: 'filterMultiple=false',
       description:
-        '原生 select 筛选；默认单选，多选时是原生多选列表，同列多值 OR、不同列 AND。无 onFilter 时按 dataIndex 严格相等匹配。空数组代表全部。',
+        'Select 筛选；默认单选，支持多选及清空，同列多值 OR、不同列 AND。无 onFilter 时按 dataIndex 严格相等匹配。空数组代表全部。',
     },
     {
       name: 'column.filteredValue / defaultFilteredValue',
       type: '(string | number)[] | null / (string | number)[]',
       description:
-        '受控/初始过滤值。受控父级拒绝请求时恢复原生选择显示；结构同步不发 change。筛选/排序请求回到第 1 页。控制模式初始化固定。',
+        '受控/初始过滤值。受控父级拒绝请求时保持 Select 选择显示；结构同步不发 change。筛选/排序请求回到第 1 页。控制模式初始化固定。',
     },
     {
       name: 'pagination',

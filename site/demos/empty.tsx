@@ -1,5 +1,5 @@
 import { vm } from 'jinge';
-import { Button, Empty, Space, AntDesignInfoCircleFilled } from 'jinge-antd';
+import { Button, Empty, Space } from 'jinge-antd';
 
 export function EmptyExample() {
   const state = vm({ created: false });
@@ -30,7 +30,12 @@ export function EmptyExample() {
       )}
       <Empty
         size="sm"
-        slot:image={<AntDesignInfoCircleFilled />}
+        slot:image={
+          <span
+            className="icon-[ant-design--search-outlined] text-5xl text-slate-400"
+            aria-hidden="true"
+          />
+        }
         slot:description={<span>没有匹配的结果，请调整搜索条件。</span>}
       />
       <Empty size="sm" image={false} description="也可以只保留文字，不展示插图。" />

@@ -22,7 +22,6 @@ FormField 增加标签/帮助/错误布局，Controller 只绑定数据。支持
 FormField 绑定原生日期，验证、提交和重置；无效草稿不覆盖业务值。,FormField 綁定原生日期，驗證、提交和重置；無效草稿不覆蓋業務值。,"Bind native dates to FormField for validation, submission and reset. Invalid drafts do not overwrite business values."
 HTML name 值,HTML name 值,Native HTML name
 Jinge 需包含 Temporal 内建对象的 VM 排除修复。当前本地构建经 test:sync-jinge 显式同步，未 link 或引入第二份运行时；发布前须使用包含该修复的正式 Jinge 版本。,Jinge 需包含 Temporal 內建對象的 VM 排除修復。當前本地構建經 test:sync-jinge 顯式同步，未 link 或引入第二份運行時；發佈前須使用包含該修復的正式 Jinge 版本。,Jinge must include the VM exclusion fix for native Temporal objects. Local builds are explicitly synced with test:sync-jinge without linking a second runtime. Use a released Jinge containing this fix before publishing.
-LoadingOutlined 是带动画的包装组件；尊重 prefers-reduced-motion。,LoadingOutlined 是帶動畫的包裝組件；尊重 prefers-reduced-motion。,LoadingOutlined is an animated wrapper that respects prefers-reduced-motion.
 Menu 的受控选中不再采用旧版的先本地修改、再等待外部值的混合行为。逐项插槽在初始化固定，F09 的运行中新增/替换仍暂缓；label/children/禁用数据可更新。,Menu 的受控選中不再採用舊版的先本地修改、再等待外部值的混合行為。逐項插槽在初始化固定，F09 的運行中新增/替換仍暫緩；label/children/禁用數據可更新。,"Controlled Menu selection no longer changes locally while waiting for an external value. Per-item slots are fixed at initialization; dynamic replacement remains deferred under F09. Labels, children and disabled data can update."
 MenuOption<T>[]，T 为 string | number,MenuOption<T>[]，T 為 string | number,"MenuOption<T>[], where T is string | number"
 Portal 渲染到当前页面 body；不支持自定义挂载容器、跨 iframe 或 body transform 特殊包含块。,Portal 渲染到當前頁面 body；不支持自定義掛載容器、跨 iframe 或 body transform 特殊包含塊。,"Portals render into the current document body. Custom containers, cross-frame rendering and transformed body containing blocks are not supported."
@@ -31,8 +30,7 @@ Radio 单项使用 checked 布尔值，RadioGroup 使用单个 value；空受控
 RadioGroup 未指定 name 时生成每实例独立名称，支持浏览器原生互斥和方向键；参与原生表单时请显式提供业务 name，自动名称同样会出现在 FormData 中。,RadioGroup 未指定 name 時生成每實例獨立名稱，支持瀏覽器原生互斥和方向鍵；參與原生表單時請顯式提供業務 name，自動名稱同樣會出現在 FormData 中。,"RadioGroup generates an instance-specific name when omitted, enabling native exclusivity and keyboard navigation. Provide a business name for form submission; generated names also appear in FormData."
 Row 使用负 margin 平衡列 padding；容器有 overflow 限制时需留出相应水平内边距。,Row 使用負 margin 平衡列 padding；容器有 overflow 限制時需留出相應水平內邊距。,Row balances column padding with negative margins. Add horizontal padding when a container clips overflow.
 SVG 图标、颜色尺寸和可访问名称。,SVG 圖標、顏色尺寸和可訪問名稱。,"SVG icons with colors, sizes and accessible names."
-SVG 图标的 font-size，数值为像素。,SVG 圖標的 font-size，數值為像素。,SVG font-size; numeric values are pixels.
-SVG 图标颜色。,SVG 圖標顏色。,SVG icon color.
+Select 筛选；默认单选，支持多选及清空，同列多值 OR、不同列 AND。无 onFilter 时按 dataIndex 严格相等匹配。空数组代表全部。,Select 篩選；默認單選，支持多選及清空，同列多值 OR、不同列 AND。無 onFilter 時按 dataIndex 嚴格相等匹配。空數組代表全部。,"Select filters support single/multiple values and clearing. Values within one column use OR; columns use AND. Without onFilter, values match dataIndex by strict equality. Empty arrays mean all records."
 TXT/CSV、单文件不超过 1 MiB，最多三项，并发两项。此处模拟上传，不发送到外部服务；以 fail 开头的文件首次失败，可重试。,TXT/CSV、單文件不超過 1 MiB，最多三項，併發兩項。此處模擬上傳，不發送到外部服務；以 fail 開頭的文件首次失敗，可重試。,"TXT/CSV files, at most 1 MiB each, three files and two concurrent uploads. This demo simulates uploads without external requests. Files starting with fail fail once and can be retried."
 VM 草稿 / 字段错误 / 状态 VM,VM 草稿 / 字段錯誤 / 狀態 VM,VM draft / field errors / status VM
 Zod 数据与校验、显式字段绑定、标签布局、异步提交及动态字段。,Zod 數據與校驗、顯式字段綁定、標籤佈局、異步提交及動態字段。,"Zod validation, explicit field binding, label layouts, asynchronous submission and dynamic fields."
@@ -128,6 +126,7 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 从 0 开始的当前索引；之前为 finish，之后为 wait。-1 全未开始，items.length 全完成。组件不自动维护业务流程。,從 0 開始的當前索引；之前為 finish，之後為 wait。-1 全未開始，items.length 全完成。組件不自動維護業務流程。,Zero-based current index: earlier steps finish and later steps wait. -1 marks none started; items.length marks all complete. Business flow is not managed automatically.
 从空列表创建记录；示例同时展示自定义内容和纯文字空态。,從空列表創建記錄；示例同時展示自定義內容和純文字空態。,"Create records from an empty list, with custom-content and text-only empty states."
 从页面边缘展示详情或编辑内容，共用 Modal 的多层、滚动锁和焦点管理。,從頁面邊緣展示詳情或編輯內容，共用 Modal 的多層、滾動鎖和焦點管理。,"Details or editing panels from the viewport edge, sharing Modal's stacking, scroll lock and focus management."
+以下 48 个常用图标均通过静态 Tailwind 类名展示，可展开源码复制使用。,以下 48 個常用圖示均透過靜態 Tailwind 類名顯示，可展開原始碼複製使用。,These 48 common icons use static Tailwind classes. Expand the source to copy them into your application.
 以语义化的定义列表展示只读详情，支持响应式列数、字段跨度和自定义内容。,以語義化的定義列表展示只讀詳情，支持響應式列數、字段跨度和自定義內容。,"Semantic definition lists for read-only details, with responsive columns, spans and custom content."
 任何关闭路径只通知一次；错误会记录到 console.error，不阻止其他条目的清理。,任何關閉路徑只通知一次；錯誤會記錄到 console.error，不阻止其他條目的清理。,Every close path notifies once. Errors go to console.error without blocking cleanup of other entries.
 传入原生 type=number，保留 spinbutton 语义、原生 min/max/step 校验；status=error 默认 aria-invalid。,傳入原生 type=number，保留 spinbutton 語義、原生 min/max/step 校驗；status=error 默認 aria-invalid。,"Uses native type=number, spinbutton semantics and min/max/step validation. status=error defaults aria-invalid."
@@ -139,6 +138,7 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 作用于弹出的浮层；触发按钮的样式直接传给 children。,作用於彈出的浮層；觸發按鈕的樣式直接傳給 children。,Applied to the floating panel. Pass trigger button styles directly to children.
 作用于浮层内容容器。定位和安全尺寸约束由组件管理。,作用於浮層內容容器。定位和安全尺寸約束由組件管理。,Applied to the floating content container. Positioning and safe-size constraints are managed by the component.
 使用 CSS gap 排列内容。Space 适合一组操作，Flex 适合占满容器的弹性布局。,使用 CSS gap 排列內容。Space 適合一組操作，Flex 適合佔滿容器的彈性佈局。,CSS gap lays out content. Space suits action groups; Flex suits full-width flexible layouts.
+使用 Iconify 的 Ant Design 图标集，搭配 Tailwind 插件将业务用到的图标按需打包。,使用 Iconify 的 Ant Design 圖示集，搭配 Tailwind 外掛將應用程式用到的圖示按需打包。,Use Iconify’s Ant Design collection with the Tailwind plugin to bundle only the icons your application uses.
 使用 JavaScript number，常用业务小数可用，不承诺高精度金融计算或超出安全整数的精确性；stringMode、formatter/parser、货币千分位和滚轮自定义暂缓。,使用 JavaScript number，常用業務小數可用，不承諾高精度金融計算或超出安全整數的精確性；stringMode、formatter/parser、貨幣千分位和滾輪自定義暫緩。,"Uses JavaScript numbers for common decimals, without financial-grade or unsafe-integer precision guarantees. stringMode, custom formatter/parser, currency separators and custom wheel behavior are deferred."
 使用 Tab 聚焦触发器、Esc 关闭；可配置方向和触发方式。,使用 Tab 聚焦觸發器、Esc 關閉；可配置方向和觸發方式。,Tab focuses the trigger; Escape closes. Placement and trigger modes are configurable.
 使用原生 fieldset/legend，提供组名称和描述。,使用原生 fieldset/legend，提供組名稱和描述。,Native fieldset/legend provide the group name and description.
@@ -242,9 +242,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 原生 Temporal.PlainTime，分钟/秒精度、步长、禁用规则和显式确认。,原生 Temporal.PlainTime，分鐘/秒精度、步長、禁用規則和顯式確認。,"Native Temporal.PlainTime with minute/second precision, steps, disabled rules and explicit confirmation."
 原生 checkbox input 使用 role=switch，可用 Space 和 Enter 切换；Enter 不提交表单。提供稳定名称，不依赖开/关状态文案作为名称。,原生 checkbox input 使用 role=switch，可用 Space 和 Enter 切換；Enter 不提交表單。提供穩定名稱，不依賴開/關狀態文案作為名稱。,A native checkbox with role=switch supports Space and Enter. Enter does not submit forms. Provide a stable accessible name independent of on/off labels.
 原生 form.reset 会恢复非受控初值且不触发 change；受控字段仍由父级 value 决定。,原生 form.reset 會恢復非受控初值且不觸發 change；受控字段仍由父級 value 決定。,Native form.reset restores uncontrolled initial values without change; controlled fields still follow the parent value.
-原生 select 对应选项禁用；更改上级可能令当前组合失效，需调整后确认，不自动替换下级选择。,原生 select 對應選項禁用；更改上級可能令當前組合失效，需調整後確認，不自動替換下級選擇。,Native selects disable corresponding options. Changing an earlier column can invalidate the combination; adjust and confirm instead of automatically replacing lower selections.
-原生 select 筛选；默认单选，多选时是原生多选列表，同列多值 OR、不同列 AND。无 onFilter 时按 dataIndex 严格相等匹配。空数组代表全部。,原生 select 篩選；默認單選，多選時是原生多選列表，同列多值 OR、不同列 AND。無 onFilter 時按 dataIndex 嚴格相等匹配。空數組代表全部。,"Native select filters support single/multiple values. Values within one column use OR; columns use AND. Without onFilter, values match dataIndex by strict equality. Empty arrays mean all records."
-原生 select 选择页大小；去重过滤无效项，并补入当前大小，原生表单 reset 不改变组件受控状态。,原生 select 選擇頁大小；去重過濾無效項，並補入當前大小，原生表單 reset 不改變組件受控狀態。,"Native select page-size options are deduplicated and filtered, retaining the current size. Native form reset does not change controlled component state."
 原生 type=number 保留未完成的负号/指数等 badInput 草稿，期间不把它当空值；提交恢复上一次有效数值。真正清空回传 undefined，绝不转成 0。,原生 type=number 保留未完成的負號/指數等 badInput 草稿，期間不把它當空值；提交恢復上一次有效數值。真正清空回傳 undefined，絕不轉成 0。,"Native number inputs preserve unfinished signs/exponents as badInput drafts, not empty values. Committing restores the last valid number. Real clearing emits undefined, never zero."
 原生 type，普通按钮不会意外提交表单。,原生 type，普通按鈕不會意外提交表單。,Native type; ordinary buttons do not accidentally submit forms.
 原生事件；通过 on:change 读取数值，不把 event.target.value 当成归一化结果。,原生事件；通過 on:change 讀取數值，不把 event.target.value 當成歸一化結果。,"Native events. Read normalized numbers through on:change, not event.target.value."
@@ -287,7 +284,7 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 "受控/初始展开行；移除记录时清理，不保留未加载行。on:expand(open,row) 和 on:expandedRowsChange(keys) 发送请求。","受控/初始展開行；移除記錄時清理，不保留未加載行。on:expand(open,row) 和 on:expandedRowsChange(keys) 發送請求。","Controlled/initial expanded rows. Removed records are cleaned up; unloaded rows are not retained. on:expand(open,row) and on:expandedRowsChange(keys) request changes."
 受控/初始每页条数，与 current 分别控制；用户修改页大小请求第 1 页。无效值回退 10。,受控/初始每頁條數，與 current 分別控制；用戶修改頁大小請求第 1 頁。無效值回退 10。,"Controlled/initial page size, independent of current. User size changes request page 1; invalid sizes fall back to 10."
 受控/初始浮层，禁用或只读会关闭并禁止打开。输入点击打开不抢焦点，ArrowDown 或图标打开后进入面板；Escape 取消草稿并回输入。Tab 正常遍历面板，在边界返回触发位置后离开。,受控/初始浮層，禁用或只讀會關閉並禁止打開。輸入點擊打開不搶焦點，ArrowDown 或圖標打開後進入面板；Escape 取消草稿並回輸入。Tab 正常遍歷面板，在邊界返回觸發位置後離開。,Controlled/initial panel visibility. Disabled/read-only closes and prevents opening. Input clicks open without stealing focus; ArrowDown/icon opening focuses the panel. Escape discards drafts and refocuses input; Tab traverses normally and exits at boundaries.
-受控/初始过滤值。受控父级拒绝请求时恢复原生选择显示；结构同步不发 change。筛选/排序请求回到第 1 页。控制模式初始化固定。,受控/初始過濾值。受控父級拒絕請求時恢復原生選擇顯示；結構同步不發 change。篩選/排序請求回到第 1 頁。控制模式初始化固定。,Controlled/initial filtered values. Rejected requests restore native selection. Structural sync emits no change. Filtering/sorting request page 1. Mode is fixed initially.
+受控/初始过滤值。受控父级拒绝请求时保持 Select 选择显示；结构同步不发 change。筛选/排序请求回到第 1 页。控制模式初始化固定。,受控/初始過濾值。受控父級拒絕請求時保持 Select 選擇顯示；結構同步不發 change。篩選/排序請求回到第 1 頁。控制模式初始化固定。,Controlled/initial filtered values. Rejected requests retain the Select value. Structural sync emits no change. Filtering/sorting request page 1. Mode is fixed initially.
 受控/初始页码，从 1 开始；越界自动按总量和页大小收敛。外部总量变化不发 change。控制模式初始化固定。,受控/初始頁碼，從 1 開始；越界自動按總量和頁大小收斂。外部總量變化不發 change。控制模式初始化固定。,Controlled/initial page number starts at 1 and is clamped to total/size. External totals do not emit change. Mode is fixed initially.
 受控与手风琴,受控與手風琴,Controlled state and accordion
 受控关闭可恢复；on:close 中 preventDefault 可以保留固定标签。,受控關閉可恢復；on:close 中 preventDefault 可以保留固定標籤。,Controlled closing can restore tags; preventDefault in on:close keeps pinned tags.
@@ -337,7 +334,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 图标,圖標,Icon
 图标开关、自定义图标、操作区与结果详情；图标是装饰性内容。,圖標開關、自定義圖標、操作區與結果詳情；圖標是裝飾性內容。,"Icon toggle, custom icons, action area and result details. Icons are decorative."
 图标插槽 / 触发器。,圖標插槽 / 觸發器。,Icon slot / trigger.
-图标获得 img 语义；LoadingOutlined 获得 status 语义。未指定时为装饰元素。,圖標獲得 img 語義；LoadingOutlined 獲得 status 語義。未指定時為裝飾元素。,Named icons use img semantics; LoadingOutlined uses status. Unnamed icons are decorative.
 图片 URL 或插槽；false 隐藏全部插图。URL 加载失败回退到内置 SVG，换源后重试。,圖片 URL 或插槽；false 隱藏全部插圖。URL 加載失敗回退到內置 SVG，換源後重試。,Image URL or slot; false hides illustrations. URL errors fall back to built-in SVG; changing the source retries.
 图片、文字、图标与失败回退。,圖片、文字、圖標與失敗回退。,"Image, text, icons and failure fallback."
 图片、文字或图标头像，支持失败回退和重试，提供可访问名称。,圖片、文字或圖標頭像，支持失敗回退和重試，提供可訪問名稱。,"Image, text or icon avatars with failure fallback, retry and accessible names."
@@ -396,7 +392,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 尺寸、状态、外层样式、占位/空态和初始焦点。,尺寸、狀態、外層樣式、佔位/空態和初始焦點。,"Sizes, states, wrapper styles, placeholder/empty text and initial focus."
 尺寸、说明和容器覆盖。,尺寸、說明和容器覆蓋。,"Sizes, descriptions and container overlays."
 尺寸、边框与外框样式。className/style 现在作用于 ja-table-container，表格仍有 ja-table 类。,尺寸、邊框與外框樣式。className/style 現在作用於 ja-table-container，表格仍有 ja-table 類。,"Size, border and wrapper styles. className/style target ja-table-container; the table retains ja-table."
-尺寸、颜色与加载,尺寸、顏色與加載,"Sizes, colors and loading"
 尺寸与形状,尺寸與形狀,Sizes and shapes
 尺寸和外框样式；原生控件仍带 ja-input。动态清空/计数/前后缀不重建控件。,尺寸和外框樣式；原生控件仍帶 ja-input。動態清空/計數/前後綴不重建控件。,"Size and wrapper styles; native controls retain ja-input. Dynamic clearing, counts and affixes do not rebuild the input."
 层级展开、选择、关联或独立勾选、过滤、异步加载与键盘导航。,層級展開、選擇、關聯或獨立勾選、過濾、異步加載與鍵盤導航。,"Hierarchy expansion, selection, linked/independent checking, filtering, async loading and keyboard navigation."
@@ -415,9 +410,9 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 嵌套、焦点管理、异步确认和结果。,嵌套、焦點管理、異步確認和結果。,"Nesting, focus management, asynchronous confirmation and results."
 工作空间路径,工作空間路徑,Workspace path
 左右方向使用 width，上下使用 height；预设宽度 256/378/736px。另一轴铺满视口。,左右方向使用 width，上下使用 height；預設寬度 256/378/736px。另一軸鋪滿視口。,Horizontal placements use width; vertical placements use height. Width presets are 256/378/736px. The other axis fills the viewport.
-已有图标：LoadingOutlined、InfoCircleFilled、CheckCircleFilled、CloseCircleFilled、ExclamationCircleFilled、CloseCircleOutlined、CloseOutlined（SVG 名称前均带 AntDesign）。,已有圖標：LoadingOutlined、InfoCircleFilled、CheckCircleFilled、CloseCircleFilled、ExclamationCircleFilled、CloseCircleOutlined、CloseOutlined（SVG 名稱前均帶 AntDesign）。,"Available AntDesign-prefixed SVG icons: LoadingOutlined, InfoCircleFilled, CheckCircleFilled, CloseCircleFilled, ExclamationCircleFilled, CloseCircleOutlined and CloseOutlined."
 布局,佈局,Layout
 布局容器,佈局容器,Layout containers
+常用图标,常用圖示,Common icons
 常用文本样式，可组合。,常用文本樣式，可組合。,Composable text styles.
 幂等关闭；等待关闭状态，始终返回同一个 Promise，关闭后仍可等待。,冪等關閉；等待關閉狀態，始終返回同一個 Promise，關閉後仍可等待。,"Idempotent closing and close-state waiting. Always returns the same Promise, including after closing."
 并发提交复用同一个 Promise；校验、回调期间 submitting=true。异常可恢复；reset/unmount/dispose 后忽略旧 UI 完成。dispose 用于手动结束无组件拥有的实例。,併發提交復用同一個 Promise；校驗、回調期間 submitting=true。異常可恢復；reset/unmount/dispose 後忽略舊 UI 完成。dispose 用於手動結束無組件擁有的實例。,Concurrent submissions share one Promise; submitting remains true during validation/callbacks. Errors are recoverable. Reset/unmount/dispose isolate obsolete UI results. dispose ends ownerless instances manually.
@@ -587,7 +582,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 没有展开/折叠动画，不枚举或反向解析 children；项目按 items 的 key 保持身份。,沒有展開/折疊動畫，不枚舉或反向解析 children；項目按 items 的 key 保持身份。,No expansion/collapse animation or reverse parsing of children. Item identity follows keys.
 没有离场动画，afterClose 表示实际卸载，不等待动画。框架 Transition 的快速关闭问题记录为 F04。,沒有離場動畫，afterClose 表示實際卸載，不等待動畫。框架 Transition 的快速關閉問題記錄為 F04。,No exit animation; afterClose signals actual unmount rather than animation completion. The rapid Transition-close issue is tracked as F04.
 没有默认页脚和确认流程，业务通过 slot:footer 与受控 open 组合提交/加载；不做拖拽缩放或嵌套推挤效果。,沒有默認頁腳和確認流程，業務通過 slot:footer 與受控 open 組合提交/加載；不做拖拽縮放或嵌套推擠效果。,No default footer or confirmation flow. Compose slot:footer and controlled open for submission/loading. Drag resizing and nested push effects are out of scope.
-沿用现有七个图标，不增加图标库依赖。,沿用現有七個圖標，不增加圖標庫依賴。,Reuses the existing seven icons without adding an icon-library dependency.
 浮层使用当前页面 body 的 fixed 定位。暂不承诺跨 iframe、虚拟锚点、任意自定义定位容器或 body transform 后的特殊包含块。,浮層使用當前頁面 body 的 fixed 定位。暫不承諾跨 iframe、虛擬錨點、任意自定義定位容器或 body transform 後的特殊包含塊。,"Fixed-position panels in the current document body. Cross-frame rendering, virtual anchors, arbitrary containers and transformed-body containing blocks are not guaranteed."
 浮层基础,浮層基礎,Floating foundation
 消息、更新、关闭、清空与等待。,消息、更新、關閉、清空與等待。,"Messages, updates, closing, clearing and waiting."
@@ -611,7 +605,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 用简洁说明和可选操作解释当前无数据的原因，支持自定义插图。,用簡潔說明和可選操作解釋當前無數據的原因，支持自定義插圖。,"Explain why no data exists with concise descriptions, optional actions and custom illustrations."
 百分比圆环、点状/导航/内联变体、折叠大量步骤与复杂自定义布局暂缓；基础横纵流程覆盖首轮中后台使用。,百分比圓環、點狀/導航/內聯變體、折疊大量步驟與複雜自定義佈局暫緩；基礎橫縱流程覆蓋首輪中後台使用。,"Percentage circles, dotted/navigation/inline variants, large-step folding and complex layouts are deferred. Basic horizontal/vertical flows cover common admin use."
 目前提供 CSS 入场动画，关闭立即卸载。离场动画暂缓，框架 Transition 的快速关闭问题已独立记录为 F04。,目前提供 CSS 入場動畫，關閉立即卸載。離場動畫暫緩，框架 Transition 的快速關閉問題已獨立記錄為 F04。,CSS entry animation only; closing unmounts immediately. Exit animations are deferred; the rapid Transition-close issue is tracked separately as F04.
-直接使用具名 SVG 图标。装饰图标默认对辅助技术隐藏，有意义的图标需提供 ariaLabel。,直接使用具名 SVG 圖標。裝飾圖標默認對輔助技術隱藏，有意義的圖標需提供 ariaLabel。,Use named SVG icons directly. Decorative icons are hidden from assistive technology; meaningful icons require ariaLabel.
 真实 h1–h5，动态切换会重建对应标题节点。,真實 h1–h5，動態切換會重建對應標題節點。,Real h1–h5 elements; changing the level rebuilds the heading node.
 真实 input 可关联 label，参与 FormData 和原生校验；默认提交值 on。未勾选和禁用项不提交。,真實 input 可關聯 label，參與 FormData 和原生校驗；默認提交值 on。未勾選和禁用項不提交。,"Real inputs participate in labels, FormData and validation. Default submission value is on; unchecked/disabled items are omitted."
 真实 radio 的表单提交、外部表单关联与校验。未传 name 自动生成独立组名。非受控 reset 回到初始值；受控 reset 保留父值。,真實 radio 的表單提交、外部表單關聯與校驗。未傳 name 自動生成獨立組名。非受控 reset 回到初始值；受控 reset 保留父值。,"Real radio submission, external forms and validation. Omitted names generate independent groups. Reset restores uncontrolled initial selection and preserves controlled values."
@@ -730,6 +723,8 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 通用,通用,General
 通知,通知,Notification
 通知位置、标题、内容与关闭。,通知位置、標題、內容與關閉。,"Notification placement, title, content and closing."
+通过 Select 禁用对应选项；更改上级可能令当前组合失效，需调整后确认，不自动替换下级选择。,透過 Select 禁用對應選項；更改上級可能令當前組合失效，需調整後確認，不自動替換下級選擇。,Select disables corresponding options. Changing an earlier column can invalidate the combination; adjust and confirm instead of automatically replacing lower selections.
+通过 Select 选择页大小；去重过滤无效项，并补入当前大小，原生表单 reset 不改变组件受控状态。,透過 Select 選擇頁大小；去重過濾無效項，並補入當前大小，原生表單 reset 不改變組件受控狀態。,"Select page-size options are deduplicated and filtered, retaining the current size. Native form reset does not change controlled component state."
 通过 context 提供响应式尺寸和禁用状态，不克隆子组件。,通過 context 提供響應式尺寸和禁用狀態，不克隆子組件。,Context supplies reactive size/disabled state without cloning children.
 通过具名导出组合使用；不是 Typography.Title 风格的 React 复合 API。,通過具名導出組合使用；不是 Typography.Title 風格的 React 復合 API。,Compose named exports rather than React-style Typography.Title compound APIs.
 通过受控 collapsed 和 collapse 事件切换；侧栏内容由使用方决定折叠后如何展示。,通過受控 collapsed 和 collapse 事件切換；側欄內容由使用方決定折疊後如何展示。,Controlled collapsed plus collapse events toggle the sidebar; consumers decide how collapsed content appears.
@@ -745,7 +740,6 @@ value 唯一；label 文本或 slot:label 插槽，支持 disabled/id。按 valu
 间距与弹性布局,間距與彈性佈局,Space and Flex
 附加 class 与内联 CSS。,附加 class 與內聯 CSS。,Additional class and inline CSS.
 附加样式与默认插槽。,附加樣式與默認插槽。,Additional styles and default slot.
-附加样式；LoadingOutlined 可通过 style 设置字号和颜色。,附加樣式；LoadingOutlined 可通過 style 設置字號和顏色。,Additional styles; LoadingOutlined can set size/color via style.
 隐藏字段以 JSON 数组序列化，保留数字类型、特殊字符及层级，空值为空字符串。原生必填校验聚焦可见触发器；reset 恢复默认快照或受控父值，不发 change。,隱藏字段以 JSON 數組序列化，保留數字類型、特殊字符及層級，空值為空字符串。原生必填校驗聚焦可見觸發器；reset 恢復默認快照或受控父值，不發 change。,"Hidden fields serialize JSON arrays, preserving numbers, special characters and hierarchy; empty paths submit empty text. Required validation focuses the visible trigger. Reset restores defaults or controlled values without change."
 需要输入框、按钮等交互内容时应使用 Popover。,需要輸入框、按鈕等交互內容時應使用 Popover。,"Use Popover for inputs, buttons or other interactive content."
 静态方法创建独立 bootstrap 根，不继承调用处 context。复杂业务应让插槽内容显式接收所需数据。,靜態方法創建獨立 bootstrap 根，不繼承調用處 context。複雜業務應讓插槽內容顯式接收所需數據。,Static methods create independent bootstrap roots without caller context. Complex business slots should receive required data explicitly.

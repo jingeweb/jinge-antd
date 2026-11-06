@@ -13,7 +13,7 @@ import {
 
 import type { InputConfig, TextAreaConfig, PasswordConfig, TextAreaHandle } from './common';
 
-import { AntDesignCloseOutlined } from '../icon';
+import { AntDesignCloseOutlined } from '../_icon';
 
 type FieldConfig = InputConfig &
   Pick<TextAreaConfig, 'rows' | 'autoSize' | 'resize'> &

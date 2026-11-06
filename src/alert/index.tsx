@@ -10,8 +10,8 @@ import {
   watch,
 } from 'jinge';
 
+import { AntDesignCloseOutlined } from '../_icon';
 import { statusIcon, type FeedbackStatus } from '../_util/status-icon';
-import { AntDesignCloseOutlined } from '../icon';
 
 export type AlertType = FeedbackStatus;
 export type AlertProps = {

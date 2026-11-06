@@ -1,5 +1,5 @@
 import { vm } from 'jinge';
-import { Button, Tag, Space, AntDesignInfoCircleFilled } from 'jinge-antd';
+import { Button, Tag, Space } from 'jinge-antd';
 
 export function TagExample() {
   const state = vm({ visible: true, closed: 0 });
@@ -8,7 +8,10 @@ export function TagExample() {
       <Space wrap>
         <Tag>默认</Tag>
         <Tag color="success">已完成</Tag>
-        <Tag color="processing" slot:icon={<AntDesignInfoCircleFilled />}>
+        <Tag
+          color="processing"
+          slot:icon={<span className="icon-[ant-design--info-circle-filled]" aria-hidden="true" />}
+        >
           处理中
         </Tag>
         <Tag color="error">失败</Tag>

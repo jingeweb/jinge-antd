@@ -70,9 +70,10 @@ export function ComponentPage(props: { doc: ComponentDoc }) {
         </>
       ) : (
         <section className="planned-panel">
-          <span className="planned-symbol" aria-hidden="true">
-            ◇
-          </span>
+          <span
+            className="planned-symbol icon-[ant-design--appstore-outlined]"
+            aria-hidden="true"
+          />
           <h2>{t('已列入实施范围')}</h2>
           <p>
             {t('本组件尚未按新的能力清单完成交付。实现、验证和示例完成后，会在此提供可运行文档。')}

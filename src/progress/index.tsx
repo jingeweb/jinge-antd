@@ -1,5 +1,7 @@
-import './style.scss';
 import { type JNode, type WithSlots, cx } from 'jinge';
+
+import './style.scss';
+import { AntDesignCheckOutlined, AntDesignCloseOutlined } from '../_icon';
 
 export type ProgressStatus = 'normal' | 'active' | 'success' | 'exception';
 export interface ProgressInfo {
@@ -34,8 +36,7 @@ function infoText(
   format: ProgressProps['format'],
 ) {
   if (format) return format(percent(value), status(state, value));
-  const resolved = status(state, value);
-  return `${resolved === 'success' ? '✓ ' : resolved === 'exception' ? '! ' : ''}${percent(value)}%`;
+  return `${percent(value)}%`;
 }
 function accessibleValue(
   value: number | undefined,
@@ -75,6 +76,23 @@ function rootStyle(
           ? 160
           : 120;
   return `${style ?? ''};${color ? `--ja-progress-color:${color};` : ''}${trail ? `--ja-progress-trail:${trail};` : ''}${type === 'circle' ? `width:${diameter}px` : ''}`;
+}
+function ProgressInfoView(props: {
+  percent?: number;
+  status?: ProgressStatus;
+  format?: ProgressProps['format'];
+}) {
+  return (
+    <>
+      {!props.format &&
+        (status(props.status, props.percent) === 'success' ? (
+          <AntDesignCheckOutlined />
+        ) : status(props.status, props.percent) === 'exception' ? (
+          <AntDesignCloseOutlined />
+        ) : null)}
+      {infoText(props.percent, props.status, props.format)}
+    </>
+  );
 }
 export function Progress(props: ProgressProps) {
   return (
@@ -138,7 +156,9 @@ export function Progress(props: ProgressProps) {
           {props['slot:info']?.({
             percent: percent(props.percent),
             status: status(props.status, props.percent),
-          }) ?? infoText(props.percent, props.status, props.format)}
+          }) ?? (
+            <ProgressInfoView percent={props.percent} status={props.status} format={props.format} />
+          )}
         </div>
       )}
     </div>

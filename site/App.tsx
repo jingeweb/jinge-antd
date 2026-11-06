@@ -1,22 +1,30 @@
-import { Router, createRouter } from 'jinge-router';
+import { Router, RouterView, createRouter } from 'jinge-router';
 
+import { locale as initialLocale } from './boot';
 import { DocRoute, NotFound } from './components/DocRoute';
-import { DocsLayout } from './components/DocsLayout';
-import { routeBase } from './i18n';
+import { LocaleLayout } from './components/LocaleLayout';
+import { base } from './i18n';
 
 const router = createRouter({
   mode: 'html5',
-  baseHref: routeBase,
+  baseHref: base,
   routes: [
-    { path: '/', redirectTo: '/components/button' },
-    { path: '/components/:id', component: DocRoute },
-    { path: '/*', component: NotFound },
+    { path: '/', redirectTo: `/${initialLocale}/components/button` },
+    {
+      path: '/:locale',
+      component: LocaleLayout,
+      redirectChild: 'components/button',
+      children: [
+        { path: '/components/:id', component: DocRoute },
+        { path: '/*', component: NotFound },
+      ],
+    },
   ],
 });
 export function App() {
   return (
     <Router router={router}>
-      <DocsLayout />
+      <RouterView />
     </Router>
   );
 }

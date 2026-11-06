@@ -8,9 +8,8 @@
   &[hidden] {
     display: none;
   }
-  button,
-  select,
-  input {
+  > button,
+  .ja-pagination-jumper input {
     box-sizing: border-box;
     border: 1px solid var(--ja-border, #d9d9d9);
     border-radius: 6px;
@@ -19,50 +18,46 @@
     font: inherit;
     min-height: 32px;
   }
-  button {
+  > button {
     min-width: 32px;
     padding: 0 8px;
     cursor: pointer;
   }
-  button[aria-current='page'] {
+  > button[aria-current='page'] {
     color: var(--ja-primary, #1677ff);
     border-color: var(--ja-primary, #1677ff);
     font-weight: 600;
   }
-  button:disabled,
-  select:disabled,
-  input:disabled {
+  > button:disabled,
+  .ja-pagination-jumper input:disabled {
     color: #bfbfbf;
     background: #f5f5f5;
     cursor: not-allowed;
   }
-  button:focus-visible,
-  select:focus-visible,
-  input:focus-visible {
+  > button:focus-visible,
+  .ja-pagination-jumper input:focus-visible {
     outline: 2px solid var(--ja-primary, #1677ff);
     outline-offset: 2px;
   }
-  select {
-    max-width: 130px;
-    padding: 0 6px;
+  .ja-pagination-size {
+    width: 130px;
   }
   .ja-pagination-jumper {
     display: inline-flex;
     gap: 6px;
     align-items: center;
   }
-  input {
+  .ja-pagination-jumper input {
     width: 54px;
     padding: 0 8px;
   }
   &.sm {
     font-size: 12px;
-    button,
-    select,
-    input {
+    > button,
+    .ja-pagination-jumper input {
       min-height: 24px;
     }
-    button {
+    > button {
       min-width: 24px;
     }
   }

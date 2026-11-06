@@ -1,5 +1,7 @@
 import { For, type WithEvents, cx, onUnmount, ref, uid, vm, watch } from 'jinge';
 
+import { AntDesignLeftOutlined, AntDesignRightOutlined } from '../_icon';
+import { Select } from '../select';
 import {
   type DateLimits,
   dateAllowed,
@@ -8,6 +10,10 @@ import {
   normalizeDate,
   sameDate,
 } from './temporal';
+const months = Array.from({ length: 12 }, (_, index) => ({
+  value: index + 1,
+  label: `${index + 1} 月`,
+}));
 export type CalendarProps = DateLimits & {
   ariaLabel?: string;
   hideOutside?: boolean;
@@ -235,7 +241,7 @@ export function CalendarPanel(props: CalendarProps) {
           disabled={!monthAllowed(state.view, -1, props.minDate, props.maxDate)}
           on:click={() => move(state.view.subtract({ months: 1 }), false)}
         >
-          ‹
+          <AntDesignLeftOutlined />
         </button>
         <span className="ja-calendar-heading" aria-live="polite">
           {monthText(state.view, props.locale)}
@@ -246,7 +252,7 @@ export function CalendarPanel(props: CalendarProps) {
           disabled={!monthAllowed(state.view, 1, props.minDate, props.maxDate)}
           on:click={() => move(state.view.add({ months: 1 }), false)}
         >
-          ›
+          <AntDesignRightOutlined />
         </button>
       </div>
       <div className="ja-calendar-controls">
@@ -267,23 +273,16 @@ export function CalendarPanel(props: CalendarProps) {
             else input.value = `${state.view.year}`;
           }}
         />
-        <select
-          aria-label="选择月份"
-          value={`${state.view.month}`}
-          on:change={(event) =>
-            move(
-              bounded(
-                state.view.with({ month: Number((event.target as HTMLSelectElement).value) }),
-                props,
-              ),
-              false,
-            )
-          }
-        >
-          <For loop={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}>
-            {(each) => <option value={`${each.data}`}>{each.data} 月</option>}
-          </For>
-        </select>
+        <Select
+          ariaLabel="选择月份"
+          className="ja-calendar-month"
+          size="sm"
+          value={state.view.month}
+          options={months}
+          on:change={(month) => {
+            if (month !== undefined) move(bounded(state.view.with({ month }), props), false);
+          }}
+        />
       </div>
       <table role="grid" aria-label={props.ariaLabel ?? '日历'} className="ja-calendar-grid">
         <thead>

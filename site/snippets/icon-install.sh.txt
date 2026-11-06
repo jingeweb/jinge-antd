@@ -1,0 +1,1 @@
+pnpm add -D @iconify-json/ant-design @iconify/tailwind4

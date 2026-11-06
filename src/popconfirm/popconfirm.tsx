@@ -9,6 +9,7 @@ import {
   watch,
 } from 'jinge';
 
+import { AntDesignExclamationCircleFilled } from '../_icon';
 import {
   type ConfirmCallback,
   type ConfirmContext,
@@ -18,7 +19,6 @@ import {
 import { z } from '../_util/z';
 import { Button } from '../button';
 import { Floating, type FloatingDuration, type FloatingPlacement } from '../floating';
-import { AntDesignExclamationCircleFilled } from '../icon';
 
 export const POPCONFIRM_CONTEXT = Symbol('popconfirmContext');
 export type PopconfirmContext = ConfirmContext<unknown>;

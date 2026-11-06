@@ -1,8 +1,15 @@
-import './style.scss';
 import { For, cx, expose, onMount, onUnmount, ref, vm, watch } from 'jinge';
 
+import './style.scss';
 import type { TreeKey, TreeNode, TreeProps } from './common';
 
+import {
+  AntDesignLoadingOutlined,
+  AntDesignCaretDownOutlined,
+  AntDesignCaretRightOutlined,
+  AntDesignMinusOutlined,
+  AntDesignCheckOutlined,
+} from '../_icon';
 import { createHierarchy, pathId, type HierarchyEntry } from '../_util/hierarchy';
 import { treeChecks } from './check';
 export type * from './common';
@@ -342,7 +349,13 @@ export function Tree(props: TreeProps) {
                   expand(each.data, event);
                 }}
               >
-                {each.data.loading ? '…' : each.data.expanded ? '▾' : '▸'}
+                {each.data.loading ? (
+                  <AntDesignLoadingOutlined className="ja-icon-spin" />
+                ) : each.data.expanded ? (
+                  <AntDesignCaretDownOutlined />
+                ) : (
+                  <AntDesignCaretRightOutlined />
+                )}
               </button>
             ) : (
               <span className="ja-tree-switch" aria-hidden="true" />
@@ -361,7 +374,11 @@ export function Tree(props: TreeProps) {
                   check(each.data, event);
                 }}
               >
-                {each.data.checked === 'mixed' ? '−' : each.data.checked ? '✓' : ''}
+                {each.data.checked === 'mixed' ? (
+                  <AntDesignMinusOutlined />
+                ) : each.data.checked ? (
+                  <AntDesignCheckOutlined />
+                ) : null}
               </span>
             )}
             <span className="ja-tree-title">

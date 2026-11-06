@@ -26,6 +26,9 @@ import {
 } from '../../src';
 
 export * from '../../src';
+export * as publicComponents from '../../src';
+// Direct imports for internal SVG tests; these are not part of the library's public API.
+export * from '../../src/_icon';
 export { autoUpdate } from '../../src/floating/autoupdate';
 export { InputInner } from '../../src/input/inner';
 export { calcPosition, getDelayOpt, getPlacementOpt } from '../../src/floating/common';

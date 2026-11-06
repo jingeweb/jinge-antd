@@ -1,6 +1,7 @@
-import './style.scss';
 import { For, cx, expose, onMount, onUnmount, ref, registerEvent, vm, watch } from 'jinge';
 
+import './style.scss';
+import { AntDesignCloseOutlined, AntDesignDownOutlined, AntDesignLoadingOutlined } from '../_icon';
 import { z } from '../_util/z';
 import { Floating } from '../floating';
 import { type SelectOption, type SelectProps, type SelectValue } from './common';
@@ -236,6 +237,7 @@ export function Select<T extends SelectValue>(props: SelectProps<T>) {
             ref={popup.root}
             className={cx(
               'ja-select-field',
+              !multiple && 'single',
               props.size ?? 'md',
               props.status,
               state.invalid && 'error',
@@ -253,7 +255,11 @@ export function Select<T extends SelectValue>(props: SelectProps<T>) {
             {editable ? (
               <input
                 ref={input}
-                className={cx('ja-select ja-select-search', props.triggerClassName)}
+                className={cx(
+                  'ja-select ja-select-search',
+                  !multiple && state.display.length > 0 && !list.open && 'has-selection',
+                  props.triggerClassName,
+                )}
                 role="combobox"
                 id={props.id}
                 value={list.query}
@@ -342,7 +348,7 @@ export function Select<T extends SelectValue>(props: SelectProps<T>) {
                       on:mouseDown={(event) => event.preventDefault()}
                       on:click={(event) => remove(each.data.value, event)}
                     >
-                      ×
+                      <AntDesignCloseOutlined />
                     </button>
                   </span>
                 )}
@@ -363,13 +369,16 @@ export function Select<T extends SelectValue>(props: SelectProps<T>) {
                 on:mouseDown={(event) => event.preventDefault()}
                 on:click={clear}
               >
-                ×
+                <AntDesignCloseOutlined />
               </button>
             )}
-            <span
-              className={cx('ja-select-arrow', props.loading && 'loading')}
-              aria-hidden="true"
-            />
+            <span className="ja-select-arrow" aria-hidden="true">
+              {props.loading ? (
+                <AntDesignLoadingOutlined className="ja-icon-spin" />
+              ) : (
+                <AntDesignDownOutlined />
+              )}
+            </span>
           </span>
         }
       >

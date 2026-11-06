@@ -90,9 +90,6 @@ export function columnStyle<T>(
       .reduce((offset, item) => offset + (item.width && item.width > 0 ? item.width : 120), 0)}px;`;
   return style;
 }
-export function filterSelected(values: FilterValue[] | undefined, value: FilterValue) {
-  return values?.includes(value) ?? false;
-}
 export function pageSelectionFlag<T>(
   rows: TableRecord<T>[],
   selected: TableKey[],

@@ -174,7 +174,7 @@ export const pickerDocs: ComponentDoc[] = [
         name: 'disabledHours / disabledMinutes / disabledSeconds',
         type: '() => number[] / (hour) => number[] / (hour,minute) => number[]',
         description:
-          '原生 select 对应选项禁用；更改上级可能令当前组合失效，需调整后确认，不自动替换下级选择。',
+          '通过 Select 禁用对应选项；更改上级可能令当前组合失效，需调整后确认，不自动替换下级选择。',
       },
       {
         name: 'disabledTime',

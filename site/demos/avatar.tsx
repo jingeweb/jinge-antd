@@ -1,5 +1,5 @@
 import { vm } from 'jinge';
-import { Avatar, Button, Space, AntDesignInfoCircleFilled } from 'jinge-antd';
+import { Avatar, Button, Space } from 'jinge-antd';
 
 const portrait = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80"><rect width="80" height="80" fill="#1677ff"/><circle cx="40" cy="29" r="15" fill="white"/><path d="M12 78a28 28 0 0 1 56 0" fill="white"/></svg>')}`;
 export function AvatarExample() {
@@ -10,7 +10,12 @@ export function AvatarExample() {
         <Avatar size="sm" alt="张三">
           张
         </Avatar>
-        <Avatar size="md" alt="团队" shape="square" slot:icon={<AntDesignInfoCircleFilled />} />
+        <Avatar
+          size="md"
+          alt="团队"
+          shape="square"
+          slot:icon={<span className="icon-[ant-design--team-outlined]" aria-hidden="true" />}
+        />
         <Avatar size="lg" alt="Ada" style="background:#87d068">
           A
         </Avatar>

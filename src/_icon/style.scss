@@ -1,0 +1,18 @@
+.ja-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.125em;
+}
+.ja-icon-spin {
+  animation: ja-icon-spin 1s linear infinite;
+}
+@keyframes ja-icon-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ja-icon-spin {
+    animation: none;
+  }
+}

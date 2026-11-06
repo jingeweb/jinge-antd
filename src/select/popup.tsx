@@ -1,5 +1,6 @@
 import { For, cx, type JNode, type WithSlots, type WithEvents } from 'jinge';
 
+import { AntDesignCheckOutlined } from '../_icon';
 import { type ComboState, type SelectValue, type SelectOption, includesValue } from './common';
 
 export function ComboList<T extends SelectValue>(
@@ -51,6 +52,10 @@ export function ComboList<T extends SelectValue>(
                       state.active === row.data.id && 'highlighted',
                       row.data.disabled && 'disabled',
                     )}
+                    on:mouseMove={() => {
+                      // Real pointer movement updates the shared keyboard highlight; scrolling alone must not.
+                      if (!row.data.disabled && !props.loading) state.active = row.data.id;
+                    }}
                     on:mouseDown={(event) => event.preventDefault()}
                     on:click={(event) => {
                       if (!row.data.disabled && !props.loading) props['on:choose'](row.data, event);
@@ -60,6 +65,9 @@ export function ComboList<T extends SelectValue>(
                       props['slot:option']({ option: row.data })
                     ) : (
                       <span>{row.data.label}</span>
+                    )}
+                    {includesValue(props.values, row.data.value) && (
+                      <AntDesignCheckOutlined className="ja-select-check" />
                     )}
                   </div>
                 )}

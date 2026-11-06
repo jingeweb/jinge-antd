@@ -5,7 +5,7 @@ import {
   AntDesignCloseCircleFilled,
   AntDesignExclamationCircleFilled,
   AntDesignInfoCircleFilled,
-} from '../icon';
+} from '../_icon';
 
 export type FeedbackStatus = 'success' | 'info' | 'warning' | 'error';
 const icons: Record<FeedbackStatus, FC> = {

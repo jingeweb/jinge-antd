@@ -303,7 +303,6 @@ taken@example.com 用于演示异步校验失败,taken@example.com 用於演示�
 次,次,times
 次结果,次結果,results
 次要说明,次要說明,Secondary description
-正在加载,正在加載,Loading
 正在加载客户信息,正在加載客戶信息,Loading customer information
 正在导入…,正在導入…,Importing…
 此示例需要浏览器原生支持 Temporal，不加载 polyfill。,此示例需要瀏覽器原生支持 Temporal，不加載 polyfill。,This example requires native browser Temporal support; no polyfill is loaded.

@@ -100,8 +100,7 @@
   justify-content: center;
   gap: 8px;
   padding: 6px;
-  input,
-  select {
+  input {
     color: inherit;
     background: transparent;
     border: 1px solid #e5e7eb;
@@ -111,6 +110,9 @@
   }
   input {
     width: 76px;
+  }
+  .ja-calendar-month {
+    width: 84px;
   }
 }
 .ja-calendar-grid {
@@ -122,6 +124,10 @@
     color: #666;
     font-size: 12px;
     padding: 4px 0;
+  }
+  // Keep all six weeks at full height when an entire row of outside dates is hidden.
+  tbody tr {
+    height: 34px;
   }
   td {
     text-align: center;

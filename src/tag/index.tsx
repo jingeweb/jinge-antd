@@ -9,7 +9,7 @@ import {
   watch,
 } from 'jinge';
 
-import { AntDesignCloseOutlined } from '../icon';
+import { AntDesignCloseOutlined } from '../_icon';
 export type TagColor = 'default' | 'success' | 'processing' | 'error' | 'warning';
 export type TagProps = {
   className?: string;

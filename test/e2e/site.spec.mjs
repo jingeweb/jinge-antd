@@ -1,4 +1,5 @@
 import { test, expect } from './fixtures.mjs';
+import { chooseOption } from './select-choice.mjs';
 
 test('Documentation InputNumber demonstrates decimal stepping, empty values and source/API', async ({
   page,
@@ -341,6 +342,12 @@ test('Documentation opens with live examples, navigation, API and a desktop layo
 test('Documentation search handles Chinese/English and an empty result', async ({ page }) => {
   await page.goto('/');
   const search = page.getByRole('searchbox', { name: '搜索组件' });
+  const searchIcon = page.locator('.search-box > span');
+  await expect(searchIcon).toHaveCSS('width', '18px');
+  await expect(searchIcon).toHaveCSS('height', '18px');
+  expect(await searchIcon.evaluate((element) => getComputedStyle(element).maskImage)).not.toBe(
+    'none',
+  );
   await search.fill('button');
   await expect(page.locator('.nav-link:visible')).toHaveCount(1);
   await search.fill('表单');
@@ -371,9 +378,12 @@ test('Documentation displays actual example source and copies it', async ({ page
   await expect(demo.locator('pre')).toHaveCount(0);
   await demo.getByRole('button', { name: '查看代码' }).click();
   await expect(demo.locator('code')).toContainText('export function ButtonBasic()');
+  await expect(demo.locator('.shiki')).toBeVisible();
   await demo.getByRole('button', { name: '复制代码' }).click();
   await expect(demo.getByRole('button', { name: '已复制' })).toBeVisible();
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain("from 'jinge-antd'");
+  const copied = await page.evaluate(() => navigator.clipboard.readText());
+  expect(copied).toContain("from 'jinge-antd'");
+  expect(await demo.locator('code').textContent()).toBe(copied);
 });
 test('Documentation examples remain interactive and page anchors work', async ({ page }) => {
   await page.goto('/zh-CN/components/button');
@@ -408,7 +418,6 @@ test('Documentation navigation is usable on narrow screens and unknown links are
 });
 
 for (const [id, name, selector] of [
-  ['icon', 'Icon 图标', '[role=img][aria-label="成功"]'],
   ['typography', 'Typography 排版', 'h3.ja-title'],
   ['space', 'Space / Flex 间距与弹性布局', '.ja-space'],
   ['divider', 'Divider 分割线', '[role=separator]'],
@@ -564,10 +573,25 @@ test('Documentation Select supports searchable grouped options, multiple tags an
   await expect(page.locator('h1')).toHaveText('Select 选择器');
   const owner = page.getByRole('combobox', { name: '项目负责人' });
   await owner.fill('gra');
+  await expect(owner).toHaveCSS('outline-style', 'none');
+  await expect(owner).toHaveCSS('border-top-width', '0px');
+  await expect(owner.locator('..')).toHaveCSS('border-top-color', 'rgb(22, 119, 255)');
+  await expect(page.locator('.ja-select-option.highlighted')).toHaveCSS('outline-style', 'none');
   await page.getByRole('option', { name: 'Grace', exact: true }).click();
   await expect(owner).toHaveAttribute('placeholder', 'Grace');
+  const textColor = await owner.evaluate((element) => getComputedStyle(element).color);
+  await expect
+    .poll(() => owner.evaluate((element) => getComputedStyle(element, '::placeholder').color))
+    .toBe(textColor);
+  await owner.click();
+  await expect(owner).toHaveAttribute('aria-expanded', 'true');
+  await expect
+    .poll(() => owner.evaluate((element) => getComputedStyle(element, '::placeholder').color))
+    .not.toBe(textColor);
+  await owner.press('Escape');
   const reviewers = page.getByRole('combobox', { name: '评审人' });
   await reviewers.fill('lin');
+  await expect(reviewers).toHaveCSS('outline-style', 'none');
   await page.getByRole('option', { name: '小林', exact: true }).click();
   await expect(page.getByRole('button', { name: '移除 小林' })).toBeVisible();
   await expect(page.locator('.api-table')).toContainText('slot:selection');
@@ -584,8 +608,19 @@ test('Documentation AutoComplete demonstrates asynchronous suggestions, free inp
   await expect(page.locator('h1')).toHaveText('AutoComplete 自动完成');
   const field = page.getByRole('combobox', { name: '联系邮箱' });
   await field.fill('ada');
+  await expect(field).toHaveCSS('outline-style', 'none');
+  await expect(field).toHaveCSS('border-top-width', '0px');
+  await expect(field.locator('..')).toHaveCSS('border-top-color', 'rgb(22, 119, 255)');
   await expect(page.getByRole('option', { name: 'ada@company.cn', exact: true })).toBeVisible();
-  await page.getByRole('option', { name: 'ada@company.cn', exact: true }).click();
+  await expect(page.locator('.ja-select-option.highlighted')).toHaveCSS('outline-style', 'none');
+  await page.screenshot({ path: 'test/.results/autocomplete-focus.png', animations: 'disabled' });
+  await page.getByRole('option', { name: 'ada@company.cn', exact: true }).hover();
+  await expect(page.locator('.ja-select-option.highlighted')).toHaveAttribute(
+    'aria-label',
+    'ada@company.cn',
+  );
+  await field.press('Enter');
+  await expect(field).toBeFocused();
   await expect(field).toHaveValue('ada@company.cn');
   await expect(page.locator('output')).toHaveText('已采用建议：ada@company.cn');
   await page.getByRole('button', { name: '清空输入' }).click();
@@ -770,7 +805,7 @@ test('Pagination documentation changes pages and size, demonstrates simple mode 
   const nav = demo.getByRole('navigation', { name: '用户列表分页' });
   await nav.getByRole('button', { name: '下一页', exact: true }).click();
   await expect(demo.locator('output')).toHaveText('第 4 页，每页 10 条');
-  await nav.getByRole('combobox', { name: '每页条数' }).selectOption('20');
+  await chooseOption(page, nav.getByRole('combobox', { name: '每页条数' }), '20 条/页');
   await expect(demo.locator('output')).toHaveText('第 1 页，每页 20 条');
   await expect(demo.getByRole('navigation', { name: '精简分页' })).toContainText('2 / 8');
   await expect(page.locator('.api-table')).toContainText('pageSizeOptions');
@@ -779,7 +814,7 @@ test('Pagination documentation changes pages and size, demonstrates simple mode 
   await demo.locator('.demo-preview').screenshot({ path: 'test/.results/pagination-demo.png' });
 });
 
-test('Table documentation demonstrates controlled selection, native filters, row actions, expansion and source/API', async ({
+test('Table documentation demonstrates controlled selection, Select filters, row actions, expansion and source/API', async ({
   page,
 }) => {
   await page.goto('/zh-CN/components/table');
@@ -790,7 +825,7 @@ test('Table documentation demonstrates controlled selection, native filters, row
   await expect(demo.locator('.ja-table-expanded')).toContainText('Ada');
   await demo.getByRole('button', { name: '查看详情' }).first().click();
   await expect(demo.locator('output')).toContainText('最近查看：Ada');
-  await demo.getByRole('combobox', { name: '筛选 团队' }).selectOption('0');
+  await chooseOption(page, demo.getByRole('combobox', { name: '筛选 团队' }), '平台');
   await expect(demo.locator('tbody [data-column-key=team]')).toHaveText(['平台', '平台', '平台']);
   await expect(page.locator('.api-table')).toContainText('preserveSelectedRowKeys');
   await demo.getByRole('button', { name: '查看代码' }).click();
@@ -872,7 +907,7 @@ test('TimePicker documentation uses native steps and confirmation and displays s
   const demo = page.locator('#time-picker-basic');
   const input = demo.getByRole('combobox', { name: '预约时间' });
   await input.press('ArrowDown');
-  await page.getByRole('combobox', { name: '分钟', exact: true }).selectOption('15');
+  await chooseOption(page, page.getByRole('combobox', { name: '分钟', exact: true }), '15');
   await page.screenshot({ path: 'test/.results/time-picker.png', animations: 'disabled' });
   await page.getByRole('button', { name: '确定', exact: true }).click();
   await expect(demo.locator('output')).toHaveText('预约时间：09:15:00');

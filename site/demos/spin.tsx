@@ -1,5 +1,5 @@
 import { vm } from 'jinge';
-import { Button, Spin, Space, LoadingOutlined } from 'jinge-antd';
+import { Button, Spin, Space } from 'jinge-antd';
 
 export function SpinExample() {
   const state = vm({ busy: false });
@@ -8,7 +8,16 @@ export function SpinExample() {
       <Space size="lg">
         <Spin size="sm" />
         <Spin />
-        <Spin size="lg" slot:indicator={<LoadingOutlined />} tip="自定义图标" />
+        <Spin
+          size="lg"
+          slot:indicator={
+            <span
+              className="icon-[ant-design--loading-outlined] animate-spin motion-reduce:animate-none"
+              aria-hidden="true"
+            />
+          }
+          tip="自定义图标"
+        />
       </Space>
       <Button
         on:click={() => {

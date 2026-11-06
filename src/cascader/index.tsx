@@ -1,8 +1,14 @@
-import './style.scss';
 import { For, cx, expose, onMount, onUnmount, ref, registerEvent, uid, vm, watch } from 'jinge';
 
+import './style.scss';
 import type { CascaderOption, CascaderProps, CascaderValue } from './common';
 
+import {
+  AntDesignCloseOutlined,
+  AntDesignDownOutlined,
+  AntDesignRightOutlined,
+  AntDesignLoadingOutlined,
+} from '../_icon';
 import { createHierarchy, pathId, type HierarchyEntry } from '../_util/hierarchy';
 import { z } from '../_util/z';
 import { Floating } from '../floating';
@@ -498,11 +504,11 @@ export function Cascader(props: CascaderProps) {
                 on:mouseDown={(event) => event.preventDefault()}
                 on:click={clear}
               >
-                ×
+                <AntDesignCloseOutlined />
               </button>
             )}
             <span aria-hidden="true" className="ja-cascader-arrow">
-              ⌄
+              <AntDesignDownOutlined />
             </span>
           </span>
         }
@@ -534,7 +540,11 @@ export function Cascader(props: CascaderProps) {
                           : each.data.label}
                       </span>
                       <span aria-hidden="true">
-                        {each.data.loading ? '…' : each.data.branch ? '›' : ''}
+                        {each.data.loading ? (
+                          <AntDesignLoadingOutlined className="ja-icon-spin" />
+                        ) : each.data.branch ? (
+                          <AntDesignRightOutlined />
+                        ) : null}
                       </span>
                     </div>
                   )}

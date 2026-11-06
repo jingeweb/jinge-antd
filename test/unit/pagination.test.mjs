@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { flush, mount, rt, ui } from './harness.mjs';
+import { chooseOption } from './select-choice.mjs';
 const button = (name) =>
   [...document.querySelectorAll('button')].find((el) => el.getAttribute('aria-label') === name);
 void test('Pagination exposes named navigation, current page and correct boundaries without submitting forms', () => {
@@ -39,11 +40,9 @@ void test('Pagination independently controls page and size, retaining rejected r
   button('下一页').click();
   await flush();
   assert.equal(document.querySelector('[aria-current=page]').textContent, '2');
-  const select = document.querySelector('select');
-  select.value = '20';
-  select.dispatchEvent(new Event('change', { bubbles: true }));
-  await flush();
-  assert.equal(select.value, '10');
+  const select = document.querySelector('[role=combobox]');
+  await chooseOption(select, '20 条/页');
+  assert.equal(select.textContent, '10 条/页');
   assert.deepEqual(changes, [
     [3, 10],
     [1, 20],
@@ -52,7 +51,7 @@ void test('Pagination independently controls page and size, retaining rejected r
   props.pageSize = 20;
   await flush();
   assert.equal(document.querySelector('[aria-current=page]').textContent, '3');
-  assert.equal(select.value, '20');
+  assert.equal(select.textContent, '20 条/页');
 });
 void test('Pagination clamps dynamic totals and invalid numeric values without emitting structural changes', async () => {
   const changes = [];
@@ -84,14 +83,14 @@ void test('Pagination size changes reset to page one and emit size-change then c
     'on:pageSizeChange': (s) => changes.push(['size', s]),
     'on:change': (...v) => changes.push(v),
   });
-  const select = document.querySelector('select');
-  assert.deepEqual(
-    [...select.options].map((el) => el.value),
-    ['10', '20', '50'],
-  );
-  select.value = '20';
-  select.dispatchEvent(new Event('change', { bubbles: true }));
+  const select = document.querySelector('[role=combobox]');
+  select.click();
   await flush();
+  assert.deepEqual(
+    [...document.querySelectorAll('[role=option]')].map((el) => el.textContent.trim()),
+    ['10 条/页', '20 条/页', '50 条/页'],
+  );
+  await chooseOption(select, '20 条/页');
   assert.deepEqual(changes, [
     ['size', 20],
     [1, 20],
@@ -147,12 +146,12 @@ void test('Pagination handles disabled, hide-on-single-page, simple mode and zer
   assert.equal(document.querySelector('nav').hasAttribute('hidden'), false);
 });
 
-void test('Pagination form reset keeps the component page size and restores native select display', async () => {
+void test('Pagination form reset keeps the component page size and keeps Select display', async () => {
   mount(ui.PaginationFormFixture);
   const form = document.querySelector('form');
-  const select = document.querySelector('select');
-  assert.equal(select.value, '20');
+  const select = document.querySelector('[role=combobox]');
+  assert.equal(select.textContent, '20 条/页');
   form.reset();
   await flush();
-  assert.equal(select.value, '20');
+  assert.equal(select.textContent, '20 条/页');
 });

@@ -2,6 +2,8 @@ import { Dynamic, t, vm } from 'jinge';
 
 import type { Demo } from '../data/types';
 
+import { CodeBlock } from './CodeBlock';
+
 export function DemoCard(props: { demo: Demo }) {
   const state = vm({ expanded: false, copy: t('复制代码') });
   async function copy() {
@@ -40,9 +42,7 @@ export function DemoCard(props: { demo: Demo }) {
         </div>
       </div>
       {state.expanded && (
-        <pre className="demo-source">
-          <code>{props.demo.source}</code>
-        </pre>
+        <CodeBlock code={props.demo.source} language="tsx" className="demo-source" />
       )}
     </section>
   );
